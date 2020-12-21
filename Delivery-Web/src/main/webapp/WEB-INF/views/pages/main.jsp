@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../css/style.css" %>
+<%@include file="../css/main.css" %>
 <%@include file="../util/mapModal.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@
 		
 	<ul class="nav__main">
 		<li><a class="menu__stuff" href="">Home</a></li>	
-		<li><a class="menu__stuff" href="">Login</a></li>	
+		<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>	
 		<li><a class="menu__stuff" href="">Join us</a></li>	
 	</ul>
 		

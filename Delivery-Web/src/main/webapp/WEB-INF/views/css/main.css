@@ -25,7 +25,7 @@ body{
 .logo__font{
 	font-family : 'Nanum Pen Script', cursive;
 	font-size	:  35px;
-	color		: black;
+	color		: white;
 }
 
 
@@ -57,13 +57,13 @@ body{
 .menu__stuff{
 	font-family : 'Nanum Pen Script', cursive;
 	font-size	:  25px;
-	color		: black;
+	color		: white;
 }
 
 .menu__stuff2{
 	font-family : 'Nanum Pen Script', cursive;
 	font-size	:  25px;
-	color		: black;
+	color		: white;
 }
 
 .nav__textArea{
