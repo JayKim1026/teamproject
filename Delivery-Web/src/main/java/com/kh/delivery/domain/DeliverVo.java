@@ -2,6 +2,8 @@ package com.kh.delivery.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class DeliverVo {
 	private int dlvr_no;
 	private String dlvr_id;
@@ -12,6 +14,7 @@ public class DeliverVo {
 	private String dlvr_addr;
 	private String dlvr_img;
 	private String dlvr_idcard;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp dlvr_date;
 	private String dlvr_state;
 	private int dlvr_point;

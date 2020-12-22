@@ -2,6 +2,8 @@ package com.kh.delivery.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class UserVo {
 	private String user_id;
 	private String user_pw;
@@ -9,6 +11,7 @@ public class UserVo {
 	private String user_phone;
 	private String user_email;
 	private String user_addr; // 주소
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp user_date;
 	private String user_state;
 	private int user_point;
