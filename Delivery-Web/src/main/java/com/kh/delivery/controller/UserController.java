@@ -1,6 +1,7 @@
 package com.kh.delivery.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/loginRun")
-	public String LoginRun(String user_id, String user_pw) throws Exception {
+	public String LoginRun(String user_id, String user_pw, HttpSession session) throws Exception {
 		UserVo userVo = userService.login(user_id, user_pw);
-		System.out.println("login, userVo = " + userVo);
+		if(userVo != null) {
+			session.setAttribute("userVo", userVo);
+		}
 		return "redirect:pages/loginForm";
 	}
 	

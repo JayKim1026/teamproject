@@ -15,9 +15,7 @@
 
 </head>
 <body>
-<div class="registerForm_header">
 	<h1>회원가입</h1>
-</div>
 <!-- 회원가입 폼 -->
 	<div class="container-fluid">
 		<div class="row">
@@ -25,36 +23,46 @@
 			<div class="col-md-4">
 				<form role="form" action="/user/registerRun" method="post">
 					<div class="form-group">
-						<label for="user_name"> 이름 </label>
-						<input type="text" class="form-control" id="user_name" name="user_name" required>
-					</div>
-					<div class="form-group">
 						<label for="user_id"> 아이디 </label>
 						<input type="text" class="form-control" id="user_id" name="user_id" required />
-					<button type="button" class="btn btn-info" id="dupCheck">아이디 중복확인</button>
-					<span id="dupCheckResult">결과</span>
+						<span id="dupCheckResult"><!-- TODO 탈퇴한 아이디 인지, 이미 가입된 아이디 인지 확인하기. --></span>
 					</div>
 					
 					<div class="form-group">
-						<label for="user_pw"> 비밀번호 </label>	<span class="pw_check"></span>
+						<label for="user_pw"> 비밀번호 </label>	
 						<input type="password" class="form-control" id="user_pw" name="user_pw" required/>
+						<span class="pw_state"><!-- 사용불가 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요. --></span>
 					</div>
+					
 					<div class="form-group">
-						<label for="user_pw2"> 비밀번호 확인 </label> <span class="pw_check"></span>
+						<label for="user_pw2"> 비밀번호 확인 </label>
 						<input type="password" class="form-control" id="user_pw2" name="user_pw2" required />
+						<span class="pw_check"><!-- 비밀번호 같은지 확인 --></span>
 					</div>
+					
+					<div class="form-group">
+						<label for="user_name"> 이름 </label>
+						<input type="text" class="form-control" id="user_name" name="user_name" required>
+						<span class="name_state"><!-- 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) --></span>
+					</div>
+
 					<div>
 					<label>주소</label><br/>
 					<%@ include file="../util/address.jsp" %>
 					</div>
+					
 					<div class="form-group">
+					<br/>
 						<label for="user_phone"> 전화번호 </label>
-						<input type="text" class="form-control" id="user_phone" name="user_phone" required placeholder="숫자만 입력해 주세요"/>
+						<input type="text" class="form-control" id="user_phone" name="user_phone" required />
+						<span><!--  --></span>
 					</div>
+					
 					<div class="form-group">
 						<label for="user_email"> 이메일 </label>
 						<input type="text" class="form-control" id="user_email" name="user_email" required />
 					</div>
+					
 					<!-- <div class="form-group">
 						<label for="user_acc_num"> 계좌번호 </label>
 						<input type="text" class="form-control" id="user_acc_num" />
