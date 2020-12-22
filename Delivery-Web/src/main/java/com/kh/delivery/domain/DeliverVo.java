@@ -14,6 +14,8 @@ public class DeliverVo {
 	private String dlvr_addr;
 	private String dlvr_img;
 	private String dlvr_idcard;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Timestamp dlvr_birth;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp dlvr_date;
 	private String dlvr_state;
