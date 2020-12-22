@@ -52,4 +52,22 @@ public class UserController {
 	public String address() throws Exception {
 		return "util/address";
 	}
+	
+	/*아이디&비밀번호 찾기 Form*/
+	@RequestMapping(value="/findAccountForm", method=RequestMethod.GET)
+	public String findAccountForm() {
+		return "pages/findAccountForm";
+	}
+	
+	/*아이디&비밀번호 찾기 Run*/
+	@RequestMapping(value="/findAccountRun", method=RequestMethod.POST)
+	public void findAccountRun(String user_name, String user_email, String user_phone){
+		// user_name , user_email, user_phone 자료 정상적으로 넘어옴 
+		
+		System.out.println("UserController, findAccountRun, user_name:" + user_name);
+		System.out.println("UserController, findAccountRun, user_email:" + user_email);
+		System.out.println("UserController, findAccountRun, user_phone:" + user_phone);
+			
+	}
+	
 }

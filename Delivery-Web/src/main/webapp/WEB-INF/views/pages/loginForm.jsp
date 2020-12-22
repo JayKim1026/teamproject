@@ -40,8 +40,13 @@ ${deliverVo}
     <!-- Remind Passowrd -->
     <div id="formFooter">
      <ul class="underline">
+<<<<<<< HEAD
      	<li><a class="underlineHover" href="/user/registerForm">회원가입</a></li>
      	<li><a class="underlineHover" href="#">아이디 찾기</a></li>
+=======
+     	<li><a class="underlineHover" href="#">회원가입</a></li>
+     	<li><a class="underlineHover" href="/user/findAccountForm">아이디 찾기</a></li>
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
      	<li><a class="underlineHover" href="#">비밀번호 찾기</a></li>
      </ul> 
     </div>
