@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
 						<input type="text" class="form-control" id="user_name" name="user_name" required>
-						<span class="name_state"><!--  --></span>
+						<span class="name_state"><!-- 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) --></span>
 					</div>
 
 					<div>
@@ -54,7 +54,8 @@
 					<div class="form-group">
 					<br/>
 						<label for="user_phone"> 전화번호 </label>
-						<input type="text" class="form-control" id="user_phone" name="user_phone" required placeholder="숫자만 입력해 주세요"/>
+						<input type="text" class="form-control" id="user_phone" name="user_phone" required />
+						<span><!--  --></span>
 					</div>
 					
 					<div class="form-group">
