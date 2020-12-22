@@ -11,4 +11,10 @@ public class UserServiceImpl implements UserService {
 	
 	@Inject
 	private UserDao userDao;
+
+	@Override
+	public void loginRun() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

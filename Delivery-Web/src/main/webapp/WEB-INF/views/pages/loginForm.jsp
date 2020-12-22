@@ -22,10 +22,10 @@
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Login">
+    <form action="/user/loginRun", method="POST">
+      <input type="text" id="user_id" class="fadeIn second" name="user_id" placeholder="아이디">
+      <input type="text" id="user_pw" class="fadeIn third" name="user_pw" placeholder="비밀번호">
+      <input type="submit" class="fadeIn fourth" value="로그인">
     </form>
 
     <!-- Remind Passowrd -->

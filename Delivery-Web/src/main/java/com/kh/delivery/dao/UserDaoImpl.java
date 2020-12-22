@@ -12,6 +12,12 @@ public class UserDaoImpl implements UserDao {
 	
 	@Inject
 	private SqlSession sqlSession;
+
+	@Override
+	public void loginRun() throws Exception {
+		
+		
+	}
 	
 	
 }

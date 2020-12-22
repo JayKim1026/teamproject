@@ -1,0 +1,9 @@
+<style>
+.registerForm_header{
+	display: flex;
+	padding: 30px;
+	background-color:whitesmoke;
+	border-radius: 30px;
+	justify-content: center;
+}
+</style>
