@@ -7,6 +7,7 @@ create table tbl_user(
     user_phone	varchar2(13)    not null, 
     user_email	varchar2(50)    not null, 
     user_addr	varchar2(300)   not null, 
+    user_birth  timestamp 		not null,
 -- 기본적으로 설정되는 부분 --
     user_date	timestamp       default sysdate,
     user_state	varchar2(1)     default 'X',
@@ -24,6 +25,7 @@ create table tbl_deliver(
     dlvr_email	varchar2(50)    not null, 
     dlvr_addr	varchar2(300)   not null,   
     dlvr_idCard	varchar2(300)   not null, 
+    dlvr_birth	timestamp		not null,
 -- 기본적으로 설정되는 부분 --
     dlvr_date	timestamp       default sysdate, 
     dlvr_state	varchar2(1)     default 'X', 
