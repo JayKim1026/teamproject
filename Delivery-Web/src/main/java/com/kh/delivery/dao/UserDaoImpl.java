@@ -1,9 +1,14 @@
 package com.kh.delivery.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import com.kh.delivery.domain.UserVo;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -14,10 +19,13 @@ public class UserDaoImpl implements UserDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void loginRun() throws Exception {
-		
-		
+	public UserVo login(String user_id, String user_pw) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_pw", user_pw);
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "login", map);
+		return userVo;
 	}
-	
+
 	
 }

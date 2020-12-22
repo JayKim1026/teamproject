@@ -19,26 +19,26 @@ public class UserController {
 	/*로그인 , 회원가입, 아이디or비밀번호 찾기 */
 	
 	@RequestMapping(value="/loginForm")
-	public String LoginForm(String user_id, String user_pw) {
+	public String LoginForm(String user_id, String user_pw) throws Exception {
 		return "pages/loginForm";
 	}
 	
 	@RequestMapping(value="/loginRun")
-	public String LoginRun(String user_id, String user_pw) {
-		
+	public String LoginRun(String user_id, String user_pw) throws Exception {
+		UserVo userVo = userService.login(user_id, user_pw);
+		System.out.println("login, userVo = " + userVo);
 		return "redirect:pages/loginForm";
 	}
 	
 	@RequestMapping(value="/registerForm")
-	public String registerForm(UserVo userVo) {
+	public String registerForm(UserVo userVo) throws Exception {
 		return "pages/registerForm";
 	}
 	
 	@RequestMapping(value="/registerRun")
-	public void registerRun(UserVo userVo) {
+	public void registerRun(UserVo userVo) throws Exception {
 		
 	}
-	
 	
 	/*주소 검색*/
 	@RequestMapping(value="/address", method=RequestMethod.GET)

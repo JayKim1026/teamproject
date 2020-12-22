@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.delivery.dao.UserDao;
+import com.kh.delivery.domain.UserVo;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -13,8 +14,9 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public void loginRun() throws Exception {
-		// TODO Auto-generated method stub
-		
+	public UserVo login(String user_id, String user_pw) throws Exception {
+		UserVo userVo = userDao.login(user_id, user_pw);
+		return userVo;
 	}
+
 }
