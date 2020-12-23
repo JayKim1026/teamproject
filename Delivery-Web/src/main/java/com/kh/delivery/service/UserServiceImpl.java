@@ -37,4 +37,10 @@ public class UserServiceImpl implements UserService {
 		return userVo;
 	}
 
+	@Override
+	public UserVo getUserInfo(int user_no) throws Exception {
+		UserVo userVo = userDao.getUserInfo(user_no);
+		return userVo;
+	}
+
 }

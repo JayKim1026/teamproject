@@ -53,5 +53,11 @@ public class UserDaoImpl implements UserDao {
 		return userVo;
 	}
 
+	@Override
+	public UserVo getUserInfo(int user_no) throws Exception {
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getUserInfo", user_no);
+		return userVo;
+	}
+
 	
 }

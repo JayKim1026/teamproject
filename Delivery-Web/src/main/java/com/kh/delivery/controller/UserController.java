@@ -108,4 +108,16 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	
+	// 안드로이드
+	// 유저 정보 가져오기
+	@RequestMapping(value="/getUserInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public UserVo getUserInfo(int user_no) throws Exception {
+		System.out.println("getUserInfo, user_no = " + user_no);
+		UserVo userVo = userService.getUserInfo(user_no);
+		System.out.println("getUserInfo, userVo = " + userVo.toString());
+		return userVo;
+	}
+	
 }
