@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.timeline">
+	<insert id="insertArticle">
+		insert into tbl_board_review
+		(review_no, user_no, review_content)
+		values(seq_review_no.nextval,#{user_no}, #{review_content})
+	</insert>
+
+</mapper>

@@ -32,5 +32,11 @@ public class OrderServiceImpl implements OrderService {
 		OrderVo orderVo = orderDao.getPickedOrder(dlvr_no);
 		return orderVo;
 	}
+
+	@Override
+	public String cancelDelivery(int order_no, int dlvr_no) throws Exception {
+		String result = orderDao.cancelDelivery(order_no, dlvr_no);
+		return result;
+	}
 	
 }

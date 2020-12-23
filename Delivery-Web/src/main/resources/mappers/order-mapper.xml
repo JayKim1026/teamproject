@@ -24,4 +24,12 @@
 		and order_state = '100-002'
 	</select>
 
+	<update id="cancelDelivery">
+		update tbl_order set
+			dlvr_no = null, 
+			order_state = '100-001'
+		where order_no = #{order_no}
+		and dlvr_no = #{dlvr_no}
+	</update>
+	
 </mapper>

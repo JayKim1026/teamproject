@@ -1,0 +1,68 @@
+<style>
+
+#head_Container{
+	position	:	relative;
+	padding-bottom	:	5% 
+	
+}
+
+.main-logo{
+	font-family : 'Nanum Pen Script', cursive;
+	font-size : 35px;
+	color : black;
+}
+
+.main-menu{
+	font-family : 'Nanum Pen Script', cursive;
+	font-size : 35px;
+	color : black;
+	padding		:	0 1.5%;
+}
+
+#main_login{
+	float: right;
+}
+
+#main_Joinus{
+	float: right;
+}
+
+#head_center_img{
+	 display: block;
+ 	 margin-left: auto;
+ 	 margin-right: auto;
+ 	 margin-top	:	15px;
+ 	 width		:	160px;
+}
+
+#head_icon_img{
+	width		:	50px;
+	padding-left: 5%;
+	
+}
+
+#head_icon_name{
+	font-family : 'Nanum Pen Script', cursive;
+	font-size : 30px;
+	padding-left: 10%;
+	color : black;
+}
+
+#head_icon_dots{
+	font-size	:	35px; 
+	padding-left: 10%;
+}
+
+#head_icon_bell{
+	font-size	:	35px; 
+	padding-left: 10%
+}
+
+#footer{
+	position	:	relative;
+	top			:	29%;
+	font-family : 'Nanum Pen Script', cursive;
+	font-size 	: 25px;
+}
+
+</style>
