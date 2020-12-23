@@ -43,4 +43,11 @@ public class OrderController {
 		System.out.println(orderVo);
 		return orderVo;
 	}
+	
+	@RequestMapping(value="/cancelDelivery", method=RequestMethod.POST)
+	@ResponseBody
+	public String cancelDelivery(int order_no, int dlvr_no) throws Exception {
+		String result = orderService.cancelDelivery(order_no, dlvr_no);
+		return result;
+	}
 }
