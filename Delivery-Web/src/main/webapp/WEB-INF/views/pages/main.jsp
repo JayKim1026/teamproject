@@ -5,21 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
-<script src="https://kit.fontawesome.com/1190a8ce02.js"
-	crossorigin="anonymous"></script>
+<%@include file="../include/link.jsp" %>
 <meta charset="UTF-8">
 <title>Main.jsp</title>
 </head>
@@ -34,6 +20,7 @@
 				<li><a class="menu__stuff" href="/">Home</a></li>
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
+				<li><a class="menu__stuff" href="/timeLine/showTimeLine">TimeLine</a></li>
 			</ul>
 			<ul class="nav__link">
 				<li><a class="menu__stuff2" href="" style="padding-right: 20;">About</a></li>
@@ -41,6 +28,7 @@
 			</ul>
 			<div class="nav__textArea">
 				<%@include file="../util/adressMain.jsp" %>
+				<button id="btnSearch">지도보기</button>
 			</div>
 		</nav>
 
@@ -200,6 +188,7 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
 <script>
+$(function(){
 	var container = document.getElementById('map');
 
 	var options = {
@@ -219,13 +208,16 @@
 	    
 	    map.relayout();
 	}
-$(function(){
+	
+
 	$("#btnSearch").click(function() {
 		$("#modal-172661").trigger("click");
+
 	});
 
 	$("#resizing").click(function(){
 		relayout();
+		// 주소-좌표 변환 객체를 생성합니다	
 	});
 });	
 </script>
