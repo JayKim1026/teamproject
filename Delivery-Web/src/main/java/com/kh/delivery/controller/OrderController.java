@@ -40,7 +40,6 @@ public class OrderController {
 	@ResponseBody
 	public OrderVo getPickedOrder(int dlvr_no) throws Exception {
 		OrderVo orderVo = orderService.getPickedOrder(dlvr_no);
-		System.out.println(orderVo);
 		return orderVo;
 	}
 	
