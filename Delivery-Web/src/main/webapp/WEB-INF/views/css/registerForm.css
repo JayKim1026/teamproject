@@ -13,11 +13,6 @@
     font-size: 45px;
 }
 
-.registerForm_birth{
-	display: flex;
-	justify-content: space-between;
-}
-
 .span_box{
 	margin: 2px;
 }
