@@ -19,6 +19,8 @@ public class OrderController {
 	@Inject
 	OrderService orderService;
 	
+	// 안드로이드
+	// 주문 리스트 찾기
 	@RequestMapping(value="/getOrderList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<OrderVo> getOrderList(double order_lat, double order_lng, int range) throws Exception {
@@ -26,4 +28,26 @@ public class OrderController {
 		return orderList;
 	}
 	
+	// 주문 선택하기
+	@RequestMapping(value="/pickOrder", method=RequestMethod.POST)
+	@ResponseBody
+	public String pickOrder(int order_no, int dlvr_no) throws Exception {
+		String result = orderService.pickOrder(order_no, dlvr_no);
+		return result;
+	}
+	
+	@RequestMapping(value="/getPickedOrder", method=RequestMethod.POST)
+	@ResponseBody
+	public OrderVo getPickedOrder(int dlvr_no) throws Exception {
+		OrderVo orderVo = orderService.getPickedOrder(dlvr_no);
+		System.out.println(orderVo);
+		return orderVo;
+	}
+	
+	@RequestMapping(value="/cancelDelivery", method=RequestMethod.POST)
+	@ResponseBody
+	public String cancelDelivery(int order_no, int dlvr_no) throws Exception {
+		String result = orderService.cancelDelivery(order_no, dlvr_no);
+		return result;
+	}
 }
