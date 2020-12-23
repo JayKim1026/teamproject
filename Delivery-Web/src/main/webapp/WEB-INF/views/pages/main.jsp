@@ -31,9 +31,9 @@
 					class="fab fa-accusoft"></i>
 			</div>
 			<ul class="nav__main">
-				<li><a class="menu__stuff" href="">Home</a></li>
+				<li><a class="menu__stuff" href="/">Home</a></li>
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
-				<li><a class="menu__stuff" href="">Join us</a></li>
+				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
 			</ul>
 			<ul class="nav__link">
 				<li><a class="menu__stuff2" href="" style="padding-right: 20;">About</a></li>

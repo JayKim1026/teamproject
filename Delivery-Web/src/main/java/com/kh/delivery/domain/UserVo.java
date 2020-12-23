@@ -5,19 +5,28 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UserVo {
+	private int user_no;
 	private String user_id;
 	private String user_pw;
 	private String user_name;
 	private String user_phone;
 	private String user_email;
 	private String user_addr; // 주소
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Timestamp user_birth;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp user_date;
 	private String user_state;
 	private int user_point;
 	private String user_rank;
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
 
 	public String getUser_id() {
 		return user_id;
@@ -67,6 +76,14 @@ public class UserVo {
 		this.user_addr = user_addr;
 	}
 
+	public Timestamp getUser_birth() {
+		return user_birth;
+	}
+
+	public void setUser_birth(Timestamp user_birth) {
+		this.user_birth = user_birth;
+	}
+
 	public Timestamp getUser_date() {
 		return user_date;
 	}
@@ -101,9 +118,10 @@ public class UserVo {
 
 	@Override
 	public String toString() {
-		return "UserVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_phone="
-				+ user_phone + ", user_email=" + user_email + ", user_addr=" + user_addr + ", user_date=" + user_date
-				+ ", user_state=" + user_state + ", user_point=" + user_point + ", user_rank=" + user_rank + "]";
+		return "UserVo [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
+				+ user_name + ", user_phone=" + user_phone + ", user_email=" + user_email + ", user_addr=" + user_addr
+				+ ", user_birth=" + user_birth + ", user_date=" + user_date + ", user_state=" + user_state
+				+ ", user_point=" + user_point + ", user_rank=" + user_rank + "]";
 	}
 
 }
