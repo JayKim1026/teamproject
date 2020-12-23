@@ -7,20 +7,10 @@
 <%@ include file="../css/registerForm.css"%>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/1190a8ce02.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<title>Register Form Page</title>
-
+<%@ include file="../include/link.jsp" %>
 </head>
 <body>
+<%@include file="../include/header.jsp" %>
 <!-- 일반회원가입 폼 -->
 	<div class="container-fluid">
 		<div class="row">
@@ -30,25 +20,25 @@
 				<form role="form" action="/user/registerRun" method="post">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
-						<input type="text" class="form-control" id="user_id" name="user_id" required />
-						<span class="id_state">TODO 탈퇴한 아이디 인지, 이미 가입된 아이디 인지 확인하기, 숫자</span>
+						<input type="text" class="form-control" id="user_id" name="user_id" required maxlength="16"/>
+						<span class="id_state" id="checkIdDupl"></span>
 					</div>
 					
 					<div class="form-group">
 						<label for="user_pw"> 비밀번호 </label>	
-						<input type="password" class="form-control" id="user_pw" name="user_pw" required/>
+						<input type="password" class="form-control" id="user_pw" name="user_pw" required maxlength="16"/>
 						<span class="pw_state">사용불가 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</span>
 					</div>
 					
 					<div class="form-group">
 						<label for="user_pw2"> 비밀번호 확인 </label>
-						<input type="password" class="form-control" id="user_pw2" name="user_pw2" required />
+						<input type="password" class="form-control" id="user_pw2" name="user_pw2" required maxlength="16"/>
 						<span class="pw_check">비밀번호 같은지 확인</span>
 					</div>
 					
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
-						<input type="text" class="form-control" id="user_name" name="user_name" required>
+						<input type="text" class="form-control" id="user_name" name="user_name" required maxlength="8">
 						<span class="name_state"><!-- 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) --></span>
 					</div>
 					
@@ -89,13 +79,14 @@
 					<div class="form-group">
 					<br/>
 						<label for="user_phone"> 전화번호 </label>
-						<input type="text" class="form-control" id="user_phone" name="user_phone"  required />
-						<span><!--  --></span>
+						<input type="text" class="form-control" id="user_phone" name="user_phone"  required maxlength="16"/>
+						<span class="phone_state"></span>
 					</div>
 					
 					<div class="form-group">
 						<label for="user_email"> 이메일 </label>
-						<input type="text" class="form-control" id="user_email" name="user_email" required />
+						<input type="text" class="form-control" id="user_email" name="user_email" required/>
+						<span class="email_state"></span>
 					</div>
 					
 					<!-- <div class="form-group">
@@ -110,72 +101,143 @@
 			<!--// 회원가입 폼  -->
 			<div class="col-md-4"></div>
 		</div>
+		<footer class="container-fluid text-center bg-lightgray" id="footer">
+	        <div class="copyrights" style="margin-top:25px;">
+         	   <p>뚜벅뚜벅COMPANY © 2020, All Rights Reserved
+               <br>
+               <span>Web Design By: PL&K </span></p>
+<!-- <p><a href="https://www.linkedin.com/in/michael-clark-webdeveloper" target="_blank">Linkedin <i class="fa fa-linkedin-square" aria-hidden="true"></i> </a></p> -->
+        	</div>
+		</footer>
 </body>
 <script>
 $(function(){
-		
-	//TODO 이름칸에 한글만 입력 가능.
-	$("#user_name").keyup(function(){
-		var user_name = $("#user_name").val();
-		var chk_user_name = "";
-		for(var i = 0; i < user_name.length; i++){
-			chk_user_name = user_name.charCodeAt(i);
-			if(chk_user_name < 45032 || 55203 < chk_user_name ){
-				$(".name_state").text("특수기호, 숫자 , 영어 입력 불가능합니다").css("color", "red");
-			} else {
-				$(".name_state").text("");
-			} 
-		}
-	});
-	
-	//TODO 아이디 중복확인
-	$("#user_id").keyup(function(){
+	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
+	$("#user_id").keyup(function() {
 		var user_id = $("#user_id").val();
 		var chk_user_id = "";
-		for(var i = 0; i < user_id.length; i++){
-			chk_user_id = user_id.charCodeAt(i)
-			if((47 < chk_user_id && chk_user_id < 58  ) || (64 < chk_user_id && chk_user_id < 91) || (96 < chk_user_id && chk_user_id < 123)){
-				$(".id_state").text("사용가능").css("color", "green");
-			} else {
-				$(".id_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+		var result = true;
+		if(user_id == "" || user_id == null) {
+			$(".id_state").text("");
+		} else {
+			for(var i = 0; i < user_id.length; i++) {
+				chk_user_id = user_id.charCodeAt(i)
+				if((47 < chk_user_id && chk_user_id < 58  ) || (64 < chk_user_id && chk_user_id < 91) || (96 < chk_user_id && chk_user_id < 123)){
+					$(".id_state").text("사용가능").css("color", "green");
+				} else {
+					result = false;
+					$(".id_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					break;
+				}
 			}
 		}
-	});
-		
-	//TODO 전화번호 숫자만 가능하게.					
-		
-	// user_pw 숫자, 영어 대소문자만 입력 가능. 
-	// TODO 자릿수 8자에서 16자
+		//<아이디칸>아이디 중복확인
+		if(result) {
+			var url = "/user/checkIdDupl";
+			var user_id = $("#user_id").val();
+			sendData = {
+					"user_id" :  user_id
+			};
+			$.get(url, sendData, function(data){
+				if(data == true){
+					$(".id_state").text("멋진 아이디네요!").css("color", "green");
+				} else {
+					$(".id_state").text("이미 사용 중이거나, 탈퇴한 아이디 입니다.").css("color", "red");
+				}
+			});// ajax
+		}// 중복확인 if
+	});// id keyup
+	
+	// <비밀번호칸> 숫자, 영어 대소문자만 입력 + TODO 자릿수 8자에서 16자
 	$("#user_pw").keyup(function(){
 		var user_pw = $(this).val();
 		var chk_user_pw = "";
-		for(var i = 0; i < user_pw.length; i++){
-			chk_user_pw = user_pw.charCodeAt(i);
-			console.log(chk_user_pw);
-			if((47 < chk_user_pw && chk_user_pw < 58  ) || (64 < chk_user_pw && chk_user_pw < 91) || (96 < chk_user_pw && chk_user_pw < 123)){
-				$(".pw_state").text("사용가능").css("color", "green");
-			} else {
-				$(".pw_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
-			} 
+		if(user_pw == "" || user_pw == null){
+			$(".pw_state").text("");
+		} else {
+			for(var i = 0; i < user_pw.length; i++){
+				chk_user_pw = user_pw.charCodeAt(i);
+				console.log(chk_user_pw);
+				if((47 < chk_user_pw && chk_user_pw < 58  ) || (64 < chk_user_pw && chk_user_pw < 91) || (96 < chk_user_pw && chk_user_pw < 123)){
+					$(".pw_state").text("사용가능").css("color", "green");
+				} else {
+					$(".pw_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					break;
+				} 
+			}
 		}
 	});
 	
-	// user_pw2 user_pw랑 일치하는지 확인
-	$("#user_pw2").keyup(function(){
+	// <비밀번호 확인칸 > user_pw2 user_pw랑 일치하는지 확인
+	$("#user_pw2").keyup(function() {
 		var user_pw = $("#user_pw").val();
 		var user_pw2 = $("#user_pw2").val();
-		
-		if(user_pw != user_pw2){
-			$(".pw_check").text("비밀번호가 일치하지 않습니다.").css("color", "red");
-		
+		if(user_pw2 == null || user_pw2 == ""){
+			$(".pw_check").text("");
 		} else {
-			$(".pw_check").text("비밀번호가 일치합니다.").css("color", "green");
-			
+			if(user_pw != user_pw2){
+				$(".pw_check").text("비밀번호가 일치하지 않습니다.").css("color", "red");
+			} else {
+				$(".pw_check").text("비밀번호가 일치합니다.").css("color", "green");
+			}
 		}
 	});
-		
 	
-		
+	//<이름칸>이름칸에 한글만 입력 가능.
+	$("#user_name").keyup(function() {
+		var user_name = $("#user_name").val();
+		var chk_user_name = "";
+		if(user_name == "" || user_name == null) {
+			$(".name_state").text("");
+		} else {
+			for(var i = 0; i < user_name.length; i++){
+				chk_user_name = user_name.charCodeAt(i);
+				if(chk_user_name < 45032 || 55203 < chk_user_name ){
+					$(".name_state").text("특수기호, 숫자 , 영어 입력 불가능합니다").css("color", "red");
+					break;
+				} else {
+					$(".name_state").text("");
+				} 
+			}
+		}
+	});
+	
+	//<전화번호칸>TODO 전화번호 숫자만 가능하게.	
+	$("#user_phone").keyup(function() {
+		var user_phone = $(this).val();
+		var chk_user_phone = "";
+		if(user_phone == null || user_phone == "") {
+			$(".phone_state").text("");
+		} else {
+			for(var i = 0; i < user_phone.length; i++) {
+				chk_user_phone = user_phone.charCodeAt(i);
+				if(47 < chk_user_phone && chk_user_phone < 57) {
+					$(".phone_state").text("");
+				} else {
+					$(".phone_state").text("숫자만 입력해 주세요").css("color", "red");
+					break;
+				}
+			}
+		}
+	});
+	
+	//<이메일칸> 양식 설정 ----@---.-----
+ 	$("#user_email").blur(function() {
+		var user_email = $(this).val();
+		var chk_user_email = "";
+ 		if(user_email == null || user_email == "") {
+ 			$(".email_state").text("");
+ 		} else {
+ 			var at = user_email.lastIndexOf("@");
+			var dot = user_email.lastIndexOf(".");
+			
+ 			for(var i = 0; i < user_email.length; i++){
+ 				chk_user_email = user_email.charCodeAt(i);
+ 				
+ 				
+ 			}
+ 		}
+	});
 	
 	
 }); // 핸들러
