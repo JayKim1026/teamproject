@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<input type="text" id="sample2_postcode" placeholder="우편번호">
+
 <input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" id="sample2_address" placeholder="주소"><br>
-<input type="text" id="sample2_detailAddress" placeholder="상세주소">
-<input type="text" id="sample2_extraAddress" placeholder="참고항목">
+<input type="hidden" id="sample2_postcode" placeholder="우편번호">
+<input type="hidden" id="sample2_detailAddress" placeholder="상세주소">
+<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
 
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
