@@ -114,6 +114,14 @@ public class DeliverVo {
 	public void setDlvr_idcard(String dlvr_idcard) {
 		this.dlvr_idcard = dlvr_idcard;
 	}
+	
+	public Timestamp getDlvr_birth() {
+		return dlvr_birth;
+	}
+
+	public void setDlvr_birth(Timestamp dlvr_birth) {
+		this.dlvr_birth = dlvr_birth;
+	}
 
 	public Timestamp getDlvr_date() {
 		return dlvr_date;

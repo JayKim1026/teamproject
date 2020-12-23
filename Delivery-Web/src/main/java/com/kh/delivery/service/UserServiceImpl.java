@@ -19,4 +19,22 @@ public class UserServiceImpl implements UserService {
 		return userVo;
 	}
 
+	@Override
+	public String registUser(UserVo userVo) throws Exception {
+		String result = userDao.registUser(userVo);
+		return result;
+	}
+
+	@Override
+	public boolean checkIdDupl(String user_id) throws Exception {
+		boolean result = userDao.checkIdDupl(user_id);
+		return result;
+	}
+
+	@Override
+	public UserVo findAccount(String user_name, String user_phone, String user_email) throws Exception {
+		UserVo userVo = userDao.findAccount(user_name, user_phone, user_email);
+		return userVo;
+	}
+
 }
