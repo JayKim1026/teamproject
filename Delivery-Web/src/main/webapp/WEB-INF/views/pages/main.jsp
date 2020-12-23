@@ -5,21 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
-<script src="https://kit.fontawesome.com/1190a8ce02.js"
-	crossorigin="anonymous"></script>
+<%@include file="../include/link.jsp" %>
 <meta charset="UTF-8">
 <title>Main.jsp</title>
 </head>
@@ -33,6 +19,7 @@
 			<ul class="nav__main">
 				<li><a class="menu__stuff" href="/">Home</a></li>
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
+				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
 			</ul>
 			<ul class="nav__link">
@@ -201,6 +188,7 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
 <script>
+$(function(){
 	var container = document.getElementById('map');
 
 	var options = {
@@ -221,39 +209,15 @@
 	    map.relayout();
 	}
 	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
 
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-	        });
-	        infowindow.open(map, marker);
-
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-$(function(){
 	$("#btnSearch").click(function() {
 		$("#modal-172661").trigger("click");
+
 	});
 
 	$("#resizing").click(function(){
 		relayout();
+		// 주소-좌표 변환 객체를 생성합니다	
 	});
 });	
 </script>
