@@ -52,7 +52,6 @@ public class UserController {
 	@RequestMapping(value="/checkIdDupl", method=RequestMethod.GET)
 	@ResponseBody
 	public boolean checkIdDupl(String user_id) throws Exception {
-		System.out.println("checkDulp, user_id = " + user_id);
 		boolean result = userService.checkIdDupl(user_id);
 		return result;
 	}
@@ -64,7 +63,7 @@ public class UserController {
 		return "pages/registerForm";
 	}
 	
-	@RequestMapping(value="/registerRun")
+	@RequestMapping(value="/registerRun" , method=RequestMethod.GET)
 	public String registRun(UserVo userVo, RedirectAttributes rttr) throws Exception {
 		System.out.println(userVo);
 		String result = userService.registUser(userVo);

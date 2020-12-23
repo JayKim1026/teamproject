@@ -20,7 +20,7 @@
 				<li><a class="menu__stuff" href="/">Home</a></li>
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
-				<li><a class="menu__stuff" href="/timeLine/showTimeLine">TimeLine</a></li>
+				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
 			</ul>
 			<ul class="nav__link">
 				<li><a class="menu__stuff2" href="" style="padding-right: 20;">About</a></li>
@@ -36,6 +36,7 @@
 	
 <body>
 	<div class="introduce__first">
+		userVo:${sessionScope.userVo}
 		<p class="introduce__first_p">초록색 행복을 배달합니다.</p>
 		<p class="introduce__first_p">We are Green Delivery</p>
 	</div>
