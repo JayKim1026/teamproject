@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../css/main.css" %>
-<%@include file="../util/mapModal.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +13,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
@@ -33,26 +31,19 @@
 					class="fab fa-accusoft"></i>
 			</div>
 			<ul class="nav__main">
-				<li><a class="menu__stuff" href="">Home</a></li>
+				<li><a class="menu__stuff" href="/">Home</a></li>
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
-				<li><a class="menu__stuff" href="">Join us</a></li>
+				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
 			</ul>
 			<ul class="nav__link">
 				<li><a class="menu__stuff2" href="" style="padding-right: 20;">About</a></li>
 				<li><a class="menu__stuff2" href="">Membership</a></li>
 			</ul>
 			<div class="nav__textArea">
-				<input type="text" class="form-control form-control" placeholder="울산광역시/남구/KH정보교육원" />
-				<button id="btnSearch">검색</button>
+				<%@include file="../util/adressMain.jsp" %>
 			</div>
 		</nav>
-<script>
-$(function(){
-$("#btnSearch").click(function() {
-	$("#modal-172661").trigger("click");
-	});
-});
-</script>
+
 	</header>
 	
 <body>
@@ -71,6 +62,10 @@ $("#btnSearch").click(function() {
 		<p class="introduce__third_p" id="introduce__third_p_left">누구나, 가볍게 그리고 안전하게 배달해요.</p>
 		<p class="introduce__third_p">누구나 쉽게, 초록색 행복을 지킬수있어요.</p>
 		<p class="introduce__third_p" id="introduce__third_p_right">튼튼한 두다리로 사고 걱정없이 자유롭게!</p>
+	</div>
+	
+	<div class="introduce__icon">
+		<img src="/resources/images/hiring.png" class="hiring_icon">
 	</div>
 	
 	<div class="introduce__four">
@@ -179,5 +174,60 @@ $("#btnSearch").click(function() {
 		</div>
 	</div>
 </section>
+<div class="row">
+<div class="col-md-12">
+<a style="display:none;" id="modal-172661" href="#modal-container-172661" role="button" class="btn" data-toggle="modal">지도 모달</a>
+	<div class="modal fade" id="modal-container-172661" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModalLabel">KaKaoMap</h5> 
+					<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body" id="map" style="width:497; height:550;">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="resizing">리사이징</button> 
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>	
+		</div>	
+	</div>	
+</div>
+</div>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
+<script>
+	var container = document.getElementById('map');
+
+	var options = {
+		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		level: 3
+	};
+
+	var map = new kakao.maps.Map(container, options);
+	
+	function resizeMap() {
+	    var mapContainer = document.getElementById('map');
+	    mapContainer.style.width = '497px';
+	    mapContainer.style.height = '550px'; 
+	}
+	
+	function relayout() {    
+	    
+	    map.relayout();
+	}
+$(function(){
+	$("#btnSearch").click(function() {
+		$("#modal-172661").trigger("click");
+	});
+
+	$("#resizing").click(function(){
+		relayout();
+	});
+});	
+</script>
 </body>
 </html>

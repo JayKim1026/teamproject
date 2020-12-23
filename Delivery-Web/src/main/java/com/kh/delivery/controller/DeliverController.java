@@ -1,6 +1,7 @@
 package com.kh.delivery.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +23,15 @@ public class DeliverController {
 	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
 		return deliverVo;
+	}
+	
+	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
+	public String loginRun(String dlvr_id, String dlvr_pw, HttpSession session) throws Exception {
+		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
+		
+		if(deliverVo != null) {
+			session.setAttribute("deliverVo", deliverVo);
+		}
+		return "redirect:/";
 	}
 }

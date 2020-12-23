@@ -69,7 +69,7 @@ top : 200px;
 left : -715px;
 }
 
-.nav__textArea input{
+#sample2_address{
 width : 400px;
 opacity : 0.79;
 }
@@ -114,6 +114,18 @@ justify-content: space-between;
 top : 250px;
 }
 
+.introduce__icon{
+	position : relative;
+	top		: 400px;
+}
+
+.hiring_icon{
+	position	:	relative;
+	left		:	45%;
+	width  : 180px;
+	height : 180px;
+}
+
 .introduce__third_p{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 25px;
@@ -134,7 +146,7 @@ left : -10%;
 position : relative;
 display : flex;
 justify-content: space-between;
-top : 400px;
+top : 500px;
 }
 
 .introduce__hire_img{
@@ -151,14 +163,14 @@ left : 17%;
 position : relative;
 left : 7.5%;
 font-size : 60px;
-top : 80px
+top : 100px
 }
 
 #introduce__hire_icon_right{
 position : relative;
 left : -7.5%;
 font-size : 60px;
-top : 80px
+top : 100px
 }
 
 #introduce__hire_img_right{
@@ -170,7 +182,7 @@ left : -17%
 position : relative;
 display : flex;
 justify-content: space-between;
-top : 420px;
+top : 500px;
 }
 
 .introduce__five_font{
