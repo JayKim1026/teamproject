@@ -11,10 +11,34 @@
 </head>
 <script>
 $(function(){
-
+$("#submitBtn").click(function(){
+	console.log("클릭");
+	
+	var user_no = parseInt($("#user_no").val());
+	var review_content = $("#review_content").val();
+	
+	console.log(user_no);
+	console.log(review_content);
+	
+	
+	var url = "/timeline/insertArticle";
+	var sendData = {
+			"user_no"				:	user_no,
+			"review_content"		:	review_content
+	};
 	
 	$.ajax({
-		
+		"url"		:	url,
+		"dataType"	:	"text",
+		"data"		:	JSON.stringify(sendData),
+		"method"	:	"post",
+		"headers"	:	{
+	"Content-Type"	:	"application/json"
+						},
+		"success"	:	function(data){
+			console.log(data);
+		}
+		});
 	});
 });
 </script>
@@ -30,8 +54,8 @@ $(function(){
 							<div class="form-group">
 								
 								<label>글쓰기</label> <input type="hidden"
-									value="${userVo.user_no}" name="user_no">
-								<textarea class="form-control" id="textArea" name="review_content"></textarea>
+									value="21" id="user_no">
+								<textarea class="form-control" id="review_content"></textarea>
 								<button class="btn btn-primary" id="submitBtn">글쓰기</button>
 							</div>
 						
