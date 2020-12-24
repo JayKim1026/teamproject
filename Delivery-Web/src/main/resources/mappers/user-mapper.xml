@@ -14,7 +14,7 @@
 		insert into tbl_user(user_no, user_id, user_pw, user_name, 
 								user_phone, user_email, user_addr, user_birth)
 		values(seq_user_no.nextval, #{user_id}, #{user_pw}, #{user_name}, 
-				#{user_phone}, #{user_email}, #{user_addr}, #{user_birth});
+				#{user_phone}, #{user_email}, #{user_addr}, #{user_birth})
 	</insert>
 	
 	<select id="checkIdDupl" resultType="UserVo">
@@ -27,6 +27,11 @@
 		where user_name = #{user_name}
 		and user_phone = #{user_phone}
 		and user_email = #{user_email}
+	</select>
+	
+	<select id="getUserInfo" resultType="UserVo">
+		select * from tbl_user
+		where user_no = #{user_no}
 	</select>
 
 </mapper>

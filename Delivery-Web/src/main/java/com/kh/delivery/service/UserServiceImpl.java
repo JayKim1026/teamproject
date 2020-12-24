@@ -36,5 +36,11 @@ public class UserServiceImpl implements UserService {
 		UserVo userVo = userDao.findAccount(user_name, user_phone, user_email);
 		return userVo;
 	}
+	
+	@Override
+	public UserVo getUserInfo(int user_no) throws Exception {
+		UserVo userVo = userDao.getUserInfo(user_no);
+		return userVo;
+	}
 
 }

@@ -29,5 +29,27 @@ public class OrderDaoImpl implements OrderDao {
 		return orderList;
 	}
 	
-	
+	@Override
+	public String pickOrder(int order_no, int dlvr_no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("order_no", order_no);
+		map.put("dlvr_no", dlvr_no);
+		sqlSession.update(NAMESPACE + "pickOrder", map);
+		return "pickOrder_success";
+	}
+
+	@Override
+	public OrderVo getPickedOrder(int dlvr_no) throws Exception {
+		OrderVo orderVo = sqlSession.selectOne(NAMESPACE + "getPickedOrder", dlvr_no);
+		return orderVo;
+	}
+
+	@Override
+	public String cancelDelivery(int order_no, int dlvr_no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("order_no", order_no);
+		map.put("dlvr_no", dlvr_no);
+		sqlSession.update(NAMESPACE + "cancelDelivery", map);
+		return "cancelDelivery_success";
+	}
 }

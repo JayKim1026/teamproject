@@ -18,13 +18,8 @@ public class DeliverController {
 	@Inject
 	DeliverService deliverService;
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	@ResponseBody
-	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception {
-		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
-		return deliverVo;
-	}
-	
+	// 웹
+	// 배달원 로그인
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public String loginRun(String dlvr_id, String dlvr_pw, HttpSession session) throws Exception {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
@@ -33,5 +28,14 @@ public class DeliverController {
 			session.setAttribute("deliverVo", deliverVo);
 		}
 		return "redirect:/";
+	}
+	
+	// 안드로이드
+	// 배달원 로그인
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@ResponseBody
+	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception {
+		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
+		return deliverVo;
 	}
 }
