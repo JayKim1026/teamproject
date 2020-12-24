@@ -1,10 +1,5 @@
 package com.kh.delivery.controller;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -57,6 +52,7 @@ public class UserController {
 	@RequestMapping(value="/checkIdDupl", method=RequestMethod.GET)
 	@ResponseBody
 	public boolean checkIdDupl(String user_id) throws Exception {
+		System.out.println("checkDulp, user_id = " + user_id);
 		boolean result = userService.checkIdDupl(user_id);
 		return result;
 	}
@@ -68,11 +64,9 @@ public class UserController {
 		return "pages/registerForm";
 	}
 	
-	@RequestMapping(value="/registerRun" , method=RequestMethod.POST)
-	public String registRun(UserVo userVo, String str_user_birth, RedirectAttributes rttr) throws Exception {
-		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-		Date user_birth = new Date(df.parse(str_user_birth).getTime());
-		userVo.setUser_birth(user_birth);
+	@RequestMapping(value="/registerRun")
+	public String registRun(UserVo userVo, RedirectAttributes rttr) throws Exception {
+		System.out.println(userVo);
 		String result = userService.registUser(userVo);
 		System.out.println("result = " + result);
 		rttr.addFlashAttribute("msg", result);
@@ -112,18 +106,6 @@ public class UserController {
 		mainSender.send(preparator);
 		rttr.addFlashAttribute("msg", "send email");
 		return "redirect:/";
-	}
-	
-	
-	// 안드로이드
-	// 유저 정보 가져오기
-	@RequestMapping(value="/getUserInfo", method=RequestMethod.POST)
-	@ResponseBody
-	public UserVo getUserInfo(int user_no) throws Exception {
-		System.out.println("getUserInfo, user_no = " + user_no);
-		UserVo userVo = userService.getUserInfo(user_no);
-		System.out.println("getUserInfo, userVo = " + userVo.toString());
-		return userVo;
 	}
 	
 }

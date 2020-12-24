@@ -23,7 +23,7 @@ public class TimelineDaoImpl implements TimelineDao {
 		System.out.println("TimelineDao, insertArticle, review_content:" + review_content);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("hi!");
+		
 		map.put("user_no", user_no);
 		map.put("review_content", review_content);
 		
