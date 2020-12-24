@@ -18,7 +18,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">사용자 가입</div>
-				<form role="form" action="/user/registerRun" method="get">
+				<form role="form" action="/user/registerRun" method="post">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
 						<input type="text" class="form-control" id="user_id" name="user_id" required maxlength="16"/>
@@ -46,7 +46,7 @@
 					<div>
 						<label for="user_birth"> 생년 월일 </label>
 						<div class="form-group">
-							<input type="date" class="form-control" id="user_birth" name="user_birth" required/>
+							<input type="date" class="form-control" id="user_birth" name="str_user_birth" max="2100-12-31" required/>
 						</div>
 					</div>
 					

@@ -1,5 +1,6 @@
 package com.kh.delivery.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +14,7 @@ public class UserVo {
 	private String user_email;
 	private String user_addr; // 주소
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Timestamp user_birth;
+	private Date user_birth;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp user_date;
 	private String user_state;
@@ -76,11 +77,11 @@ public class UserVo {
 		this.user_addr = user_addr;
 	}
 
-	public Timestamp getUser_birth() {
+	public Date getUser_birth() {
 		return user_birth;
 	}
 
-	public void setUser_birth(Timestamp user_birth) {
+	public void setUser_birth(Date user_birth) {
 		this.user_birth = user_birth;
 	}
 
