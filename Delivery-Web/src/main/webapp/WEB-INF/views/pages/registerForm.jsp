@@ -88,7 +88,6 @@
 </body>
 <script>
 $(function(){
-	
 	/* // 가입 완료
 	$("#btnRegister").click(function(e){
 		e.preventDefault();
