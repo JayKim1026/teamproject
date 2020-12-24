@@ -26,10 +26,11 @@ public class DeliverController {
 	// 웹
 	
 	// 배달원 회원가입
-	@RequestMapping(value="/dlvr_RegisterForm", method=RequestMethod.POST)
+	@RequestMapping(value="/dlvr_RegisterForm", method=RequestMethod.GET)
 	public String dlvr_RegisterForm() throws Exception {
 		return "pages/dlvr_RegisterForm";
 	}
+	
 	@RequestMapping(value="/dlvr_RegisterRun", method=RequestMethod.POST)
 	public String dlvr_RegisterRun(DeliverVo deliverVo, String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
