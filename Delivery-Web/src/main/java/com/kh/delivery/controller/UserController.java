@@ -32,8 +32,8 @@ public class UserController {
 	// 웹
 	
 	// 로그인
-	@RequestMapping(value="/loginForm")
-	public String loginForm(String user_id, String user_pw) throws Exception {
+	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
+	public String loginForm() throws Exception {
 		return "pages/loginForm";
 	}
 	
@@ -61,12 +61,12 @@ public class UserController {
 	}
 	
 	//회원 가입
-	@RequestMapping(value="/registerForm")
+	@RequestMapping(value="/registerForm", method=RequestMethod.GET)
 	public String registForm() throws Exception {
 		return "pages/registerForm";
 	}
 	
-	@RequestMapping(value="/registerRun")
+	@RequestMapping(value="/registerRun", method=RequestMethod.POST)
 	public String registRun(UserVo userVo, String str_user_birth, RedirectAttributes rttr) throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date user_birth = new Date(df.parse(str_user_birth).getTime());
