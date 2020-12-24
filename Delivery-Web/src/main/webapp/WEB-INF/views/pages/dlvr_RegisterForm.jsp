@@ -85,14 +85,7 @@
 			<!--// 회원가입 폼  -->
 			<div class="col-md-4"></div>
 		</div>
-		<footer class="container-fluid text-center bg-lightgray" id="footer">
-	        <div class="copyrights" style="margin-top:25px;">
-         	   <p>뚜벅뚜벅COMPANY © 2020, All Rights Reserved
-               <br>
-               <span>Web Design By: PL&K </span></p>
-<!-- <p><a href="https://www.linkedin.com/in/michael-clark-webdeveloper" target="_blank">Linkedin <i class="fa fa-linkedin-square" aria-hidden="true"></i> </a></p> -->
-        	</div>
-		</footer>
+<%@ include file = "../include/footer.jsp" %>
 </body>
 <script>
 $(function(){

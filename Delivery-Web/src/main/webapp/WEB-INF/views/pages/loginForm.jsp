@@ -41,6 +41,8 @@
   </div>
 </div>
 
+<%@ include file="../include/footer.jsp" %>
+</body>
 <script>
 $(function(){
 	$(".check_who").click(function(){
@@ -57,6 +59,4 @@ $(function(){
 	});
 });
 </script>
-<%@ include file="../include/footer.jsp" %>
-</body>
 </html>
