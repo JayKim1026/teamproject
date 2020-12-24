@@ -8,5 +8,9 @@
 		(review_no, user_no, review_content)
 		values(seq_review_no.nextval,#{user_no}, #{review_content})
 	</insert>
+	
+	<select id="timelineList">
+		select * from tbl_board_review
+	</select>
 
 </mapper>

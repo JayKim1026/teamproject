@@ -1,11 +1,16 @@
 package com.kh.delivery.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.delivery.domain.TimelineVo;
+import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.TimelineService;
 
 @Controller
@@ -16,16 +21,18 @@ public class TimelineController {
 	private TimelineService timelineService;
 	
 	@RequestMapping(value="/showTimeline")
-	public String timeline() {
+	public String timelineList() {
 		
 		return "pages/timeline";
 	}
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
-	public void insertArticle(int user_no, String review_content) {
-		System.out.println("timelineController, insertArticle, user_no:" + user_no);
-		System.out.println("timelineController, insertArticle, review_content:" + review_content);
-		timelineService.insertArticle(user_no, review_content);
-		
+	@ResponseBody
+	public String insertArticle(@RequestBody TimelineVo timelineVo,HttpSession session) throws Exception {
+		System.out.println("timelineVo" +  timelineVo);
+		timelineService.insertArticle(timelineVo);
+		return "success";
 	}
+	
+	
 }

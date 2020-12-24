@@ -19,7 +19,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">라이더 회원 가입</div>
-				<form role="form" action="/user/registerRun" method="post">
+				<form role="form" action="/deliver/dlvr_RegisterRun" method="post">
 					<div class="form-group">
 					 	<label for="dlvr_id"> 아이디 </label>
 						<input type="text" class="form-control" id="dlvr_id" name="dlvr_id" required maxlength="16"/>
@@ -50,7 +50,19 @@
 							<input type="date" class="form-control" id="dlvr_birth" name="str_dlvr_birth" max="2100-12-31" required/>
 						</div>
 					</div>
-					
+
+					<div class="form-group">
+						<label for="dlvr_img"> 증명사진 </label>
+						<input type="file" class="form-control-file" id="dlvr_img" name="dlvr_img"/>
+						<span class="imgPreview"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="dlvr_idcard">  주민등록증 </label>
+						<input type="file" class="form-control-file" id="dlvr_idcard" name="dlvr_idcard"/>
+						<span class="idcardPreview"></span>
+					</div>
+										
 					<div>
 					<label>주소</label><br/>
 						<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
@@ -82,14 +94,16 @@
 				</form>
 				</div>
 			</div>
-			<!--// 회원가입 폼  -->
 			<div class="col-md-4"></div>
 		</div>
 <%@ include file = "../include/footer.jsp" %>
 </body>
 <script>
 $(function(){
-	
+	$("input[type=file]").on("change", function(e){
+		var file = e.originalEvent.dataTransfer.file;
+		console.log(file);
+	});	
 	/* // 가입 완료
 	$("#btnRegister").click(function(e){
 		e.preventDefault();
@@ -110,7 +124,7 @@ $(function(){
 	});
 	 */
 	
-	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
+	/* //<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#dlvr_id").keyup(function() {
 		var dlvr_id = $("#dlvr_id").val();
 		var char_dlvr_id = "";
@@ -144,7 +158,7 @@ $(function(){
 				}
 			});// ajax
 		}// 중복확인 if
-	});// id keyup
+	});// id keyup */
 	
 	// <비밀번호칸> 숫자, 영어 대소문자만 입력 + TODO 자릿수 8자에서 16자
 	$("#dlvr_pw").keyup(function(){
