@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.deliver">
+	
+	<select id="login" resultType="DeliverVo">
+		select * from tbl_deliver
+		where dlvr_id = #{dlvr_id}
+		and dlvr_pw = #{dlvr_pw}
+	</select>
+
+	<insert id="registDeliver">
+		insert into tbl_deliver(
+			dlvr_no, dlvr_id, dlvr_pw, dlvr_name, dlvr_phone, 
+			dlvr_email, dlvr_addr, dlvr_idcard, dlvr_birth, dlvr_img
+		)
+		values(
+			seq_dlvr_no.nextval, #{dlvr_id}, #{dlvr_pw}, #{dlvr_name}, #{dlvr_phone}, 
+			#{dlvr_email}, #{dlvr_addr}, #{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img}
+		)
+	</insert>
+</mapper>

@@ -1,0 +1,36 @@
+
+<style>
+#head_Container{
+	position	:	relative;
+	height		:	15%;
+	
+}
+
+.main-logo{
+	font-family : 'Nanum Pen Script', cursive;
+	font-size : 35px;
+	color : black;
+}
+
+.main-menu{
+	font-family : 'Nanum Pen Script', cursive;
+	font-size : 35px;
+	color : black;
+	padding		:	0 1.5%;
+}
+
+#main_login{
+	float: right;
+}
+
+#main_Joinus{
+	float: right;
+}
+
+#footer{
+	position	:	relative;
+	top			:	29%;
+	font-family : 'Nanum Pen Script', cursive;
+	font-size 	: 25px;
+}
+</style>

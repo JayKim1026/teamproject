@@ -1,0 +1,35 @@
+<style>
+.register_wrapper{
+	background-color: whitesmoke;
+	background-size: cover;
+	border-radius: 30px;
+	justify-content: center;
+}
+
+.register_title{
+	text-align: center;
+    font-family: 'Nanum Pen Script', cursive;
+    font-weight: bold;
+    font-size: 45px;
+}
+
+.registerForm_birth{
+	display: flex;
+	justify-content: space-between;
+}
+
+.span_box{
+	margin: 2px;
+}
+#user_birth_day{
+	display: box;
+}
+
+.sel{
+	border:1px solid #ccc;
+	border-radius:.25rem;
+	padding : 6px 12px;
+	
+    background-size: 20px 8px;
+}
+</style>
