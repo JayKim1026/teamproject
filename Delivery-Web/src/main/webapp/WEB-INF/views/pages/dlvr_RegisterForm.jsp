@@ -19,7 +19,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">라이더 회원 가입</div>
-				<form role="form" action="/deliver/dlvr_RegisterRun" method="post">
+				<form role="form" action="/deliver/dlvr_RegisterRun" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 					 	<label for="dlvr_id"> 아이디 </label>
 						<input type="text" class="form-control" id="dlvr_id" name="dlvr_id" required maxlength="16"/>
