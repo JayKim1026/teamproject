@@ -37,9 +37,14 @@ public class DeliverDaoImpl implements DeliverDao {
 	
 	// 배달원 아이디 중복 체크
 	@Override
-	public boolean CheckIdDupl(String dlvr_id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checkIdDupl(String dlvr_id) throws Exception {
+		DeliverVo deliverVo = sqlSession.selectOne(NAMESPACE + "checkIdDupl" , dlvr_id);
+			if(deliverVo == null) {
+				return true;
+			} else {
+				
+				return false;
+			}
 	}
 
 }
