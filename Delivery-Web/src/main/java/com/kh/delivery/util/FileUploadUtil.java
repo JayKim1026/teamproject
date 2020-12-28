@@ -36,6 +36,19 @@ public class FileUploadUtil {
 		return s3;
 	}
 	
+	// 이미지 파일인지 확인하기
+	// 예시 FileUploadUtil.isImage(fileName);
+	public static boolean isImage(String fileName) {
+		int dotIndex = fileName.lastIndexOf(".");
+		String extName = fileName.substring(dotIndex+1);
+		String upper = extName.toUpperCase();
+		if(!upper.equals("JPG") && !upper.equals("PNG") && !upper.equals("GIF")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	// 파일 업로드
 	// 예시 FileUploadUtil.upload(file, FileUploadUtil.DLVR_IMG);
 	public static void upload(File file, String folderName) {

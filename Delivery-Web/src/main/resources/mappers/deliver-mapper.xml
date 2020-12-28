@@ -20,4 +20,11 @@
 			#{dlvr_email}, #{dlvr_addr}, #{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img}
 		)
 	</insert>
+	
+	<select id="checkIdDupl" resultType="deliverVo">
+		select * 
+		from tbl_deliver
+		where dlvr_id = #{dlvr_id}
+		
+	</select>
 </mapper>

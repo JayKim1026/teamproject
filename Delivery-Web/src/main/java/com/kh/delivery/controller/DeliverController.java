@@ -1,5 +1,6 @@
 package com.kh.delivery.controller;
 
+import java.io.File;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,13 +9,18 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend.Attr;
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.TestVo;
 import com.kh.delivery.service.DeliverService;
+import com.kh.delivery.util.FileUploadUtil;
 
 @Controller
 @RequestMapping(value="/deliver")
@@ -31,19 +37,56 @@ public class DeliverController {
 		return "pages/dlvr_RegisterForm";
 	}
 	
+	
 	@RequestMapping(value="/dlvr_RegisterRun", method=RequestMethod.POST)
-	public String dlvr_RegisterRun(DeliverVo deliverVo, String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
+	public String dlvr_RegisterRun(DeliverVo deliverVo, MultipartFile f_dlvr_img , MultipartFile f_dlvr_idcard, String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
-		System.out.println(deliverVo);
-//		String result = deliverService.registDeliver(deliverVo) ;
-//		System.out.println("result = " + result);
-//		rttr.addFlashAttribute("msg", result);
 		
-		return "redirect:/";
+		
+		//이미지 확인
+		String org_dlvr_img = f_dlvr_img.getOriginalFilename();
+		String org_dlvr_idcard = f_dlvr_idcard.getOriginalFilename();
+		
+		boolean isImage_img = FileUploadUtil.isImage(org_dlvr_img);
+		boolean isImage_idcard = FileUploadUtil.isImage(org_dlvr_idcard);
+		
+		if(!isImage_img || !isImage_idcard) {
+			rttr.addFlashAttribute("msg", "notImage");
+			return "redirect:/deliver/dlvr_RegisterForm";
+		} else {
+			// aws 업로드 & DB에 저장할 파일명
+			String dlvr_img = deliverVo.getDlvr_id() + "_" + org_dlvr_img; 
+			String dlvr_idcard = deliverVo.getDlvr_id() + "_" + org_dlvr_idcard;
+			
+			deliverVo.setDlvr_img(dlvr_img);
+			deliverVo.setDlvr_idcard(dlvr_idcard);
+			
+			File dlvrImg = new File(dlvr_img);
+			File dlvrIdcard = new File(dlvr_idcard);
+			f_dlvr_img.transferTo(dlvrImg);
+			f_dlvr_idcard.transferTo(dlvrIdcard);
+			
+			FileUploadUtil.upload(dlvrImg, FileUploadUtil.DLVR_IMG);
+			FileUploadUtil.upload(dlvrIdcard, FileUploadUtil.DLVR_IDCARD);
+			
+			System.out.println("deliverVo : " + deliverVo);
+			String result = deliverService.registDeliver(deliverVo) ;
+			System.out.println("result = " + result);
+			rttr.addFlashAttribute("msg", result);
+			return "redirect:/";
+
+		}
 	}
-	
+
+	// 아이디 중복확인
+	@RequestMapping(value="/dlvr_checkIdDupl", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean checkIdDupl(String dlvr_id)throws Exception {
+		boolean result = deliverService.checkIdDupl(dlvr_id);
+		return result;
+	}
 	
 	// 배달원 로그인
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)

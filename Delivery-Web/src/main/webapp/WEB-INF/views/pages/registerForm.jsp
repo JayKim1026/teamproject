@@ -88,26 +88,7 @@
 </body>
 <script>
 $(function(){
-	/* // 가입 완료
-	$("#btnRegister").click(function(e){
-		e.preventDefault();
-		var user_id = $("#user_id").val();
-		var user_pw = $("#user_pw").val();
-		var user_name = $("#user_name").val();
-		var user_birth = $("#user_birth").val();
-		var user_addr = $(".user_addr").val();
-		var user_phone = $("#user_phone").val();
-		var user_email = $("#user_email").val();
-		console.log("user_id : " +user_id);
-		console.log("user_pw : " +user_pw);
-		console.log("user_name : " +user_name);
-		console.log("user_birth: " +user_birth);
-		console.log("user_addr : " +user_addr);
-		console.log("user_phone : " +user_phone);
-		console.log("user_email : " +user_email);
-	});
-	 */
-	
+
 	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#user_id").keyup(function() {
 		var user_id = $("#user_id").val();
@@ -119,14 +100,13 @@ $(function(){
 			for(var i = 0; i < user_id.length; i++) {
 				char_user_id = user_id.charCodeAt(i)
 				if((47 < char_user_id && char_user_id < 58  ) || (64 < char_user_id && char_user_id < 91) || (96 < char_user_id && char_user_id < 123)){
-					$(".id_state").text("사용가능").css("color", "green");
+					$(".id_state").text("");
 				} else {
 					result = false;
 					$(".id_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
 					break;
 				}
 			}
-		}
 		//<아이디칸>아이디 중복확인
 		if(result) {
 			var url = "/user/checkIdDupl";
@@ -141,6 +121,7 @@ $(function(){
 					$(".id_state").text("이미 사용 중이거나, 탈퇴한 아이디 입니다.").css("color", "red");
 				}
 			});// ajax
+		}
 		}// 중복확인 if
 	});// id keyup
 	

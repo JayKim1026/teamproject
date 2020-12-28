@@ -20,6 +20,7 @@
 				<li><a class="menu__stuff" href="/">Home</a></li>
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
+				<li><a class="menu__stuff" href="/deliver/dlvr_RegisterForm">Deliver Join</a></li>
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
 			</ul>
 			<ul class="nav__link">

@@ -11,6 +11,6 @@ public interface DeliverDao {
 	public String registDeliver(DeliverVo deliverVo) throws Exception;
 	
 	// 배달원 아이디 중복 확인
-	public boolean CheckIdDupl(String dlvr_id) throws Exception;
+	public boolean checkIdDupl(String dlvr_id) throws Exception;
 	
 }
