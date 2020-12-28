@@ -7,4 +7,12 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
+<<<<<<< HEAD
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+=======
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/1190a8ce02.js"
+	crossorigin="anonymous"></script>
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
