@@ -78,12 +78,17 @@ public class UserController {
 	}
 	
 	
-	/*주소 검색*/
+	//주소 검색
 	@RequestMapping(value="/address", method=RequestMethod.GET)
 	public String address() throws Exception {
 		return "util/address";
 	}
 	
+	// 유저 마이 페이지
+	@RequestMapping(value="/userPage", method=RequestMethod.GET)
+	public String userPage() throws Exception {
+		return "pages/userPage";
+	}
 	// 아이디, 비밀번호 찾기
 	@RequestMapping(value="/findAccountForm", method=RequestMethod.GET)
 	public String findAccountForm() throws Exception {
