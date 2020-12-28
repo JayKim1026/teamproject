@@ -29,4 +29,16 @@ public class TimelineServiceImpl implements TimelineService {
 		return list;
 	}
 
+	@Override
+	public void updateArticle(TimelineVo timelineVo) {
+		timelineDao.updateArticle(timelineVo);
+		
+	}
+
+	@Override
+	public void deleteArticle(int review_no) {
+		timelineDao.deleteArticle(review_no);
+		
+	}
+
 }

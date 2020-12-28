@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,9 +36,22 @@ public class TimelineController {
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String insertArticle(@RequestBody TimelineVo timelineVo,HttpSession session) throws Exception {
-		System.out.println("timelineVo" +  timelineVo);
+		System.out.println("TimelineController, insertArticle, timelineVo" +  timelineVo);
 		timelineService.insertArticle(timelineVo);
 		return "success";
+	}
+	
+	@RequestMapping(value="/updateArticle", method=RequestMethod.POST)
+	public void updateArticle(@RequestBody TimelineVo timelineVo) throws Exception{
+		System.out.println("TimelineController, updateArticle, timelineVo" + timelineVo);
+		timelineService.updateArticle(timelineVo);
+		
+	}
+	
+	@RequestMapping(value="/deleteArticle/{review_no}", method=RequestMethod.GET)
+	public void deleteArticle(@PathVariable("review_no") int review_no) throws Exception {
+		System.out.println("TimelineController, deleteArticle, review_no:" + review_no);
+		timelineService.deleteArticle(review_no);
 	}
 	
 	

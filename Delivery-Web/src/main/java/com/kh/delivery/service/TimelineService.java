@@ -11,4 +11,10 @@ public interface TimelineService {
 	
 	/* 글 리스트 */
 	public List<TimelineVo> timelineList(); 
+	
+	/* 글 수정 */
+	public void updateArticle(TimelineVo timelineVo);
+	
+	/*글 삭제*/
+	public void deleteArticle(int review_no);
 }

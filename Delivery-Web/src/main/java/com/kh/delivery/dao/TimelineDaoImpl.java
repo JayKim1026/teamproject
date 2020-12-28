@@ -33,4 +33,17 @@ public class TimelineDaoImpl implements TimelineDao {
 		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "timelineList");
 		return list;
 	}
+
+	@Override
+	public void updateArticle(TimelineVo timelineVo) {
+		
+		sqlSession.update(NAMESPACE + "updateArticle", timelineVo);
+		
+	}
+
+	@Override
+	public void deleteArticle(int review_no) {
+		sqlSession.update(NAMESPACE + "deleteArticle", review_no);
+		
+	}
 }

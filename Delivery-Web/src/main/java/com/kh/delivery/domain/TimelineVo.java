@@ -8,6 +8,7 @@ public class TimelineVo {
 	private int review_star;
 	private int dlvr_no;
 	private String review_state;
+	private String user_name;
 	
 	
 	public int getReview_no() {
@@ -52,12 +53,19 @@ public class TimelineVo {
 	public void setReview_state(String review_state) {
 		this.review_state = review_state;
 	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 	
 	@Override
 	public String toString() {
 		return "TimelineVo [review_no=" + review_no + ", review_content=" + review_content + ", user_no=" + user_no
 				+ ", review_img=" + review_img + ", review_star=" + review_star + ", dlvr_no=" + dlvr_no
-				+ ", review_state=" + review_state + "]";
+				+ ", review_state=" + review_state + ", user_name=" + user_name + "]";
 	}
+	
 	
 }

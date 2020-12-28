@@ -12,5 +12,9 @@ public interface TimelineDao {
 	/*글 작성*/
 	public void insertArticle(TimelineVo timelineVo);
 
+	/*글 수정*/
+	public void updateArticle(TimelineVo timelineVo);
 	
+	/*글 삭제*/
+	public void deleteArticle(int review_no);
 }
