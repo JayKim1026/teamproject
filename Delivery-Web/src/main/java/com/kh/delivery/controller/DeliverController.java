@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.DeliverVo;
@@ -32,10 +33,13 @@ public class DeliverController {
 	}
 	
 	@RequestMapping(value="/dlvr_RegisterRun", method=RequestMethod.POST)
-	public String dlvr_RegisterRun(DeliverVo deliverVo, String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
+	public String dlvr_RegisterRun(DeliverVo deliverVo, String dlvr_img, MultipartFile file ,String dlvr_idcard ,String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
+		System.out.println("file : " + file);
+		System.out.println("dlvr_img : " + dlvr_img);
+		System.out.println("dlvr_idcard : " + dlvr_idcard);
 		System.out.println(deliverVo);
 //		String result = deliverService.registDeliver(deliverVo) ;
 //		System.out.println("result = " + result);
