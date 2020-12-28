@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html>
 <html>
@@ -45,42 +46,55 @@ $("#submitBtn").click(function(){
 <body>
 <%@include file="../include/timelineHeader.jsp" %>
 	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-2"></div>
+<div class="container-fluid">
+	timelineVo: ${timelineVo}
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-2"></div>
 					<div class="col-md-8">
-							<div class="form-group">
+						<div class="form-group">
 								
-								<label>글쓰기</label> <input type="hidden"
-									value="21" id="user_no">
-								<textarea class="form-control" id="review_content"></textarea>
-								<button class="btn btn-primary" id="submitBtn">글쓰기</button>
-							</div>
+							<label>글쓰기</label> 
+							<input type="hidden"value="21" id="user_no">
+							<textarea class="form-control" id="review_content"></textarea>
+							<button class="btn btn-primary" id="submitBtn">글쓰기</button>
+						</div>
 						
-			
-						<div class="timeline-centered timeline-centered-location">
+					</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-8">
+					<div class="timeline-centered timeline-centered-location">
 							<!-- 글 출력 -->
 							<article class="timeline-entry">
-								
 								<div class="timeline-entry-inner">
-																				
+																		
 									<div class="timeline-icon bg-success">
+									
 										<i class="entypo-feather"></i>
+										
 									</div>
 									
 									<div class="timeline-label">
-										<h2>
-											<a href="#">Art Ramadani</a> <span>posted a statusupdate</span>
-										</h2>
-										<p>Tolerably earnestly middleton extremely distrusts she
-											boy now not. Add and offered prepare how cordial two promise.
-											Greatly who affixed suppose but enquire compact prepare all
-											put. Added forth chief trees but rooms think may.</p>
+										<c:forEach var="timelineVo" items="${timelineVo}">
+									
+											<h2>
+											<a href="#">${timelineVo.user_no}</a> <span>posted a statusupdate</span>
+											</h2>
+											<p>${timelineVo.review_content}</p>
+										</c:forEach>
 									</div>
-								</div>
-								
+								</div>	
 							</article>
 							<!--// 글 출력 끝 -->
 												
@@ -99,12 +113,12 @@ $("#submitBtn").click(function(){
 							</article>
 							<!--// 새로고침 버튼 끝-->
 						</div>
-					</div>
-					<div class="col-md-2"></div>
+				</div>
+				<div class="col-md-2">
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 										
 <%@include file="../include/footer.jsp" %>
 </body>

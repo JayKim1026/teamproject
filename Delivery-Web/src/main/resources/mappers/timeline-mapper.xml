@@ -9,7 +9,7 @@
 		values(seq_review_no.nextval,#{user_no}, #{review_content})
 	</insert>
 	
-	<select id="timelineList">
+	<select id="timelineList" resultType="TimelineVo">
 		select * from tbl_board_review
 	</select>
 
