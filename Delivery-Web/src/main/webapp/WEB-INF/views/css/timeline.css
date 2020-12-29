@@ -1,6 +1,7 @@
 <style>
 
 
+
 #textArea{
 	height : 150px;
 }
@@ -330,4 +331,227 @@ img {
 #lineModalLabel{
 	text-align: center;
 }
+
+<!--글쓰기-->
+body {
+     color: #000;
+     overflow-x: hidden;
+     height: 100%;
+     background-color: #00C853;
+     background-repeat: no-repeat
+ }
+
+ .card_writeform {
+ 	 background-color: #fff;
+     border-radius: 10px;
+     width: 800px;
+     padding: 20px;
+     margin-top: 50px;
+     margin-bottom: 50px
+ }
+
+ .profile-pic {
+     width: 60px;
+     height: 60px;
+     border-radius: 50%;
+     object-fit: contain;
+     background-color: #E0E0E0
+ }
+
+ textarea {
+     padding: 15px 20px;
+     border-radius: 10px;
+     box-sizing: border-box;
+     color: #616161;
+     border: 1px solid #F5F5F5;
+     font-size: 16px;
+     letter-spacing: 1px;
+     height: 120px !important;
+     width: 100%
+ }
+
+ textarea:focus {
+     -moz-box-shadow: none !important;
+     -webkit-box-shadow: none !important;
+     box-shadow: none !important;
+     border: 1px solid #00C853 !important;
+     outline-width: 0 !important
+ }
+
+ select {
+     border: none;
+     font-size: 15px;
+     background-color: #fff !important
+ }
+
+ select:focus {
+     -moz-box-shadow: none !important;
+     -webkit-box-shadow: none !important;
+     box-shadow: none !important;
+     outline-width: 0 !important
+ }
+
+ ::placeholder {
+     color: #BDBDBD
+ }
+
+ :-ms-input-placeholder {
+     color: #BDBDBD
+ }
+
+ ::-ms-input-placeholder {
+     color: #BDBDBD
+ }
+
+ .btn-success {
+     border-radius: 50px;
+     padding: 4px 40px
+ }
+
+ .options {
+     font-size: 23px;
+     color: #757575;
+     cursor: pointer
+ }
+
+ .options:hover {
+     color: #000
+ }
+ 
+ <!--글보기 새로운 폼 -->
+a {
+    text-decoration: none !important;
+    color: inherit
+}
+
+a:hover {
+    color: #455A64
+}
+
+.card_output {
+/*     border-radius: 5px; */
+/*     background-color: #fff; */
+/*     width:800px; */
+/*     padding-left: 60px; */
+/*     padding-right: 60px; */
+/*     margin-top: 30px; */
+/*     padding-top: 30px; */
+/*     padding-bottom: 30px */
+ background-color: #fff;
+     border-radius: 10px;
+     width: 800px;
+     padding: 20px;
+     margin-top: 50px;
+     margin-bottom: 50px
+}
+
+.rating-box {
+    width: 130px;
+    height: 130px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #FBC02D;
+    color: #fff
+}
+
+.rating-label {
+    font-weight: bold
+}
+
+.rating-bar {
+    width: 300px;
+    padding: 8px;
+    border-radius: 5px
+}
+
+.bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 5px
+}
+
+.bar-5 {
+    width: 70%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-4 {
+    width: 30%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-3 {
+    width: 20%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-2 {
+    width: 10%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-1 {
+    width: 0%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+td {
+    padding-bottom: 10px
+}
+
+.star-active {
+    color: #FBC02D;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.star-active:hover {
+    color: #F9A825;
+    cursor: pointer
+}
+
+.star-inactive {
+    color: #CFD8DC;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.blue-text {
+    color: #0091EA
+}
+
+.content {
+    font-size: 18px
+}
+
+.profile-pic {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    margin-right: 30px
+}
+
+.pic {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px
+}
+
+.vote {
+    cursor: pointer
+} 			
 </style>

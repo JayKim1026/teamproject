@@ -94,94 +94,58 @@ $(".btnDelete").click(function(){
 </script>
 <body>
 <%@include file="../include/timelineHeader.jsp" %>
-	
-<div class="container-fluid">
-	timelineVo: ${timelineVo}
-	userVo: ${userVo}
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-2"></div>
-					<div class="col-md-8">
-						<div class="form-group">
-								
-							<label>글쓰기</label> 
-							<input type="hidden"value="${userVo.user_no}" id="user_no">
-							<textarea class="form-control" id="review_content"></textarea>
-							<button class="btn btn-primary" id="submitBtn">글쓰기</button>
-						</div>
-						
-					</div>
-				<div class="col-md-2"></div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-8">
-					<div class="timeline-centered timeline-centered-location">
-							<!-- 글 출력 -->
-							<c:forEach var="timelineVo" items="${timelineVo}">
-							<article class="timeline-entry">
-								<div class="timeline-entry-inner">
-																		
-									<div class="timeline-icon bg-success">
-									
-										<i class="entypo-feather"></i>
-										
-									</div>
-									
-									<div class="timeline-label">
-										 <ul class="nav navbar-nav" style="float:right;">
-        									<li class="dropdown">
-			 									 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>				
-			 								<ul class="dropdown-menu" role="menu">
-			 									  <c:if test="${sessionScope.userVo.user_no == timelineVo.user_no}">
-             									  <li><a class="btnUpdate" data-no="${timelineVo.review_no}">수정</a></li>
-                								  <li><a class="btnDelete" data-no="${timelineVo.review_no}">삭제</a></li>
-             									  </c:if>
-             									  <li><a id="btnReport">신고</a></li>
-             								</ul>                
-          								  	</li>
-       									</ul>
-		
-										<h2>
-										<a href="#">${timelineVo.user_name}</a> <span>posted a statusupdate</span>
-										</h2>
-										<p>${timelineVo.review_content}</p>
 
+	<div class="container-fluid divcolor"  style="background-color: #f0f2f5;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-1"></div>
+					<div class="col-md-6">
+						<div class="form-group">
+
+							<input type="hidden" value="${userVo.user_no}" id="user_no">
+							<div class="container px-4 py-5 mx-auto">
+								<div class="row d-flex justify-content-center">
+									<div class="card_writeform">
+										<div class="row px-3">
+											<img class="profile-pic mr-3"
+												src="https://i.imgur.com/6tPhTUn.jpg">
+											<div class="flex-column">
+												<h3 class="mb-0 font-weight-normal">${userVo.user_name}</h3>
+												<select name="privacy" class="privacy">
+													<option>Public post</option>
+													<option>Private post</option>
+												</select>
+											</div>
+										</div>
+										<div class="row px-3 form-group">
+											<textarea id="review_content" class="text-muted bg-light mt-4 mb-3"
+												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
+										</div>
+										<div class="row px-3">
+											<p class="fa fa-user options mb-0 mr-4"></p>
+											<p class="fa fa-map-marker options mb-0 mr-4"></p>
+											<p class="fa fa-image options mb-0 mr-4"></p>
+											<img class="options"
+												src="https://img.icons8.com/material/24/000000/more--v2.png"
+												width="30px" height="28px">
+											<div class="btn btn-success ml-auto" id="submitBtn">글쓰기</div>
+										</div>
 									</div>
-									</div>	
-									
-							</article>
-							</c:forEach>
-							<!--// 글 출력 끝 -->
-												
-							<!-- 새로고침 버튼 -->
-							<article class="timeline-entry begin">
-							
-								<div class="timeline-entry-inner">
-								
-									<div class="timeline-icon"
-										style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);">
-										<i class="entypo-flight"></i> +
-									</div>
-									
 								</div>
-								
-							</article>
-							<!--// 새로고침 버튼 끝-->
+							</div>
 						</div>
-				</div>
-				<div class="col-md-2">
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+
+<!-----------------------------------------모달----------------------------------------->
 <button data-toggle="modal" data-target="#squarespaceModal"class="btn btn-primary center-block" id="btnUpdateModal" style="display:none;">Click Me</button>
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<input type="hidden" name="review_no">
