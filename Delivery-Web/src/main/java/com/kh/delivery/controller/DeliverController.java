@@ -109,4 +109,16 @@ public class DeliverController {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
 		return deliverVo;
 	}
+	
+	// 배달원 회원가입
+	@RequestMapping(value="/registDeliver", method=RequestMethod.POST)
+	@ResponseBody
+	public String registDeliver(DeliverVo deliverVo, String str_dlvr_birth) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		Date dlvr_birth = new Date(sdf.parse(str_dlvr_birth).getTime());
+		deliverVo.setDlvr_birth(dlvr_birth);
+		System.out.println(deliverVo);
+		String result = deliverService.registDeliver(deliverVo);
+		return result;
+	}
 }
