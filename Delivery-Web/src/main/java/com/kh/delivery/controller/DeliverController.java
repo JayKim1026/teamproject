@@ -81,7 +81,7 @@ public class DeliverController {
 	}
 
 	// 아이디 중복확인
-	@RequestMapping(value="/dlvr_checkIdDupl", method=RequestMethod.GET)
+	@RequestMapping(value="/dlvr_checkIdDupl", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean checkIdDupl(String dlvr_id)throws Exception {
 		boolean result = deliverService.checkIdDupl(dlvr_id);
@@ -108,5 +108,17 @@ public class DeliverController {
 	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
 		return deliverVo;
+	}
+	
+	// 배달원 회원가입
+	@RequestMapping(value="/registDeliver", method=RequestMethod.POST)
+	@ResponseBody
+	public String registDeliver(DeliverVo deliverVo, String str_dlvr_birth) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		Date dlvr_birth = new Date(sdf.parse(str_dlvr_birth).getTime());
+		deliverVo.setDlvr_birth(dlvr_birth);
+		System.out.println(deliverVo);
+		String result = deliverService.registDeliver(deliverVo);
+		return result;
 	}
 }
