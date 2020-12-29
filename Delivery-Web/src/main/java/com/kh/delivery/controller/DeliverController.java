@@ -37,15 +37,13 @@ public class DeliverController {
 		return "pages/dlvr_RegisterForm";
 	}
 	
-	
+
 	@RequestMapping(value="/dlvr_RegisterRun", method=RequestMethod.POST)
 	public String dlvr_RegisterRun(DeliverVo deliverVo, MultipartFile f_dlvr_img , MultipartFile f_dlvr_idcard, String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
 		
-		
-		//이미지 확인
 		String org_dlvr_img = f_dlvr_img.getOriginalFilename();
 		String org_dlvr_idcard = f_dlvr_idcard.getOriginalFilename();
 		
@@ -99,7 +97,7 @@ public class DeliverController {
 		return "redirect:/";
 	}
 	
-	
+
 	
 	// 안드로이드
 	// 배달원 로그인
