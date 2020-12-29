@@ -34,4 +34,10 @@ public class DeliverServiceImpl implements DeliverService {
 		return result;
 	}
 
+	@Override
+	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
+		String result = deliverDao.modifyDeliver(deliverVo);
+		return result;
+	}
+
 }

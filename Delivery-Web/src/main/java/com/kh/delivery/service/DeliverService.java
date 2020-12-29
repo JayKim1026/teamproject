@@ -13,5 +13,7 @@ public interface DeliverService {
 	// 아이디 중복 체크
 	public boolean checkIdDupl(String dlvr_id) throws Exception;
 
+	// 배달원 정보 수정
+	public String modifyDeliver(DeliverVo deliverVo) throws Exception;
 	
 }

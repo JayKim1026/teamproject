@@ -47,4 +47,10 @@ public class DeliverDaoImpl implements DeliverDao {
 			}
 	}
 
+	@Override
+	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
+		sqlSession.update(NAMESPACE + "modifyDeliver", deliverVo);
+		return "modify_deliver_success";
+	}
+
 }
