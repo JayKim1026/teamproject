@@ -428,21 +428,21 @@ a:hover {
     color: #455A64
 }
 
-.card_output {
-/*     border-radius: 5px; */
-/*     background-color: #fff; */
-/*     width:800px; */
-/*     padding-left: 60px; */
-/*     padding-right: 60px; */
-/*     margin-top: 30px; */
-/*     padding-top: 30px; */
-/*     padding-bottom: 30px */
- background-color: #fff;
-     border-radius: 10px;
-     width: 800px;
-     padding: 20px;
-     margin-top: 50px;
-     margin-bottom: 50px
+.card_output{
+  		border-radius: 5px;
+	    background-color: #fff;
+	    width:800px;
+	    padding-left: 60px;
+	    padding-right: 60px;
+	    margin-top: 30px;
+	    padding-top: 30px;
+	    padding-bottom: 30px
+/* 	 	 background-color: #fff; */
+/* 	     border-radius: 10px; */
+/* 	     width: 800px; */
+/* 	     padding: 20px; */
+/* 	     margin-top: 50px; */
+/* 	     margin-bottom: 50px */
 }
 
 .rating-box {

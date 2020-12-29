@@ -90,12 +90,16 @@ $(".btnDelete").click(function(){
 	});
 });
 
+$("#file_upload_icon").click(function(){
+	("#timeline_img").trigger("open");
+});
+
 });
 </script>
 <body>
 <%@include file="../include/timelineHeader.jsp" %>
-
-	<div class="container-fluid divcolor"  style="background-color: #f0f2f5;">
+	<!-------------------------- 글 입력  --------------------------> 
+	<div class="container-fluid" style="background-color: #f0f2f5;">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row">
@@ -105,8 +109,8 @@ $(".btnDelete").click(function(){
 						<div class="form-group">
 
 							<input type="hidden" value="${userVo.user_no}" id="user_no">
-							<div class="container px-4 py-5 mx-auto">
-								<div class="row d-flex justify-content-center">
+							<div class="px-4 py-5 mx-auto">
+								<div class="d-flex justify-content-center">
 									<div class="card_writeform">
 										<div class="row px-3">
 											<img class="profile-pic mr-3"
@@ -120,13 +124,15 @@ $(".btnDelete").click(function(){
 											</div>
 										</div>
 										<div class="row px-3 form-group">
-											<textarea id="review_content" class="text-muted bg-light mt-4 mb-3"
+											<textarea id="review_content"
+												class="text-muted bg-light mt-4 mb-3"
 												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
 										</div>
 										<div class="row px-3">
 											<p class="fa fa-user options mb-0 mr-4"></p>
 											<p class="fa fa-map-marker options mb-0 mr-4"></p>
-											<p class="fa fa-image options mb-0 mr-4"></p>
+											<label class="fa fa-image options mb-0 mr-4" for="timeline_img"></label>
+											<input type="file" class="form-control-file" id="timeline_img" name="timeline_img" style="display:none" />
 											<img class="options"
 												src="https://img.icons8.com/material/24/000000/more--v2.png"
 												width="30px" height="28px">
@@ -143,9 +149,96 @@ $(".btnDelete").click(function(){
 			</div>
 		</div>
 	</div>
+	<!-------------------------- //글 입력  -------------------------->
 	
+	<!-------------------------- 글 출력  -------------------------->
+	<div class="container-fluid" style="background-color: #f0f2f5;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-1"></div>
+					<div class="col-md-6">
+						<c:forEach var="timelineVo" items="${timelineVo}">
+						<div>
+							<div class="d-flex justify-content-center">
+								
+								<div class="card_output">
+									<div class="row d-flex">
+										<div class="">
+											<img class="profile-pic"
+												src="https://i.imgur.com/V3ICjlm.jpg">
+										</div>
+										<div class="d-flex flex-column">
+											<h3 class="mt-2 mb-0">${timelineVo.user_name}</h3>
+											<div>
+												<p class="text-left">
+													<span class="text-muted">4.0</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</div>
+										</div>
+											<div class="ml-auto">
+												<ul class="nav navbar-nav" style="float:right;">
+													<li class="dropdown"><a href="#"
+														class="dropdown-toggle" data-toggle="dropdown"><span
+															class="caret"></span></a>
+														<ul class="dropdown-menu" role="menu">
+															<c:if
+																test="${sessionScope.userVo.user_no == timelineVo.user_no}">
+																<li><a class="btnUpdate"
+																	data-no="${timelineVo.review_no}">수정</a></li>
+																<li><a class="btnDelete"
+																	data-no="${timelineVo.review_no}">삭제</a></li>
+															</c:if>
+															<li><a id="btnReport">신고</a></li>
+														</ul>
+										
+													</ul>
+													<p class="text-muted pt-2 pt-sm-5">10 Sept</p>
+												</div>
+										</div>
+									<div class="text-left">
+										<p class="content">${timelineVo.review_content}</p>
+									</div>
+									<div class="row text-left">
+										<img class="pic" src="https://i.imgur.com/kjcZcfv.jpg">
+										<img class="pic" src="https://i.imgur.com/SjBwAgs.jpg">
+										<img class="pic" src="https://i.imgur.com/IgHpsBh.jpg">
+									</div>
+									<div class="row text-left mt-4">
+										<div class="like mr-3 vote">
+											<img src="https://i.imgur.com/mHSQOaX.png"><span
+												class="blue-text pl-2">20</span>
+										</div>
+										<div class="unlike vote">
+											<img src="https://i.imgur.com/bFBO3J7.png"><span
+												class="text-muted pl-2">4</span>
+										</div>
 
-<!-----------------------------------------모달----------------------------------------->
+	<!--------------------------// 글 출력  -------------------------->
+
+
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						</c:forEach>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-----------------------------------------모달----------------------------------------->
 <button data-toggle="modal" data-target="#squarespaceModal"class="btn btn-primary center-block" id="btnUpdateModal" style="display:none;">Click Me</button>
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<input type="hidden" name="review_no">
