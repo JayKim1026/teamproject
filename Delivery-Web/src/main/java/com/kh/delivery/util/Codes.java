@@ -12,6 +12,6 @@ public interface Codes {
 	String TIMELINE_IMG = "Timeline_Img/";
 
 	// AWS 엑세스 키
-	String ACCESS_KEY = "AKIAIJVB65YRV4624WJA";
-	String SECRET_KEY = "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";
+	String ACCESS_KEY = "AKIA6CRPTNJD4CR57XUS";
+	String SECRET_KEY = "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";
 }

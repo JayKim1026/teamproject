@@ -59,8 +59,8 @@ public class DeliverController implements Codes {
 			deliverVo.setDlvr_img(dlvr_img);
 			deliverVo.setDlvr_idcard(dlvr_idcard);
 			
-			File dlvrImg = new File(dlvr_img);
-			File dlvrIdcard = new File(dlvr_idcard);
+			File dlvrImg = new File(org_dlvr_img);
+			File dlvrIdcard = new File(org_dlvr_idcard);
 			f_dlvr_img.transferTo(dlvrImg);
 			f_dlvr_idcard.transferTo(dlvrIdcard);
 			
