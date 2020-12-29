@@ -136,7 +136,7 @@ $(function() {
 				sendData = {
 					"dlvr_id" : dlvr_id
 				};
-				$.get(url, sendData, function(data) {
+				$.post(url, sendData, function(data) {
 					if (data == true) {
 						$(".id_state").text("멋진 아이디네요!").css("color", "green");
 					} else {
