@@ -13,36 +13,35 @@
 <script>
 $(function(){
 	
-$("#submitBtn").click(function(){
+$("#btnInsert").click(function(e){
 	console.log("클릭");
 	
-	var user_no = parseInt($("#user_no").val());
-	var review_content = $("#review_content").val();
+// 	var user_no = parseInt($("#user_no").val());
+// 	var review_content = $("#review_content").val();
 	
-	console.log(user_no);
-	console.log(review_content);
+// 	console.log(user_no);
+// 	console.log(review_content);
 	
+// 	var sendData = {
+// 	"user_no"				:	user_no,
+// 	"review_content"		:	review_content
+// 	};
+
+	var form = $("#frmData")[0];
+	var formData = new FormData(form);
 	
-	var url = "/timeline/insertArticle";
-	var sendData = {
-			"user_no"				:	user_no,
-			"review_content"		:	review_content
-	};
+// 	var url = "/timeline/insertArticle";
+
 	
 	$.ajax({
-		"url"		:	url,
-		"dataType"	:	"text",
-		"data"		:	JSON.stringify(sendData),
-		"method"	:	"post",
-		"headers"	:	{
-	"Content-Type"	:	"application/json"
-						},
-		"success"	:	function(data){
-			console.log(data);
-			javascript:history.go(0);
-		}
+		type	:	"post",
+		url		:	"/timeline/insertArticle",
+		data	:	formData,
+		processData	:	false,
+		contentType	:	false,
 		});
-	});
+// 	javascript:history.go(0);
+});
 
 $(".btnUpdate").click(function(e){
 	$("#squarespaceModal > input[name=review_no]").val($(this).attr("data-no"));
@@ -90,10 +89,6 @@ $(".btnDelete").click(function(){
 	});
 });
 
-$("#file_upload_icon").click(function(){
-	("#timeline_img").trigger("open");
-});
-
 });
 </script>
 <body>
@@ -107,8 +102,8 @@ $("#file_upload_icon").click(function(){
 					<div class="col-md-1"></div>
 					<div class="col-md-6">
 						<div class="form-group">
-
-							<input type="hidden" value="${userVo.user_no}" id="user_no">
+							<!-- 유저번호  -->
+							
 							<div class="px-4 py-5 mx-auto">
 								<div class="d-flex justify-content-center">
 									<div class="card_writeform">
@@ -123,21 +118,27 @@ $("#file_upload_icon").click(function(){
 												</select>
 											</div>
 										</div>
+										<form enctype="multipart/form-data" method="post" id="frmData">
 										<div class="row px-3 form-group">
-											<textarea id="review_content"
+										
+											<input type="hidden" value="${userVo.user_no}" id="user_no" name="user_no">
+											<textarea id="review_content" name="review_content"
 												class="text-muted bg-light mt-4 mb-3"
 												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
+										
 										</div>
-										<div class="row px-3">
+										<div class="row px-3 form-group">
 											<p class="fa fa-user options mb-0 mr-4"></p>
 											<p class="fa fa-map-marker options mb-0 mr-4"></p>
-											<label class="fa fa-image options mb-0 mr-4" for="timeline_img"></label>
-											<input type="file" class="form-control-file" id="timeline_img" name="timeline_img" style="display:none" />
+											<label class="fa fa-image options mb-0 mr-4" for="review_img"></label>
+											<input type="file" class="form-control-file" id="review_img" name="review_img" style="display:none" />
 											<img class="options"
 												src="https://img.icons8.com/material/24/000000/more--v2.png"
 												width="30px" height="28px">
-											<div class="btn btn-success ml-auto" id="submitBtn">글쓰기</div>
+										
+											<div class="btn btn-success ml-auto" id="btnInsert">글쓰기</div>
 										</div>
+										</form>	
 									</div>
 								</div>
 							</div>
