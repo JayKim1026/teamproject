@@ -18,7 +18,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">사용자 가입</div>
-				<form role="form" action="/user/registerRun" method="post">
+				<form role="form" action="/user/registerRun" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
 						<input type="text" class="form-control" id="user_id" name="user_id" required maxlength="16"/>
@@ -47,6 +47,15 @@
 						<label for="user_birth"> 생년 월일 </label>
 						<div class="form-group">
 							<input type="date" class="form-control" id="user_birth" name="str_user_birth" max="2100-12-31" required/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div>
+							<label for="user_img"> 프로필 사진 </label> 
+							<input type="file" class="form-control-file" id="user_img" name="f_user_img" /> 
+							<span class="file_state"></span>
+							<span class="imgPreview"></span>
 						</div>
 					</div>
 
@@ -177,6 +186,18 @@ $(function(){
 			}
 		}
 	});
+	
+	// <파일> JPG, PNG만 가능
+	$("input[type=file]").change(function(){
+		var extName = $(this).val().split(".").pop().toUpperCase();
+		if(extName == "PNG" || extName == "JPG" || extName =="") {
+			$(".file_state").text("");
+		} else {
+			$(".file_state").text("JPG, PNG만 업로드 가능합니다.").css("color", "red");
+		}
+			
+		});
+		
 }); // 핸들러
 
 // <주소>
