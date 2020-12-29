@@ -28,19 +28,19 @@
 					<div class="form-group">
 						<label for="user_pw"> 비밀번호 </label>	
 						<input type="password" class="form-control" id="user_pw" name="user_pw" required maxlength="16"/>
-						<span class="pw_state">사용불가 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</span>
+						<span class="pw_state"></span>
 					</div>
 
 					<div class="form-group">
 						<label for="user_pw2"> 비밀번호 확인 </label>
 						<input type="password" class="form-control" id="user_pw2" name="user_pw2" required maxlength="16"/>
-						<span class="pw_check">비밀번호 같은지 확인</span>
+						<span class="pw_check"></span>
 					</div>
 
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
 						<input type="text" class="form-control" id="user_name" name="user_name" required maxlength="8">
-						<span class="name_state"><!-- 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) --></span>
+						<span class="name_state"></span>
 					</div>
 
 					<div>
@@ -125,7 +125,7 @@ $(function(){
 		}// 중복확인 if
 	});// id keyup
 	
-	// <비밀번호칸> 숫자, 영어 대소문자만 입력 + TODO 자릿수 8자에서 16자
+	// <비밀번호칸> 숫자, 영어 대소문자만 입력
 	$("#user_pw").keyup(function(){
 		var user_pw = $(this).val();
 		var char_user_pw = "";
@@ -178,6 +178,7 @@ $(function(){
 		}
 	});
 }); // 핸들러
+
 // <주소>
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 function sample4_execDaumPostcode() {

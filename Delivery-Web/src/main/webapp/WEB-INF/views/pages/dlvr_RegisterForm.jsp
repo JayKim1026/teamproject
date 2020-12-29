@@ -201,6 +201,23 @@ $(function() {
 						}
 					}
 				});
+		// <생년월일 칸> 현재 날짜와 선택한 날짜 비교로 성인 체크.
+		
+		$("#dlvr_birth").change(function(){		
+			var dlvr_birth = $(this).val().split("-");
+			var dlvr_year = dlvr_birth[0];
+			var date = new Date();
+			var nowYear = date.getFullYear();
+		
+			var ageCheck = (nowYear - dlvr_year);
+			if(ageCheck < 19) {
+				alert("만 18세 이하는 가입하실 수 없습니다.");
+				history.go(-1);
+			} 
+			
+		
+			
+		});
 		
 		// <파일> JPG, PNG만 가능
 		$("input[type=file]").change(function(){
