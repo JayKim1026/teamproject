@@ -20,11 +20,12 @@ import com.fasterxml.jackson.databind.annotation.JsonAppend.Attr;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.TestVo;
 import com.kh.delivery.service.DeliverService;
+import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
 
 @Controller
 @RequestMapping(value="/deliver")
-public class DeliverController {
+public class DeliverController implements Codes {
 
 	@Inject
 	DeliverService deliverService;
@@ -40,10 +41,14 @@ public class DeliverController {
 
 	@RequestMapping(value="/dlvr_RegisterRun", method=RequestMethod.POST)
 	public String dlvr_RegisterRun(DeliverVo deliverVo, MultipartFile f_dlvr_img , MultipartFile f_dlvr_idcard, String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
-		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
 		
+<<<<<<< HEAD
+=======
+		//이미지 확인
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 		String org_dlvr_img = f_dlvr_img.getOriginalFilename();
 		String org_dlvr_idcard = f_dlvr_idcard.getOriginalFilename();
 		
@@ -55,8 +60,8 @@ public class DeliverController {
 			return "redirect:/deliver/dlvr_RegisterForm";
 		} else {
 			// aws 업로드 & DB에 저장할 파일명
-			String dlvr_img = deliverVo.getDlvr_id() + "_" + org_dlvr_img; 
-			String dlvr_idcard = deliverVo.getDlvr_id() + "_" + org_dlvr_idcard;
+			String dlvr_img = DLVR_IMG + deliverVo.getDlvr_id() + "_" + org_dlvr_img; 
+			String dlvr_idcard = DLVR_IDCARD + deliverVo.getDlvr_id() + "_" + org_dlvr_idcard;
 			
 			deliverVo.setDlvr_img(dlvr_img);
 			deliverVo.setDlvr_idcard(dlvr_idcard);
@@ -66,15 +71,14 @@ public class DeliverController {
 			f_dlvr_img.transferTo(dlvrImg);
 			f_dlvr_idcard.transferTo(dlvrIdcard);
 			
-			FileUploadUtil.upload(dlvrImg, FileUploadUtil.DLVR_IMG);
-			FileUploadUtil.upload(dlvrIdcard, FileUploadUtil.DLVR_IDCARD);
+			FileUploadUtil.upload(dlvrImg, dlvr_img);
+			FileUploadUtil.upload(dlvrIdcard, dlvr_idcard);
 			
 			System.out.println("deliverVo : " + deliverVo);
 			String result = deliverService.registDeliver(deliverVo) ;
 			System.out.println("result = " + result);
 			rttr.addFlashAttribute("msg", result);
 			return "redirect:/";
-
 		}
 	}
 
@@ -90,7 +94,6 @@ public class DeliverController {
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public String loginRun(String dlvr_id, String dlvr_pw, HttpSession session) throws Exception {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
-		
 		if(deliverVo != null) {
 			session.setAttribute("deliverVo", deliverVo);
 		}
@@ -112,11 +115,21 @@ public class DeliverController {
 	@RequestMapping(value="/registDeliver", method=RequestMethod.POST)
 	@ResponseBody
 	public String registDeliver(DeliverVo deliverVo, String str_dlvr_birth) throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dlvr_birth = new Date(sdf.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
 		System.out.println(deliverVo);
 		String result = deliverService.registDeliver(deliverVo);
+		return result;
+	}
+	
+	// 배달원 정보 수정
+	@RequestMapping(value="/modifyDeliver", method=RequestMethod.POST)
+	@ResponseBody
+	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
+		System.out.println("mod, deliverVo = " + deliverVo.toString());
+		String result = deliverService.modifyDeliver(deliverVo);
+		System.out.println("mod, resutl = " + result);
 		return result;
 	}
 }

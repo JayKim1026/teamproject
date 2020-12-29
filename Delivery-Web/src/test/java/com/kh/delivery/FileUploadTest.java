@@ -22,13 +22,13 @@ public class FileUploadTest {
 	@Test
 	public void testFileDelete() throws Exception {
 		String fileName = "dog.jpg";
-		FileUploadUtil.delete(fileName, FileUploadUtil.DLVR_IMG);
+//		FileUploadUtil.delete(fileName, FileUploadUtil.DLVR_IMG);
 	}
 	
 	@Test
 	public void testFileModify() throws Exception {
 		String org_fileName = "cat.jpg";
 		String mod_fileName = "cat2.jpg";
-		FileUploadUtil.modify(org_fileName, mod_fileName, FileUploadUtil.DLVR_IMG);
+//		FileUploadUtil.modify(org_fileName, mod_fileName, FileUploadUtil.DLVR_IMG);
 	}
 }
