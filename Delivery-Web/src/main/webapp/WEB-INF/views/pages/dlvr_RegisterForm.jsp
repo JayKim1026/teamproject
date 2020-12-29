@@ -21,7 +21,7 @@
 			<div class="col-md-4 register_wrapper">
 				<div class="register_title">라이더 회원 가입</div>
 
-				<form role="form" action="/deliver/dlvr_RegisterRun" method="post"
+				<form role="form" id="frmRegist" action="/deliver/dlvr_RegisterRun" method="post"
 					enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="dlvr_id"> 아이디 </label> 
@@ -78,12 +78,13 @@
 						<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호"> 
 						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
 						<br>
-						<input type="text" class="form-control dlvr_addr" id="sample4_roadAddress" placeholder="도로명주소" name="dlvr_addr">
+						<input type="text" class="form-control dlvr_addr" id="sample4_roadAddress" placeholder="도로명주소">
 						<input type="text" class="form-control" id="sample4_jibunAddress" placeholder="지번주소"> 
 						<span id="guide" style="color: #999; display: none"></span> 
-						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소"> 
+						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소(필수!)" required> 
 						<input type="text" class="form-control" id="sample4_extraAddress" placeholder="참고항목">
-					</div>
+						<input type="hidden" id="dlvr_addr" name="dlvr_addr">
+		 			</div>
 
 					<div class="form-group">
 						<br /> <label for="dlvr_phone"> 전화번호 </label> 
@@ -110,6 +111,23 @@
 </body>
 <script>
 $(function() {
+	
+	//<주소>
+	$("#btnRegister").click(function(e) {
+		e.preventDefault();
+		
+		var road1 = $("#sample4_roadAddress").val();
+		var road2 = $("#sample4_extraAddress").val();
+		var road3 = $("#sample4_detailAddress").val();
+		
+		if(road3 == null || road3 == "") {
+			$("#dlvr_addr").val(road1 + road2);
+		} else {
+			$("#dlvr_addr").val(road1 + road2 + " " + road3);
+		}
+		$("#frmRegist").submit();
+		
+	});
 	//<아이디칸>사용 가능한 아이디(영어 소문자, 숫자) 
 	$("#dlvr_id") .keyup( function() {
 		var dlvr_id = $("#dlvr_id").val();

@@ -18,7 +18,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">사용자 가입</div>
-				<form role="form" action="/user/registerRun" method="post" enctype="multipart/form-data">
+				<form role="form" id="frmRegist" action="/user/registerRun" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
 						<input type="text" class="form-control" id="user_id" name="user_id" required maxlength="16"/>
@@ -63,11 +63,12 @@
 					<label>주소</label><br/>
 						<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
 						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" class="form-control user_addr" id="sample4_roadAddress" placeholder="도로명주소"  name="user_addr">
-						<input type="text"class="form-control"  id="sample4_jibunAddress" placeholder="지번주소">
+						<input type="text" class="form-control user_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
+						<input type="text"class="form-control "  id="sample4_jibunAddress" placeholder="지번주소">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소">
-						<input type="text" class="form-control"  id="sample4_extraAddress" placeholder="참고항목">
+						<input type="text" class="form-control addr3" id="sample4_detailAddress" placeholder="상세주소(필수!)" required>
+						<input type="text" class="form-control addr2"  id="sample4_extraAddress" placeholder="참고항목">
+						<input type="hidden" id="user_addr" name="user_addr">
 					</div>
 
 					<div class="form-group">
@@ -97,7 +98,24 @@
 </body>
 <script>
 $(function(){
-
+	
+	//<주소>
+	$("#btnRegister").click(function(e) {
+		e.preventDefault();
+		
+		var road1 = $("#sample4_roadAddress").val();
+		var road2 = $("#sample4_extraAddress").val();
+		var road3 = $("#sample4_detailAddress").val();
+		
+		if(road3 == null || road3 == "") {
+			$("#user_addr").val(road1 + road2);
+		} else {
+			$("#user_addr").val(road1 + road2 + " " + road3);
+		}
+		$("#frmRegist").submit();
+		
+	});
+	
 	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#user_id").keyup(function() {
 		var user_id = $("#user_id").val();
