@@ -24,7 +24,7 @@
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
 			</ul>
 			<ul class="nav__link">
-				<li><a class="menu__stuff2" href="" style="padding-right: 20;">About</a></li>
+				<li><a class="menu__stuff2" href="/user/userPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
 				<li><a class="menu__stuff2" href="">Membership</a></li>
 			</ul>
 			<div class="nav__textArea">

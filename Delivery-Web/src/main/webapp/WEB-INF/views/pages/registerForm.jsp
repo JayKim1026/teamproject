@@ -18,7 +18,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">사용자 가입</div>
-				<form role="form" action="/user/registerRun" method="post">
+				<form role="form" id="frmRegist" action="/user/registerRun" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
 						<input type="text" class="form-control" id="user_id" name="user_id" required maxlength="16"/>
@@ -28,19 +28,19 @@
 					<div class="form-group">
 						<label for="user_pw"> 비밀번호 </label>	
 						<input type="password" class="form-control" id="user_pw" name="user_pw" required maxlength="16"/>
-						<span class="pw_state">사용불가 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</span>
+						<span class="pw_state"></span>
 					</div>
 
 					<div class="form-group">
 						<label for="user_pw2"> 비밀번호 확인 </label>
 						<input type="password" class="form-control" id="user_pw2" name="user_pw2" required maxlength="16"/>
-						<span class="pw_check">비밀번호 같은지 확인</span>
+						<span class="pw_check"></span>
 					</div>
 
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
 						<input type="text" class="form-control" id="user_name" name="user_name" required maxlength="8">
-						<span class="name_state"><!-- 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) --></span>
+						<span class="name_state"></span>
 					</div>
 
 					<div>
@@ -49,16 +49,26 @@
 							<input type="date" class="form-control" id="user_birth" name="str_user_birth" max="2100-12-31" required/>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<div>
+							<label for="user_img"> 프로필 사진 </label> 
+							<input type="file" class="form-control-file" id="user_img" name="f_user_img" /> 
+							<span class="file_state"></span>
+							<span class="imgPreview"></span>
+						</div>
+					</div>
 
 					<div>
 					<label>주소</label><br/>
 						<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
 						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" class="form-control user_addr" id="sample4_roadAddress" placeholder="도로명주소"  name="user_addr">
-						<input type="text"class="form-control"  id="sample4_jibunAddress" placeholder="지번주소">
+						<input type="text" class="form-control user_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
+						<input type="text"class="form-control "  id="sample4_jibunAddress" placeholder="지번주소">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소">
-						<input type="text" class="form-control"  id="sample4_extraAddress" placeholder="참고항목">
+						<input type="text" class="form-control addr3" id="sample4_detailAddress" placeholder="상세주소(필수!)" required>
+						<input type="text" class="form-control addr2"  id="sample4_extraAddress" placeholder="참고항목">
+						<input type="hidden" id="user_addr" name="user_addr">
 					</div>
 
 					<div class="form-group">
@@ -88,7 +98,24 @@
 </body>
 <script>
 $(function(){
-
+	
+	//<주소>
+	$("#btnRegister").click(function(e) {
+		e.preventDefault();
+		
+		var road1 = $("#sample4_roadAddress").val();
+		var road2 = $("#sample4_extraAddress").val();
+		var road3 = $("#sample4_detailAddress").val();
+		
+		if(road3 == null || road3 == "") {
+			$("#user_addr").val(road1 + road2);
+		} else {
+			$("#user_addr").val(road1 + road2 + " " + road3);
+		}
+		$("#frmRegist").submit();
+		
+	});
+	
 	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#user_id").keyup(function() {
 		var user_id = $("#user_id").val();
@@ -125,7 +152,7 @@ $(function(){
 		}// 중복확인 if
 	});// id keyup
 	
-	// <비밀번호칸> 숫자, 영어 대소문자만 입력 + TODO 자릿수 8자에서 16자
+	// <비밀번호칸> 숫자, 영어 대소문자만 입력
 	$("#user_pw").keyup(function(){
 		var user_pw = $(this).val();
 		var char_user_pw = "";
@@ -177,7 +204,20 @@ $(function(){
 			}
 		}
 	});
+	
+	// <파일> JPG, PNG만 가능
+	$("input[type=file]").change(function(){
+		var extName = $(this).val().split(".").pop().toUpperCase();
+		if(extName == "PNG" || extName == "JPG" || extName =="") {
+			$(".file_state").text("");
+		} else {
+			$(".file_state").text("JPG, PNG만 업로드 가능합니다.").css("color", "red");
+		}
+			
+		});
+		
 }); // 핸들러
+
 // <주소>
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 function sample4_execDaumPostcode() {

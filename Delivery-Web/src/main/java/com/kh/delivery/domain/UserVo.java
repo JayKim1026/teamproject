@@ -13,6 +13,7 @@ public class UserVo {
 	private String user_phone;
 	private String user_email;
 	private String user_addr; // 주소
+	private String user_img;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date user_birth;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -25,8 +26,9 @@ public class UserVo {
 	}
 
 	public UserVo(int user_no, String user_id, String user_pw, String user_name, String user_phone, String user_email,
-			String user_addr, Date user_birth, Timestamp user_date, String user_state, int user_point,
+			String user_addr, String user_img, Date user_birth, Timestamp user_date, String user_state, int user_point,
 			String user_rank) {
+		super();
 		this.user_no = user_no;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
@@ -34,6 +36,7 @@ public class UserVo {
 		this.user_phone = user_phone;
 		this.user_email = user_email;
 		this.user_addr = user_addr;
+		this.user_img = user_img;
 		this.user_birth = user_birth;
 		this.user_date = user_date;
 		this.user_state = user_state;
@@ -97,6 +100,14 @@ public class UserVo {
 		this.user_addr = user_addr;
 	}
 
+	public String getUser_img() {
+		return user_img;
+	}
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
+	}
+
 	public Date getUser_birth() {
 		return user_birth;
 	}
@@ -141,8 +152,10 @@ public class UserVo {
 	public String toString() {
 		return "UserVo [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
 				+ user_name + ", user_phone=" + user_phone + ", user_email=" + user_email + ", user_addr=" + user_addr
-				+ ", user_birth=" + user_birth + ", user_date=" + user_date + ", user_state=" + user_state
-				+ ", user_point=" + user_point + ", user_rank=" + user_rank + "]";
+				+ ", user_img=" + user_img + ", user_birth=" + user_birth + ", user_date=" + user_date + ", user_state="
+				+ user_state + ", user_point=" + user_point + ", user_rank=" + user_rank + "]";
 	}
+
+	
 
 }
