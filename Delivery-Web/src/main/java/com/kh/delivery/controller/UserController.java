@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +39,10 @@ public class UserController implements Codes {
 
 	// userPage 회원정보
 	@RequestMapping(value = "/userPage/info", method = RequestMethod.GET)
-	public String userInfo() throws Exception {
+	public String userInfo(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_img = userVo.getUser_img();
+		model.addAttribute("image_url", BUCKET_URL + user_img);
 		return "pages/userPage/info";
 	}
 

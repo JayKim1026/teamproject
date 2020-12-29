@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<!-- 헤더 -->
 <header id="head_Container">
 <div class="container-fluid">
 	<div class="row">
@@ -68,10 +69,15 @@
 									<tr>
 										<td>사진</td>
 										<td>
-											<img id="user_img" name="user_img" src="${sessionScope.userVo.user_img}" alt="프로필 사진">
+											<c:if test="${sessionScope.userVo.user_id != null }">
+												<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 30%; height: 30%;">
+											</c:if>
 											<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 										</td>
-										<td><button class="btn-default">사진 변경</button></td>
+										<td>
+											<button type="button" class="btn-default" id=btnChangeImg>사진 변경</button>
+ 											<input type="file" style="display:none;" id="changeImg">
+										</td>
 									</tr>
 									<tr>
 										<td>아이디</td>
@@ -117,6 +123,13 @@
 
 <script>
 $(function(){
+	
+	// 사진변경 버튼
+	$("#btnChangeImg").click(function(){
+		$("#changeImg").trigger("click");
+	});
+
+	
 	//가입 정보 보기 전 비밀번호 확인
 	$("#btn_check").click(function(e){
 		e.preventDefault();
