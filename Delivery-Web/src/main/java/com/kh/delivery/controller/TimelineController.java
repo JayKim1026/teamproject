@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
@@ -35,10 +36,16 @@ public class TimelineController {
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertArticle(@RequestBody TimelineVo timelineVo,HttpSession session) throws Exception {
+	public String insertArticle(@RequestBody TimelineVo timelineVo,HttpSession session, MultipartFile review_img) throws Exception {
 		System.out.println("TimelineController, insertArticle, timelineVo" +  timelineVo);
+		System.out.println("TimelineController, insertArticle, timelineVo" +  review_img);
 		timelineService.insertArticle(timelineVo);
 		return "success";
+	}
+	
+	@RequestMapping(value="/uploadFile")
+	public String uploadFile()throws Exception{
+		return null;
 	}
 	
 	@RequestMapping(value="/updateArticle", method=RequestMethod.POST)
