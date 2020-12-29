@@ -43,7 +43,7 @@
 
 					<div class="form-group">
 						<label for="dlvr_name"> 이름 </label> 
-						<input type="text" class="form-control" id="dlvr_name" name="dlvr_name" required maxlength="8" value="이진형">
+						<input type="text" class="form-control" id="dlvr_name" name="dlvr_name" required maxlength="8" >
 						<span class="name_state"></span>
 					</div>
 
@@ -51,7 +51,7 @@
 						<label for="dlvr_birth"> 생년 월일 </label>
 						<div class="form-group">
 							<input type="date" class="form-control" id="dlvr_birth" name="str_dlvr_birth" 
-								   max="2100-12-31" required value="2020-10-31" />
+								   max="2100-12-31" required />
 						</div>
 					</div>
 
@@ -222,7 +222,7 @@ $(function() {
 		// <파일> JPG, PNG만 가능
 		$("input[type=file]").change(function(){
 			var extName = $(this).val().split(".").pop().toUpperCase();
-			console.log(extName);
+			//console.log(extName);
 		if(extName == "PNG" || extName == "JPG" || extName =="") {
 			$(".file_state").text("");
 		} else {

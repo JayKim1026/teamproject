@@ -9,16 +9,13 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend.Attr;
 import com.kh.delivery.domain.DeliverVo;
-import com.kh.delivery.domain.TestVo;
 import com.kh.delivery.service.DeliverService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
@@ -45,10 +42,6 @@ public class DeliverController implements Codes {
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
 		
-<<<<<<< HEAD
-=======
-		//이미지 확인
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 		String org_dlvr_img = f_dlvr_img.getOriginalFilename();
 		String org_dlvr_idcard = f_dlvr_idcard.getOriginalFilename();
 		

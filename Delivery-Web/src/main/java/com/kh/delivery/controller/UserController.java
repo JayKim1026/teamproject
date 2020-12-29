@@ -1,6 +1,7 @@
 package com.kh.delivery.controller;
 
 import java.io.File;
+import java.net.URI;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,11 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.UserService;
+import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController implements Codes {
 
 	@Inject
 	private UserService userService;
@@ -86,7 +88,7 @@ public class UserController {
 	@RequestMapping(value = "/checkIdDupl", method = RequestMethod.GET)
 	@ResponseBody
 	public boolean checkIdDupl(String user_id) throws Exception {
-		System.out.println("checkDulp, user_id = " + user_id);
+		//System.out.println("checkDulp, user_id = " + user_id);
 		boolean result = userService.checkIdDupl(user_id);
 		return result;
 	}
@@ -98,34 +100,32 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/registerRun", method = RequestMethod.POST)
-	public void registRun(UserVo userVo, MultipartFile f_user_img , String str_user_birth, RedirectAttributes rttr) throws Exception {
+	public String registRun(UserVo userVo, MultipartFile f_user_img , String str_user_birth, RedirectAttributes rttr) throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date user_birth = new Date(df.parse(str_user_birth).getTime());
 		userVo.setUser_birth(user_birth);
 		
-		String org_usr_img = f_user_img.getOriginalFilename();
-		System.out.println("org_usr_img : " + org_usr_img);
+		String org_user_img = f_user_img.getOriginalFilename();
 		
-		boolean isImage_img = FileUploadUtil.isImage(org_usr_img);
+		boolean isImage_img = FileUploadUtil.isImage(org_user_img);
 		if(!isImage_img) {
 			rttr.addFlashAttribute("msg", "notImage");
-			//return "redirect:/user/registerForm";
+			return "redirect:/user/registerForm";
 		} else {
 			
-			String user_img = userVo.getUser_id() + "_" + org_usr_img;
+			String user_img = USER_IMG + userVo.getUser_id() + "_" + org_user_img;
 			userVo.setUser_img(user_img);
-			
-			File userImg = new File(user_img);
+					
+			File userImg = new File(org_user_img);
 			f_user_img.transferTo(userImg);
 			
-			//FileUploadUtil.upload(userImg, FileUploadUtil.USER_IMG);
-			
+			FileUploadUtil.upload(userImg, user_img);
 			System.out.println("userVo : " + userVo);
 			
-			//String result = userService.registUser(userVo);
-			//System.out.println("result = " + result);
-			//rttr.addFlashAttribute("msg", result);
-			//return "redirect:/";
+			String result = userService.registUser(userVo);
+			System.out.println("result = " + result);
+			rttr.addFlashAttribute("msg", result);
+			return "redirect:/";
 		}
 		
 		
