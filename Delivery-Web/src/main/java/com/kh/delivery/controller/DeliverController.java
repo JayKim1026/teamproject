@@ -81,7 +81,7 @@ public class DeliverController {
 	}
 
 	// 아이디 중복확인
-	@RequestMapping(value="/dlvr_checkIdDupl", method=RequestMethod.GET)
+	@RequestMapping(value="/dlvr_checkIdDupl", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean checkIdDupl(String dlvr_id)throws Exception {
 		boolean result = deliverService.checkIdDupl(dlvr_id);
