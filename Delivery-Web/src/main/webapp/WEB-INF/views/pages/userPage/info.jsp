@@ -26,7 +26,16 @@
 					<h1> 마이 페이지 </h1>
 				</div>
 				<div class="col-md-2">
-				userVo:${sessionScope.userVo}
+					<c:choose>
+						<c:when test="${sessionScope.userVo.user_id != null }">
+							<button type="button" class="btn-default" id="btnLogout">로그아웃</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn-default" id="btnLogin">로그인</button>
+						</c:otherwise>
+					</c:choose>
+					<br/>
+					userVo:${sessionScope.userVo}
 				</div>
 			</div>
 		</div>
@@ -51,15 +60,8 @@
 					<div class="row">
 						<div class="col-md-12">
 						
-						<!-- 회원 정보 조회 시 비밀번호 입력 -->
-						<form id="check">
-							<label>비밀번호</label>
-							<input type="password" id="pw_check" name="pw_check">
-							<button type="submit" id="btn_check">확인</button>
-						</form>			
-						
 						<!-- 회원 정보 테이블  -->	
-							<table class="table infoTable" style="display:none;">
+							<table class="table infoTable">
 								<thead>
 									<tr>
 										<th>기본 회원 정보 <span>필수</span></th>
@@ -70,13 +72,15 @@
 										<td>사진</td>
 										<td>
 											<c:if test="${sessionScope.userVo.user_id != null }">
-												<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 30%; height: 30%;">
+												<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
 											</c:if>
 											<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 										</td>
 										<td>
-											<button type="button" class="btn-default" id=btnChangeImg>사진 변경</button>
- 											<input type="file" style="display:none;" id="changeImg">
+											<form>
+												<button type="button" class="btn-default" id=btnChangeImg >사진 변경</button>
+ 												<input type="file" style="display:none;" id="changeImg" name="f_user_file" accept="image/,.jpg,.png,.gif">
+											</form>										
 										</td>
 									</tr>
 									<tr>
@@ -86,7 +90,7 @@
 									</tr>
 									<tr>
 										<td>비밀번호</td>
-										<td><input type="password" value="${sessionScope.userVo.user_pw}" style="border:none"/></td>
+										<td><input type="password" value="${sessionScope.userVo.user_pw}" style="border:none; cursor: default;" readonly/></td>
 										<td><button class="btn-default">비밀번호 변경</button></td>
 									</tr>
 									<tr>
@@ -123,26 +127,19 @@
 
 <script>
 $(function(){
-	
 	// 사진변경 버튼
 	$("#btnChangeImg").click(function(){
-		$("#changeImg").trigger("click");
-	});
-
-	
-	//가입 정보 보기 전 비밀번호 확인
-	$("#btn_check").click(function(e){
-		e.preventDefault();
-
-		var pw_check = $("#pw_check").val();
-		var user_pw = ${sessionScope.userVo.user_pw};
-		
-		if(pw_check == user_pw) {
-			$(".infoTable").fadeIn(1000);
-			$("#check").fadeOut(1000);
-		}
+		$("#changeImg").trigger("click").change(function(){
+			var changeImgName = $("#changeImg").val();
+			console.log("changeImgName : " + changeImgName);
+			
+		});
 	});
 	
+	// 로그아웃 
+	$("#btnLogout").click(function(){
+		location.href="/user/logout";
+	});
 }); // 핸들러
 </script>
 </html>

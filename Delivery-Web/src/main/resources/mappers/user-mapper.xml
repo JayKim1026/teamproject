@@ -12,9 +12,9 @@
 	
 	<insert id="insertUser">
 		insert into tbl_user(user_no, user_id, user_pw, user_name, 
-								user_phone, user_email, user_addr, user_birth)
+								user_phone, user_email, user_addr, user_birth, user_img)
 		values(seq_user_no.nextval, #{user_id}, #{user_pw}, #{user_name}, 
-				#{user_phone}, #{user_email}, #{user_addr}, #{user_birth})
+				#{user_phone}, #{user_email}, #{user_addr}, #{user_birth}, #{user_img})
 	</insert>
 	
 	<select id="checkIdDupl" resultType="UserVo">

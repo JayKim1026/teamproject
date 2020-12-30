@@ -36,7 +36,6 @@ public class UserController implements Codes {
 	private JavaMailSender mainSender;
 
 	// 웹
-
 	// userPage 회원정보
 	@RequestMapping(value = "/userPage/info", method = RequestMethod.GET)
 	public String userInfo(Model model, HttpSession session) throws Exception {
@@ -48,23 +47,27 @@ public class UserController implements Codes {
 
 	// userPage 주문 내역 조회
 	@RequestMapping(value = "/userPage/orderList", method = RequestMethod.GET)
-	public String userOrderList() throws Exception {
+	public String userOrderList(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/orderList";
 	}
 
 	// userPage 포인트
 	@RequestMapping(value = "/userPage/point", method = RequestMethod.GET)
-	public String userPoint() throws Exception {
+	public String userPoint(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/point";
 	}
 	// userPage 1:1 질문
 	@RequestMapping(value = "/userPage/question", method = RequestMethod.GET)
-	public String userQuestion() throws Exception {
+	public String userQuestion(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/question";
 	}
 	// userPage 내가 작성한 후기
 	@RequestMapping(value = "/userPage/review", method = RequestMethod.GET)
-	public String userReview() throws Exception {
+	public String userReview(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/review";
 	}
 
@@ -89,8 +92,9 @@ public class UserController implements Codes {
 	}
 	
 	// 로그아웃
-	public String logout() throws Exception {
-		
+	@RequestMapping(value="/logout" , method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
 		return "redirect:/";
 	}
 	
@@ -125,7 +129,8 @@ public class UserController implements Codes {
 			//user table에 프로필 사진 경로 + 유저아이디 + 파일 이름 저장
 			String user_img = USER_IMG + userVo.getUser_id() + "_" + org_user_img;
 			userVo.setUser_img(user_img);
-					
+			System.out.println("userVo : " + userVo);
+			
 			//aws에 프로필 사진 파일 저장
 			File userImg = new File(org_user_img);
 			f_user_img.transferTo(userImg);
