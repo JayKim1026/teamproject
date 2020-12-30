@@ -50,6 +50,7 @@ public class DeliverController implements Codes {
 		
 		if(!isImage_img || !isImage_idcard) {
 			rttr.addFlashAttribute("msg", "notImage");
+			
 			return "redirect:/deliver/dlvr_RegisterForm";
 		} else {
 			// aws 업로드 & DB에 저장할 파일명

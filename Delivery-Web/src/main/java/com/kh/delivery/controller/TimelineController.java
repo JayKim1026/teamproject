@@ -44,12 +44,12 @@ public class TimelineController implements Codes{
 		System.out.println("TimelineController, insertArticle, timelineVo" +  timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String org_review_img = f_review_img.getOriginalFilename();
+		System.out.println("TimelineController, org_review_img = " + org_review_img );
 		boolean isImage_img = FileUploadUtil.isImage(org_review_img);
 		if(!isImage_img) {
 			rttr.addFlashAttribute("msg", "notImage");
 			return"redirect:/timeline/showTimeline";
-		}
-		System.out.println("TimelineController, org_review_img = " + org_review_img );
+		}else {
 		File file = new File(org_review_img);
 		f_review_img.transferTo(file);
 		String review_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_review_img;
@@ -57,6 +57,7 @@ public class TimelineController implements Codes{
 		timelineVo.setReview_img(review_img);
 		timelineService.insertArticle(timelineVo);
 		return "success";
+		}
 	}
 	
 	@RequestMapping(value="/uploadFile")
