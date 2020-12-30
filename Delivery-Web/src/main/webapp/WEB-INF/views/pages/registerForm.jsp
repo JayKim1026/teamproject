@@ -80,7 +80,6 @@
 					<div class="form-group">
 						<label for="user_email"> 이메일 </label>
 						<input type="email" class="form-control" id="user_email" name="user_email" required/>
-						<span class="email_state"></span>
 					</div>
 
 					<!-- <div class="form-group">
@@ -102,7 +101,7 @@ $(function(){
 	// 메세지
 	var isImage_msg = "${isImage_msg}";
 	if(isImage_msg == "notImage") {
-		alert("이미지 파일만 업로드 가능합니다.");
+		alert("jpg, png, gif 파일만 업로드 가능합니다.");
 	} 
 	//회원가입 완료 버튼 클릭
 	$("#btnRegister").click(function(e) {
@@ -114,7 +113,7 @@ $(function(){
 		if(road2 == null || road2 == "") {
 			$("#user_addr").val(road1 + road3);
 		} else {
-			$("#user_addr").val(road1 + road2 + road3);
+			$("#user_addr").val(road1 + road2 + " " + road3);
 		}
 		//<아이디 ~ 이메일 이미지는 제외>
 		var idCheck = $("#user_id").val();
@@ -218,7 +217,6 @@ $(function(){
 					char_user_pw = user_pw.charCodeAt(i);
 					if((47 < char_user_pw && char_user_pw < 58  ) || (64 < char_user_pw && char_user_pw < 91) || (96 < char_user_pw && char_user_pw < 123)){
 						$(".pw_state").text("사용가능").css("color", "green");
-						console.log(char_user_pw);
 					} else {
 						$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
 						break;
@@ -280,11 +278,6 @@ $(function(){
 				}
 			}
 		}
-	});
-	
-	//<이메일>
-	$("#user_phone").keyup(function(){
-		
 	});
 }); // 핸들러
 

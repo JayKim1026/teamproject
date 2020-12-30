@@ -58,13 +58,13 @@
 					<div class="form-group imgFile">
 						<div>
 							<label for="dlvr_img"> 증명사진 </label> 
-							<input type="file" class="form-control-file" id="dlvr_img" name="f_dlvr_img" /> 
+							<input type="file" class="form-control-file" id="dlvr_img" name="f_dlvr_img" accept="image/,.jpg,.png"/> 
 							<span class="imgPreview"></span>
 						</div>
 						<br />
 						<div>
 							<label for="dlvr_idcard"> 주민등록증 </label>
-							<input type="file" class="form-control-file" id="dlvr_idcard" name="f_dlvr_idcard" />
+							<input type="file" class="form-control-file" id="dlvr_idcard" name="f_dlvr_idcard" accept="image/,.jpg,.png"/>
 							<span class="idcardPreview"></span>
 						</div>
 					</div>
@@ -89,6 +89,7 @@
 					<div class="form-group">
 						<br /> <label for="dlvr_phone"> 전화번호 </label> 
 						<input type="tel" class="form-control" id="dlvr_phone" name="dlvr_phone" required maxlength="16" />
+						<span class="phone_state"></span>
 					</div>
 
 					<div class="form-group">
@@ -114,7 +115,7 @@ $(function() {
 	//메세지
 	var isImage_msg = "${isImage_msg}";
 	if(isImage_msg == "notImage") {
-		alert("이미지 파일만 업로드 가능합니다.");
+		alert("jpg, png 파일만 업로드 가능합니다.");
 	}
 	
 	//회원가입 완료 버튼 클릭
@@ -125,14 +126,68 @@ $(function() {
 		var road2 = $("#sample4_extraAddress").val();
 		var road3 = $("#sample4_detailAddress").val();
 		
-		if(road3 == null || road3 == "") {
-			$("#dlvr_addr").val(road1 + road2);
+		if(road2 == null || road2 == "") {
+			$("#dlvr_addr").val(road1 + road3);
 		} else {
 			$("#dlvr_addr").val(road1 + road2 + " " + road3);
 		}
-		$("#frmRegist").submit();
+		//<아이디 ~ 이메일 이미지는 제외>
+		var idCheck = $("#dlvr_id").val();
+		var pwCheck = $("#dlvr_pw").val();
+		var pwCheck2 = $("#dlvr_pw2").val();
+		var nameCheck = $("#dlvr_name").val();
+		var birthCheck = $("#dlvr_birth").val();
+		var imgCheck = $("#dlvr_img").val();
+		var idcardCheck = $("#dlvr_idcard").val();
+		var sample4_detailAddress = $("#sample4_detailAddress").val();
+		var phoneCheck = $("#dlvr_phone").val();
+		var emailCheck = $("#dlvr_email").val();
 		
-	});
+		if(idCheck == null || idCheck == "") {
+			alert("아이디를 입력해주세요");
+			$("#dlvr_id").focus();
+			return;
+		} else if(pwCheck == null || pwCheck == "") {
+			alert("비밀번호를 입력해 주세요");
+			$("#dlvr_pw").focus();
+			return;
+		} else if(pwCheck2 == null || pwCheck2 == ""){
+			alert("확인 비밀번호를 입력해 주세요");
+			$("#dlvr_pw2").focus();
+			return;
+		} else if(nameCheck == null || nameCheck == "") {
+			alert("이름을 입력해 주세요");
+			$("#dlvr_name").focus();
+			return;
+		} else if(birthCheck == null || birthCheck == "") {
+			alert("생일을 입력해 주세요");
+			$("#dlvr_birth").focus();
+			return;
+		} else if(imgCheck == null || imgCheck == "") {
+			alert("증명사진을 업로드 해주세요.");
+			$("#dlvr_img").focus();
+			return;
+		} else if(idcardCheck == null || idcardCheck =="") {
+			alert("신분증 사진을 업로드 해주세요.");
+			$("#dlvr_idcard").focus();
+			return;
+		} else if(sample4_detailAddress == null || sample4_detailAddress == ""){
+			alert("상세주소를 입력해주세요");
+			$("#btnAddr").focus();
+			return; 
+		} else if(phoneCheck == null || phoneCheck == "") {
+			alert("전화번호를 입력해 주세요");
+			$("#dlvr_phone").focus();
+			return;
+		} else if(emailCheck == null || emailCheck == "") {
+			alert("이메일을 입력해주세요");
+			$("#dlvr_email").focus();
+			return;
+		} else {
+			$("#frmRegist").submit();
+		}
+	}); // 회원 가입 완료 버튼
+	
 	//<아이디칸>사용 가능한 아이디(영어 소문자, 숫자) 
 	$("#dlvr_id") .keyup( function() {
 		var dlvr_id = $("#dlvr_id").val();
@@ -143,12 +198,18 @@ $(function() {
 			$(".id_state").text("");
 		} else {
 			for (var i = 0; i < dlvr_id.length; i++) {
-				char_dlvr_id = dlvr_id.charCodeAt(i)
-				if ((47 < char_dlvr_id && char_dlvr_id < 58)|| (96 < char_dlvr_id && char_dlvr_id < 123)) {
-					$(".id_state").text("사용가능").css("color", "green");
+				if( 5 < dlvr_id.length && dlvr_id.length < 17) {
+					char_dlvr_id = dlvr_id.charCodeAt(i)
+					if ((47 < char_dlvr_id && char_dlvr_id < 58)|| (96 < char_dlvr_id && char_dlvr_id < 123)) {
+						$(".id_state").text("")
+					} else {
+						result = false;
+						$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
+						break;
+					}
 				} else {
 					result = false;
-					$(".id_state").text("특수기호, 영어대문자, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
 					break;
 				}
 			}
@@ -170,19 +231,26 @@ $(function() {
 		}// else
 });// id keyup
 
-		// <비밀번호칸> 숫자, 영어 대소문자만 입력 + TODO 자릿수 8자에서 16자
+		// <비밀번호칸> 숫자, 영어 대소문자만 입력 
 		$("#dlvr_pw").keyup(function() {
 			var dlvr_pw = $(this).val();
+			//console.log("dlvr_pw : " + dlvr_pw);
 			var char_dlvr_pw = "";
 			if (dlvr_pw == "" || dlvr_pw == null) {
 				$(".pw_state").text("");
 			} else {
 				for (var i = 0; i < dlvr_pw.length; i++) {
-					char_dlvr_pw = dlvr_pw.charCodeAt(i);
-					if ((47 < char_dlvr_pw && char_dlvr_pw < 58)|| (96 < char_dlvr_pw && char_dlvr_pw < 123)) {
-						$(".pw_state").text("");
+					if( 7 < dlvr_pw.length && dlvr_pw.length < 17) {
+						char_dlvr_pw = dlvr_pw.charCodeAt(i);
+						console.log("char_dlvr_pw : " + char_dlvr_pw);
+						if ((47 < char_dlvr_pw && char_dlvr_pw < 58)|| (64 < char_dlvr_pw && char_dlvr_pw < 91) || (96 < char_dlvr_pw && char_dlvr_pw < 123)) {
+							$(".pw_state").text("");
+						} else {
+							$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
+							break;
+						}
 					} else {
-						$(".pw_state").text("특수기호, 영어 대문자, 한글은 입력이 불가능합니다").css("color", "red");
+						$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
 						break;
 					}
 				}
@@ -225,7 +293,6 @@ $(function() {
 					}
 				});
 		// <생년월일 칸> 현재 날짜와 선택한 날짜 비교로 성인 체크.
-		
 		$("#dlvr_birth").change(function(){		
 			var dlvr_birth = $(this).val().split("-");
 			var dlvr_year = dlvr_birth[0];
@@ -237,22 +304,27 @@ $(function() {
 				alert("만 18세 이하는 가입하실 수 없습니다.");
 				history.go(-1);
 			} 
-			
-		
-			
 		});
 		
-		// <파일> JPG, PNG만 가능
-		$("input[type=file]").change(function(){
-			var extName = $(this).val().split(".").pop().toUpperCase();
-			//console.log(extName);
-		if(extName == "PNG" || extName == "JPG" || extName =="") {
-			$(".file_state").text("");
-		} else {
-			$(".file_state").text("JPG, PNG만 업로드 가능합니다.").css("color", "red");
-		}
-			
+		//<전화번호>
+		$("#dlvr_phone").keyup(function(){
+			var dlvr_phone = $(this).val();
+			var char_dlvr_phone = "";
+			if(dlvr_phone == null || dlvr_phone == "") {
+				$(".phone_state").text("");
+			} else {
+				for(var i = 0; i < dlvr_phone.length; i++) {
+					char_dlvr_phone = dlvr_phone.charCodeAt(i);
+					if( 47< char_dlvr_phone && char_dlvr_phone < 58) {
+						$(".phone_state").text("");
+					} else {
+						$(".phone_state").text("숫자만 입력해주세요").css("color", "red");
+						break;
+					}
+				}
+			}
 		});
+		
 		
 	}); // 핸들러
 	// <주소>
