@@ -77,9 +77,9 @@
 											<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 										</td>
 										<td>
-											<form>
-												<button type="button" class="btn-default" id=btnChangeImg >사진 변경</button>
- 												<input type="file" style="display:none;" id="changeImg" name="f_user_file" accept="image/,.jpg,.png,.gif">
+											<form action="/user/userPage/info" method="POST"  enctype="multipart/form-data" id="frmchangeImg">
+ 												<input type="file" style="display:none;" id="changeImgFile" name="change_user_img" accept="image/,.jpg,.png,.gif">
+												<button type="submit" class="btn-default" id=btnChangeImg >사진 변경</button>
 											</form>										
 										</td>
 									</tr>
@@ -128,11 +128,10 @@
 <script>
 $(function(){
 	// 사진변경 버튼
-	$("#btnChangeImg").click(function(){
-		$("#changeImg").trigger("click").change(function(){
-			var changeImgName = $("#changeImg").val();
-			console.log("changeImgName : " + changeImgName);
-			
+	$("#btnChangeImg").click(function(e){
+		e.preventDefault();
+		$("#changeImgFile").trigger("click").change(function(){
+			$("#frmchangeImg").submit();
 		});
 	});
 	
