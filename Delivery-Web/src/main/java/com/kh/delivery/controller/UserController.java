@@ -40,8 +40,12 @@ public class UserController implements Codes {
 	@RequestMapping(value = "/userPage/info", method = RequestMethod.GET)
 	public String userInfo(Model model, HttpSession session) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
-		String user_img = userVo.getUser_img();
-		model.addAttribute("image_url", BUCKET_URL + user_img);
+		if(userVo != null) {
+			String user_img = userVo.getUser_img();
+			model.addAttribute("image_url", BUCKET_URL + user_img);
+		} else {
+			return "/user/loginForm";
+		}
 		return "pages/userPage/info";
 	}
 
@@ -123,7 +127,7 @@ public class UserController implements Codes {
 		boolean isImage_img = FileUploadUtil.isImage(org_user_img);
 		
 		if(!isImage_img) {
-			rttr.addFlashAttribute("msg", "notImage");
+			rttr.addFlashAttribute("isImage_msg", "notImage");
 			return "redirect:/user/registerForm";
 		} else {
 			//user table에 프로필 사진 경로 + 유저아이디 + 파일 이름 저장
@@ -140,7 +144,7 @@ public class UserController implements Codes {
 			
 			String result = userService.registUser(userVo);
 			System.out.println("result = " + result);
-			rttr.addFlashAttribute("msg", result);
+			rttr.addFlashAttribute("img_upload", result);
 			return "redirect:/";
 		}
 		

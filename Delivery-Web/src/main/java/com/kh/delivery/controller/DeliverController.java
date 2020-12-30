@@ -49,8 +49,7 @@ public class DeliverController implements Codes {
 		boolean isImage_idcard = FileUploadUtil.isImage(org_dlvr_idcard);
 		
 		if(!isImage_img || !isImage_idcard) {
-			rttr.addFlashAttribute("msg", "notImage");
-			
+			rttr.addFlashAttribute("isImage_msg", "notImage");
 			return "redirect:/deliver/dlvr_RegisterForm";
 		} else {
 			// aws 업로드 & DB에 저장할 파일명
@@ -71,7 +70,7 @@ public class DeliverController implements Codes {
 			System.out.println("deliverVo : " + deliverVo);
 			String result = deliverService.registDeliver(deliverVo) ;
 			System.out.println("result = " + result);
-			rttr.addFlashAttribute("msg", result);
+			rttr.addFlashAttribute("img_upload", result);
 			return "redirect:/";
 		}
 	}
