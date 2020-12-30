@@ -27,18 +27,23 @@ $("#btnInsert").click(function(e){
 // 	"review_content"		:	review_content
 // 	};
 
-	var form = $("#frmData")[0];
-	var formData = new FormData(form);
+// 	var form = $("#frmData")[0];
+	var formData = new FormData();
 	
 // 	var url = "/timeline/insertArticle";
-
-	
+	var f_review_img = $("input[type=file]")[0].files[0];
+	formData.append("f_review_img", f_review_img);
+	formData.append("review_content", $("#review_content").val());
+	formData.append("user_no", $("#user_no").val());
 	$.ajax({
-		type	:	"post",
-		url		:	"/timeline/insertArticle",
-		data	:	formData,
-		processData	:	false,
-		contentType	:	false,
+		"processData"	:	false,
+		"contentType"	:	false,
+		"type"			:	"post",
+		"url"			:	"/timeline/insertArticle",
+		"data"			:	formData, 
+		"success"		:	function(data) {
+			console.log(data);
+		}
 		});
 // 	javascript:history.go(0);
 });
