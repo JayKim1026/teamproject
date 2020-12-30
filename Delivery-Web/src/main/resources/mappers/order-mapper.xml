@@ -39,7 +39,7 @@
 		and dlvr_no = #{dlvr_no}
 	</update>
 
-	<select id="getPickedOrder" resultType="OrderVo">
+	<select id="getCompletedOrder" resultType="OrderVo">
 		select * from tbl_order
 		where dlvr_no = #{dlvr_no}
 		and order_state = '100-003'
