@@ -16,7 +16,7 @@
 			dlvr_email, dlvr_addr, dlvr_idcard, dlvr_birth, dlvr_img
 		)
 		values(
-			seq_dlvr_no.nextval, #{dlvr_id}, #{dlvr_pw}, #{dlvr_name}, #{dlvr_phone}, 
+			seq_account_no.nextval, #{dlvr_id}, #{dlvr_pw}, #{dlvr_name}, #{dlvr_phone}, 
 			#{dlvr_email}, #{dlvr_addr}, #{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img}
 		)
 	</insert>
