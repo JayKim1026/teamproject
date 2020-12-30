@@ -49,7 +49,12 @@ public class DeliverController implements Codes {
 		boolean isImage_idcard = FileUploadUtil.isImage(org_dlvr_idcard);
 		
 		if(!isImage_img || !isImage_idcard) {
+<<<<<<< HEAD
 			rttr.addFlashAttribute("isgImage_msg", "notImage");
+=======
+			rttr.addFlashAttribute("msg", "notImage");
+			
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 			return "redirect:/deliver/dlvr_RegisterForm";
 		} else {
 			// aws 업로드 & DB에 저장할 파일명

@@ -16,21 +16,8 @@ $(function(){
 $("#btnInsert").click(function(e){
 	console.log("클릭");
 	
-// 	var user_no = parseInt($("#user_no").val());
-// 	var review_content = $("#review_content").val();
-	
-// 	console.log(user_no);
-// 	console.log(review_content);
-	
-// 	var sendData = {
-// 	"user_no"				:	user_no,
-// 	"review_content"		:	review_content
-// 	};
 
-// 	var form = $("#frmData")[0];
 	var formData = new FormData();
-	
-// 	var url = "/timeline/insertArticle";
 	var f_review_img = $("input[type=file]")[0].files[0];
 	formData.append("f_review_img", f_review_img);
 	formData.append("review_content", $("#review_content").val());
@@ -43,6 +30,12 @@ $("#btnInsert").click(function(e){
 		"data"			:	formData, 
 		"success"		:	function(data) {
 			console.log(data);
+			var clone1 = $("#forclone").clone();
+			clone1.find("h3").text("${userVo.user_name}");
+			clone1.find(".content").text($("#review_content").val());	
+			$("#house").prepend(clone1).hide().fadeIn(1000);
+			$("#review_content").val("");
+			$("#review_img").val("");
 		}
 		});
 // 	javascript:history.go(0);
@@ -137,10 +130,10 @@ $(".btnDelete").click(function(){
 											<p class="fa fa-map-marker options mb-0 mr-4"></p>
 											<label class="fa fa-image options mb-0 mr-4" for="review_img"></label>
 											<input type="file" class="form-control-file" id="review_img" name="review_img" style="display:none" />
-											<img class="options"
-												src="https://img.icons8.com/material/24/000000/more--v2.png"
-												width="30px" height="28px">
-										
+											
+											<div id="divUploaded" style="padding-left:40px;">
+												<img height="25" src="/resources/images/default.png"/>
+											</div>
 											<div class="btn btn-success ml-auto" id="btnInsert">글쓰기</div>
 										</div>
 										</form>	
@@ -164,9 +157,9 @@ $(".btnDelete").click(function(){
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-1"></div>
-					<div class="col-md-6">
+					<div class="col-md-6" id="house">
 						<c:forEach var="timelineVo" items="${timelineVo}">
-						<div>
+						<div id="forclone">
 							<div class="d-flex justify-content-center">
 								
 								<div class="card_output">
@@ -225,16 +218,12 @@ $(".btnDelete").click(function(){
 											<img src="https://i.imgur.com/bFBO3J7.png"><span
 												class="text-muted pl-2">4</span>
 										</div>
-
-	<!--------------------------// 글 출력  -------------------------->
-
-
 									</div>
-								</div>
-								
+								</div>	
 							</div>
 						</div>
 						</c:forEach>
+						<!--------------------------// 글 출력  -------------------------->
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-md-2"></div>
