@@ -191,6 +191,18 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
 <script>
 $(function(){
+	//메세지
+	var userJoin_msg = "${userJoin_msg}";
+	if(userJoin_msg == "registSuccess") {
+		alert("회원가입이 완료되었습니다.");
+	}
+	
+	var dlvrJoin_msg = "${dlvrJoin_msg}";
+	if(dlvrJoin_msg == "registSuccess") {
+		alert("회원가입이 완료되었습니다.")
+	}
+	
+	// 지도
 	var container = document.getElementById('map');
 
 	var options = {

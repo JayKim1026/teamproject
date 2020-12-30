@@ -70,7 +70,7 @@ public class DeliverController implements Codes {
 			System.out.println("deliverVo : " + deliverVo);
 			String result = deliverService.registDeliver(deliverVo) ;
 			System.out.println("result = " + result);
-			rttr.addFlashAttribute("img_upload", result);
+			rttr.addFlashAttribute("dlvrJoin_msg", result);
 			return "redirect:/";
 		}
 	}

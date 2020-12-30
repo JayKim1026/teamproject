@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public String registUser(UserVo userVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "insertUser", userVo);
-		return "regist_success";
+		return "registSuccess";
 	}
 
 	@Override
