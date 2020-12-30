@@ -135,7 +135,7 @@ $(function(){
 		e.preventDefault();
 
 		var pw_check = $("#pw_check").val();
-		var user_pw = ${sessionScope.userVo.user_pw}
+		var user_pw = ${sessionScope.userVo.user_pw};
 		
 		if(pw_check == user_pw) {
 			$(".infoTable").fadeIn(1000);

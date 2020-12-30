@@ -87,7 +87,13 @@ public class UserController implements Codes {
 			return "redirect:/user/loginForm";
 		}
 	}
-
+	
+	// 로그아웃
+	public String logout() throws Exception {
+		
+		return "redirect:/";
+	}
+	
 	// 아이디 중복 체크
 	@RequestMapping(value = "/checkIdDupl", method = RequestMethod.GET)
 	@ResponseBody
@@ -110,16 +116,17 @@ public class UserController implements Codes {
 		userVo.setUser_birth(user_birth);
 		
 		String org_user_img = f_user_img.getOriginalFilename();
-		
 		boolean isImage_img = FileUploadUtil.isImage(org_user_img);
+		
 		if(!isImage_img) {
 			rttr.addFlashAttribute("msg", "notImage");
 			return "redirect:/user/registerForm";
 		} else {
-			
+			//user table에 프로필 사진 경로 + 유저아이디 + 파일 이름 저장
 			String user_img = USER_IMG + userVo.getUser_id() + "_" + org_user_img;
 			userVo.setUser_img(user_img);
 					
+			//aws에 프로필 사진 파일 저장
 			File userImg = new File(org_user_img);
 			f_user_img.transferTo(userImg);
 			

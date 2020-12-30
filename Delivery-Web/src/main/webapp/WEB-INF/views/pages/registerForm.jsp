@@ -27,7 +27,7 @@
 
 					<div class="form-group">
 						<label for="user_pw"> 비밀번호 </label>	
-						<input type="password" class="form-control" id="user_pw" name="user_pw" required maxlength="16"/>
+						<input type="password" class="form-control" id="user_pw" name="user_pw" required  maxlength="16"/>
 						<span class="pw_state"></span>
 					</div>
 
@@ -39,7 +39,7 @@
 
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
-						<input type="text" class="form-control" id="user_name" name="user_name" required maxlength="8">
+						<input type="text" class="form-control" id="user_name" name="user_name" required  maxlength="8">
 						<span class="name_state"></span>
 					</div>
 
@@ -53,9 +53,8 @@
 					<div class="form-group">
 						<div>
 							<label for="user_img"> 프로필 사진 </label> 
-							<input type="file" class="form-control-file" id="user_img" name="f_user_img" /> 
+							<input type="file" class="form-control-file" id="user_img" name="f_user_img" accept="image/,.jpg,.png,.gif"/> 
 							<span class="file_state"></span>
-							<span class="imgPreview"></span>
 						</div>
 					</div>
 
@@ -74,7 +73,7 @@
 					<div class="form-group">
 					<br/>
 						<label for="user_phone"> 전화번호 </label>
-						<input type="tel" class="form-control" id="user_phone" name="user_phone"  required maxlength="16"/>
+						<input type="tel" class="form-control" id="user_phone" name="user_phone"  required min="10" maxlength="16"/>
 					</div>
 
 					<div class="form-group">
@@ -99,22 +98,52 @@
 <script>
 $(function(){
 	
-	//<주소>
+	//회원가입 완료 버튼 클릭 시 검사.
 	$("#btnRegister").click(function(e) {
 		e.preventDefault();
+		var idCheck = $("#user_id").val();
+		var pwCheck = $("#user_pw").val();
+		var nameCheck = $("#user_name").val();
+		var birthCheck = $("#user_birth").val();
+		var phoneCheck = $("#user_phone").val();
+		var emailCheck = $("#user_email").val();
+		var road1 = $("#sample4_roadAddress").val(); //도로명주소
+		var road2 = $("#sample4_extraAddress").val();//참고항목
+		var road3 = $("#sample4_detailAddress").val();// 상세주소
 		
-		var road1 = $("#sample4_roadAddress").val();
-		var road2 = $("#sample4_extraAddress").val();
-		var road3 = $("#sample4_detailAddress").val();
+		if(idCheck == null || idCheck == "") {
+			alert("아이디를 입력해주세요");
+			$("#user_id").focus();
+			return;
+		} else if(pwCheck == null || pwCheck == "") {
+			alert("비밀번호를 입력해 주세요");
+			$("#user_pw").focus();
+			return;
+		} else if(nameCheck == null || nameCheck == "") {
+			alert("이름을 입력해 주세요");
+			$("#user_name").focus();
+			return;
+		} else if(birthCheck == null || birthCheck == "") {
+			alert("생일을 입력해 주세요");
+			$("#user_birth").focus();
+			return;
+		} else if(phoneCheck == null || phoneCheck == "") {
+			alert("전화번호를 입력해 주세요");
+			$("#user_phone").focut();
+			return;
+		} else if(emailCheck == null || emailCheck == "") {
+			alert("")
+		}
 		
 		if(road3 == null || road3 == "") {
 			$("#user_addr").val(road1 + road2);
 		} else {
 			$("#user_addr").val(road1 + road2 + " " + road3);
 		}
-		$("#frmRegist").submit();
 		
-	});
+		 $("#frmRegist").submit();
+		
+	}); // 회원 가입 완료 버튼
 	
 	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#user_id").keyup(function() {
@@ -124,13 +153,14 @@ $(function(){
 		if(user_id == "" || user_id == null) {
 			$(".id_state").text("");
 		} else {
+			
 			for(var i = 0; i < user_id.length; i++) {
 				char_user_id = user_id.charCodeAt(i)
-				if((47 < char_user_id && char_user_id < 58  ) || (64 < char_user_id && char_user_id < 91) || (96 < char_user_id && char_user_id < 123)){
+				if((47 < char_user_id && char_user_id < 58  ) || (96 < char_user_id && char_user_id < 123)){
 					$(".id_state").text("");
 				} else {
 					result = false;
-					$(".id_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
 					break;
 				}
 			}
@@ -145,12 +175,24 @@ $(function(){
 				if(data == true){
 					$(".id_state").text("멋진 아이디네요!").css("color", "green");
 				} else {
-					$(".id_state").text("이미 사용 중이거나, 탈퇴한 아이디 입니다.").css("color", "red");
+					$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
 				}
 			});// ajax
 		}
 		}// 중복확인 if
 	});// id keyup
+	
+	//<아이디 길이>
+	$("#user_id").blur(function(){
+		var id_length = $(this).val().length;
+		//console.log("id_length : " + id_length);
+		if(5 < id_length && id_length < 17) {
+			$(".id_state").text("멋진 아이디네요!").css("color", "green");
+		} else {
+			$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
+		}
+	});
+	
 	
 	// <비밀번호칸> 숫자, 영어 대소문자만 입력
 	$("#user_pw").keyup(function(){
@@ -164,10 +206,19 @@ $(function(){
 				if((47 < char_user_pw && char_user_pw < 58  ) || (64 < char_user_pw && char_user_pw < 91) || (96 < char_user_pw && char_user_pw < 123)){
 					$(".pw_state").text("사용가능").css("color", "green");
 				} else {
-					$(".pw_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
 					break;
 				} 
 			}
+		}
+	});
+	// <비밀번호칸> 비번 길이
+	$("#user_pw").blur(function(){
+		var pw_length = $(this).val().length;
+		if(7 < pw_length && pw_length < 17) {
+			$(".pw_state").text("사용가능").css("color", "green");
+		} else {
+			$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
 		}
 	});
 	
@@ -196,7 +247,7 @@ $(function(){
 			for(var i = 0; i < user_name.length; i++){
 				char_user_name = user_name.charCodeAt(i);
 				if(char_user_name < 45032 || 55203 < char_user_name ){
-					$(".name_state").text("특수기호, 숫자 , 영어 입력 불가능합니다").css("color", "red");
+					$(".name_state").text("이름을 정확히 입력해 주세요.").css("color", "red");
 					break;
 				} else {
 					$(".name_state").text("");
@@ -205,17 +256,6 @@ $(function(){
 		}
 	});
 	
-	// <파일> JPG, PNG만 가능
-	$("input[type=file]").change(function(){
-		var extName = $(this).val().split(".").pop().toUpperCase();
-		if(extName == "PNG" || extName == "JPG" || extName =="") {
-			$(".file_state").text("");
-		} else {
-			$(".file_state").text("JPG, PNG만 업로드 가능합니다.").css("color", "red");
-		}
-			
-		});
-		
 }); // 핸들러
 
 // <주소>
