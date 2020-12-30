@@ -99,8 +99,12 @@
 </body>
 <script>
 $(function(){
-	
-	//회원가입 완료 버튼 클릭 시 검사.
+	// 메세지
+	var isImage_msg = "${isImage_msg}";
+	if(isImage_msg == "notImage") {
+		alert("이미지 파일만 업로드 가능합니다.");
+	} 
+	//회원가입 완료 버튼 클릭
 	$("#btnRegister").click(function(e) {
 		e.preventDefault();
 		//<주소>
