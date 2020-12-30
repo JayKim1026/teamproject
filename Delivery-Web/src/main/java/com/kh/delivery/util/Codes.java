@@ -10,8 +10,4 @@ public interface Codes {
 	String DLVR_IDCARD = "Dlvr_IDCard/";
 	String USER_IMG = "User_Img/";
 	String TIMELINE_IMG = "Timeline_Img/";
-
-	// AWS 엑세스 키
-	String ACCESS_KEY = "AKIA6CRPTNJD4CR57XUS";
-	String SECRET_KEY = "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";
 }
