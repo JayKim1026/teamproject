@@ -202,6 +202,10 @@ $(function(){
 		alert("회원가입이 완료되었습니다.")
 	}
 	
+	var loginPlz = "${loginPlz}";
+	if(loginPlz == "loginPlz") {
+		alert("로그인을 해주세요.")
+	}
 	// 지도
 	var container = document.getElementById('map');
 

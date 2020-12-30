@@ -76,12 +76,6 @@
 											</c:if>
 											<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 										</td>
-										<td>
-											<form action="/user/userPage/info" method="POST"  enctype="multipart/form-data" id="frmchangeImg">
- 												<input type="file" style="display:none;" id="changeImgFile" name="change_user_img" accept="image/,.jpg,.png,.gif">
-												<button type="submit" class="btn-default" id=btnChangeImg >사진 변경</button>
-											</form>										
-										</td>
 									</tr>
 									<tr>
 										<td>아이디</td>
@@ -91,22 +85,18 @@
 									<tr>
 										<td>비밀번호</td>
 										<td><input type="password" value="${sessionScope.userVo.user_pw}" style="border:none; cursor: default;" readonly/></td>
-										<td><button class="btn-default">비밀번호 변경</button></td>
 									</tr>
 									<tr>
 										<td>이름</td>
 										<td>${sessionScope.userVo.user_name}</td>
-										<td><button class="btn-default">이름 수정</button></td>
 									</tr>
 									<tr>
 										<td>이메일</td>
 										<td>${sessionScope.userVo.user_email}</td>
-										<td><button class="btn-default">이메일 변경</button></td>
 									</tr>
 									<tr>
 										<td>휴대전화</td>
 										<td>${sessionScope.userVo.user_phone}</td>
-										<td><button class="btn-default">휴대전화 변경</button></td>
 									</tr>
 									<!-- <tr>
 										<td>계좌번호</td>
@@ -127,14 +117,6 @@
 
 <script>
 $(function(){
-	// 사진변경 버튼
-	$("#btnChangeImg").click(function(e){
-		e.preventDefault();
-		$("#changeImgFile").trigger("click").change(function(){
-			$("#frmchangeImg").submit();
-		});
-	});
-	
 	// 로그아웃 
 	$("#btnLogout").click(function(){
 		location.href="/user/logout";

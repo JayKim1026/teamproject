@@ -37,23 +37,20 @@ public class UserController implements Codes {
 
 	// 웹
 	// userPage 회원정보
-	@RequestMapping(value = "/userPage/info", method = RequestMethod.POST)
-	public String userInfo(Model model, HttpSession session, MultipartFile change_user_img) throws Exception {
+	@RequestMapping(value = "/userPage/info", method=RequestMethod.GET)
+	public String userInfo(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
-
 		if(userVo != null) {
 			String user_img = userVo.getUser_img();
-			if(change_user_img != null) {
-				System.out.println("change_user_img : " + change_user_img);
-//				String orgChangeImg_name = change_user_img.getOriginalFilename();
-//				boolean isImage_changeImg = FileUploadUtil.isImage(orgChangeImg_name);
-			} else {
-				model.addAttribute("image_url", BUCKET_URL + user_img);
-			}
+			model.addAttribute("image_url", BUCKET_URL + user_img);
+			return "pages/userPage/info";
+			
 		} else {
-			return "/user/loginForm";
+			rttr.addFlashAttribute("loginPlz", "loginPlz");
+			return "redirect:/";
+			
 		}
-		return "pages/userPage/info";
+		
 	}
 
 	// userPage 주문 내역 조회
