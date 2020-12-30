@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,32 +36,38 @@ public class UserController implements Codes {
 	private JavaMailSender mainSender;
 
 	// 웹
-
 	// userPage 회원정보
 	@RequestMapping(value = "/userPage/info", method = RequestMethod.GET)
-	public String userInfo() throws Exception {
+	public String userInfo(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_img = userVo.getUser_img();
+		model.addAttribute("image_url", BUCKET_URL + user_img);
 		return "pages/userPage/info";
 	}
 
 	// userPage 주문 내역 조회
 	@RequestMapping(value = "/userPage/orderList", method = RequestMethod.GET)
-	public String userOrderList() throws Exception {
+	public String userOrderList(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/orderList";
 	}
 
 	// userPage 포인트
 	@RequestMapping(value = "/userPage/point", method = RequestMethod.GET)
-	public String userPoint() throws Exception {
+	public String userPoint(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/point";
 	}
 	// userPage 1:1 질문
 	@RequestMapping(value = "/userPage/question", method = RequestMethod.GET)
-	public String userQuestion() throws Exception {
+	public String userQuestion(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/question";
 	}
 	// userPage 내가 작성한 후기
 	@RequestMapping(value = "/userPage/review", method = RequestMethod.GET)
-	public String userReview() throws Exception {
+	public String userReview(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		return "pages/userPage/review";
 	}
 
@@ -83,7 +90,14 @@ public class UserController implements Codes {
 			return "redirect:/user/loginForm";
 		}
 	}
-
+	
+	// 로그아웃
+	@RequestMapping(value="/logout" , method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	// 아이디 중복 체크
 	@RequestMapping(value = "/checkIdDupl", method = RequestMethod.GET)
 	@ResponseBody
@@ -106,16 +120,18 @@ public class UserController implements Codes {
 		userVo.setUser_birth(user_birth);
 		
 		String org_user_img = f_user_img.getOriginalFilename();
-		
 		boolean isImage_img = FileUploadUtil.isImage(org_user_img);
+		
 		if(!isImage_img) {
 			rttr.addFlashAttribute("msg", "notImage");
 			return "redirect:/user/registerForm";
 		} else {
-			
+			//user table에 프로필 사진 경로 + 유저아이디 + 파일 이름 저장
 			String user_img = USER_IMG + userVo.getUser_id() + "_" + org_user_img;
 			userVo.setUser_img(user_img);
-					
+			System.out.println("userVo : " + userVo);
+			
+			//aws에 프로필 사진 파일 저장
 			File userImg = new File(org_user_img);
 			f_user_img.transferTo(userImg);
 			

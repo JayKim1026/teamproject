@@ -27,7 +27,7 @@
 
 					<div class="form-group">
 						<label for="user_pw"> 비밀번호 </label>	
-						<input type="password" class="form-control" id="user_pw" name="user_pw" required maxlength="16"/>
+						<input type="password" class="form-control" id="user_pw" name="user_pw" required  maxlength="16"/>
 						<span class="pw_state"></span>
 					</div>
 
@@ -39,7 +39,7 @@
 
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
-						<input type="text" class="form-control" id="user_name" name="user_name" required maxlength="8">
+						<input type="text" class="form-control" id="user_name" name="user_name" required  maxlength="8">
 						<span class="name_state"></span>
 					</div>
 
@@ -53,16 +53,15 @@
 					<div class="form-group">
 						<div>
 							<label for="user_img"> 프로필 사진 </label> 
-							<input type="file" class="form-control-file" id="user_img" name="f_user_img" /> 
+							<input type="file" class="form-control-file" id="user_img" name="f_user_img" accept="image/,.jpg,.png,.gif"/> 
 							<span class="file_state"></span>
-							<span class="imgPreview"></span>
 						</div>
 					</div>
 
 					<div>
 					<label>주소</label><br/>
 						<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
-						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="btnAddr"><br>
 						<input type="text" class="form-control user_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
 						<input type="text"class="form-control "  id="sample4_jibunAddress" placeholder="지번주소">
 						<span id="guide" style="color:#999;display:none"></span>
@@ -74,12 +73,14 @@
 					<div class="form-group">
 					<br/>
 						<label for="user_phone"> 전화번호 </label>
-						<input type="tel" class="form-control" id="user_phone" name="user_phone"  required maxlength="16"/>
+						<input type="tel" class="form-control" id="user_phone" name="user_phone" required min="10" maxlength="16"/>
+						<span class="phone_state"></span>
 					</div>
 
 					<div class="form-group">
 						<label for="user_email"> 이메일 </label>
 						<input type="email" class="form-control" id="user_email" name="user_email" required/>
+						<span class="email_state"></span>
 					</div>
 
 					<!-- <div class="form-group">
@@ -99,22 +100,65 @@
 <script>
 $(function(){
 	
-	//<주소>
+	//회원가입 완료 버튼 클릭 시 검사.
 	$("#btnRegister").click(function(e) {
 		e.preventDefault();
-		
+		//<주소>
 		var road1 = $("#sample4_roadAddress").val();
 		var road2 = $("#sample4_extraAddress").val();
 		var road3 = $("#sample4_detailAddress").val();
-		
-		if(road3 == null || road3 == "") {
-			$("#user_addr").val(road1 + road2);
+		if(road2 == null || road2 == "") {
+			$("#user_addr").val(road1 + road3);
 		} else {
-			$("#user_addr").val(road1 + road2 + " " + road3);
+			$("#user_addr").val(road1 + road2 + road3);
 		}
-		$("#frmRegist").submit();
+		//<아이디 ~ 이메일 이미지는 제외>
+		var idCheck = $("#user_id").val();
+		var pwCheck = $("#user_pw").val();
+		var pwCheck2 = $("#user_pw2").val();
+		var nameCheck = $("#user_name").val();
+		var birthCheck = $("#user_birth").val();
+		var sample4_detailAddress = $("#sample4_detailAddress").val();
+		var phoneCheck = $("#user_phone").val();
+		var emailCheck = $("#user_email").val();
 		
-	});
+		if(idCheck == null || idCheck == "") {
+			alert("아이디를 입력해주세요");
+			$("#user_id").focus();
+			return;
+		} else if(pwCheck == null || pwCheck == "") {
+			alert("비밀번호를 입력해 주세요");
+			$("#user_pw").focus();
+			return;
+		} else if(pwCheck2 == null || pwCheck2 == ""){
+			alert("확인 비밀번호를 입력해 주세요");
+			$("#user_pw2").focus();
+			return;
+		} else if(nameCheck == null || nameCheck == "") {
+			alert("이름을 입력해 주세요");
+			$("#user_name").focus();
+			return;
+		} else if(birthCheck == null || birthCheck == "") {
+			alert("생일을 입력해 주세요");
+			$("#user_birth").focus();
+			return;
+		} else if(sample4_detailAddress == null || sample4_detailAddress == ""){
+			alert("상세주소를 입력해주세요");
+			$("#btnAddr").focus();
+			return; 
+		} 
+		else if(phoneCheck == null || phoneCheck == "") {
+			alert("전화번호를 입력해 주세요");
+			$("#user_phone").focus();
+			return;
+		} else if(emailCheck == null || emailCheck == "") {
+			alert("이메일을 입력해주세요");
+			$("#user_email").focus();
+			return;
+		} else {
+			$("#frmRegist").submit();
+		}
+	}); // 회원 가입 완료 버튼
 	
 	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#user_id").keyup(function() {
@@ -125,12 +169,18 @@ $(function(){
 			$(".id_state").text("");
 		} else {
 			for(var i = 0; i < user_id.length; i++) {
-				char_user_id = user_id.charCodeAt(i)
-				if((47 < char_user_id && char_user_id < 58  ) || (64 < char_user_id && char_user_id < 91) || (96 < char_user_id && char_user_id < 123)){
-					$(".id_state").text("");
+				if( 5 < user_id.length &&  user_id.length < 17) {
+					char_user_id = user_id.charCodeAt(i)
+					if((47 < char_user_id && char_user_id < 58  ) || (96 < char_user_id && char_user_id < 123)){
+						$(".id_state").text("");
+					} else {
+						result = false;
+						$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
+						break;
+					}
 				} else {
 					result = false;
-					$(".id_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
 					break;
 				}
 			}
@@ -145,7 +195,7 @@ $(function(){
 				if(data == true){
 					$(".id_state").text("멋진 아이디네요!").css("color", "green");
 				} else {
-					$(".id_state").text("이미 사용 중이거나, 탈퇴한 아이디 입니다.").css("color", "red");
+					$(".id_state").text("이미 사용중이거나 탈퇴한 아이디 입니다.").css("color", "red");
 				}
 			});// ajax
 		}
@@ -160,13 +210,19 @@ $(function(){
 			$(".pw_state").text("");
 		} else {
 			for(var i = 0; i < user_pw.length; i++){
-				char_user_pw = user_pw.charCodeAt(i);
-				if((47 < char_user_pw && char_user_pw < 58  ) || (64 < char_user_pw && char_user_pw < 91) || (96 < char_user_pw && char_user_pw < 123)){
-					$(".pw_state").text("사용가능").css("color", "green");
+				if( 7 < user_pw.length && user_pw.length < 17){
+					char_user_pw = user_pw.charCodeAt(i);
+					if((47 < char_user_pw && char_user_pw < 58  ) || (64 < char_user_pw && char_user_pw < 91) || (96 < char_user_pw && char_user_pw < 123)){
+						$(".pw_state").text("사용가능").css("color", "green");
+						console.log(char_user_pw);
+					} else {
+						$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
+						break;
+					} 
 				} else {
-					$(".pw_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
 					break;
-				} 
+				}
 			}
 		}
 	});
@@ -196,26 +252,36 @@ $(function(){
 			for(var i = 0; i < user_name.length; i++){
 				char_user_name = user_name.charCodeAt(i);
 				if(char_user_name < 45032 || 55203 < char_user_name ){
-					$(".name_state").text("특수기호, 숫자 , 영어 입력 불가능합니다").css("color", "red");
-					break;
+					$(".name_state").text("이름을 정확히 입력해 주세요.").css("color", "red");
 				} else {
 					$(".name_state").text("");
 				} 
 			}
 		}
 	});
-	
-	// <파일> JPG, PNG만 가능
-	$("input[type=file]").change(function(){
-		var extName = $(this).val().split(".").pop().toUpperCase();
-		if(extName == "PNG" || extName == "JPG" || extName =="") {
-			$(".file_state").text("");
+	//<전화번호>
+	$("#user_phone").keyup(function(){
+		var user_phone = $(this).val();
+		var char_user_phone = "";
+		if(user_phone == null || user_phone == "") {
+			$(".phone_state").text("");
 		} else {
-			$(".file_state").text("JPG, PNG만 업로드 가능합니다.").css("color", "red");
+			for(var i = 0; i < user_phone.length; i++) {
+				char_user_phone = user_phone.charCodeAt(i);
+				if( 47< char_user_phone && char_user_phone < 58) {
+					$(".phone_state").text("");
+				} else {
+					$(".phone_state").text("숫자만 입력해주세요").css("color", "red");
+					break;
+				}
+			}
 		}
-			
-		});
+	});
+	
+	//<이메일>
+	$("#user_phone").keyup(function(){
 		
+	});
 }); // 핸들러
 
 // <주소>

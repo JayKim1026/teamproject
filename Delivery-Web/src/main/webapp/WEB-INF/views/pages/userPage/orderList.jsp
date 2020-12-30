@@ -20,7 +20,7 @@
 					<h1> 마이 페이지 </h1>
 				</div>
 				<div class="col-md-2">
-
+					userVo:${sessionScope.userVo}
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,6 @@
 		</div>
 		
 		<div class="col-md-2">
-		
 		</div>
 	</div>
 </div>
