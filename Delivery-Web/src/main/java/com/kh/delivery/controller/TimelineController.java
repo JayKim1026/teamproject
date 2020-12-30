@@ -48,7 +48,7 @@ public class TimelineController implements Codes{
 		String review_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_review_img;
 		System.out.println("TimelineController, review_img = " + review_img );
 		timelineVo.setReview_img(review_img);
-//		timelineService.insertArticle(timelineVo);
+		timelineService.insertArticle(timelineVo);
 		return "success";
 	}
 	
