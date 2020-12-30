@@ -31,6 +31,7 @@ $("#btnInsert").click(function(e){
 		"success"		:	function(data) {
 			console.log(data);
 			if(data == "success"){
+				
 			var clone1 = $("#forclone").clone();
 			clone1.find("h3").text("${userVo.user_name}");
 			clone1.find(".content").text($("#review_content").val());	
@@ -135,9 +136,9 @@ $(".btnDelete").click(function(){
 											<label class="fa fa-image options mb-0 mr-4" for="review_img"></label>
 											<input type="file" class="form-control-file" id="review_img" name="review_img" style="display:none" />
 											
-											<div id="divUploaded" style="padding-left:40px;">
-												<img height="25" src="/resources/images/default.png"/>
-											</div>
+<!-- 											<div id="divUploaded" style="padding-left:40px;"> -->
+<!-- 												<img height="25" src="/resources/images/default.png"/> -->
+<!-- 											</div> -->
 											<div class="btn btn-success ml-auto" id="btnInsert">글쓰기</div>
 										</div>
 										</form>	

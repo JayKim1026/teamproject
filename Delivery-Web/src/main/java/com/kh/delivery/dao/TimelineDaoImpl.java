@@ -20,12 +20,15 @@ public class TimelineDaoImpl implements TimelineDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void insertArticle(TimelineVo timelineVo) {
+	public TimelineVo insertArticle(TimelineVo timelineVo) {
 		
 		System.out.println("TimelineDao, insertArticle, timelineVo:" + timelineVo);
-		
-		sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
-		
+		if(timelineVo.getReview_img() != null) {
+			//TimelineVo vo = sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
+		} else {
+			//TimelineVo vo = sqlSession.insert(NAMESPACE + "insertArticleNoPic", timelineVo);
+		}
+		return null;
 	}
 
 	@Override

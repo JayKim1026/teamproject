@@ -16,10 +16,11 @@ public class TimelineServiceImpl implements TimelineService {
 	private TimelineDao timelineDao;
 	
 	@Override
-	public void insertArticle(TimelineVo timelineVo) {
+	public TimelineVo insertArticle(TimelineVo timelineVo) {
 
-		timelineDao.insertArticle(timelineVo);
+		TimelineVo vo = timelineDao.insertArticle(timelineVo);
 			
+		return vo;
 	}
 
 	@Override

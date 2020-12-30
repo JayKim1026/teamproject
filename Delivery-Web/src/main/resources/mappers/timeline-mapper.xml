@@ -9,6 +9,12 @@
 		values(seq_review_no.nextval,#{user_no}, #{review_content}, #{review_img})
 	</insert>
 	
+	<insert id="insertArticleNoPic">
+		insert into tbl_board_review
+		(review_no, user_no, review_content)
+		values(seq_review_no.nextval,#{user_no}, #{review_content})
+	</insert>
+	
 	<select id="timelineList" resultType="TimelineVo">
 		select t.*, u.user_name
 		from tbl_board_review t inner join tbl_user u
@@ -26,4 +32,5 @@
 		delete from tbl_board_review
 		where review_no = #{review_no}
 	</delete>
+	
 </mapper>

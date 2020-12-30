@@ -10,7 +10,7 @@ public interface TimelineDao {
 	public List<TimelineVo> timelineList(); 
 	
 	/*글 작성*/
-	public void insertArticle(TimelineVo timelineVo);
+	public TimelineVo insertArticle(TimelineVo timelineVo);
 
 	/*글 수정*/
 	public void updateArticle(TimelineVo timelineVo);
