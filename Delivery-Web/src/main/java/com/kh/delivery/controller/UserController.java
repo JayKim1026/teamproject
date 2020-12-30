@@ -144,7 +144,7 @@ public class UserController implements Codes {
 			
 			String result = userService.registUser(userVo);
 			System.out.println("result = " + result);
-			rttr.addFlashAttribute("msg", result);
+			rttr.addFlashAttribute("img_upload", result);
 			return "redirect:/";
 		}
 		
