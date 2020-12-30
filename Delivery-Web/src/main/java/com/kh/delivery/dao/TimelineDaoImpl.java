@@ -23,8 +23,11 @@ public class TimelineDaoImpl implements TimelineDao {
 	public void insertArticle(TimelineVo timelineVo) {
 		
 		System.out.println("TimelineDao, insertArticle, timelineVo:" + timelineVo);
-		
-		sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
+		if(timelineVo.getReview_img() != null) {
+			sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
+		} else {
+			sqlSession.insert(NAMESPACE + "insertArticleNoPic", timelineVo);
+		}
 		
 	}
 

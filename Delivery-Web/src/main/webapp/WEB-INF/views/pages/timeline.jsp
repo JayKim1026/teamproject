@@ -30,13 +30,18 @@ $("#btnInsert").click(function(e){
 		"data"			:	formData, 
 		"success"		:	function(data) {
 			console.log(data);
+			if(data == "success"){
+				
 			var clone1 = $("#forclone").clone();
 			clone1.find("h3").text("${userVo.user_name}");
-			clone1.find(".content").text($("#review_content").val());	
+			clone1.find(".content").text("${review_content}");
 			$("#house").prepend(clone1).hide().fadeIn(1000);
 			$("#review_content").val("");
 			$("#review_img").val("");
-		}
+			} else if(data == "fail"){
+				alert("글쓰기 실패");
+			}
+		}	
 		});
 // 	javascript:history.go(0);
 });
@@ -131,9 +136,9 @@ $(".btnDelete").click(function(){
 											<label class="fa fa-image options mb-0 mr-4" for="review_img"></label>
 											<input type="file" class="form-control-file" id="review_img" name="review_img" style="display:none" />
 											
-											<div id="divUploaded" style="padding-left:40px;">
-												<img height="25" src="/resources/images/default.png"/>
-											</div>
+<!-- 											<div id="divUploaded" style="padding-left:40px;"> -->
+<!-- 												<img height="25" src="/resources/images/default.png"/> -->
+<!-- 											</div> -->
 											<div class="btn btn-success ml-auto" id="btnInsert">글쓰기</div>
 										</div>
 										</form>	
@@ -205,9 +210,9 @@ $(".btnDelete").click(function(){
 										<p class="content">${timelineVo.review_content}</p>
 									</div>
 									<div class="row text-left">
-										<img class="pic" src="https://i.imgur.com/kjcZcfv.jpg">
-										<img class="pic" src="https://i.imgur.com/SjBwAgs.jpg">
-										<img class="pic" src="https://i.imgur.com/IgHpsBh.jpg">
+										<c:if test="${timelineVo.review_img != null}">
+											<img class="pic" src="${image_url}${timelineVo.review_img}">
+										</c:if>
 									</div>
 									<div class="row text-left mt-4">
 										<div class="like mr-3 vote">

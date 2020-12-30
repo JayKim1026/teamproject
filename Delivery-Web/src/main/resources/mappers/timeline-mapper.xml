@@ -5,6 +5,12 @@
 <mapper namespace="com.kh.delivery.timeline">
 	<insert id="insertArticle">
 		insert into tbl_board_review
+		(review_no, user_no, review_content, review_img)
+		values(seq_board_no.nextval,#{user_no}, #{review_content}, #{review_img})
+	</insert>
+	
+	<insert id="insertArticleNoPic">
+		insert into tbl_board_review
 		(review_no, user_no, review_content)
 		values(seq_board_no.nextval,#{user_no}, #{review_content})
 	</insert>
@@ -26,4 +32,5 @@
 		delete from tbl_board_review
 		where review_no = #{review_no}
 	</delete>
+	
 </mapper>

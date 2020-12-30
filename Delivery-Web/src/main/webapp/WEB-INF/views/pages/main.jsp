@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../css/main.css" %>
 <!DOCTYPE html>
 <html>
@@ -17,14 +18,20 @@
 					class="fab fa-accusoft"></i>
 			</div>
 			<ul class="nav__main">
-				<li><a class="menu__stuff" href="/">Home</a></li>
+				<c:if test="${sessionScope.userVo == null}">
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
 				<li><a class="menu__stuff" href="/deliver/dlvr_RegisterForm">Deliver Join</a></li>
+				</c:if>
+				<c:if test="${sessionScope.userVo != null}">
+				<li><a class="menu__stuff" href="/user/logout">Logout</a></li>
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
+				</c:if>
 			</ul>
 			<ul class="nav__link">
+			<c:if test="${sessionScope.userVo != null }">
 				<li><a class="menu__stuff2" href="/user/userPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
+			</c:if>
 				<li><a class="menu__stuff2" href="">Membership</a></li>
 			</ul>
 			<div class="nav__textArea">
