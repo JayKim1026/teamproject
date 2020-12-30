@@ -6,7 +6,7 @@
 	<insert id="insertArticle">
 		insert into tbl_board_review
 		(review_no, user_no, review_content, review_img)
-		values(seq_review_no.nextval,#{user_no}, #{review_content}, #{review_img})
+		values(seq_board_no.nextval,#{user_no}, #{review_content}, #{review_img})
 	</insert>
 	
 	<insert id="insertArticleNoPic">

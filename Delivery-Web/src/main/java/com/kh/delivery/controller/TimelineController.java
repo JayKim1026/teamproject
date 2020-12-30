@@ -44,7 +44,7 @@ public class TimelineController implements Codes {
 	@RequestMapping(value = "/insertArticle", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_review_img,
-			RedirectAttributes rttr) throws Exception {
+			Model model) throws Exception {
 		System.out.println("TimelineController, insertArticle, timelineVo" + timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		if (f_review_img != null) {
@@ -52,7 +52,6 @@ public class TimelineController implements Codes {
 			System.out.println("TimelineController, org_review_img = " + org_review_img);
 			boolean isImage_img = FileUploadUtil.isImage(org_review_img);
 			if (!isImage_img) {
-				rttr.addFlashAttribute("msg", "notImage");
 				return "fail";
 			}
 
@@ -65,7 +64,14 @@ public class TimelineController implements Codes {
 			timelineVo.setReview_img(review_img);
 		}
 
-		TimelineVo vo = timelineService.insertArticle(timelineVo);
+		timelineService.insertArticle(timelineVo);
+		
+		String review_content = timelineVo.getReview_content();
+		String review_img = timelineVo.getReview_img();
+		System.out.println("TimelineController, insertArticle, review_content:" + review_content);
+		System.out.println("TimelineController, insertArticle, review_img:" + review_img);
+		model.addAttribute("review_content", review_content);
+		model.addAttribute("review_img", review_img);
 		return "success";
 
 	}

@@ -34,7 +34,7 @@ $("#btnInsert").click(function(e){
 				
 			var clone1 = $("#forclone").clone();
 			clone1.find("h3").text("${userVo.user_name}");
-			clone1.find(".content").text($("#review_content").val());	
+			clone1.find(".content").text("${review_content}");
 			$("#house").prepend(clone1).hide().fadeIn(1000);
 			$("#review_content").val("");
 			$("#review_img").val("");
