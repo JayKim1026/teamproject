@@ -12,7 +12,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
-public class FileUploadUtil implements Codes {
+public class FileUploadUtil implements Codes, Keys {
 	
 	// s3 버킷 이름
 	private static String BUCKET = "delivery-img";
