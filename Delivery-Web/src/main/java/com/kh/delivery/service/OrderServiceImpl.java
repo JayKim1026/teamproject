@@ -38,4 +38,16 @@ public class OrderServiceImpl implements OrderService {
 		String result = orderDao.cancelDelivery(order_no, dlvr_no);
 		return result;
 	}
+
+	@Override
+	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception {
+		String result = orderDao.deliveryCompleted(order_no, dlvr_no);
+		return result;
+	}
+
+	@Override
+	public List<OrderVo> getCompletedOrder(int dlvr_no) throws Exception {
+		List<OrderVo> orderList = orderDao.getCompletedOrder(dlvr_no);
+		return orderList;
+	}
 }

@@ -36,6 +36,7 @@ public class OrderController {
 		return result;
 	}
 
+	// 수락한 주문정보 가져오기
 	@RequestMapping(value="/getPickedOrder", method=RequestMethod.POST)
 	@ResponseBody
 	public OrderVo getPickedOrder(int dlvr_no) throws Exception {
@@ -43,10 +44,28 @@ public class OrderController {
 		return orderVo;
 	}
 
+	// 배달 취소
 	@RequestMapping(value="/cancelDelivery", method=RequestMethod.POST)
 	@ResponseBody
 	public String cancelDelivery(int order_no, int dlvr_no) throws Exception {
+		System.out.println(order_no + ", " + dlvr_no);
 		String result = orderService.cancelDelivery(order_no, dlvr_no);
 		return result;
+	}
+	
+	// 배달 완료
+	@RequestMapping(value="/deliveryCompleted", method=RequestMethod.POST)
+	@ResponseBody
+	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception {
+		String result = orderService.deliveryCompleted(order_no, dlvr_no);
+		return result;
+	}
+	
+	// 배달 완료 목록 가져오기
+	@RequestMapping(value="/getCompletedOrder", method=RequestMethod.POST)
+	@ResponseBody
+	public List<OrderVo> getCompletedOrder(int dlvr_no) throws Exception {
+		List<OrderVo> orderList = orderService.getCompletedOrder(dlvr_no);
+		return orderList;
 	}
 }

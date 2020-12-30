@@ -52,4 +52,19 @@ public class OrderDaoImpl implements OrderDao {
 		sqlSession.update(NAMESPACE + "cancelDelivery", map);
 		return "cancelDelivery_success";
 	}
+
+	@Override
+	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("order_no", order_no);
+		map.put("dlvr_no", dlvr_no);
+		sqlSession.update(NAMESPACE + "deliveryCompleted", map);
+		return "delivery_completed";
+	}
+
+	@Override
+	public List<OrderVo> getCompletedOrder(int dlvr_no) throws Exception {
+		List<OrderVo> orderList = sqlSession.selectList(NAMESPACE + "getCompletedOrder", dlvr_no);
+		return orderList;
+	}
 }
