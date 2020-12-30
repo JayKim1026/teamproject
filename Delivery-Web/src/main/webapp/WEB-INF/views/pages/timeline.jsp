@@ -30,13 +30,17 @@ $("#btnInsert").click(function(e){
 		"data"			:	formData, 
 		"success"		:	function(data) {
 			console.log(data);
+			if(data == "success"){
 			var clone1 = $("#forclone").clone();
 			clone1.find("h3").text("${userVo.user_name}");
 			clone1.find(".content").text($("#review_content").val());	
 			$("#house").prepend(clone1).hide().fadeIn(1000);
 			$("#review_content").val("");
 			$("#review_img").val("");
-		}
+			} else if(data == "fail"){
+				alert("글쓰기 실패");
+			}
+		}	
 		});
 // 	javascript:history.go(0);
 });
@@ -205,9 +209,9 @@ $(".btnDelete").click(function(){
 										<p class="content">${timelineVo.review_content}</p>
 									</div>
 									<div class="row text-left">
-										<img class="pic" src="https://i.imgur.com/kjcZcfv.jpg">
-										<img class="pic" src="https://i.imgur.com/SjBwAgs.jpg">
-										<img class="pic" src="https://i.imgur.com/IgHpsBh.jpg">
+										<c:if test="${timelineVo.review_img != null}">
+											<img class="pic" src="${image_url}${timelineVo.review_img}">
+										</c:if>
 									</div>
 									<div class="row text-left mt-4">
 										<div class="like mr-3 vote">

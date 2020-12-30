@@ -5,8 +5,8 @@
 <mapper namespace="com.kh.delivery.timeline">
 	<insert id="insertArticle">
 		insert into tbl_board_review
-		(review_no, user_no, review_content)
-		values(seq_review_no.nextval,#{user_no}, #{review_content})
+		(review_no, user_no, review_content, review_img)
+		values(seq_review_no.nextval,#{user_no}, #{review_content}, #{review_img})
 	</insert>
 	
 	<select id="timelineList" resultType="TimelineVo">

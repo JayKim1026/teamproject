@@ -33,8 +33,11 @@ public class TimelineController implements Codes{
 	public String timelineList(Model model) {
 		
 		List<TimelineVo> list = timelineService.timelineList();
+		String image_url = BUCKET_URL;
 		
 		model.addAttribute("timelineVo", list);
+		model.addAttribute("image_url", image_url);
+		
 		return "pages/timeline";
 	}
 	
@@ -48,16 +51,21 @@ public class TimelineController implements Codes{
 		boolean isImage_img = FileUploadUtil.isImage(org_review_img);
 		if(!isImage_img) {
 			rttr.addFlashAttribute("msg", "notImage");
-			return"redirect:/timeline/showTimeline";
-		}else {
-		File file = new File(org_review_img);
-		f_review_img.transferTo(file);
+			return "fail";
+		}
+		
 		String review_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_review_img;
 		System.out.println("TimelineController, review_img = " + review_img );
+		
+		File file = new File(org_review_img);
+		f_review_img.transferTo(file);
+		
+		FileUploadUtil.upload(file, review_img);
 		timelineVo.setReview_img(review_img);
+	
 		timelineService.insertArticle(timelineVo);
 		return "success";
-		}
+		
 	}
 	
 	@RequestMapping(value="/uploadFile")
