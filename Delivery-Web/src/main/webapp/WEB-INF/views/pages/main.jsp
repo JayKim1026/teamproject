@@ -18,12 +18,12 @@
 					class="fab fa-accusoft"></i>
 			</div>
 			<ul class="nav__main">
-				<c:if test="${sessionScope.userVo == null}">
+				<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
 				<li><a class="menu__stuff" href="/deliver/dlvr_RegisterForm">Deliver Join</a></li>
 				</c:if>
-				<c:if test="${sessionScope.userVo != null}">
+				<c:if test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
 				<li><a class="menu__stuff" href="/user/logout">Logout</a></li>
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
 				</c:if>
