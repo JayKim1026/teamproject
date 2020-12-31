@@ -79,22 +79,24 @@ public class UserController implements Codes {
 		return "pages/userPage/review";
 	}
 
-	// 로그인
+	// 로그인 화면
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() throws Exception {
 		return "pages/loginForm";
 	}
 
+	// 로그인
 	@RequestMapping(value = "/loginRun", method = RequestMethod.POST)
-	public String loginRun(String user_id, String user_pw, HttpSession session) throws Exception {
+	public String loginRun(String user_id, String user_pw, HttpSession session, RedirectAttributes rttr) throws Exception {
 		System.out.println("loginRun, user_info = " + user_id + ", " + user_pw);
 		UserVo userVo = userService.login(user_id, user_pw);
 		System.out.println("loginRun, userVo = " + userVo);
 		if (userVo != null) {
+			rttr.addFlashAttribute("login_success", "login_success");
 			session.setAttribute("userVo", userVo);
 			return "redirect:/";
 		} else {
-			session.setAttribute("login_result", "login_fail");
+			rttr.addFlashAttribute("login_result", "login_fail");
 			return "redirect:/user/loginForm";
 		}
 	}

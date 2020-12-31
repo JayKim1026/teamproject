@@ -45,6 +45,9 @@
 <body>
 	<div class="introduce__first">
 		userVo:${sessionScope.userVo}
+		<br/>
+		<br/>
+		dlvrVo:${sessionScope.deliverVo}
 		<p class="introduce__first_p">초록색 행복을 배달합니다.</p>
 		<p class="introduce__first_p">We are Green Delivery</p>
 	</div>
@@ -213,6 +216,12 @@ $(function(){
 	if(loginPlz == "loginPlz") {
 		alert("로그인을 해주세요.")
 	}
+	
+	var login_success = "${login_success}";
+	if(login_success == "login_success") {
+		alert("로그인 성공");
+	}
+	
 	// 지도
 	var container = document.getElementById('map');
 
