@@ -94,6 +94,43 @@ create table tbl_report(
     report_date	    timestamp       default sysdate
 );
 
+create table tbl_board_free(
+    free_no             number  primary key,
+    free_writer_no      number,
+    free_content        varchar2(600), 
+    free_img            varchar2(600), 
+    free_date           timestamp   default sysdate, 
+    free_state          varchar2(10) default '10-001' REFERENCES tbl_code(code_no), 
+    dummy_no            number  default -1, 
+    dummy_star          number  default -1 not null, 
+    dummy_name         varchar2(30) default 'dummy' not null
+);
+
+create table tbl_board_notice(
+    notice_no           number  primary key,
+    admin_no            number  REFERENCES tbl_admin(admin_no),
+    notice_content      varchar2(600), 
+    notice_img          varchar2(600), 
+    notice_date         timestamp   default sysdate,
+    notice_state        varchar2(10) default '10-001' REFERENCES tbl_code(code_no), 
+    dummy_no            number  default -1, 
+    dummy_star          number  default -1 not null, 
+    dummy_name         varchar2(30) default 'dummy' not null
+);
+
+create table tbl_board_review(
+    review_no           number  primary key,
+    user_no             number  REFERENCES tbl_user(user_no),
+    review_content      varchar2(600), 
+    review_img          varchar2(600),
+    review_date         timestamp   default sysdate,
+    review_state        varchar2(10) default '10-001' REFERENCES tbl_code(code_no), 
+    dlvr_no             number  REFERENCES tbl_deliver(dlvr_no), 
+    review_star         number  default 2.5 not null
+);
+
+// 게시판 테이블 위쪽 쿼리로 수정함
+/*
 create table tbl_board_notice(
     notice_no	    number          primary key, 
     admin_no	    number          REFERENCES tbl_admin(admin_no), 
@@ -114,3 +151,4 @@ create table tbl_board_review(
     dlvr_no	        number          REFERENCES tbl_deliver(dlvr_no), 
     review_state	varchar2(1)     default 'X'
 );
+*/

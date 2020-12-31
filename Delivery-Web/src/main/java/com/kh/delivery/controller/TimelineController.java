@@ -32,10 +32,10 @@ public class TimelineController implements Codes {
 	@RequestMapping(value = "/showTimeline", method = RequestMethod.GET)
 	public String timelineList(Model model) {
 
-		List<TimelineVo> list = timelineService.timelineList();
+		List<TimelineVo> timelineList = timelineService.timelineList();
 		String image_url = BUCKET_URL;
-
-		model.addAttribute("timelineVo", list);
+		System.out.println(timelineList);
+		model.addAttribute("timelineList", timelineList);
 		model.addAttribute("image_url", image_url);
 
 		return "pages/timeline";
@@ -43,35 +43,35 @@ public class TimelineController implements Codes {
 
 	@RequestMapping(value = "/insertArticle", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_review_img,
+	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
 			Model model) throws Exception {
 		System.out.println("TimelineController, insertArticle, timelineVo" + timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
-		if (f_review_img != null) {
-			String org_review_img = f_review_img.getOriginalFilename();
-			System.out.println("TimelineController, org_review_img = " + org_review_img);
-			boolean isImage_img = FileUploadUtil.isImage(org_review_img);
+		if (f_timeline_img != null) {
+			String org_timeline_img = f_timeline_img.getOriginalFilename();
+			System.out.println("TimelineController, org_timeline_img = " + org_timeline_img);
+			boolean isImage_img = FileUploadUtil.isImage(org_timeline_img);
 			if (!isImage_img) {
 				return "fail";
 			}
 
-			String review_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_review_img;
-			System.out.println("TimelineController, review_img = " + review_img);
-			File file = new File(org_review_img);
-			f_review_img.transferTo(file);
+			String timeline_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_timeline_img;
+			System.out.println("TimelineController, review_img = " + timeline_img);
+			File file = new File(org_timeline_img);
+			f_timeline_img.transferTo(file);
 
-			FileUploadUtil.upload(file, review_img);
-			timelineVo.setReview_img(review_img);
+			FileUploadUtil.upload(file, timeline_img);
+			timelineVo.setTimeline_img(timeline_img);
 		}
 
 		timelineService.insertArticle(timelineVo);
 		
-		String review_content = timelineVo.getReview_content();
-		String review_img = timelineVo.getReview_img();
-		System.out.println("TimelineController, insertArticle, review_content:" + review_content);
-		System.out.println("TimelineController, insertArticle, review_img:" + review_img);
-		model.addAttribute("review_content", review_content);
-		model.addAttribute("review_img", review_img);
+		String timeline_content = timelineVo.getTimeline_content();
+		String timeline_img = timelineVo.getTimeline_img();
+		System.out.println("TimelineController, insertArticle, timeline_content:" + timeline_content);
+		System.out.println("TimelineController, insertArticle, timeline_img:" + timeline_img);
+		model.addAttribute("timeline_content", timeline_content);
+		model.addAttribute("timeline_img", timeline_img);
 		return "success";
 
 	}
