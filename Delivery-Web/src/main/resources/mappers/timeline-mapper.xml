@@ -6,13 +6,13 @@
 	<insert id="insertArticle">
 		insert into tbl_board_review
 		(review_no, user_no, review_content, review_img)
-		values(seq_board_no.nextval,#{user_no}, #{timeline_content}, #{timeline_img})
+		values(seq_board_no.nextval,#{writer_no}, #{timeline_content}, #{timeline_img})
 	</insert>
 	
 	<insert id="insertArticleNoPic">
 		insert into tbl_board_review
 		(review_no, user_no, review_content)
-		values(seq_board_no.nextval,#{user_no}, #{timeline_content})
+		values(seq_board_no.nextval,#{writer_no}, #{timeline_content})
 	</insert>
 	
 	<select id="timelineList" resultType="TimelineVo">

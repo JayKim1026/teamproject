@@ -16,7 +16,6 @@ $(function(){
 $("#btnInsert").click(function(e){
 	console.log("클릭");
 	
-
 	var formData = new FormData();
 	var f_timeline_img = $("input[type=file]")[0].files[0];
 	formData.append("f_timeline_img", f_timeline_img);
@@ -32,17 +31,17 @@ $("#btnInsert").click(function(e){
 			console.log(data);
 			if(data == "success"){
 			
-			var clone1 = $("#forclone").clone();
-			clone1.find("h3").text("${userVo.user_name}");
-			clone1.find(".content").text("${timeline_content}");
-			$("#house").prepend(clone1).hide().fadeIn(1000);
-			$("#timeline_content").val("");
-			$("#timeline_img").val("");
-			} else if(data == "fail"){
-				alert("글쓰기 실패");
+// 			var clone1 = $("#forclone").clone();
+// 			clone1.find("h3").text("${userVo.user_name}");
+// 			clone1.find(".content").text("${timeline_content}");
+// 			$("#house").prepend(clone1).hide().fadeIn(1000);
+// 			$("#timeline_content").val("");
+// 			$("#timeline_img").val("");
+// 			} else if(data == "fail"){
+// 				alert("글쓰기 실패");
 			}
 		}	
-		});
+	});
 // 	javascript:history.go(0);
 });
 
