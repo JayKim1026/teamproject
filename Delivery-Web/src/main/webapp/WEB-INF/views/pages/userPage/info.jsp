@@ -17,6 +17,9 @@
 .upload-hidden{
 	display:none;
 }
+#chgImgPreview{
+	display:none;	
+}
 </style>
 </head>
 
@@ -55,13 +58,14 @@
 					<div>
 						<c:if test="${sessionScope.userVo.user_id != null }">
 							<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
+							<div id="chgImgPreview">preview</div>
 						</c:if>
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
 					<div class="imgChange">
 						<form role="form" action="/user/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
 							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
-							<input type="hidden" value="${sessionScope.userVo.user_id }" name="user_id">
+							<input type="hidden" value="${sessionScope.userVo.user_img }" name="orgImg">
 						</form>
 							<button type="button" class="btn btn-secondary" id="upload-click"> 사진 선택</button>
 							<button type="button" class="btn btn-secondary" > 기본 이미지로 변경 </button>
@@ -172,6 +176,8 @@ $(function() {
 		$(this).hide();
 		$(".imgChange").hide();
 		$("#btnChgImg").show();
+		$("#chgImgPreview").hide();
+		$("#user_img").show();
 	});
 	
 	// 사진변경 - 사진 선택 버튼 -> input file 실행
@@ -179,18 +185,22 @@ $(function() {
 		$("#file-upload").trigger("click")
 	});
 	
-	// 사진변경 - 실행된 input file에서 생긴 변화 이벤트
-	$("#file-upload").change(function() {
-		var imgChangeName = $(this).val();
+	// 사진변경 - 실행된 input file에서 이미지를 선택 => 미리보기 이미지 띄우기
+	$("#file-upload").change(function(e) {
+		var imgChangeName = e.target.files;
+		//TODO 제이쿼리 이미지 미리보기
+		console.log("imgChangeName : " + imgChangeName );
 		if(imgChangeName != null ){
-			$("#frmImgChange").submit();
+			$("#user_img").hide();
+			$("#chgImgPreview").show();
+			//TODO 변경할 프사 미리보기
+			
 		} else {
-			console.log("취소");
 			return;
 		}
 		
 	});
-	// 사진변경 - 완료 버튼
+	// TODO 사진변경 - 완료 버튼
 	
 	
 }); // 핸들러

@@ -194,14 +194,40 @@ public class UserController implements Codes {
 
 	// 프로필 사진 변경
 	@RequestMapping(value="/imgChange", method=RequestMethod.POST)
-	public void imgChange(String user_id, MultipartFile chgImg) throws Exception {
+	public String imgChange(String orgImg, MultipartFile chgImg, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("chgImg : " + chgImg); // 변경할 이미지
+		System.out.println("orgImg : " + orgImg); // 기존의 이미지 (userVo.user_img)
+		
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
 		System.out.println("user_id : " + user_id);
-		System.out.println("chgImg : " + chgImg);
-		String org_chgImg = chgImg.getOriginalFilename();
+
+		String org_chgImg = chgImg.getOriginalFilename(); // 변경할 이미지의 본래 이름
 		System.out.println("org_chgImg : " + org_chgImg);
 		
 		boolean isImageResult = FileUploadUtil.isImage(org_chgImg);
+		if(!isImageResult) {
+			rttr.addFlashAttribute("isImageResult", "notImge");
+			return "redirect:/user/userPage/info";
+		} else {
+			
+			FileUploadUtil.delete(orgImg); // 아마존에 저장된 기존 이미지 삭제.
+
+			String user_img = USER_IMG + user_id + "_" + org_chgImg;
+			System.out.println(" 아마존이랑 DB에 저장할 이름 user_img : " +  user_img  );
+			
+			File chgUserImg = new File(org_chgImg);
+			chgImg.transferTo(chgUserImg);
+			
+			FileUploadUtil.upload(chgUserImg, org_chgImg); // 아마존에 변경할 사진 저장.
+			
+			String result = userService.imgChange(user_id, user_img);
+			System.out.println("result : " + result );
+			rttr.addFlashAttribute("imgChangeResult", "success");
+			return "redirect:/user/userPage/info";
 		
+			
+		}
 		
 	}
 	

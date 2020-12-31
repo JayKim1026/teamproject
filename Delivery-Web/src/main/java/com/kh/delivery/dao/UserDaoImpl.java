@@ -58,5 +58,15 @@ public class UserDaoImpl implements UserDao {
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getUserInfo", user_no);
 		return userVo;
 	}
+
+	@Override
+	public String imgChange(String user_id, String user_img) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put(user_id, user_id);
+		map.put(user_img, user_img);
+		sqlSession.update(NAMESPACE + "imgChange", map);
+				
+		return "imgChange_success";
+	}
 	
 }
