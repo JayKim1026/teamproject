@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../css/main.css" %>
 <!DOCTYPE html>
 <html>
@@ -17,13 +18,20 @@
 					class="fab fa-accusoft"></i>
 			</div>
 			<ul class="nav__main">
-				<li><a class="menu__stuff" href="/">Home</a></li>
+				<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
 				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
+				<li><a class="menu__stuff" href="/deliver/dlvr_RegisterForm">Deliver Join</a></li>
+				</c:if>
+				<c:if test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
+				<li><a class="menu__stuff" href="/user/logout">Logout</a></li>
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
+				</c:if>
 			</ul>
 			<ul class="nav__link">
-				<li><a class="menu__stuff2" href="" style="padding-right: 20;">About</a></li>
+			<c:if test="${sessionScope.userVo != null }">
+				<li><a class="menu__stuff2" href="/user/userPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
+			</c:if>
 				<li><a class="menu__stuff2" href="">Membership</a></li>
 			</ul>
 			<div class="nav__textArea">
@@ -37,6 +45,9 @@
 <body>
 	<div class="introduce__first">
 		userVo:${sessionScope.userVo}
+		<br/>
+		<br/>
+		dlvrVo:${sessionScope.deliverVo}
 		<p class="introduce__first_p">초록색 행복을 배달합니다.</p>
 		<p class="introduce__first_p">We are Green Delivery</p>
 	</div>
@@ -190,6 +201,28 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=604ec3b26177328871e555f2b188cf12"></script>
 <script>
 $(function(){
+	//메세지
+	var userJoin_msg = "${userJoin_msg}";
+	if(userJoin_msg == "registSuccess") {
+		alert("회원가입이 완료되었습니다.");
+	}
+	
+	var dlvrJoin_msg = "${dlvrJoin_msg}";
+	if(dlvrJoin_msg == "registSuccess") {
+		alert("회원가입이 완료되었습니다.")
+	}
+	
+	var loginPlz = "${loginPlz}";
+	if(loginPlz == "loginPlz") {
+		alert("로그인을 해주세요.")
+	}
+	
+	var login_success = "${login_result}";
+	if(login_success == "login_success") {
+		alert("로그인 성공");
+	}
+	
+	// 지도
 	var container = document.getElementById('map');
 
 	var options = {

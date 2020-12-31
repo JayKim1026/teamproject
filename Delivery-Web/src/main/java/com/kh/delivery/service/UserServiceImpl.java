@@ -43,4 +43,10 @@ public class UserServiceImpl implements UserService {
 		return userVo;
 	}
 
+	@Override
+	public String imgChange(String user_id, String user_img) throws Exception {
+		userDao.imgChange(user_id, user_img);
+		return "imgChange_success";
+	}
+
 }

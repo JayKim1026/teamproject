@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public String registUser(UserVo userVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "insertUser", userVo);
-		return "regist_success";
+		return "registSuccess";
 	}
 
 	@Override
@@ -57,6 +57,16 @@ public class UserDaoImpl implements UserDao {
 	public UserVo getUserInfo(int user_no) throws Exception {
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getUserInfo", user_no);
 		return userVo;
+	}
+
+	@Override
+	public String imgChange(String user_id, String user_img) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put(user_id, user_id);
+		map.put(user_img, user_img);
+		sqlSession.update(NAMESPACE + "imgChange", map);
+				
+		return "imgChange_success";
 	}
 	
 }

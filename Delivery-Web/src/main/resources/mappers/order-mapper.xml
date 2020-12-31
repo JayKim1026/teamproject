@@ -31,5 +31,18 @@
 		where order_no = #{order_no}
 		and dlvr_no = #{dlvr_no}
 	</update>
+	
+	<update id="deliveryCompleted">
+		update tbl_order set
+			order_state = '100-003'
+		where order_no = #{order_no}
+		and dlvr_no = #{dlvr_no}
+	</update>
+
+	<select id="getCompletedOrder" resultType="OrderVo">
+		select * from tbl_order
+		where dlvr_no = #{dlvr_no}
+		and order_state = '100-003'
+	</select>
 
 </mapper>

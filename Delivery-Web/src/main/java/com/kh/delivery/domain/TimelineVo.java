@@ -1,63 +1,120 @@
 package com.kh.delivery.domain;
 
+import java.sql.Timestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TimelineVo {
-	private int review_no;
-	private String review_content;
-	private int user_no;
-	private String review_img;
-	private int review_star;
+	// 테이블 컬럼
+	private int time_no;
+	private int writer_no;
+	private String writer_state;
+	private String time_content;
+	private String time_img;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private Timestamp time_date;
+	private String time_state;
+	private double time_star;
 	private int dlvr_no;
-	private String review_state;
-	
-	
-	public int getReview_no() {
-		return review_no;
+
+	// 조인 컬럼
+	private String writer_name;
+	private String dlvr_name;
+
+	public int getTime_no() {
+		return time_no;
 	}
-	public void setReview_no(int review_no) {
-		this.review_no = review_no;
+
+	public void setTime_no(int time_no) {
+		this.time_no = time_no;
 	}
-	public String getReview_content() {
-		return review_content;
+
+	public int getWriter_no() {
+		return writer_no;
 	}
-	public void setReview_content(String review_content) {
-		this.review_content = review_content;
+
+	public void setWriter_no(int writer_no) {
+		this.writer_no = writer_no;
 	}
-	public int getUser_no() {
-		return user_no;
+
+	public String getWriter_state() {
+		return writer_state;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+
+	public void setWriter_state(String writer_state) {
+		this.writer_state = writer_state;
 	}
-	public String getReview_img() {
-		return review_img;
+
+	public String getTime_content() {
+		return time_content;
 	}
-	public void setReview_img(String review_img) {
-		this.review_img = review_img;
+
+	public void setTime_content(String time_content) {
+		this.time_content = time_content;
 	}
-	public int getReview_star() {
-		return review_star;
+
+	public String getTime_img() {
+		return time_img;
 	}
-	public void setReview_star(int review_star) {
-		this.review_star = review_star;
+
+	public void setTime_img(String time_img) {
+		this.time_img = time_img;
 	}
+
+	public Timestamp getTime_date() {
+		return time_date;
+	}
+
+	public void setTime_date(Timestamp time_date) {
+		this.time_date = time_date;
+	}
+
+	public String getTime_state() {
+		return time_state;
+	}
+
+	public void setTime_state(String time_state) {
+		this.time_state = time_state;
+	}
+
+	public double getTime_star() {
+		return time_star;
+	}
+
+	public void setTime_star(double time_star) {
+		this.time_star = time_star;
+	}
+
 	public int getDlvr_no() {
 		return dlvr_no;
 	}
+
 	public void setDlvr_no(int dlvr_no) {
 		this.dlvr_no = dlvr_no;
 	}
-	public String getReview_state() {
-		return review_state;
+
+	public String getWriter_name() {
+		return writer_name;
 	}
-	public void setReview_state(String review_state) {
-		this.review_state = review_state;
+
+	public void setWriter_name(String writer_name) {
+		this.writer_name = writer_name;
 	}
-	
+
+	public String getDlvr_name() {
+		return dlvr_name;
+	}
+
+	public void setDlvr_name(String dlvr_name) {
+		this.dlvr_name = dlvr_name;
+	}
+
 	@Override
 	public String toString() {
-		return "TimelineVo [review_no=" + review_no + ", review_content=" + review_content + ", user_no=" + user_no
-				+ ", review_img=" + review_img + ", review_star=" + review_star + ", dlvr_no=" + dlvr_no
-				+ ", review_state=" + review_state + "]";
+		return "TimelineVo [time_no=" + time_no + ", writer_no=" + writer_no + ", writer_state=" + writer_state
+				+ ", time_content=" + time_content + ", time_img=" + time_img + ", time_date=" + time_date
+				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no + ", writer_name="
+				+ writer_name + ", dlvr_name=" + dlvr_name + "]";
 	}
-	
+
 }

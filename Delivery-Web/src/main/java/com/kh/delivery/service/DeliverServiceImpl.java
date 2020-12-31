@@ -30,8 +30,14 @@ public class DeliverServiceImpl implements DeliverService {
 	// 배달원 아이디 중복체크
 	@Override
 	public boolean checkIdDupl(String dlvr_id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = deliverDao.checkIdDupl(dlvr_id);
+		return result;
+	}
+
+	@Override
+	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
+		String result = deliverDao.modifyDeliver(deliverVo);
+		return result;
 	}
 
 }

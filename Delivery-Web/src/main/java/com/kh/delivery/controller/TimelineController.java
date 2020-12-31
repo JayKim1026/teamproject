@@ -1,38 +1,167 @@
 package com.kh.delivery.controller;
 
+import java.io.File;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.TimelineService;
+import com.kh.delivery.util.Codes;
+import com.kh.delivery.util.FileUploadUtil;
 
 @Controller
-@RequestMapping(value="/timeline")
-public class TimelineController {
-	
+@RequestMapping(value = "/timeline")
+public class TimelineController implements Codes {
+
 	@Inject
 	private TimelineService timelineService;
+
+	// 웹
+//	@RequestMapping(value = "/showTimeline", method = RequestMethod.GET)
+//	public String timelineList(Model model) {
+//
+//		List<TimelineVo> timelineList = timelineService.timelineList();
+//		String image_url = BUCKET_URL;
+//		System.out.println(timelineList);
+//		model.addAttribute("timelineList", timelineList);
+//		model.addAttribute("image_url", image_url);
+//
+//		return "pages/timeline";
+//	}
+//
+//	@RequestMapping(value = "/insertArticle", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+//			Model model) throws Exception {
+//		System.out.println("TimelineController, insertArticle, timelineVo" + timelineVo);
+//		UserVo userVo = (UserVo) session.getAttribute("userVo");
+//		if (f_timeline_img != null) {
+//			String org_timeline_img = f_timeline_img.getOriginalFilename();
+//			System.out.println("TimelineController, org_timeline_img = " + org_timeline_img);
+//			boolean isImage_img = FileUploadUtil.isImage(org_timeline_img);
+//			if (!isImage_img) {
+//				return "fail";
+//			}
+//
+//			String timeline_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_timeline_img;
+//			System.out.println("TimelineController, review_img = " + timeline_img);
+//			File file = new File(org_timeline_img);
+//			f_timeline_img.transferTo(file);
+//
+//			FileUploadUtil.upload(file, timeline_img);
+//			timelineVo.setTime_image(timeline_img);
+//		}
+//
+//		timelineService.insertArticle(timelineVo);
+//		
+//		String timeline_content = timelineVo.getTime_content();
+//		String timeline_img = timelineVo.getTime_image();
+//		System.out.println("TimelineController, insertArticle, timeline_content:" + timeline_content);
+//		System.out.println("TimelineController, insertArticle, timeline_img:" + timeline_img);
+//		model.addAttribute("timeline_content", timeline_content);
+//		model.addAttribute("timeline_img", timeline_img);
+//		return "success";
+//
+//	}
+//
+//	@RequestMapping(value = "/uploadFile")
+//	public String uploadFile() throws Exception {
+//		return null;
+//	}
+//
+//	@RequestMapping(value = "/updateArticle", method = RequestMethod.POST)
+//	public void updateArticle(@RequestBody TimelineVo timelineVo) throws Exception {
+//		System.out.println("TimelineController, updateArticle, timelineVo" + timelineVo);
+//		timelineService.updateArticle(timelineVo);
+//
+//	}
+//
+//	@RequestMapping(value = "/deleteArticle/{review_no}", method = RequestMethod.GET)
+//	public void deleteArticle(@PathVariable("review_no") int review_no) throws Exception {
+//		System.out.println("TimelineController, deleteArticle, review_no:" + review_no);
+//		timelineService.deleteArticle(review_no);
+//	}
 	
-	@RequestMapping(value="/showTimeline")
-	public String timelineList() {
-		
+	
+	// 수정본
+	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
+	public String showTimeline2(Model model) throws Exception {
+		List<TimelineVo> timelineList = timelineService.timelineList2();
+		String image_url = BUCKET_URL;
+		System.out.println("showTimeline2, timelineList = " + timelineList);
+		model.addAttribute("timelineList", timelineList);
+		model.addAttribute("image_url", image_url);
 		return "pages/timeline";
 	}
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertArticle(@RequestBody TimelineVo timelineVo,HttpSession session) throws Exception {
-		System.out.println("timelineVo" +  timelineVo);
-		timelineService.insertArticle(timelineVo);
-		return "success";
+	public String insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+			Model model) throws Exception {
+		System.out.println("insertArticle2, timelineVo = " + timelineVo);
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		if (f_timeline_img != null) {
+			String org_timeline_img = f_timeline_img.getOriginalFilename();
+			System.out.println("insertArticle2, org_timeline_img = " + org_timeline_img);
+			if (!FileUploadUtil.isImage(org_timeline_img)) {
+				return "fail";
+			}
+			String timeline_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_timeline_img;
+			timelineVo.setTime_img(timeline_img);
+			System.out.println("insertArticle2, review_img = " + timeline_img);
+			
+			File file = new File(org_timeline_img);
+			f_timeline_img.transferTo(file);
+			FileUploadUtil.upload(file, timeline_img);
+		}
+		
+		String result = timelineService.insertArticle2(timelineVo);
+		return result;
+	}
+
+	@RequestMapping(value = "/updateArticle", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateArticle2(TimelineVo timelineVo) throws Exception {
+		System.out.println("TimelineController, updateArticle, timelineVo" + timelineVo);
+		String result = timelineService.updateArticle2(timelineVo);
+		return result;
+	}
+
+	@RequestMapping(value = "/deleteArticle/{review_no}", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteArticle2(@PathVariable("review_no") int review_no) throws Exception {
+		System.out.println("TimelineController, deleteArticle, review_no:" + review_no);
+		String result = timelineService.deleteArticle2(review_no);
+		return result;
 	}
 	
 	
+	// 안드로이드
+	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getTimelineList() throws Exception {
+		List<TimelineVo> timelineList = timelineService.timelineList();
+		return timelineList;
+	}
+	
+	@RequestMapping(value="/aInsertArticle", method=RequestMethod.POST)
+	@ResponseBody
+	public String insertArticle(TimelineVo timelineVo) throws Exception {
+		System.out.println("atimelineVo = " + timelineVo);
+		String result = timelineService.insertArticle2(timelineVo);
+		return result;
+	}
 }

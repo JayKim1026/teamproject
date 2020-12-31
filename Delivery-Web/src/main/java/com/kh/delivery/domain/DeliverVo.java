@@ -3,6 +3,8 @@ package com.kh.delivery.domain;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DeliverVo {
