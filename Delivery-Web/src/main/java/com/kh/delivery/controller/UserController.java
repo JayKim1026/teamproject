@@ -92,7 +92,7 @@ public class UserController implements Codes {
 		UserVo userVo = userService.login(user_id, user_pw);
 		System.out.println("loginRun, userVo = " + userVo);
 		if (userVo != null) {
-			rttr.addFlashAttribute("login_success", "login_success");
+			rttr.addFlashAttribute("login_result", "login_success");
 			session.setAttribute("userVo", userVo);
 			return "redirect:/";
 		} else {

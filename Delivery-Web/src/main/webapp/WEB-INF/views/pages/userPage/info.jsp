@@ -11,9 +11,12 @@
 <title>My page</title>
 <%@ include file="../../include/link.jsp"%>
 <style>
-.update_div{
+.imgChange{
 	display:none;
 } 
+.upload-hidden{
+	display:none;
+}
 </style>
 </head>
 
@@ -55,15 +58,23 @@
 						</c:if>
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
-					
-					<div class="update_div">
-						<input type="file" id="change-img" name="user_img" accept="image/, .jpg, .png, .gif">
+					<div class="imgChange">
+						<input type="file" class="upload-hidden" id="file-upload" name="user_img" accept="image/, .jpg, .png, .gif" style="text-decoration:none">
+						<button type="button" class="btn btn-secondary" id="upload-click"> 사진 선택</button>
+						<button type="button" class="btn btn-secondary" > 기본 이미지로 변경 </button>
 					</div>
+				</td>
+				<td>	
+					<button type="button" class="btn btn-secondary" id="btnChgImg">사진변경</button>
+					<button type="button" class="btn btn-secondary imgChange" id="btnChgImg_cancel">취소</button>
+					<button type="submit" class="btn btn-secondary imgChange" id="btnChgImg_ok">완료</button>
+					
 				</td>
 			</tr>
 			<tr>
 				<td>아이디</td>
 				<td>${sessionScope.userVo.user_id}</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
@@ -71,6 +82,8 @@
 					<div class="out">
 						<input type="password" value="${sessionScope.userVo.user_pw}" style="border: none; cursor: default;" readonly />
 					</div>
+				</td>
+				<td>
 					<div class="update_div">
 						<label> 현재 비밀번호</label>
 						<input type="password" name="user_pw">
@@ -91,6 +104,8 @@
 					<div>
 						${sessionScope.userVo.user_name}
 					</div>
+				</td>
+				<td>
 					<div class="update_div" >
 						<label>수정 이름 </label>
 						<input type="text" name="user_name">
@@ -103,6 +118,8 @@
 					<div>
 						${sessionScope.userVo.user_email}
 					</div>
+				</td>
+				<td>
 					<div class="update_div">
 						<label>수정 이메일 </label>
 						<input type="email" name="user_name">
@@ -115,25 +132,17 @@
 					<div>
 						${sessionScope.userVo.user_phone}
 					</div>
+				</td>
+				<td>	
 					<div class="update_div">
 						<label>수정 전화번호</label>
 						<input type="tel" name="user_name">
 					</div>
 				</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>계좌번호</td> -->
-<!-- 				<td></td> -->
-<!-- 				<td><button class="btn-default">계좌 변경</button></td> -->
-<!-- 				<td></td> -->
-<!-- 			</tr> -->
 		</tbody>
 	</table>
-	
-	<button type="button" id="btnUpdate">수정하기</button>
-	<button type="button" id="btnCansel" style="display: none;">취소</button>
-	<button type="button" id="btnUpdateOk" style="display: none;">완료</button>
-	
+
 	<form>
 		<input type="hidden" id="user_img" name="user_img">
 		<input type="hidden" id="user_id" name="user_id">
@@ -148,32 +157,29 @@
 
 <script>
 $(function() {
-	// 수정하기 버튼 클릭
-	$("#btnUpdate").click(function(){
-		console.log("클릭");
-		$(".out").hide();
+	//<이미지 수정>
+	// 사진 변경 버튼
+	$("#btnChgImg").click(function(){
 		$(this).hide();
-		$(".update_div").show();
-		$("#btnCansel").show();
-		$("#btnUpdateOk").show();
-		
+		$(".imgChange").show();
 	});
 	
-	// 취소 버튼 클릭
-	$("#btnCansel").click(function(){
-		$(".update_div").hide();
+	// 사진변경 - 취소 버튼
+	$("#btnChgImg_cancel").click(function(){
 		$(this).hide();
-		$("#btnUpdateOk").hide();
-		$(".out").show();
-		$("#btnUpdate").show();
+		$(".imgChange").hide();
+		$("#btnChgImg").show();
 	});
-	// 이미지 선택
-	$("#change-img").change(function(){
-		var imgName = $(this).val();
-		var user_img = $("input[name=user_img]").val();
-		console.log("imgName : " + imgName);
-		console.log("user_img : " + user_img );
+	
+	// 사진변경 - 사진 선택 버튼
+	$("#upload-click").click(function(){
+		$("#file-upload").trigger("click");
 	});
+
+	
+	// 사진변경 - 완료 버튼
+	
+	
 }); // 핸들러
 </script>
 </html>

@@ -85,12 +85,18 @@ public class DeliverController implements Codes {
 	
 	// 배달원 로그인
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
-	public String loginRun(String dlvr_id, String dlvr_pw, HttpSession session) throws Exception {
+	public String loginRun(String dlvr_id, String dlvr_pw, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("dlvr_id, dlvr_pw : " + dlvr_id +" / "+ dlvr_pw);
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
+		System.out.println("deliverVo : " + deliverVo );
 		if(deliverVo != null) {
 			session.setAttribute("deliverVo", deliverVo);
+			rttr.addFlashAttribute("login_result", "login_success");
+			return "redirect:/";
+		} else {
+			rttr.addFlashAttribute("login_result", "login_fail");
+			return "redirect:/user/loginForm";
 		}
-		return "redirect:/";
 	}
 	
 
