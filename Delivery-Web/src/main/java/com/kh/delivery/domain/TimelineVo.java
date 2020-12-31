@@ -2,26 +2,31 @@ package com.kh.delivery.domain;
 
 import java.sql.Timestamp;
 
-public class TimelineVo {
-	private int timeline_no;
-	private int writer_no;
-	private String timeline_content;
-	private String timeline_img;
-	private Timestamp timeline_date;
-	private String timeline_state;
-	private String writer_name;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-	// 리뷰에서만 사용함
-	private double review_star;
+public class TimelineVo {
+	// 테이블 컬럼
+	private int time_no;
+	private int writer_no;
+	private String writer_state;
+	private String time_content;
+	private String time_img;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private Timestamp time_date;
+	private String time_state;
+	private double time_star;
 	private int dlvr_no;
+
+	// 조인 컬럼
+	private String writer_name;
 	private String dlvr_name;
 
-	public int getTimeline_no() {
-		return timeline_no;
+	public int getTime_no() {
+		return time_no;
 	}
 
-	public void setTimeline_no(int timeline_no) {
-		this.timeline_no = timeline_no;
+	public void setTime_no(int time_no) {
+		this.time_no = time_no;
 	}
 
 	public int getWriter_no() {
@@ -32,52 +37,52 @@ public class TimelineVo {
 		this.writer_no = writer_no;
 	}
 
-	public String getTimeline_content() {
-		return timeline_content;
+	public String getWriter_state() {
+		return writer_state;
 	}
 
-	public void setTimeline_content(String timeline_content) {
-		this.timeline_content = timeline_content;
+	public void setWriter_state(String writer_state) {
+		this.writer_state = writer_state;
 	}
 
-	public String getTimeline_img() {
-		return timeline_img;
+	public String getTime_content() {
+		return time_content;
 	}
 
-	public void setTimeline_img(String timeline_img) {
-		this.timeline_img = timeline_img;
+	public void setTime_content(String time_content) {
+		this.time_content = time_content;
 	}
 
-	public Timestamp getTimeline_date() {
-		return timeline_date;
+	public String getTime_img() {
+		return time_img;
 	}
 
-	public void setTimeline_date(Timestamp timeline_date) {
-		this.timeline_date = timeline_date;
+	public void setTime_img(String time_img) {
+		this.time_img = time_img;
 	}
 
-	public String getTimeline_state() {
-		return timeline_state;
+	public Timestamp getTime_date() {
+		return time_date;
 	}
 
-	public void setTimeline_state(String timeline_state) {
-		this.timeline_state = timeline_state;
+	public void setTime_date(Timestamp time_date) {
+		this.time_date = time_date;
 	}
 
-	public String getWriter_name() {
-		return writer_name;
+	public String getTime_state() {
+		return time_state;
 	}
 
-	public void setWriter_name(String writer_name) {
-		this.writer_name = writer_name;
+	public void setTime_state(String time_state) {
+		this.time_state = time_state;
 	}
 
-	public double getReview_star() {
-		return review_star;
+	public double getTime_star() {
+		return time_star;
 	}
 
-	public void setReview_star(double review_star) {
-		this.review_star = review_star;
+	public void setTime_star(double time_star) {
+		this.time_star = time_star;
 	}
 
 	public int getDlvr_no() {
@@ -86,6 +91,14 @@ public class TimelineVo {
 
 	public void setDlvr_no(int dlvr_no) {
 		this.dlvr_no = dlvr_no;
+	}
+
+	public String getWriter_name() {
+		return writer_name;
+	}
+
+	public void setWriter_name(String writer_name) {
+		this.writer_name = writer_name;
 	}
 
 	public String getDlvr_name() {
@@ -98,10 +111,10 @@ public class TimelineVo {
 
 	@Override
 	public String toString() {
-		return "TimelineVo [timeline_no=" + timeline_no + ", writer_no=" + writer_no + ", timeline_content="
-				+ timeline_content + ", timeline_img=" + timeline_img + ", timeline_date=" + timeline_date
-				+ ", timeline_state=" + timeline_state + ", writer_name=" + writer_name + ", review_star=" + review_star
-				+ ", dlvr_no=" + dlvr_no + ", dlvr_name=" + dlvr_name + "]";
+		return "TimelineVo [time_no=" + time_no + ", writer_no=" + writer_no + ", writer_state=" + writer_state
+				+ ", time_content=" + time_content + ", time_img=" + time_img + ", time_date=" + time_date
+				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no + ", writer_name="
+				+ writer_name + ", dlvr_name=" + dlvr_name + "]";
 	}
 
 }

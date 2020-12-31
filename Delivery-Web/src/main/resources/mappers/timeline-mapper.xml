@@ -3,53 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.timeline">
-	<insert id="insertArticle">
-		insert into tbl_board_review
-		(review_no, user_no, review_content, review_img)
-		values(seq_board_no.nextval,#{user_no}, #{timeline_content}, #{timeline_img})
-	</insert>
+<!-- 	<insert id="insertArticle"> -->
+<!-- 		insert into tbl_board_review -->
+<!-- 		(review_no, user_no, review_content, review_img) -->
+<!-- 		values(seq_board_no.nextval,#{writer_no}, #{time_content}, #{time_img}) -->
+<!-- 	</insert> -->
 	
-	<insert id="insertArticleNoPic">
-		insert into tbl_board_review
-		(review_no, user_no, review_content)
-		values(seq_board_no.nextval,#{user_no}, #{timeline_content})
-	</insert>
+<!-- 	<insert id="insertArticleNoPic"> -->
+<!-- 		insert into tbl_board_review -->
+<!-- 		(review_no, user_no, review_content) -->
+<!-- 		values(seq_board_no.nextval,#{writer_no}, #{time_content}) -->
+<!-- 	</insert> -->
 	
-	<select id="timelineList" resultType="TimelineVo">
-		select review_no timeline_no, user_no writer_no, review_content timeline_content, 
-				review_img timeline_img, review_date timeline_date, review_state timeline_state, 
-				dlvr_no, review_star, dlvr_name, writer_name
-		from (
-		    select re.*, u.user_name writer_name
-		    from (
-		        select r.*, d.dlvr_name 
-		        from tbl_board_review r inner join tbl_deliver d 
-		        on r.dlvr_no = d.dlvr_no
-		        ) re inner join tbl_user u 
-		    on re.user_no = u.user_no
-		    
-		    union
-		    
-		    select n.*, a.admin_name 
-		    from tbl_board_notice n inner join tbl_admin a 
-		    on n.admin_no = a.admin_no
-		    
-		    union
-		    
-		    select f.*, a.account_name
-		    from tbl_board_free f inner join (
-		            select user_no account_no, user_name account_name from tbl_user 
-		            union 
-		            select dlvr_no, dlvr_name from tbl_deliver
-		            union
-		            select admin_no, admin_name from tbl_admin
-		        ) a 
-		    on f.writer_no = a.account_no
-		    )
-		order by review_no desc
-	</select>
-	
-<!-- 	리스트 출력 위 쿼리문으로 변경 -->
 <!-- 	<select id="timelineList" resultType="TimelineVo"> -->
 <!-- 		select t.*, u.user_name -->
 <!-- 		from tbl_board_review t inner join tbl_user u -->
@@ -57,15 +22,56 @@
 <!-- 		order by review_no desc -->
 <!-- 	</select> -->
 	
+<!-- 	<update id="updateArticle"> -->
+<!-- 		update tbl_board_review set -->
+<!-- 		review_content = #{timeline_content} -->
+<!-- 		where review_no = #{timeline_no} -->
+<!-- 	</update> -->
+	
+<!-- 	<delete id="deleteArticle"> -->
+<!-- 		delete from tbl_board_review -->
+<!-- 		where review_no = #{timeline_no} -->
+<!-- 	</delete> -->
+	
+	
+<!-- 	수정본 -->
+	<select id="timelineList" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.writer_name
+		from tbl_timeline t 
+		    left outer join tbl_deliver d
+		    on t.dlvr_no = d.dlvr_no
+		    left outer join (
+		        select admin_no account_no, admin_name writer_name from tbl_admin
+		        union
+		        select user_no, user_name from tbl_user
+		        union
+		        select dlvr_no, dlvr_name from tbl_deliver
+		    ) a
+		    on t.writer_no = a.account_no
+		order by t.time_no desc
+	</select>
+	
+	<insert id="insertArticle">
+		insert into tbl_timeline
+		(time_no, writer_no, time_content, time_img)
+		values(seq_board_no.nextval, #{writer_no}, #{time_content}, #{time_img})
+	</insert>
+	
+	<insert id="insertArticleNoPic">
+		insert into tbl_timeline
+		(time_no, writer_no, time_content)
+		values(seq_board_no.nextval, #{writer_no}, #{time_content})
+	</insert>
+	
 	<update id="updateArticle">
-		update tbl_board_review set
-		review_content = #{timeline_content}
-		where review_no = #{timeline_no}
+		update tbl_timeline set
+		time_content = #{time_content}
+		where time_no = #{time_no}
 	</update>
 	
 	<delete id="deleteArticle">
-		delete from tbl_board_review
-		where review_no = #{timeline_no}
+		delete from tbl_timeline
+		where time_no = #{time_no}
 	</delete>
 	
 </mapper>
