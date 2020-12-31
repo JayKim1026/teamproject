@@ -192,6 +192,20 @@ public class UserController implements Codes {
 		return "redirect:/";
 	}
 
+	// 프로필 사진 변경
+	@RequestMapping(value="/imgChange", method=RequestMethod.POST)
+	public void imgChange(String user_id, MultipartFile chgImg) throws Exception {
+		System.out.println("user_id : " + user_id);
+		System.out.println("chgImg : " + chgImg);
+		String org_chgImg = chgImg.getOriginalFilename();
+		System.out.println("org_chgImg : " + org_chgImg);
+		
+		boolean isImageResult = FileUploadUtil.isImage(org_chgImg);
+		
+		
+	}
+	
+	
 	// 안드로이드
 	// 유저 정보 가져오기
 	@RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)

@@ -34,4 +34,10 @@
 		where user_no = #{user_no}
 	</select>
 
+<!-- 사용자 이미지 변경  -->
+	<update id="imgChange">
+		update tbl_user set 
+		user_img = #{user_img}
+		where user_id = #{user_id}
+	</update>
 </mapper>

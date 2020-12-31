@@ -59,9 +59,12 @@
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
 					<div class="imgChange">
-						<input type="file" class="upload-hidden" id="file-upload" name="user_img" accept="image/, .jpg, .png, .gif" style="text-decoration:none">
-						<button type="button" class="btn btn-secondary" id="upload-click"> 사진 선택</button>
-						<button type="button" class="btn btn-secondary" > 기본 이미지로 변경 </button>
+						<form role="form" action="/user/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
+							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
+							<input type="hidden" value="${sessionScope.userVo.user_id }" name="user_id">
+						</form>
+							<button type="button" class="btn btn-secondary" id="upload-click"> 사진 선택</button>
+							<button type="button" class="btn btn-secondary" > 기본 이미지로 변경 </button>
 					</div>
 				</td>
 				<td>	
@@ -143,7 +146,7 @@
 		</tbody>
 	</table>
 
-	<form>
+	<!-- <form>
 		<input type="hidden" id="user_img" name="user_img">
 		<input type="hidden" id="user_id" name="user_id">
 		<input type="hidden" id="user_pw" name="user_pw">
@@ -151,7 +154,7 @@
 		<input type="hidden" id="user_name" name="user_name">
 		<input type="hidden" id="user_email" name="user_email">
 		<input type="hidden" id="user_phone" name="user_phone">
-	</form>
+	</form> -->
 	
 </body>
 
@@ -159,24 +162,34 @@
 $(function() {
 	//<이미지 수정>
 	// 사진 변경 버튼
-	$("#btnChgImg").click(function(){
+	$("#btnChgImg").click(function() {
 		$(this).hide();
 		$(".imgChange").show();
 	});
 	
 	// 사진변경 - 취소 버튼
-	$("#btnChgImg_cancel").click(function(){
+	$("#btnChgImg_cancel").click(function() {
 		$(this).hide();
 		$(".imgChange").hide();
 		$("#btnChgImg").show();
 	});
 	
-	// 사진변경 - 사진 선택 버튼
-	$("#upload-click").click(function(){
-		$("#file-upload").trigger("click");
+	// 사진변경 - 사진 선택 버튼 -> input file 실행
+	$("#upload-click").click(function() {
+		$("#file-upload").trigger("click")
 	});
-
 	
+	// 사진변경 - 실행된 input file에서 생긴 변화 이벤트
+	$("#file-upload").change(function() {
+		var imgChangeName = $(this).val();
+		if(imgChangeName != null ){
+			$("#frmImgChange").submit();
+		} else {
+			console.log("취소");
+			return;
+		}
+		
+	});
 	// 사진변경 - 완료 버튼
 	
 	
