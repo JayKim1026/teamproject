@@ -18,65 +18,75 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
 				<div class="register_title">사용자 가입</div>
-				<form role="form" action="/user/registerRun" method="get">
+				<form role="form" id="frmRegist" action="/user/registerRun" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
 						<input type="text" class="form-control" id="user_id" name="user_id" required maxlength="16"/>
 						<span class="id_state" id="checkIdDupl"></span>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="user_pw"> 비밀번호 </label>	
-						<input type="password" class="form-control" id="user_pw" name="user_pw" required maxlength="16"/>
-						<span class="pw_state">사용불가 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</span>
+						<input type="password" class="form-control" id="user_pw" name="user_pw" required  maxlength="16"/>
+						<span class="pw_state"></span>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="user_pw2"> 비밀번호 확인 </label>
 						<input type="password" class="form-control" id="user_pw2" name="user_pw2" required maxlength="16"/>
-						<span class="pw_check">비밀번호 같은지 확인</span>
+						<span class="pw_check"></span>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="user_name"> 이름 </label>
-						<input type="text" class="form-control" id="user_name" name="user_name" required maxlength="8">
-						<span class="name_state"><!-- 한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가) --></span>
+						<input type="text" class="form-control" id="user_name" name="user_name" required  maxlength="8">
+						<span class="name_state"></span>
 					</div>
-					
+
 					<div>
 						<label for="user_birth"> 생년 월일 </label>
 						<div class="form-group">
-							<input type="date" class="form-control" id="user_birth" name="user_birth" required/>
+							<input type="date" class="form-control" id="user_birth" name="str_user_birth" max="2100-12-31" required/>
 						</div>
 					</div>
 					
+					<div class="form-group">
+						<div>
+							<label for="user_img"> 프로필 사진 </label> 
+							<input type="file" class="form-control-file" id="user_img" name="f_user_img" accept="image/,.jpg,.png,.gif"/> 
+							<span class="file_state"></span>
+						</div>
+					</div>
+
 					<div>
 					<label>주소</label><br/>
 						<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
-						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" class="form-control user_addr" id="sample4_roadAddress" placeholder="도로명주소"  name="user_addr">
-						<input type="text"class="form-control"  id="sample4_jibunAddress" placeholder="지번주소">
+						<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="btnAddr"><br>
+						<input type="text" class="form-control user_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
+						<input type="text"class="form-control "  id="sample4_jibunAddress" placeholder="지번주소">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소">
-						<input type="text" class="form-control"  id="sample4_extraAddress" placeholder="참고항목">
+						<input type="text" class="form-control addr3" id="sample4_detailAddress" placeholder="상세주소(필수!)" required>
+						<input type="text" class="form-control addr2"  id="sample4_extraAddress" placeholder="참고항목">
+						<input type="hidden" id="user_addr" name="user_addr">
 					</div>
-					
+
 					<div class="form-group">
 					<br/>
 						<label for="user_phone"> 전화번호 </label>
-						<input type="tel" class="form-control" id="user_phone" name="user_phone"  required maxlength="16"/>
+						<input type="tel" class="form-control" id="user_phone" name="user_phone" required min="10" maxlength="16"/>
+						<span class="phone_state"></span>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="user_email"> 이메일 </label>
 						<input type="email" class="form-control" id="user_email" name="user_email" required/>
 					</div>
-					
+
 					<!-- <div class="form-group">
 						<label for="user_acc_num"> 계좌번호 </label>
 						<input type="text" class="form-control" id="user_acc_num" />
 					</div> -->
-					
+
 					<button type="submit" class="btn btn-primary" id="btnRegister">가입완료</button>
 				</form>
 				</div>
@@ -84,57 +94,99 @@
 			<!--// 회원가입 폼  -->
 			<div class="col-md-4"></div>
 		</div>
-		<footer class="container-fluid text-center bg-lightgray" id="footer">
-	        <div class="copyrights" style="margin-top:25px;">
-         	   <p>뚜벅뚜벅COMPANY © 2020, All Rights Reserved
-               <br>
-               <span>Web Design By: PL&K </span></p>
-<!-- <p><a href="https://www.linkedin.com/in/michael-clark-webdeveloper" target="_blank">Linkedin <i class="fa fa-linkedin-square" aria-hidden="true"></i> </a></p> -->
-        	</div>
-		</footer>
+<%@ include file = "../include/footer.jsp" %>
 </body>
 <script>
 $(function(){
-	
-	/* // 가입 완료
-	$("#btnRegister").click(function(e){
+	// 메세지
+	var isImage_msg = "${isImage_msg}";
+	if(isImage_msg == "notImage") {
+		alert("jpg, png, gif 파일만 업로드 가능합니다.");
+	} 
+	//회원가입 완료 버튼 클릭
+	$("#btnRegister").click(function(e) {
 		e.preventDefault();
-		var user_id = $("#user_id").val();
-		var user_pw = $("#user_pw").val();
-		var user_name = $("#user_name").val();
-		var user_birth = $("#user_birth").val();
-		var user_addr = $(".user_addr").val();
-		var user_phone = $("#user_phone").val();
-		var user_email = $("#user_email").val();
-		console.log("user_id : " +user_id);
-		console.log("user_pw : " +user_pw);
-		console.log("user_name : " +user_name);
-		console.log("user_birth: " +user_birth);
-		console.log("user_addr : " +user_addr);
-		console.log("user_phone : " +user_phone);
-		console.log("user_email : " +user_email);
-	});
-	 */
+		//<주소>
+		var road1 = $("#sample4_roadAddress").val();
+		var road2 = $("#sample4_extraAddress").val();
+		var road3 = $("#sample4_detailAddress").val();
+		if(road2 == null || road2 == "") {
+			$("#user_addr").val(road1 + road3);
+		} else {
+			$("#user_addr").val(road1 + road2 + " " + road3);
+		}
+		//<아이디 ~ 이메일 이미지는 제외>
+		var idCheck = $("#user_id").val();
+		var pwCheck = $("#user_pw").val();
+		var pwCheck2 = $("#user_pw2").val();
+		var nameCheck = $("#user_name").val();
+		var birthCheck = $("#user_birth").val();
+		var sample4_detailAddress = $("#sample4_detailAddress").val();
+		var phoneCheck = $("#user_phone").val();
+		var emailCheck = $("#user_email").val();
+		
+		if(idCheck == null || idCheck == "") {
+			alert("아이디를 입력해주세요");
+			$("#user_id").focus();
+			return;
+		} else if(pwCheck == null || pwCheck == "") {
+			alert("비밀번호를 입력해 주세요");
+			$("#user_pw").focus();
+			return;
+		} else if(pwCheck2 == null || pwCheck2 == ""){
+			alert("확인 비밀번호를 입력해 주세요");
+			$("#user_pw2").focus();
+			return;
+		} else if(nameCheck == null || nameCheck == "") {
+			alert("이름을 입력해 주세요");
+			$("#user_name").focus();
+			return;
+		} else if(birthCheck == null || birthCheck == "") {
+			alert("생일을 입력해 주세요");
+			$("#user_birth").focus();
+			return;
+		} else if(sample4_detailAddress == null || sample4_detailAddress == ""){
+			alert("상세주소를 입력해주세요");
+			$("#btnAddr").focus();
+			return; 
+		} 
+		else if(phoneCheck == null || phoneCheck == "") {
+			alert("전화번호를 입력해 주세요");
+			$("#user_phone").focus();
+			return;
+		} else if(emailCheck == null || emailCheck == "") {
+			alert("이메일을 입력해주세요");
+			$("#user_email").focus();
+			return;
+		} else {
+			$("#frmRegist").submit();
+		}
+	}); // 회원 가입 완료 버튼
 	
 	//<아이디칸>사용 가능한 아이디(영어 대소문자, 숫자) 
 	$("#user_id").keyup(function() {
 		var user_id = $("#user_id").val();
-		var chk_user_id = "";
+		var char_user_id = "";
 		var result = true;
 		if(user_id == "" || user_id == null) {
 			$(".id_state").text("");
 		} else {
 			for(var i = 0; i < user_id.length; i++) {
-				chk_user_id = user_id.charCodeAt(i)
-				if((47 < chk_user_id && chk_user_id < 58  ) || (64 < chk_user_id && chk_user_id < 91) || (96 < chk_user_id && chk_user_id < 123)){
-					$(".id_state").text("사용가능").css("color", "green");
+				if( 5 < user_id.length &&  user_id.length < 17) {
+					char_user_id = user_id.charCodeAt(i)
+					if((47 < char_user_id && char_user_id < 58  ) || (96 < char_user_id && char_user_id < 123)){
+						$(".id_state").text("");
+					} else {
+						result = false;
+						$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
+						break;
+					}
 				} else {
 					result = false;
-					$(".id_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".id_state").text("6~16자의 영문 소문자와 숫자만 사용가능합니다.").css("color", "red");
 					break;
 				}
 			}
-		}
 		//<아이디칸>아이디 중복확인
 		if(result) {
 			var url = "/user/checkIdDupl";
@@ -146,27 +198,33 @@ $(function(){
 				if(data == true){
 					$(".id_state").text("멋진 아이디네요!").css("color", "green");
 				} else {
-					$(".id_state").text("이미 사용 중이거나, 탈퇴한 아이디 입니다.").css("color", "red");
+					$(".id_state").text("이미 사용중이거나 탈퇴한 아이디 입니다.").css("color", "red");
 				}
 			});// ajax
+		}
 		}// 중복확인 if
 	});// id keyup
 	
-	// <비밀번호칸> 숫자, 영어 대소문자만 입력 + TODO 자릿수 8자에서 16자
+	// <비밀번호칸> 숫자, 영어 대소문자만 입력
 	$("#user_pw").keyup(function(){
 		var user_pw = $(this).val();
-		var chk_user_pw = "";
+		var char_user_pw = "";
 		if(user_pw == "" || user_pw == null){
 			$(".pw_state").text("");
 		} else {
 			for(var i = 0; i < user_pw.length; i++){
-				chk_user_pw = user_pw.charCodeAt(i);
-				if((47 < chk_user_pw && chk_user_pw < 58  ) || (64 < chk_user_pw && chk_user_pw < 91) || (96 < chk_user_pw && chk_user_pw < 123)){
-					$(".pw_state").text("사용가능").css("color", "green");
+				if( 7 < user_pw.length && user_pw.length < 17){
+					char_user_pw = user_pw.charCodeAt(i);
+					if((47 < char_user_pw && char_user_pw < 58  ) || (64 < char_user_pw && char_user_pw < 91) || (96 < char_user_pw && char_user_pw < 123)){
+						$(".pw_state").text("사용가능").css("color", "green");
+					} else {
+						$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
+						break;
+					} 
 				} else {
-					$(".pw_state").text("특수기호, 한글은 입력이 불가능합니다").css("color", "red");
+					$(".pw_state").text("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.").css("color", "red");
 					break;
-				} 
+				}
 			}
 		}
 	});
@@ -189,18 +247,35 @@ $(function(){
 	//<이름칸>이름칸에 한글만 입력 가능.
 	$("#user_name").keyup(function() {
 		var user_name = $("#user_name").val();
-		var chk_user_name = "";
+		var char_user_name = "";
 		if(user_name == "" || user_name == null) {
 			$(".name_state").text("");
 		} else {
 			for(var i = 0; i < user_name.length; i++){
-				chk_user_name = user_name.charCodeAt(i);
-				if(chk_user_name < 45032 || 55203 < chk_user_name ){
-					$(".name_state").text("특수기호, 숫자 , 영어 입력 불가능합니다").css("color", "red");
-					break;
+				char_user_name = user_name.charCodeAt(i);
+				if(char_user_name < 45032 || 55203 < char_user_name ){
+					$(".name_state").text("이름을 정확히 입력해 주세요.").css("color", "red");
 				} else {
 					$(".name_state").text("");
 				} 
+			}
+		}
+	});
+	//<전화번호>
+	$("#user_phone").keyup(function(){
+		var user_phone = $(this).val();
+		var char_user_phone = "";
+		if(user_phone == null || user_phone == "") {
+			$(".phone_state").text("");
+		} else {
+			for(var i = 0; i < user_phone.length; i++) {
+				char_user_phone = user_phone.charCodeAt(i);
+				if( 47< char_user_phone && char_user_phone < 58) {
+					$(".phone_state").text("");
+				} else {
+					$(".phone_state").text("숫자만 입력해주세요").css("color", "red");
+					break;
+				}
 			}
 		}
 	});
@@ -212,12 +287,10 @@ function sample4_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
             // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var roadAddr = data.roadAddress; // 도로명 주소 변수
             var extraRoadAddr = ''; // 참고 항목 변수
-
             // 법정동명이 있을 경우 추가한다. (법정리는 제외)
             // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
             if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -231,7 +304,6 @@ function sample4_execDaumPostcode() {
             if(extraRoadAddr !== ''){
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
-
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample4_postcode').value = data.zonecode;
             document.getElementById("sample4_roadAddress").value = roadAddr;
@@ -243,14 +315,12 @@ function sample4_execDaumPostcode() {
             } else {
                 document.getElementById("sample4_extraAddress").value = '';
             }
-
             var guideTextBox = document.getElementById("guide");
             // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
             if(data.autoRoadAddress) {
                 var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                 guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                 guideTextBox.style.display = 'block';
-
             } else if(data.autoJibunAddress) {
                 var expJibunAddr = data.autoJibunAddress;
                 guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
@@ -263,4 +333,3 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 </script>
-</html>

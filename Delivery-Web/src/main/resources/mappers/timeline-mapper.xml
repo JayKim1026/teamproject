@@ -3,10 +3,75 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.timeline">
+<!-- 	<insert id="insertArticle"> -->
+<!-- 		insert into tbl_board_review -->
+<!-- 		(review_no, user_no, review_content, review_img) -->
+<!-- 		values(seq_board_no.nextval,#{writer_no}, #{time_content}, #{time_img}) -->
+<!-- 	</insert> -->
+	
+<!-- 	<insert id="insertArticleNoPic"> -->
+<!-- 		insert into tbl_board_review -->
+<!-- 		(review_no, user_no, review_content) -->
+<!-- 		values(seq_board_no.nextval,#{writer_no}, #{time_content}) -->
+<!-- 	</insert> -->
+	
+<!-- 	<select id="timelineList" resultType="TimelineVo"> -->
+<!-- 		select t.*, u.user_name -->
+<!-- 		from tbl_board_review t inner join tbl_user u -->
+<!-- 		on t.user_no = u.user_no  -->
+<!-- 		order by review_no desc -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="updateArticle"> -->
+<!-- 		update tbl_board_review set -->
+<!-- 		review_content = #{timeline_content} -->
+<!-- 		where review_no = #{timeline_no} -->
+<!-- 	</update> -->
+	
+<!-- 	<delete id="deleteArticle"> -->
+<!-- 		delete from tbl_board_review -->
+<!-- 		where review_no = #{timeline_no} -->
+<!-- 	</delete> -->
+	
+	
+<!-- 	수정본 -->
+	<select id="timelineList" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.writer_name
+		from tbl_timeline t 
+		    left outer join tbl_deliver d
+		    on t.dlvr_no = d.dlvr_no
+		    left outer join (
+		        select admin_no account_no, admin_name writer_name from tbl_admin
+		        union
+		        select user_no, user_name from tbl_user
+		        union
+		        select dlvr_no, dlvr_name from tbl_deliver
+		    ) a
+		    on t.writer_no = a.account_no
+		order by t.time_no desc
+	</select>
+	
 	<insert id="insertArticle">
-		insert into tbl_board_review
-		(review_no, user_no, review_content)
-		values(seq_review_no.nextval,#{user_no}, #{review_content})
+		insert into tbl_timeline
+		(time_no, writer_no, time_content, time_img)
+		values(seq_board_no.nextval, #{writer_no}, #{time_content}, #{time_img})
 	</insert>
-
+	
+	<insert id="insertArticleNoPic">
+		insert into tbl_timeline
+		(time_no, writer_no, time_content)
+		values(seq_board_no.nextval, #{writer_no}, #{time_content})
+	</insert>
+	
+	<update id="updateArticle">
+		update tbl_timeline set
+		time_content = #{time_content}
+		where time_no = #{time_no}
+	</update>
+	
+	<delete id="deleteArticle">
+		delete from tbl_timeline
+		where time_no = #{time_no}
+	</delete>
+	
 </mapper>

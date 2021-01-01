@@ -6,7 +6,7 @@
         <div class="copyrights" style="margin-top:25px;">
             <p>뚜벅뚜벅COMPANY © 2020, All Rights Reserved
                 <br>
-                <span>Web Design By: PL&K </span></p>
+                <span>Web Design By: PL&amp;K </span></p>
 <!--             <p><a href="https://www.linkedin.com/in/michael-clark-webdeveloper" target="_blank">Linkedin <i class="fa fa-linkedin-square" aria-hidden="true"></i> </a></p> -->
         </div>
 </footer>

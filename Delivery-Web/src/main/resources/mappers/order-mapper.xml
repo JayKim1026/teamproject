@@ -10,14 +10,14 @@
 		and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
 		and order_state = '100-001'
 	</select>
-	
+
 	<update id="pickOrder">
 		update tbl_order set
 			dlvr_no = #{dlvr_no}, 
 			order_state = '100-002'
 		where order_no = #{order_no}
 	</update>
-	
+
 	<select id="getPickedOrder" resultType="OrderVo">
 		select * from tbl_order
 		where dlvr_no = #{dlvr_no}
@@ -32,4 +32,17 @@
 		and dlvr_no = #{dlvr_no}
 	</update>
 	
+	<update id="deliveryCompleted">
+		update tbl_order set
+			order_state = '100-003'
+		where order_no = #{order_no}
+		and dlvr_no = #{dlvr_no}
+	</update>
+
+	<select id="getCompletedOrder" resultType="OrderVo">
+		select * from tbl_order
+		where dlvr_no = #{dlvr_no}
+		and order_state = '100-003'
+	</select>
+
 </mapper>

@@ -1,6 +1,9 @@
 package com.kh.delivery.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,9 +17,9 @@ public class DeliverVo {
 	private String dlvr_addr;
 	private String dlvr_img;
 	private String dlvr_idcard;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Timestamp dlvr_birth;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dlvr_birth;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp dlvr_date;
 	private String dlvr_state;
 	private int dlvr_point;
@@ -26,8 +29,9 @@ public class DeliverVo {
 	}
 
 	public DeliverVo(int dlvr_no, String dlvr_id, String dlvr_pw, String dlvr_name, String dlvr_phone,
-			String dlvr_email, String dlvr_addr, String dlvr_img, String dlvr_idcard, Timestamp dlvr_date,
-			String dlvr_state, int dlvr_point, String dlvr_rank) {
+			String dlvr_email, String dlvr_addr, String dlvr_img, String dlvr_idcard, Date dlvr_birth,
+			Timestamp dlvr_date, String dlvr_state, int dlvr_point, String dlvr_rank) {
+		super();
 		this.dlvr_no = dlvr_no;
 		this.dlvr_id = dlvr_id;
 		this.dlvr_pw = dlvr_pw;
@@ -37,6 +41,7 @@ public class DeliverVo {
 		this.dlvr_addr = dlvr_addr;
 		this.dlvr_img = dlvr_img;
 		this.dlvr_idcard = dlvr_idcard;
+		this.dlvr_birth = dlvr_birth;
 		this.dlvr_date = dlvr_date;
 		this.dlvr_state = dlvr_state;
 		this.dlvr_point = dlvr_point;
@@ -114,12 +119,12 @@ public class DeliverVo {
 	public void setDlvr_idcard(String dlvr_idcard) {
 		this.dlvr_idcard = dlvr_idcard;
 	}
-	
-	public Timestamp getDlvr_birth() {
+
+	public Date getDlvr_birth() {
 		return dlvr_birth;
 	}
 
-	public void setDlvr_birth(Timestamp dlvr_birth) {
+	public void setDlvr_birth(Date dlvr_birth) {
 		this.dlvr_birth = dlvr_birth;
 	}
 
@@ -159,8 +164,9 @@ public class DeliverVo {
 	public String toString() {
 		return "DeliverVo [dlvr_no=" + dlvr_no + ", dlvr_id=" + dlvr_id + ", dlvr_pw=" + dlvr_pw + ", dlvr_name="
 				+ dlvr_name + ", dlvr_phone=" + dlvr_phone + ", dlvr_email=" + dlvr_email + ", dlvr_addr=" + dlvr_addr
-				+ ", dlvr_img=" + dlvr_img + ", dlvr_idcard=" + dlvr_idcard + ", dlvr_date=" + dlvr_date
-				+ ", dlvr_state=" + dlvr_state + ", dlvr_point=" + dlvr_point + ", dlvr_rank=" + dlvr_rank + "]";
+				+ ", dlvr_img=" + dlvr_img + ", dlvr_idcard=" + dlvr_idcard + ", dlvr_birth=" + dlvr_birth
+				+ ", dlvr_date=" + dlvr_date + ", dlvr_state=" + dlvr_state + ", dlvr_point=" + dlvr_point
+				+ ", dlvr_rank=" + dlvr_rank + "]";
 	}
 
 }

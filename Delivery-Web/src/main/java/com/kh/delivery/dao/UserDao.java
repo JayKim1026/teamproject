@@ -10,9 +10,12 @@ public interface UserDao {
 	public String registUser(UserVo userVo) throws Exception;
 	// 아이디 중복 확인
 	public boolean checkIdDupl(String user_id) throws Exception;
+	
 	// 사용자 아이디 비밀번호 찾기
 	public UserVo findAccount(String user_name, String user_phone, String user_email) throws Exception;
 	
+	// 사용자 프로필 사진 변경
+	public String imgChange(String user_id, String user_img) throws Exception;
 	
 	// 안드로이드
 	// 유저 정보 찾기

@@ -4,9 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">												
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login Form Page</title>
-
 <%@ include file="../include/link.jsp" %>
 <%@ include file="../css/loginForm.css"%>
 </head>
@@ -42,9 +41,15 @@
   </div>
 </div>
 
+<%@ include file="../include/footer.jsp" %>
+</body>
 <script>
 $(function(){
-	// 일반회원으로 로그인, 라이더 회원으로 로그인 구분
+	var login_result = "${login_result}";
+	if(login_result == "login_fail") {
+		alert("아이디 또는 비밀번호를 확인해주세요");
+	}
+	
 	$(".check_who").click(function(){
 		var check_who = $(this).val();
 		if(check_who == "라이더 회원"){
@@ -59,4 +64,4 @@ $(function(){
 	});
 });
 </script>
-<%@ include file="../include/footer.jsp" %>
+</html>
