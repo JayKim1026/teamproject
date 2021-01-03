@@ -1,7 +1,6 @@
 package com.kh.delivery.controller;
 
 import java.io.File;
-import java.net.URI;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +24,7 @@ import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.UserService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
+import com.kh.delivery.util.Keys;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -212,21 +212,24 @@ public class UserController implements Codes {
 		} else {
 			
 			FileUploadUtil.delete(orgImg); // 아마존에 저장된 기존 이미지 삭제.
-
 			String user_img = USER_IMG + user_id + "_" + org_chgImg;
-			System.out.println(" 아마존이랑 DB에 저장할 이름 user_img : " +  user_img  );
-			
+			System.out.println("아마존이랑 DB에 저장할 이름 user_img : " +  user_img);
+			userVo.setUser_img(user_img);
 			File chgUserImg = new File(org_chgImg);
 			chgImg.transferTo(chgUserImg);
-			
-			FileUploadUtil.upload(chgUserImg, org_chgImg); // 아마존에 변경할 사진 저장.
+			FileUploadUtil.upload(chgUserImg, user_img); // 아마존에 변경할 사진 저장.
 			
 			String result = userService.imgChange(user_id, user_img);
 			System.out.println("result : " + result );
-			rttr.addFlashAttribute("imgChangeResult", "success");
-			return "redirect:/user/userPage/info";
-		
-			
+			if(result == "imgChange_success") {
+				rttr.addFlashAttribute("imgChangeResult", "success"); //TODO
+				System.out.println("이미지 저장 성공");
+				return "redirect:/user/userPage/info";
+			} else {
+				rttr.addFlashAttribute("imgChangeResult", "fail"); //TODO
+				System.out.println("이미지 저장 실패");
+				return "redirect:/user/userPage/info";
+			}
 		}
 		
 	}
