@@ -27,7 +27,7 @@
 	display:none;
 }
 
-.pwLabel{
+.Label{
 	display: inline-block;
     min-width: 165px;
     line-height: 32px;
@@ -110,15 +110,15 @@
 				</td>
 				<td class="pwChange">
 					<div>
-						<label class="pwLabel"> 현재 비밀번호</label>
+						<label class="pw Label"> 현재 비밀번호</label>
 						<input type="password" name="user_pw">
 					</div>
 					<div>
-						<label class="pwLabel"> 새 비밀번호</label>
+						<label class="pw Label"> 새 비밀번호</label>
 						<input type="password" name="user_Npw">
 					</div>
 					<div>
-						<label class="pwLabel"> 새 비밀번호 확인</label>
+						<label class="pw Label"> 새 비밀번호 확인</label>
 						<input type="password" name="user_Npw2">
 					</div>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
@@ -148,11 +148,11 @@
 				</td>
 				<td class="EmailChange">
 					<div>
-						<label class="emailLabel">수정 이메일 </label>
+						<label class="email Label">수정 이메일 </label>
 						<input type="email" name="user_name">
 						<br/>
-						<button type="button" class="btn btn-secondary">취소</button>
-						<button type="submit" class="btn btn-secondary">완료</button>
+						<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
+						<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
 					</div>
 				</td>
 				<td>
@@ -161,22 +161,22 @@
 			</tr>
 			<tr>
 				<td>휴대전화</td>
-				<td>
+				<td class="phoneHide">
 					<div>
 						${sessionScope.userVo.user_phone}
 					</div>
 				</td>
 				<td class="phoneChange">
 					<div>
-						<label>수정 전화번호</label>
+						<label class="phone Label">수정 전화번호</label>
 						<input type="tel" name="user_name">
 						<br/>
-						<button type="button" class="btn btn-secondary">취소</button>
-						<button type="submit" class="btn btn-secondary">완료</button>
+						<button type="button" class="btn btn-secondary" id="btnChgPhone_cancel">취소</button>
+						<button type="submit" class="btn btn-secondary" id="btnChgPhone_ok">완료</button>
 					</div>
 				</td>
 				<td>	
-					<button type="button" class="btn btn-secondary">휴대전화 변경</button>
+					<button type="button" class="btn btn-secondary" id="btnChgPhone">휴대전화 변경</button>
 				</td>
 			</tr>
 		</tbody>
@@ -242,9 +242,31 @@ $(function() {
 		$(".EmaileHide").hide();
 		$(this).hide();
 		$(".EmailChange").show();
-		
-		
 	});
+	// 이메일 변경 - 취소 버튼
+		$("#btnChgEmail_cancel").click(function(){
+			$(".EmaileHide").show();
+			$(".chgEmail").show();
+			$(".EmailChange").hide();
+		});
+	//TODO 
+	//이메일 변경 - 완료 버튼 
+	
+	//휴대전화 변경 버튼
+	$("#btnChgPhone").click(function(){
+		$(".phoneChange").show();
+		$(this).hide();
+		$(".phoneHide").hide();
+	});
+	
+	//휴대전화 변경 - 취소버튼
+	$("#btnChgPhone_cancel").click(function(){
+		$(".phoneChange").hide();
+		$("#btnChgPhone").show();
+		$(".phoneHide").show();
+	});
+	//TODO
+	//휴대전화 변경 - 완료버튼
 }); // 핸들러
 
 // 바꿀 프로필 사진 미리 보여주기
