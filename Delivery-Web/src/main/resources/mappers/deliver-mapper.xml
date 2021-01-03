@@ -37,5 +37,10 @@
 		where dlvr_no = #{dlvr_no}
 	</update>
 	
+	<update id="updateDlvrImg">
+		update tbl_deliver set
+			dlvr_img = #{dlvr_img}
+		where dlvr_no = #{dlvr_no}
+	</update>
 	
 </mapper>
