@@ -34,7 +34,11 @@
 }
 
 .EmailChange{
-	display: den
+	display: none;
+}
+
+.phoneChange{
+	display: none;
 }
 </style>
 </head>
@@ -117,12 +121,11 @@
 						<label class="pwLabel"> 새 비밀번호 확인</label>
 						<input type="password" name="user_Npw2">
 					</div>
+					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
+					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
 				</td>
 				<td> 
 					<button type="button" class="btn btn-secondary pwHide" id="btnChgPw">비밀번호 변경</button>
-					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
-					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
-					
 				</td>
 				
 			</tr>
@@ -138,17 +141,22 @@
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td>
+				<td class="EmaileHide">
 					<div>
 						${sessionScope.userVo.user_email}
-						<div class="EmailChange">
-							<label class="emailLabel">수정 이메일 </label>
-							<input type="email" name="user_name">
-						</div>
+					</div>
+				</td>
+				<td class="EmailChange">
+					<div>
+						<label class="emailLabel">수정 이메일 </label>
+						<input type="email" name="user_name">
+						<br/>
+						<button type="button" class="btn btn-secondary">취소</button>
+						<button type="submit" class="btn btn-secondary">완료</button>
 					</div>
 				</td>
 				<td>
-					<button type="button" class="btn btn-secondery">이메일 변경</button>
+					<button type="button" class="btn btn-secondary chgEmail">이메일 변경</button>
 				</td>
 			</tr>
 			<tr>
@@ -158,11 +166,17 @@
 						${sessionScope.userVo.user_phone}
 					</div>
 				</td>
-				<td>	
-					<div class="update_div">
+				<td class="phoneChange">
+					<div>
 						<label>수정 전화번호</label>
 						<input type="tel" name="user_name">
+						<br/>
+						<button type="button" class="btn btn-secondary">취소</button>
+						<button type="submit" class="btn btn-secondary">완료</button>
 					</div>
+				</td>
+				<td>	
+					<button type="button" class="btn btn-secondary">휴대전화 변경</button>
 				</td>
 			</tr>
 		</tbody>
@@ -221,6 +235,15 @@ $(function() {
 	$("#btnChgImg_ok").click(function(e){
 		e.preventDefault();
 		$("#frmImgChange").submit();
+	});
+	
+	// 이메일 변경 버튼
+	$(".chgEmail").click(function(){
+		$(".EmaileHide").hide();
+		$(this).hide();
+		$(".EmailChange").show();
+		
+		
 	});
 }); // 핸들러
 
