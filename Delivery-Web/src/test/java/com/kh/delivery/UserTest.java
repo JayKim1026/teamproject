@@ -29,7 +29,7 @@ public class UserTest {
 	public void testLogin() throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", "user01");
-		map.put("user_pw", "1234");
+		map.put("user_pw", "1q2w3e4r");
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "login", map);
 		System.out.println(userVo);
 	}

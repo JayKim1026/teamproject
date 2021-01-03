@@ -16,4 +16,6 @@ public interface DeliverDao {
 	// 배달원 정보 수정
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception;
 	
+	// 배달원 이미지 수정
+	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception;
 }

@@ -40,4 +40,10 @@ public class DeliverServiceImpl implements DeliverService {
 		return result;
 	}
 
+	@Override
+	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception {
+		String result = deliverDao.updateDlvrImg(dlvr_no, dlvr_img);
+		return result;
+	}
+
 }

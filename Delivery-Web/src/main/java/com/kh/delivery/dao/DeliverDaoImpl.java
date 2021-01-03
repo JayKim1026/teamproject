@@ -53,4 +53,13 @@ public class DeliverDaoImpl implements DeliverDao {
 		return "modify_deliver_success";
 	}
 
+	@Override
+	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("dlvr_no", dlvr_no);
+		map.put("dlvr_img", dlvr_img);
+		sqlSession.update(NAMESPACE + "updateDlvrImg", map);
+		return "updateDlvrImg_success";
+	}
+
 }
