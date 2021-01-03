@@ -141,12 +141,15 @@ public class DeliverController implements Codes {
 	
 	@RequestMapping(value="/updateDlvrImg", method=RequestMethod.POST)
 	@ResponseBody
-	public String updateDlvrImg(MultipartFile m_file, int dlvr_no) throws Exception {
+	public String updateDlvrImg(MultipartFile m_file, int dlvr_no, String dlvr_img, String dlvr_id) throws Exception {
 		String org_fileName = m_file.getOriginalFilename();
 		File file = new File(org_fileName);
 		m_file.transferTo(file);
-		
-		return "";
+		String mod_dlvr_img = DLVR_IMG + dlvr_id + "_" + org_fileName;
+		FileUploadUtil.upload(file, mod_dlvr_img);
+		FileUploadUtil.delete(dlvr_img);
+		String result = deliverService.updateDlvrImg(dlvr_no, mod_dlvr_img);
+		return result;
 	}
 
 	

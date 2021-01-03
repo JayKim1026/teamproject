@@ -39,7 +39,6 @@
 		<li><a href="/deliver/deliverPage/info">회원정보</a></li>
 		<li><a href="/deliver/deliverPage/orderList">주문 내역 조회</a></li>
 		<li><a href="/deliver/deliverPage/point">포인트 조회</a></li>
-		<li><a href="/deliver/deliverPage/review">내가 작성한 후기</a></li>
 		<li><a href="/deliver/deliverPage/question">1:1 문의</a></li>
 	</ul>
 
@@ -198,7 +197,9 @@ $(function() {
 			var url = "/deliver/updateDlvrImg";
 			var formData = new FormData();
 			formData.append("m_file", m_file);
-			formData.append("dlvr_no", ${deliverVo.dlvr_no});
+			formData.append("dlvr_no", parseInt("${deliverVo.dlvr_no}"));
+			formData.append("dlvr_img", "${deliverVo.dlvr_img}");
+			formData.append("dlvr_id", "${deliverVo.dlvr_id}");
 			
 			$.ajax({
 				"processData"	:	false,

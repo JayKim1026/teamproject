@@ -19,13 +19,4 @@ public class UtilController {
 		return "util/daum_address";
 	}
 	
-	@RequestMapping(value="/getFilePath", method=RequestMethod.POST)
-	@ResponseBody
-	public String getFilePath(MultipartFile m_file) throws Exception {
-		String org_file_name = m_file.getOriginalFilename();
-		File file = new File(org_file_name);
-		m_file.transferTo(file);
-		String filePath = file.getAbsolutePath();
-		return filePath;
-	}
 }
