@@ -84,10 +84,9 @@ $("#btnUpdateSave").click(function(){
 						},
 		"success"	:	function(data){
 			console.log(data);
-	
 		}	
 						
-		});
+	});
 	javascript:history.go(0);
 	$("#btnUpdateClose").trigger("click");	
 });

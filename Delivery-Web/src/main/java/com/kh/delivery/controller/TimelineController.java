@@ -33,8 +33,8 @@ public class TimelineController implements Codes {
 
 	// 웹
 	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
-	public String showTimeline2(Model model) throws Exception {
-		List<TimelineVo> timelineList = timelineService.timelineList2();
+	public String showTimeline2(String searchType, Model model) throws Exception {
+		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
 		String image_url = BUCKET_URL;
 		System.out.println("showTimeline2, timelineList = " + timelineList);
 		model.addAttribute("timelineList", timelineList);
@@ -71,17 +71,12 @@ public class TimelineController implements Codes {
 		System.out.println("insertArticle2, timeline_img:" + time_img);
 		System.out.println("insertArticle2, time_content:" + time_content);
 		
-		String result = timelineService.insertArticle2(timelineVo);
+		String result = timelineService.insertArticle(timelineVo);
 		System.out.println("result" + result);
-		
-		
 		
 		map.put("time_img", time_img);
 		map.put("time_content", time_content);
 		map.put("result", result);
-		
-	
-		
 		
 		return map;
 	}
@@ -90,7 +85,7 @@ public class TimelineController implements Codes {
 	@ResponseBody
 	public String updateArticle(TimelineVo timelineVo) throws Exception {
 		System.out.println("TimelineController, updateArticle, timelineVo" + timelineVo);
-		String result = timelineService.updateArticle2(timelineVo);
+		String result = timelineService.updateArticle(timelineVo);
 		return result;
 	}
 
@@ -98,7 +93,7 @@ public class TimelineController implements Codes {
 	@ResponseBody
 	public String deleteArticle(@PathVariable("review_no") int review_no) throws Exception {
 		System.out.println("TimelineController, deleteArticle, review_no:" + review_no);
-		String result = timelineService.deleteArticle2(review_no);
+		String result = timelineService.deleteArticle(review_no);
 		return result;
 	}
 	
@@ -106,8 +101,8 @@ public class TimelineController implements Codes {
 	// 안드로이드
 	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
 	@ResponseBody
-	public List<TimelineVo> getTimelineList() throws Exception {
-		List<TimelineVo> timelineList = timelineService.timelineList();
+	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
+		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
 		return timelineList;
 	}
 	
@@ -115,7 +110,7 @@ public class TimelineController implements Codes {
 	@ResponseBody
 	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
 		System.out.println("atimelineVo = " + timelineVo);
-		String result = timelineService.insertArticle2(timelineVo);
+		String result = timelineService.insertArticle(timelineVo);
 		return result;
 	}
 }
