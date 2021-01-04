@@ -16,12 +16,15 @@ $(function(){
 $("#btnInsert").click(function(e){
 	console.log("클릭");
 	
-
 	var formData = new FormData();
-	var f_review_img = $("input[type=file]")[0].files[0];
-	formData.append("f_review_img", f_review_img);
-	formData.append("review_content", $("#review_content").val());
-	formData.append("user_no", $("#user_no").val());
+	var f_timeline_img = $("input[type=file]")[0].files[0];
+	var time_content = $("#time_content").val();
+	var writer_name = "${userVo.user_name}";
+	var writer_state = "2-012";
+	formData.append("f_timeline_img", f_timeline_img);
+	formData.append("time_content", time_content);
+	formData.append("writer_no", writer_name);
+	formData.append("writer_state", writer_state);
 	$.ajax({
 		"processData"	:	false,
 		"contentType"	:	false,
@@ -30,6 +33,7 @@ $("#btnInsert").click(function(e){
 		"data"			:	formData, 
 		"success"		:	function(data) {
 			console.log(data);
+<<<<<<< HEAD
 			if(data != null){
 				
 			var clone1 = $("#forclone").clone();
@@ -39,29 +43,39 @@ $("#btnInsert").click(function(e){
 			$("#review_content").val("");
 			$("#review_img").val("");
 			} else if(data == "fail"){
+=======
+			if(data == "insertArticle_success"){
+				var clone1 = $("#forclone").clone();
+				clone1.find("h3").text(writer_name);
+				clone1.find(".content").text(time_content);
+				$("#house").prepend(clone1).hide().fadeIn(1000);
+				$("#timeline_content").val("");
+				$("#timeline_img").val("");
+			} else if(data == "fail") {
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 				alert("글쓰기 실패");
 			}
 		}	
-		});
+	});
 // 	javascript:history.go(0);
 });
 
 $(".btnUpdate").click(function(e){
-	$("#squarespaceModal > input[name=review_no]").val($(this).attr("data-no"));
+	$("#squarespaceModal > input[name=time_no]").val($(this).attr("data-no"));
 	$("#btnUpdateModal").trigger("click");
 });
 
 $("#btnUpdateSave").click(function(){
-	var review_no = $("#squarespaceModal > input[name=review_no]").val();
-	var review_content = $("#review_content_update").val();
+	var time_no = $("#squarespaceModal > input[name=time_no]").val();
+	var time_content = $("#time_content_update").val();
 	
-	console.log(review_no);
-	console.log(review_content);
+	console.log(time_no);
+	console.log(time_content);
 	
 	var url = "/timeline/updateArticle";
 	var sendData = {
-			"review_no" : review_no,
-			"review_content" : review_content
+			"time_no" : time_no,
+			"time_content" : time_content
 	};
 	
 	$.ajax({
@@ -83,9 +97,9 @@ $("#btnUpdateSave").click(function(){
 });
 
 $(".btnDelete").click(function(){
-	var review_no = $(this).attr("data-no");
-	console.log(review_no);
-	var url = "/timeline/deleteArticle/" + review_no;
+	var time_no = $(this).attr("data-no");
+	console.log(time_no);
+	var url = "/timeline/deleteArticle/" + time_no;
 	$.get(url,function(data){
 		console.log(data);
 		javascript:history.go(0);
@@ -125,7 +139,7 @@ $(".btnDelete").click(function(){
 										<div class="row px-3 form-group">
 										
 											<input type="hidden" value="${userVo.user_no}" id="user_no" name="user_no">
-											<textarea id="review_content" name="review_content"
+											<textarea id="time_content" name="time_content"
 												class="text-muted bg-light mt-4 mb-3"
 												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
 										
@@ -133,8 +147,8 @@ $(".btnDelete").click(function(){
 										<div class="row px-3 form-group">
 											<p class="fa fa-user options mb-0 mr-4"></p>
 											<p class="fa fa-map-marker options mb-0 mr-4"></p>
-											<label class="fa fa-image options mb-0 mr-4" for="review_img"></label>
-											<input type="file" class="form-control-file" id="review_img" name="review_img" style="display:none" />
+											<label class="fa fa-image options mb-0 mr-4" for="time_img"></label>
+											<input type="file" class="form-control-file" id="time_img" name="time_img" style="display:none" />
 											
 <!-- 											<div id="divUploaded" style="padding-left:40px;"> -->
 <!-- 												<img height="25" src="/resources/images/default.png"/> -->
@@ -163,7 +177,7 @@ $(".btnDelete").click(function(){
 					<div class="col-md-2"></div>
 					<div class="col-md-1"></div>
 					<div class="col-md-6" id="house">
-						<c:forEach var="timelineVo" items="${timelineVo}">
+						<c:forEach var="timelineVo" items="${timelineList}">
 						<div id="forclone">
 							<div class="d-flex justify-content-center">
 								
@@ -174,7 +188,7 @@ $(".btnDelete").click(function(){
 												src="https://i.imgur.com/V3ICjlm.jpg">
 										</div>
 										<div class="d-flex flex-column">
-											<h3 class="mt-2 mb-0">${timelineVo.user_name}</h3>
+											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
 											<div>
 												<p class="text-left">
 													<span class="text-muted">4.0</span> <span
@@ -193,11 +207,11 @@ $(".btnDelete").click(function(){
 															class="caret"></span></a>
 														<ul class="dropdown-menu" role="menu">
 															<c:if
-																test="${sessionScope.userVo.user_no == timelineVo.user_no}">
+																test="${sessionScope.userVo.user_no == timelineVo.writer_no}">
 																<li><a class="btnUpdate"
-																	data-no="${timelineVo.review_no}">수정</a></li>
+																	data-no="${timelineVo.time_no}">수정</a></li>
 																<li><a class="btnDelete"
-																	data-no="${timelineVo.review_no}">삭제</a></li>
+																	data-no="${timelineVo.time_no}">삭제</a></li>
 															</c:if>
 															<li><a id="btnReport">신고</a></li>
 														</ul>
@@ -207,11 +221,11 @@ $(".btnDelete").click(function(){
 												</div>
 										</div>
 									<div class="text-left">
-										<p class="content">${timelineVo.review_content}</p>
+										<p class="content">${timelineVo.time_content}</p>
 									</div>
 									<div class="row text-left">
-										<c:if test="${timelineVo.review_img != null}">
-											<img class="pic" src="${image_url}${timelineVo.review_img}">
+										<c:if test="${timelineVo.time_img != null}">
+											<img class="pic" src="${image_url}${timelineVo.time_img}">
 										</c:if>
 									</div>
 									<div class="row text-left mt-4">
@@ -241,7 +255,7 @@ $(".btnDelete").click(function(){
 	<!-----------------------------------------모달----------------------------------------->
 <button data-toggle="modal" data-target="#squarespaceModal"class="btn btn-primary center-block" id="btnUpdateModal" style="display:none;">Click Me</button>
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-	<input type="hidden" name="review_no">
+	<input type="hidden" name="time_no">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -250,7 +264,7 @@ $(".btnDelete").click(function(){
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<textarea class="form-control" id="review_content_update" placeholder="당신의 생각을 공유해주세요!"></textarea>
+							<textarea class="form-control" id="time_content_update" placeholder="당신의 생각을 공유해주세요!"></textarea>
 						</div>
 					</form>
 

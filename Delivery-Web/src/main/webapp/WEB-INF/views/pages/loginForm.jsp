@@ -45,6 +45,11 @@
 </body>
 <script>
 $(function(){
+	var login_result = "${login_result}";
+	if(login_result == "login_fail") {
+		alert("아이디 또는 비밀번호를 확인해주세요");
+	}
+	
 	$(".check_who").click(function(){
 		var check_who = $(this).val();
 		if(check_who == "라이더 회원"){

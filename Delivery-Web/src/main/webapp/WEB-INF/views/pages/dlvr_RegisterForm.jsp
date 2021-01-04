@@ -38,7 +38,7 @@
 					<div class="form-group">
 						<label for="dlvr_pw2"> 비밀번호 확인 </label> 
 						<input type="password" class="form-control" id="dlvr_pw2" name="dlvr_pw2" required maxlength="16" />
-						<span class="pw_check">비밀번호 같은지 확인</span>
+						<span class="pw_check"></span>
 					</div>
 
 					<div class="form-group">

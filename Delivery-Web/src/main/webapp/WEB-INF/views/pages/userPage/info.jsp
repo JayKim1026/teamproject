@@ -1,145 +1,285 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<%@ include file = "../../include/link.jsp" %>
+<title>My page</title>
+<%@ include file="../../include/link.jsp"%>
+<style>
+.imgChange{
+	display:none;
+} 
+
+.upload-hidden{
+	display:none;
+}
+
+#chgImgPreview{
+	display:none;	
+}
+
+.pwChange{
+	display:none;
+}
+
+.Label{
+	display: inline-block;
+    min-width: 165px;
+    line-height: 32px;
+}
+
+.EmailChange{
+	display: none;
+}
+
+.phoneChange{
+	display: none;
+}
+</style>
 </head>
 
 <body>
-<!-- 헤더 -->
-<header id="head_Container">
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-2">
-					<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
-				</div>
-				<div class="col-md-8">
-					<h1> 마이 페이지 </h1>
-				</div>
-				<div class="col-md-2">
-					<c:choose>
-						<c:when test="${sessionScope.userVo.user_id != null }">
-							<button type="button" class="btn-default" id="btnLogout">로그아웃</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="btn-default" id="btnLogin">로그인</button>
-						</c:otherwise>
-					</c:choose>
-					<br/>
-					userVo:${sessionScope.userVo}
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</header>
+	<!-- 헤더 -->
+	<header id="head_Container">
+		<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
+		<h1 id="header_title">마이 페이지</h1>
+			<c:if test="${sessionScope.userVo.user_id != null }">
+				<form action="/user/logout" method="get">
+					<button type="submit" class="btn-default" id="btnLogout">로그아웃</button>
+				</form>
+			</c:if>
+		<br /> userVo:${sessionScope.userVo}
+	</header>
+	<ul class="sideMenu">
+		<li><a href="/user/userPage/info">회원정보</a></li>
+		<li><a href="/user/userPage/orderList">주문 내역 조회</a></li>
+		<li><a href="/user/userPage/point">포인트 조회</a></li>
+		<li><a href="/user/userPage/review">내가 작성한 후기</a></li>
+		<li><a href="/user/userPage/question">1:1 문의</a></li>
+	</ul>
 
-	<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-2 side-bar">
-			<ul>
-				<li><a href="/user/userPage/info">회원정보</a></li>
-				<li><a href="/user/userPage/orderList">주문 내역 조회</a></li> 
-				<li><a href="/user/userPage/point">포인트 조회</a></li> 
-				<li><a href="/user/userPage/review">내가 작성한 후기</a></li> 
-				<li><a href="/user/userPage/question">1:1 문의</a></li> 
-			</ul>
-		</div>
-	
-		<div class="col-md-8 content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-						
-						<!-- 회원 정보 테이블  -->	
-							<table class="table infoTable">
-								<thead>
-									<tr>
-										<th>기본 회원 정보 <span>필수</span></th>
-									<tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>사진</td>
-										<td>
-											<c:if test="${sessionScope.userVo.user_id != null }">
-												<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
-											</c:if>
-											<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
-										</td>
-										<td>
-											<form>
-												<button type="button" class="btn-default" id=btnChangeImg >사진 변경</button>
- 												<input type="file" style="display:none;" id="changeImg" name="f_user_file" accept="image/,.jpg,.png,.gif">
-											</form>										
-										</td>
-									</tr>
-									<tr>
-										<td>아이디</td>
-										<td>${sessionScope.userVo.user_id}</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>비밀번호</td>
-										<td><input type="password" value="${sessionScope.userVo.user_pw}" style="border:none; cursor: default;" readonly/></td>
-										<td><button class="btn-default">비밀번호 변경</button></td>
-									</tr>
-									<tr>
-										<td>이름</td>
-										<td>${sessionScope.userVo.user_name}</td>
-										<td><button class="btn-default">이름 수정</button></td>
-									</tr>
-									<tr>
-										<td>이메일</td>
-										<td>${sessionScope.userVo.user_email}</td>
-										<td><button class="btn-default">이메일 변경</button></td>
-									</tr>
-									<tr>
-										<td>휴대전화</td>
-										<td>${sessionScope.userVo.user_phone}</td>
-										<td><button class="btn-default">휴대전화 변경</button></td>
-									</tr>
-									<!-- <tr>
-										<td>계좌번호</td>
-										<td></td>
-										<td><button class="btn-default">계좌 변경</button></td>
-									</tr> -->
-								</tbody>
-							</table>
-						</div>
+
+	<!-- 회원 정보 테이블  -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th style="border:none;">기본 회원 정보 <span>필수</span></th>
+			<tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>사진</td>
+				<td>
+					<div>
+						<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
+						<img id="chgImgPreview" src="#" alt="변경한 프로필 사진" style="width: 80px; height: 80px;"/>
+						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
-				</div>
-			</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-</div>
+					<div class="imgChange">
+						<form role="form" action="/user/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
+							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
+							<input type="hidden" value="${sessionScope.userVo.user_img }" name="orgImg"><!-- 기존 프사  -->
+						</form>
+							<button type="button" class="btn btn-secondary" id="upload-click"> 사진 선택</button>
+							<button type="button" class="btn btn-secondary" > 기본 이미지로 변경 </button>
+					</div>
+				</td>
+				<td>	
+					<button type="button" class="btn btn-secondary" id="btnChgImg">사진변경</button>
+					<button type="button" class="btn btn-secondary imgChange" id="btnChgImg_cancel">취소</button>
+					<button type="button" class="btn btn-secondary imgChange" id="btnChgImg_ok">완료</button>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>아이디</td>
+				<td>${sessionScope.userVo.user_id}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td class="pwHide">
+					<div >
+						<input type="password" value="${sessionScope.userVo.user_pw}" style="border: none; cursor: default;" readonly />
+					</div>
+				</td>
+				<td class="pwChange">
+					<div>
+						<label class="pw Label"> 현재 비밀번호</label>
+						<input type="password" name="user_pw">
+					</div>
+					<div>
+						<label class="pw Label"> 새 비밀번호</label>
+						<input type="password" name="user_Npw">
+					</div>
+					<div>
+						<label class="pw Label"> 새 비밀번호 확인</label>
+						<input type="password" name="user_Npw2">
+					</div>
+					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
+					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
+				</td>
+				<td> 
+					<button type="button" class="btn btn-secondary pwHide" id="btnChgPw">비밀번호 변경</button>
+				</td>
+				
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td>
+					<div>
+						${sessionScope.userVo.user_name}
+					</div>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td class="EmaileHide">
+					<div>
+						${sessionScope.userVo.user_email}
+					</div>
+				</td>
+				<td class="EmailChange">
+					<div>
+						<label class="email Label">수정 이메일 </label>
+						<input type="email" name="user_name">
+						<br/>
+						<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
+						<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
+					</div>
+				</td>
+				<td>
+					<button type="button" class="btn btn-secondary chgEmail">이메일 변경</button>
+				</td>
+			</tr>
+			<tr>
+				<td>휴대전화</td>
+				<td class="phoneHide">
+					<div>
+						${sessionScope.userVo.user_phone}
+					</div>
+				</td>
+				<td class="phoneChange">
+					<div>
+						<label class="phone Label">수정 전화번호</label>
+						<input type="tel" name="user_name">
+						<br/>
+						<button type="button" class="btn btn-secondary" id="btnChgPhone_cancel">취소</button>
+						<button type="submit" class="btn btn-secondary" id="btnChgPhone_ok">완료</button>
+					</div>
+				</td>
+				<td>	
+					<button type="button" class="btn btn-secondary" id="btnChgPhone">휴대전화 변경</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 
 <script>
-$(function(){
-	// 사진변경 버튼
-	$("#btnChangeImg").click(function(){
-		$("#changeImg").trigger("click").change(function(){
-			var changeImgName = $("#changeImg").val();
-			console.log("changeImgName : " + changeImgName);
-			
-		});
+$(function() {
+	//<비밀번호 변경>
+	
+	// 비밀번호 변경 버튼 클릭
+	$("#btnChgPw").click(function(){
+		$(".pwHide").hide();
+		$(".pwChange").show();
 	});
 	
-	// 로그아웃 
-	$("#btnLogout").click(function(){
-		location.href="/user/logout";
+	// 비밀번호 변경 - 취소버튼 클릭
+	$("#btnChgPw_cancel").click(function(){
+		$(".pwChange").hide();
+		$(".pwHide").show();
 	});
+	
+	// 비밀번호 변경 - 현재 비밀번호 AJAX 확인하기
+	$("input[name=user_pw]").keyup(function(){
+		
+	});
+	//<이미지 수정>
+	// 사진 변경 버튼
+	$("#btnChgImg").click(function() {
+		$(this).hide();
+		$(".imgChange").show();
+	});
+	
+	// 사진변경 - 취소 버튼
+	$("#btnChgImg_cancel").click(function() {
+		$(this).hide();
+		$(".imgChange").hide();
+		$("#btnChgImg").show();
+		$("#chgImgPreview").hide();
+		$("#user_img").show();
+	});
+	
+	// 사진변경 - 사진 선택 버튼 -> input file 실행
+	$("#upload-click").click(function() {
+		$("#file-upload").trigger("click")
+	});
+	
+	// 사진변경 - 실행된 input file에서 이미지를 선택 => 미리보기 이미지 띄우기
+	$("#file-upload").on("change" , function() {
+		readURL(this);
+		$("#user_img").hide();
+		$("#chgImgPreview").show();
+	});
+	
+	// 사진 변경 form 전송 //TODO DB에 저장이 되지만 세션에 변경이 안되는 듯. 로그아웃 후 로그인했을 때 사진이 안뜸. 새로 회원가입 후 조회하면 사진 뜸. 
+	$("#btnChgImg_ok").click(function(e){
+		e.preventDefault();
+		$("#frmImgChange").submit();
+	});
+	
+	// 이메일 변경 버튼
+	$(".chgEmail").click(function(){
+		$(".EmaileHide").hide();
+		$(this).hide();
+		$(".EmailChange").show();
+	});
+	// 이메일 변경 - 취소 버튼
+		$("#btnChgEmail_cancel").click(function(){
+			$(".EmaileHide").show();
+			$(".chgEmail").show();
+			$(".EmailChange").hide();
+		});
+	//TODO 
+	//이메일 변경 - 완료 버튼 
+	
+	//휴대전화 변경 버튼
+	$("#btnChgPhone").click(function(){
+		$(".phoneChange").show();
+		$(this).hide();
+		$(".phoneHide").hide();
+	});
+	
+	//휴대전화 변경 - 취소버튼
+	$("#btnChgPhone_cancel").click(function(){
+		$(".phoneChange").hide();
+		$("#btnChgPhone").show();
+		$(".phoneHide").show();
+	});
+	//TODO
+	//휴대전화 변경 - 완료버튼
 }); // 핸들러
+
+// 바꿀 프로필 사진 미리 보여주기
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    	var reader = new FileReader();
+		reader.onload = function (e) {
+          $('#chgImgPreview').attr('src', e.target.result);
+       }
+		reader.readAs
+		reader.readAsDataURL(input.files[0]);
+       	console.log("input.files[0] : " + input.files[0]);
+    }
+}
 </script>
 </html>
