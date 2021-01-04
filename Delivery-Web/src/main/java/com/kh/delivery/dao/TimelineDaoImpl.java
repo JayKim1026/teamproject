@@ -20,44 +20,13 @@ public class TimelineDaoImpl implements TimelineDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void insertArticle(TimelineVo timelineVo) {
-		
-		System.out.println("TimelineDao, insertArticle, timelineVo:" + timelineVo);
-		if(timelineVo.getTime_img() != null) {
-			sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
-		} else {
-			sqlSession.insert(NAMESPACE + "insertArticleNoPic", timelineVo);
-		}
-		
-	}
-
-	@Override
-	public List<TimelineVo> timelineList() {
-		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "timelineList");
-		return list;
-	}
-
-	@Override
-	public void updateArticle(TimelineVo timelineVo) {
-		
-		sqlSession.update(NAMESPACE + "updateArticle", timelineVo);
-		
-	}
-
-	@Override
-	public void deleteArticle(int review_no) {
-		sqlSession.update(NAMESPACE + "deleteArticle", review_no);
-		
-	}
-
-	@Override
-	public List<TimelineVo> timelineList2() {
-		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList");
+	public List<TimelineVo> timelineList(String searchType) {
+		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", searchType);
 		return timelineList;
 	}
 
 	@Override
-	public String insertArticle2(TimelineVo timelineVo) {
+	public String insertArticle(TimelineVo timelineVo) {
 		if(timelineVo.getTime_img() != null) {
 			sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
 		} else {
@@ -67,13 +36,13 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public String updateArticle2(TimelineVo timelineVo) {
+	public String updateArticle(TimelineVo timelineVo) {
 		sqlSession.update(NAMESPACE + "updateArticle", timelineVo);
 		return "updateArticle_success";
 	}
 
 	@Override
-	public String deleteArticle2(int time_no) {
+	public String deleteArticle(int time_no) {
 		sqlSession.update(NAMESPACE + "deleteArticle", time_no);
 		return "deleteArticle_success";
 	}
