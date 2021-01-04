@@ -71,4 +71,9 @@
 	</update>
 	
 	<!-- 사용자 전화번호 변경 -->
+	<update id="phoneChange">
+		update tbl_user set
+		user_phone = #{chg_phone}
+		where user_id = #{user_id}
+	</update>
 </mapper>

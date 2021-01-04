@@ -205,10 +205,25 @@
 <script>
 $(function() {
 	//메세지
-	var pwChagneResult = "${pwChagneResult}";
-	if(pwChagneResult == "success") {
+	var imgChangeResult = "${imgChangeResult}";
+	if(imgChangeResult == "success") {
+		alert("프로필 사진이 변경 되었습니다.");
+	}
+	
+	var pwChangeResult = "${pwChangeResult}";
+	if(pwChangeResult == "success") {
 		alert("비밀번호가 변경되었습니다.");
-	} 
+	}
+	
+	var phoneChangeResult = "${phoneChangeResult}";
+	if(phoneChangeResult == "success") {
+		alert("전화번호가 변경되었습니다.");
+	}
+	
+	var emailChangeResult = "${emailChangeResult}";
+	if(emailChangeResult == "success") {
+		alert("이메일이 변경되었습니다.");
+	}
 	
 	//<비밀번호 변경>
 	// 비밀번호 변경 버튼 클릭
@@ -347,23 +362,28 @@ $(function() {
 		$(".phoneHide").show();
 	});
 	//휴대전화 변경 - 완료버튼
-	$("#btnChgPhone_ok").click(function(){
+	$("#btnChgPhone_ok").click(function(e){
+		e.preventDefault();
 		var chg_phone = $("#chg_phone").val();
-		if(chg_phone != nll && chg_phone != "") {
+		console.log("chg_phone : " + chg_phone);
+		
+		if(chg_phone != null && chg_phone != "") {
 			for(var i = 0; i < chg_phone.length ; i++) {
 				var char_chg_phone = chg_phone.charCodeAt(i);
-				if(9 < chg_phone.length && chg_phone.length <11){
+				if(9 < chg_phone.length && chg_phone.length < 17) {
 					if( 47< char_chg_phone && char_chg_phone < 58) {
-						
-						
+						$("#frmPhone").submit();
 					} else {
-						alert("숫자만 입력해주세요");
+						alert("10~16자로 숫자만 입력해주세요");
 						$("#chg_phone").val("").focus();
 						return;
 					}
+				} else {
+					alert("10~16자로 숫자만 입력해주세요");
+					$("#chg_phone").val("").focus();
+					return;
 				}
-			}
-			
+			} // for
 		} else {
 			alert("휴대전화 번호를 입력해 주세요.");
 			$("#chg_phone").focus();

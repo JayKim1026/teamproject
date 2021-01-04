@@ -108,5 +108,15 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("emailChange Dao result : " + result);
 		return "emailChange_success";
 	}
+
+	@Override
+	public String phoneChange(String user_id, String chg_phone) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("chg_phone", chg_phone);
+		int result = sqlSession.update(NAMESPACE + "phoneChange", map);
+		System.out.println("phoneChange Dao result : " + result);
+		return "phoneChange_success";
+	}
 	
 }

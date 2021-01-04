@@ -27,7 +27,8 @@ public interface UserDao {
 	public String emailChange(String user_id, String user_email ) throws Exception;
 	
 	// 사용자 휴대전화 변경
-	
+	public String phoneChange(String user_id, String chg_phone) throws Exception;
+
 	
 	// 안드로이드
 	// 유저 정보 찾기
