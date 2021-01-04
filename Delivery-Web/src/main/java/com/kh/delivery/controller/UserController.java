@@ -258,7 +258,7 @@ public class UserController implements Codes {
 		String user_id = userVo.getUser_id();
 		String result = userService.pwChange(user_id, user_Npw);
 		if(result == "pwChange_success") {
-			session.setAttribute("user_pw", user_Npw);
+			userVo.setUser_pw(user_Npw);
 			rttr.addFlashAttribute("pwChagneResult", "success");
 			return "redirect:userPage/info";
 		} else {

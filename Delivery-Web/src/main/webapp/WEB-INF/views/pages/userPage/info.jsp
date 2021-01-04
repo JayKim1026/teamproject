@@ -200,6 +200,11 @@
 
 <script>
 $(function() {
+	//메세지
+	var pwChagneResult = "${pwChagneResult}";
+	if(pwChagneResult == "success") {
+		alert("비밀번호가 변경되었습니다.");
+	} 
 	//<비밀번호 변경>
 	// 비밀번호 변경 버튼 클릭
 	$("#btnChgPw").click(function(){
