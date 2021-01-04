@@ -15,7 +15,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 public class FileUploadUtil implements Codes, Keys {
 	
 	// s3 버킷 이름
-	private static String BUCKET = "delivery-img";
+	private static String BUCKET = "delivery-img2";
 	
 	// s3 엑세스
 	private static AmazonS3 access() {
