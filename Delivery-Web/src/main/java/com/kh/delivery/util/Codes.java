@@ -3,7 +3,7 @@ package com.kh.delivery.util;
 public interface Codes {
 
 	// 이미지 파일 버킷 주소
-	String BUCKET_URL = "https://delivery-img.s3.ap-northeast-2.amazonaws.com/";
+	String BUCKET_URL = "https://delivery-img2.s3.ap-northeast-2.amazonaws.com/";
 	
 	// 버킷 내 폴더 이름
 	String DLVR_IMG = "Dlvr_Img/";
