@@ -1,7 +1,9 @@
 package com.kh.delivery.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -42,15 +44,17 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+	public Map insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
 			Model model) throws Exception {
+		Map<String, String> map = new HashMap<>();
 		System.out.println("insertArticle2, timelineVo = " + timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		if (f_timeline_img != null) {
 			String org_timeline_img = f_timeline_img.getOriginalFilename();
 			System.out.println("insertArticle2, org_timeline_img = " + org_timeline_img);
 			if (!FileUploadUtil.isImage(org_timeline_img)) {
-				return "fail";
+				map.put("fail", "fail");
+				return map;
 			}
 			String timeline_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_timeline_img;
 			timelineVo.setTime_img(timeline_img);
@@ -61,8 +65,25 @@ public class TimelineController implements Codes {
 			FileUploadUtil.upload(file, timeline_img);
 		}
 		
+		String time_img = timelineVo.getTime_img();
+		String time_content = timelineVo.getTime_content();
+		
+		System.out.println("insertArticle2, timeline_img:" + time_img);
+		System.out.println("insertArticle2, time_content:" + time_content);
+		
 		String result = timelineService.insertArticle2(timelineVo);
-		return result;
+		System.out.println("result" + result);
+		
+		
+		
+		map.put("time_img", time_img);
+		map.put("time_content", time_content);
+		map.put("result", result);
+		
+	
+		
+		
+		return map;
 	}
 
 	@RequestMapping(value = "/updateArticle", method = RequestMethod.POST)

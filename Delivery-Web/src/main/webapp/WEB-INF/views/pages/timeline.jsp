@@ -15,47 +15,41 @@ $(function(){
 	
 $("#btnInsert").click(function(e){
 	console.log("클릭");
-	
+	var starRating = $(".star-rating").val();
+	console.log(starRating);
+	var url = "/timeline/insertArticle"
 	var formData = new FormData();
 	var f_timeline_img = $("input[type=file]")[0].files[0];
 	var time_content = $("#time_content").val();
-	var writer_name = "${userVo.user_name}";
+	var writer_no = parseInt("${userVo.user_no}");
 	var writer_state = "2-012";
+	var time_state = $("#category").val();
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
-	formData.append("writer_no", writer_name);
+	formData.append("time_state", time_state);
+	formData.append("writer_no", writer_no);
 	formData.append("writer_state", writer_state);
 	$.ajax({
 		"processData"	:	false,
 		"contentType"	:	false,
 		"type"			:	"post",
-		"url"			:	"/timeline/insertArticle",
+		"url"			:	url,
 		"data"			:	formData, 
 		"success"		:	function(data) {
 			console.log(data);
-<<<<<<< HEAD
-			if(data != null){
+			if(data.result == "insertArticle_success"){
 				
-			var clone1 = $("#forclone").clone();
-			clone1.find("h3").text("${userVo.user_name}");
-			clone1.find(".content").text("${review_content}");
-			$("#house").prepend(clone1).hide().fadeIn(1000);
-			$("#review_content").val("");
-			$("#review_img").val("");
-			} else if(data == "fail"){
-=======
-			if(data == "insertArticle_success"){
 				var clone1 = $("#forclone").clone();
-				clone1.find("h3").text(writer_name);
-				clone1.find(".content").text(time_content);
+				clone1.find("h3").text("${userVo.user_name}");
+				clone1.find(".content").text(data.time_content);
+				clone1.find(".pic").attr("src","${image_url}" + data.time_img);
 				$("#house").prepend(clone1).hide().fadeIn(1000);
-				$("#timeline_content").val("");
-				$("#timeline_img").val("");
-			} else if(data == "fail") {
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
+				$("#time_content").val("");
+				$("#time_img").val("");
+			} else if(data.fail == "fail"){
 				alert("글쓰기 실패");
-			}
-		}	
+			}	
+		}
 	});
 // 	javascript:history.go(0);
 });
@@ -107,6 +101,18 @@ $(".btnDelete").click(function(){
 });
 
 });
+function add(ths, sno) {
+	for (var i = 1; i <= 5; i++) {
+		var cur = document.getElementById("star" + i)
+		cur.className = "far fa-star"
+	}
+	for (var i = 1; i <= sno; i++) {
+		var cur = document.getElementById("star" + i)
+		if (cur.className == "far fa-star") {
+			cur.className = "fas fa-star"
+		}
+	}
+}
 </script>
 <body>
 <%@include file="../include/timelineHeader.jsp" %>
@@ -129,12 +135,25 @@ $(".btnDelete").click(function(){
 												src="https://i.imgur.com/6tPhTUn.jpg">
 											<div class="flex-column">
 												<h3 class="mb-0 font-weight-normal">${userVo.user_name}</h3>
-												<select name="privacy" class="privacy">
-													<option>Public post</option>
-													<option>Private post</option>
+												<select id="category" name="privacy" class="privacy">
+													<option value="2-003">일반</option>
+													<option value="2-002">배달후기</option>
 												</select>
 											</div>
 										</div>
+										<div class="rating">
+											<input type="radio" name="rating" value="5" id="5"> 
+											<label for="5">☆</label> 
+											<input type="radio" name="rating" value="4" id="4"> 
+											<label for="4">☆</label> 
+											<input type="radio" name="rating" value="3" id="3"> 
+											<label for="3">☆</label> 
+											<input type="radio" name="rating" value="2" id="2"> 
+											<label for="2">☆</label> 
+											<input type="radio" name="rating" value="1" id="1"> 
+											<label for="1">☆</label>
+										</div>
+										
 										<form enctype="multipart/form-data" method="post" id="frmData">
 										<div class="row px-3 form-group">
 										
