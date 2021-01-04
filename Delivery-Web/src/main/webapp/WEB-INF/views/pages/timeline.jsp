@@ -19,11 +19,11 @@ $("#btnInsert").click(function(e){
 	var formData = new FormData();
 	var f_timeline_img = $("input[type=file]")[0].files[0];
 	var time_content = $("#time_content").val();
-	var writer_name = "${userVo.user_name}";
+	var writer_no = parseInt("${userVo.user_no}");
 	var writer_state = "2-012";
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
-	formData.append("writer_no", writer_name);
+	formData.append("writer_no", writer_no);
 	formData.append("writer_state", writer_state);
 	$.ajax({
 		"processData"	:	false,
@@ -43,7 +43,7 @@ $("#btnInsert").click(function(e){
 			} else if(data == "fail") {
 				alert("글쓰기 실패");
 			}
-		}	
+		}
 	});
 // 	javascript:history.go(0);
 });

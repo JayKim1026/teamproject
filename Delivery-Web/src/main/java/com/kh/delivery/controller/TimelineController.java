@@ -42,7 +42,7 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
 			Model model) throws Exception {
 		System.out.println("insertArticle2, timelineVo = " + timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
@@ -67,7 +67,7 @@ public class TimelineController implements Codes {
 
 	@RequestMapping(value = "/updateArticle", method = RequestMethod.POST)
 	@ResponseBody
-	public String updateArticle2(TimelineVo timelineVo) throws Exception {
+	public String updateArticle(TimelineVo timelineVo) throws Exception {
 		System.out.println("TimelineController, updateArticle, timelineVo" + timelineVo);
 		String result = timelineService.updateArticle2(timelineVo);
 		return result;
@@ -75,7 +75,7 @@ public class TimelineController implements Codes {
 
 	@RequestMapping(value = "/deleteArticle/{review_no}", method = RequestMethod.GET)
 	@ResponseBody
-	public String deleteArticle2(@PathVariable("review_no") int review_no) throws Exception {
+	public String deleteArticle(@PathVariable("review_no") int review_no) throws Exception {
 		System.out.println("TimelineController, deleteArticle, review_no:" + review_no);
 		String result = timelineService.deleteArticle2(review_no);
 		return result;
@@ -92,7 +92,7 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value="/aInsertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertArticle(TimelineVo timelineVo) throws Exception {
+	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
 		System.out.println("atimelineVo = " + timelineVo);
 		String result = timelineService.insertArticle2(timelineVo);
 		return result;
