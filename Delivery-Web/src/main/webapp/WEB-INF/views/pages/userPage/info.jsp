@@ -150,11 +150,13 @@
 				</td>
 				<td class="EmailChange">
 					<div>
-						<label class="email Label">수정 이메일 </label>
-						<input type="email" name="user_name">
-						<br/>
-						<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
-						<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
+						<form id="frmEmail" action="/user/emailChange" method="Post">
+							<label class="email Label">수정 이메일 </label>
+							<input type="email" id="chg_Email" name="user_email">
+							<br/>
+							<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
+							<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
+						</form>
 					</div>
 				</td>
 				<td>
@@ -170,11 +172,13 @@
 				</td>
 				<td class="phoneChange">
 					<div>
-						<label class="phone Label">수정 전화번호</label>
-						<input type="tel" name="user_name">
-						<br/>
-						<button type="button" class="btn btn-secondary" id="btnChgPhone_cancel">취소</button>
-						<button type="submit" class="btn btn-secondary" id="btnChgPhone_ok">완료</button>
+						<form id="frmPhone" action="/user/phoneChange" method="post">
+							<label class="phone Label">수정 전화번호</label>
+							<input type="tel" id="chg_phone" name="chg_phone">
+							<br/>
+							<button type="button" class="btn btn-secondary" id="btnChgPhone_cancel">취소</button>
+							<button type="submit" class="btn btn-secondary" id="btnChgPhone_ok">완료</button>
+						</form>
 					</div>
 				</td>
 				<td>	
@@ -205,6 +209,7 @@ $(function() {
 	if(pwChagneResult == "success") {
 		alert("비밀번호가 변경되었습니다.");
 	} 
+	
 	//<비밀번호 변경>
 	// 비밀번호 변경 버튼 클릭
 	$("#btnChgPw").click(function(){
@@ -302,6 +307,8 @@ $(function() {
 		$("#frmImgChange").submit();
 	});
 	
+	
+	//<이메일 변경>
 	// 이메일 변경 버튼
 	$(".chgEmail").click(function(){
 		$(".EmaileHide").hide();
@@ -314,9 +321,18 @@ $(function() {
 			$(".chgEmail").show();
 			$(".EmailChange").hide();
 		});
-	//TODO 
 	//이메일 변경 - 완료 버튼 
-	
+	$("#btnChgEmail_ok").click(function(e) {
+		e.preventDefault();
+		var chg_email = $("#chg_Email").val();
+		if(chg_email != null && chg_email != "") {
+			$("#frmEmail").submit();
+		} else {
+			alert("이메일을 입력해주세요");
+			$("#chg_Email").focus();
+		}
+		
+	});
 	//휴대전화 변경 버튼
 	$("#btnChgPhone").click(function(){
 		$(".phoneChange").show();
@@ -330,8 +346,30 @@ $(function() {
 		$("#btnChgPhone").show();
 		$(".phoneHide").show();
 	});
-	//TODO
 	//휴대전화 변경 - 완료버튼
+	$("#btnChgPhone_ok").click(function(){
+		var chg_phone = $("#chg_phone").val();
+		if(chg_phone != nll && chg_phone != "") {
+			for(var i = 0; i < chg_phone.length ; i++) {
+				var char_chg_phone = chg_phone.charCodeAt(i);
+				if(9 < chg_phone.length && chg_phone.length <11){
+					if( 47< char_chg_phone && char_chg_phone < 58) {
+						
+						
+					} else {
+						alert("숫자만 입력해주세요");
+						$("#chg_phone").val("").focus();
+						return;
+					}
+				}
+			}
+			
+		} else {
+			alert("휴대전화 번호를 입력해 주세요.");
+			$("#chg_phone").focus();
+			return;
+		}
+	});
 }); // 핸들러
 
 // 바꿀 프로필 사진 미리 보여주기

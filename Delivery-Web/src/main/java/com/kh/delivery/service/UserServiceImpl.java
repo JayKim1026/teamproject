@@ -63,4 +63,10 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public String emailChange(String user_id, String user_email) throws Exception {
+		String result = userDao.emailChange(user_id, user_email);
+		return result;
+	}
+
 }

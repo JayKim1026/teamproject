@@ -94,9 +94,19 @@ public class UserDaoImpl implements UserDao {
 		map.put("user_id", user_id);
 		map.put("user_Npw", user_Npw);
 		int result = sqlSession.update(NAMESPACE + "pwChange", map);
-		System.out.println(result);	
+		System.out.println("pwChange Dao result" + result);	
 		return "pwChange_success";
 			
+	}
+
+	@Override
+	public String emailChange(String user_id, String user_email) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_email", user_email);
+		int result = sqlSession.update(NAMESPACE + "emailChange" , map);
+		System.out.println("emailChange Dao result : " + result);
+		return "emailChange_success";
 	}
 	
 }

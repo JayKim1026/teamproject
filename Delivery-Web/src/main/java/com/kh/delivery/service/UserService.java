@@ -26,6 +26,7 @@ public interface UserService {
 	public String pwChange(String user_id, String user_Npw) throws Exception;
 	
 	// 사용자 이메일 변경
+	public String emailChange(String user_id, String user_email) throws Exception;
 	
 	// 사용자 전화번호 변경
 

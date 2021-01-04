@@ -262,9 +262,37 @@ public class UserController implements Codes {
 			rttr.addFlashAttribute("pwChagneResult", "success");
 			return "redirect:userPage/info";
 		} else {
-			rttr.addFlashAttribute("pwChagneResult", "false");
+			rttr.addFlashAttribute("pwChagneResult", "fail");
 			return "redirect:userPage/info";
 		}
+	}
+	
+	// 이메일 변경
+	@RequestMapping(value="/emailChange", method=RequestMethod.POST)
+	public String emailChange(String user_email, HttpSession session, RedirectAttributes rttr)throws Exception {
+		System.out.println("user_email : " + user_email);
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		String result = userService.emailChange(user_id, user_email);
+		if(result == "emailChange_success") {
+			userVo.setUser_email(user_email);
+			rttr.addFlashAttribute("emailChangeResult", "success");
+			return "redirect:userPage/info";
+		} else {
+			rttr.addFlashAttribute("emailChangeResult", "fail");
+			return "redirect:userPage/info";
+
+		}
+	}
+	
+	// 사용자 휴대전화 변경
+	@RequestMapping(value="/phoneChange", method=RequestMethod.POST)
+	public String phoneChange(String user_phone, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		System.out.println("컨트롤러 phone user_id : " + user_id);
+		System.out.println("컨트롤러 phone user_phone : " + user_phone);
+		return null;
 	}
 	
 	// 안드로이드
