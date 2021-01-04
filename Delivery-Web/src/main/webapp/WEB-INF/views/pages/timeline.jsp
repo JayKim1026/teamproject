@@ -215,6 +215,7 @@ function add(ths, sno) {
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
 											<div>
 											<!-- 별 다섯개 나 머리나빠서 로직 아직 안됨 기다리셈 -->
+											<c:if test='${timelineVo.time_state == "2-002"}'>
 											<c:if test="${timelineVo.time_star == 5}">
 												<p class="text-left">
 													<span class="text-muted">5</span> <span
@@ -272,7 +273,7 @@ function add(ths, sno) {
 														class="fa fa-star star-inactive"></span>
 												</p>
 											</c:if>
-											
+											</c:if>
 											</div>
 										</div>
 											<div class="ml-auto">
@@ -287,6 +288,7 @@ function add(ths, sno) {
 																	data-no="${timelineVo.time_no}">수정</a></li>
 																<li><a class="btnDelete"
 																	data-no="${timelineVo.time_no}">삭제</a></li>
+															
 															</c:if>
 															<li><a id="btnReport">신고</a></li>
 														</ul>
