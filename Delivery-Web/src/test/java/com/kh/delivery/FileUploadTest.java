@@ -15,7 +15,7 @@ public class FileUploadTest {
 
 	@Test
 	public void testFileUpload() throws Exception {
-		File file = new File("G://images/dog.jpg");
+		File file = new File("G://dog1.png");
 		FileUploadUtil.upload(file, FileUploadUtil.DLVR_IMG);
 	}
 	

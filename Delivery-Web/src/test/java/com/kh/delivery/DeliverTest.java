@@ -27,11 +27,12 @@ public class DeliverTest {
 	
 	@Test
 	public void testLogin() throws Exception {
-		Map<String, String> map = new HashMap<>();
-		map.put("dlvr_id", "dlvr01");
-		map.put("dlvr_pw", "1234");
-		DeliverVo deliverVo = sqlSession.selectOne(NAMESPACE + "login", map);
-		System.out.println(deliverVo);
+		System.out.println(sqlSession);
+//		Map<String, String> map = new HashMap<>();
+//		map.put("dlvr_id", "dlvr01");
+//		map.put("dlvr_pw", "1234");
+//		DeliverVo deliverVo = sqlSession.selectOne(NAMESPACE + "login", map);
+//		System.out.println(deliverVo);
 	}
 	
 	@Test

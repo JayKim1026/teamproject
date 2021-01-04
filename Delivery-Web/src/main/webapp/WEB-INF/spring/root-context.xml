@@ -15,7 +15,7 @@
 		id="dataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 		<property name="url" 
-			value="jdbc:oracle:thin:@teamproject.cntwvo07jxkb.ap-northeast-2.rds.amazonaws.com:1521:orcl"></property>
+			value="jdbc:oracle:thin:@teamproject2.c6wnuw3pzcso.ap-northeast-2.rds.amazonaws.com:1521:orcl"></property>
 		<property name="username" value="admin"></property>
 		<property name="password" value="1q2w3e4r"></property>
 	</bean>
