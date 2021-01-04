@@ -210,9 +210,10 @@ function add(ths, sno) {
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
 											<div>
+											<!-- 별 다섯개 나 머리나빠서 로직 아직 안됨 기다리셈 -->
 											<c:if test="${timelineVo.time_star == 5}">
 												<p class="text-left">
-													<span class="text-muted">5.0</span> <span
+													<span class="text-muted">5</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-active"></span> <span
 														class="fa fa-star star-active"></span> <span
@@ -220,6 +221,54 @@ function add(ths, sno) {
 														class="fa fa-star star-active"></span>
 												</p>
 											</c:if>
+											<!-- 별 네개 -->
+											<c:if test="${timelineVo.time_star == 4}">
+												<p class="text-left">
+													<span class="text-muted">4</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
+											<!-- 별 세개 -->
+											<c:if test="${timelineVo.time_star == 3}">
+												<p class="text-left">
+													<span class="text-muted">3</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
+											<!-- 별 두개 -->
+											<c:if test="${timelineVo.time_star == 2}">
+												<p class="text-left">
+													<span class="text-muted">2</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
+											<!-- 별 한개 -->
+											<c:if test="${timelineVo.time_star == 1}">
+												<p class="text-left">
+													<span class="text-muted">1</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
 											</div>
 										</div>
 											<div class="ml-auto">
