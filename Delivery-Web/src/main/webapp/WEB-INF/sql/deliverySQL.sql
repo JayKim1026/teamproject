@@ -1,13 +1,14 @@
 create table tbl_user(
     user_no	    number primary key, 
 -- 가입 시 작성하는 부분 --
-    user_id	    varchar2(20)    primary key, 
+    user_id	    varchar2(20)    not null, 
     user_pw	    varchar2(20)    not null, 
     user_name	varchar2(30)    not null, 
     user_phone	varchar2(13)    not null, 
     user_email	varchar2(50)    not null, 
     user_addr	varchar2(300)   not null, 
-    user_birth  timestamp 		not null,
+    user_img    varchar2(600)   not null, 
+    user_birth  date 		    not null,
 -- 기본적으로 설정되는 부분 --
     user_date	timestamp       default sysdate,
     user_state	varchar2(1)     default 'X',
@@ -18,14 +19,15 @@ create table tbl_user(
 create table tbl_deliver(
     dlvr_no	    number          primary key,
 -- 가입 시 작성하는 부분 --
-    dlvr_id	    varchar2(20)    primary key, 
+    dlvr_id	    varchar2(20)    not null, 
     dlvr_pw	    varchar2(20)    not null, 
     dlvr_name	varchar2(30)    not null, 
     dlvr_phone	varchar2(13)    not null, 
     dlvr_email	varchar2(50)    not null, 
-    dlvr_addr	varchar2(300)   not null,   
-    dlvr_idCard	varchar2(300)   not null, 
-    dlvr_birth	timestamp		not null,
+    dlvr_addr	varchar2(300)   not null,  
+    dlvr_img    varchar2(600)   not null,  
+    dlvr_idCard	varchar2(600)   not null, 
+    dlvr_birth	date    		not null,
 -- 기본적으로 설정되는 부분 --
     dlvr_date	timestamp       default sysdate, 
     dlvr_state	varchar2(1)     default 'X', 
@@ -59,9 +61,9 @@ create table tbl_order(
     order_lat	number, 
     order_lng	number, 
     user_id	    number          REFERENCES tbl_user(user_no), 
+    order_state	varchar2(10)    REFERENCES tbl_code(code_no), 
 -- 배달원이 주문을 받으면 작성되는 부분 -- 
     dlvr_id	    number          REFERENCES tbl_deliver(dlvr_no),
-    order_state	varchar2(10)    REFERENCES tbl_code(code_no), 
 -- 기본적으로 설정되는 부분 -- 
     order_date	timestamp       default sysdate
 );
@@ -86,69 +88,35 @@ create table tbl_deliver_point(
 
 create table tbl_report(
     report_no	    number          primary key, 
-    user_no	        number    REFERENCES tbl_user(user_no), 
-    dlvr_no	        number    REFERENCES tbl_deliver(dlvr_no), 
+    user_no	        number          REFERENCES tbl_user(user_no), 
+    dlvr_no	        number          REFERENCES tbl_deliver(dlvr_no), 
     report_content	varchar2(300)   not null, 
+    report_img      varchar2(600)   not null, 
     report_state	varchar2(10)    REFERENCES tbl_code(code_no), 
     report_type	    varchar2(4)     not null, 
     report_date	    timestamp       default sysdate
 );
 
-create table tbl_board_free(
-    free_no             number  primary key,
-    free_writer_no      number,
-    free_content        varchar2(600), 
-    free_img            varchar2(600), 
-    free_date           timestamp   default sysdate, 
-    free_state          varchar2(10) default '10-001' REFERENCES tbl_code(code_no), 
-    dummy_no            number  default -1, 
-    dummy_star          number  default -1 not null, 
-    dummy_name         varchar2(30) default 'dummy' not null
+create table tbl_timeline(
+    time_no         number          primary key,
+    writer_no       number, 
+    writer_state    varchar2(10)    REFERENCES  tbl_code(code_no), 
+    time_content    varchar2(600), 
+    time_img        varchar2(600), 
+    time_date       timestamp       default sysdate, 
+    time_state      varchar2(10)    REFERENCES  tbl_code(code_no), 
+    time_star       number          default 2.5, 
+    dlvr_no         number          REFERENCES  tbl_deliver(dlvr_no)
 );
 
-create table tbl_board_notice(
-    notice_no           number  primary key,
-    admin_no            number  REFERENCES tbl_admin(admin_no),
-    notice_content      varchar2(600), 
-    notice_img          varchar2(600), 
-    notice_date         timestamp   default sysdate,
-    notice_state        varchar2(10) default '10-001' REFERENCES tbl_code(code_no), 
-    dummy_no            number  default -1, 
-    dummy_star          number  default -1 not null, 
-    dummy_name         varchar2(30) default 'dummy' not null
-);
+drop table tbl_user;
 
-create table tbl_board_review(
-    review_no           number  primary key,
-    user_no             number  REFERENCES tbl_user(user_no),
-    review_content      varchar2(600), 
-    review_img          varchar2(600),
-    review_date         timestamp   default sysdate,
-    review_state        varchar2(10) default '10-001' REFERENCES tbl_code(code_no), 
-    dlvr_no             number  REFERENCES tbl_deliver(dlvr_no), 
-    review_star         number  default 2.5 not null
-);
+create SEQUENCE seq_account_no;
 
-// 게시판 테이블 위쪽 쿼리로 수정함
-/*
-create table tbl_board_notice(
-    notice_no	    number          primary key, 
-    admin_no	    number          REFERENCES tbl_admin(admin_no), 
-    notice_title	varchar2(100)   not null, 
-    notice_content	varchar2(600), 
-    notice_img	    varchar2(600), 
-    notice_date	    timestamp       default sysdate, 
-    notice_state	varchar2(1)     default 'X' 
-);
+create sequence seq_timeline_no;
 
-create table tbl_board_review(
-    review_no	    number          primary key, 
-    review_title	varchar2(100)   not null, 
-    review_content	varchar2(300), 
-    user_no	        number          REFERENCES tbl_user(user_no), 
-    review_img	    varchar2(600), 
-    review_star	    number          default 2.5, 
-    dlvr_no	        number          REFERENCES tbl_deliver(dlvr_no), 
-    review_state	varchar2(1)     default 'X'
-);
-*/
+create sequence seq_report_no;
+
+create sequence seq_order_no;
+
+create sequence seq_point_no;
