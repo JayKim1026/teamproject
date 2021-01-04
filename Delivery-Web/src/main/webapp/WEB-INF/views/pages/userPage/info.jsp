@@ -109,20 +109,22 @@
 					</div>
 				</td>
 				<td class="pwChange">
-					<div>
-						<label class="pw Label"> 현재 비밀번호</label>
-						<input type="password" name="user_pw">
-					</div>
-					<div>
-						<label class="pw Label"> 새 비밀번호</label>
-						<input type="password" name="user_Npw">
-					</div>
-					<div>
-						<label class="pw Label"> 새 비밀번호 확인</label>
-						<input type="password" name="user_Npw2">
-					</div>
+					<form id="frmPw" action="/user/pwChange" method="post">
+						<div>
+							<label class="pw Label"> 현재 비밀번호</label>
+							<input type="password" id="user_pw" name="user_pw">
+						</div>
+						<div>
+							<label class="pw Label"> 새 비밀번호</label>
+							<input type="password" id="user_Npw" name="user_Npw">
+						</div>
+						<div>
+							<label class="pw Label"> 새 비밀번호 확인</label>
+							<input type="password" id="user_Npw2" name="user_Npw2">
+						</div>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
+					</form>
 				</td>
 				<td> 
 					<button type="button" class="btn btn-secondary pwHide" id="btnChgPw">비밀번호 변경</button>
@@ -179,6 +181,19 @@
 					<button type="button" class="btn btn-secondary" id="btnChgPhone">휴대전화 변경</button>
 				</td>
 			</tr>
+			<%-- <tr>
+				<td>주소</td>
+				<td class="addrHide"> 
+					<div>
+						${sessionScope.userVO.user_addr}
+					</div>
+				</td>
+				<td class="addrChange">
+				</td>
+				<td>
+					<button type="button" class="btn btn-secondary">주소 변경</button>
+				</td>
+			</tr> --%>
 		</tbody>
 	</table>
 </body>
@@ -198,10 +213,56 @@ $(function() {
 		$(".pwHide").show();
 	});
 	
-	// 비밀번호 변경 - 현재 비밀번호 AJAX 확인하기
-	$("input[name=user_pw]").keyup(function(){
-		
+	// 비밀번호 변경 - 완료버튼 클릭 
+	$("#btnChgPw_ok").click(function(){
+		//비밀번호 AJAX 확인하기
+		var user_pw = $("input[name=user_pw]").val();
+		var url = "/user/pwCheck";
+		var sendData = {
+				"user_pw"	:	user_pw				
+		};
+		$.post(url,sendData,function(result){
+			// 현재 비밀번호가 => 일치 true / 불일치 false
+			if(result == "true") {
+				var Npw = $("#user_Npw").val();
+				var Npw2 = $("#user_Npw2").val();
+				
+				if(Npw != null && Npw != ""){
+					for(var i = 0; i < Npw.length; i++) {
+						var char_Npw = Npw.charCodeAt(i);
+						if( 7 < Npw.length && Npw.length < 17) {
+							if((47 < char_Npw && char_Npw < 58  ) || (64 < char_Npw && char_Npw < 91) || (96 < char_Npw && char_Npw < 123)) {
+								if(Npw == Npw2) {
+									$("#frmPw").submit();
+								} else {
+									alert("새 비밀번호가 일치하지 않습니다.");
+									$("#user_Npw").val("").focus();
+									$("#user_Npw2").val("");
+									return;
+								}
+							} else {
+								alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
+								return;
+							}// 영어 대소문자, 숫자  else
+						} else {
+							alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
+							return;
+						}
+					} //for
+				} else if(Npw == null || Npw == "") {
+					alert("새 비밀번호를 입력해주세요.");
+					$("#user_Npw").focus();
+					return;
+				}
+				
+			} else {
+				alert("현재 비밀번호를 다시 입력해주세요.");
+				$("#user_pw").val("").focus();
+			}
+				
+		});// post
 	});
+	
 	//<이미지 수정>
 	// 사진 변경 버튼
 	$("#btnChgImg").click(function() {
