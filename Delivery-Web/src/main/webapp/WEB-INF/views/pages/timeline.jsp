@@ -30,7 +30,7 @@ $("#btnInsert").click(function(e){
 		"data"			:	formData, 
 		"success"		:	function(data) {
 			console.log(data);
-			if(data == "success"){
+			if(data != null){
 				
 			var clone1 = $("#forclone").clone();
 			clone1.find("h3").text("${userVo.user_name}");
