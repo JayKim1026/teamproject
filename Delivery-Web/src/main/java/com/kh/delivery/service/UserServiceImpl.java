@@ -69,4 +69,10 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public String phoneChange(String user_id, String chg_phone) throws Exception {
+		String result = userDao.phoneChange(user_id, chg_phone);
+		return result;
+	}
+
 }

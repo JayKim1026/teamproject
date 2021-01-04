@@ -223,11 +223,11 @@ public class UserController implements Codes {
 			String result = userService.imgChange(user_id, user_img);
 			System.out.println("result : " + result );
 			if(result == "imgChange_success") {
-				rttr.addFlashAttribute("imgChangeResult", "success"); //TODO
+				rttr.addFlashAttribute("imgChangeResult", "success");
 				System.out.println("이미지 저장 성공");
 				return "redirect:/user/userPage/info";
 			} else {
-				rttr.addFlashAttribute("imgChangeResult", "fail"); //TODO
+				rttr.addFlashAttribute("imgChangeResult", "fail");
 				System.out.println("이미지 저장 실패");
 				return "redirect:/user/userPage/info";
 			}
@@ -259,10 +259,10 @@ public class UserController implements Codes {
 		String result = userService.pwChange(user_id, user_Npw);
 		if(result == "pwChange_success") {
 			userVo.setUser_pw(user_Npw);
-			rttr.addFlashAttribute("pwChagneResult", "success");
+			rttr.addFlashAttribute("pwChangeResult", "success");
 			return "redirect:userPage/info";
 		} else {
-			rttr.addFlashAttribute("pwChagneResult", "fail");
+			rttr.addFlashAttribute("pwChangeResult", "fail");
 			return "redirect:userPage/info";
 		}
 	}
@@ -287,12 +287,20 @@ public class UserController implements Codes {
 	
 	// 사용자 휴대전화 변경
 	@RequestMapping(value="/phoneChange", method=RequestMethod.POST)
-	public String phoneChange(String user_phone, HttpSession session) throws Exception {
+	public String phoneChange(String chg_phone, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
 		System.out.println("컨트롤러 phone user_id : " + user_id);
-		System.out.println("컨트롤러 phone user_phone : " + user_phone);
-		return null;
+		System.out.println("컨트롤러 phone user_phone : " + chg_phone);
+		String result = userService.phoneChange(user_id, chg_phone);
+		if(result == "phoneChange_success") {
+			rttr.addFlashAttribute("phoneChangeResult", "success");
+			userVo.setUser_phone(chg_phone);
+			return "redirect:userPage/info";
+		} else {
+			rttr.addFlashAttribute("phoneChangeResult", "fail");			
+			return "redirect:userPage/info";
+		}
 	}
 	
 	// 안드로이드

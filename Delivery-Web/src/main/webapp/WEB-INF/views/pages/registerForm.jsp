@@ -269,10 +269,15 @@ $(function(){
 		} else {
 			for(var i = 0; i < user_phone.length; i++) {
 				char_user_phone = user_phone.charCodeAt(i);
-				if( 47< char_user_phone && char_user_phone < 58) {
-					$(".phone_state").text("");
+				if(9 < user_phone.length && user_phone.length < 17) {
+					if( 47< char_user_phone && char_user_phone < 58) {
+						$(".phone_state").text("");
+					} else {
+						$(".phone_state").text("10~16자로 숫자만 입력해주세요").css("color", "red");
+						break;
+					}
 				} else {
-					$(".phone_state").text("숫자만 입력해주세요").css("color", "red");
+					$(".phone_state").text("10~16자로 숫자만 입력해주세요").css("color", "red");
 					break;
 				}
 			}
