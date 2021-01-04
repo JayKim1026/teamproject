@@ -11,8 +11,15 @@
 <title>timeLine.jsp</title>
 </head>
 <script>
+
 $(function(){
-	
+$("#category").on("change", function(){
+	if($(this).val() == "2-002"){
+		$(".rating").show();
+	}else{
+		$(".rating").hide();
+	}
+});
 $("#btnInsert").click(function(e){
 	console.log("클릭");
 	var url = "/timeline/insertArticle"
@@ -143,7 +150,7 @@ function add(ths, sno) {
 												</select>
 											</div>
 										</div>
-										<div class="rating">
+										<div class="rating" style="display:none;">
 											<input type="radio" name="rating" value="5" id="5"> 
 											<label for="5">☆</label> 
 											<input type="radio" name="rating" value="4" id="4"> 
