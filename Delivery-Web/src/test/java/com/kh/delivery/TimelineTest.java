@@ -1,6 +1,7 @@
 package com.kh.delivery;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.TimelineVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -38,5 +40,14 @@ public class TimelineTest {
 		map.put("review_content", "1234");
 		sqlSession.insert(NAMESPACE + "insertArticle", map);
 		
+	}
+	
+	@Test
+	public void testgetTimelineList() throws Exception {
+		Map<String, String> map = new HashMap<>();
+		String searchType = "2-002";
+		map.put("searchType", searchType);
+		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", map);
+		System.out.println(timelineList);
 	}
 }
