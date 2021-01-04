@@ -14,7 +14,7 @@ public class TimelineVo {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp time_date;
 	private String time_state;
-	private double time_star;
+	private int time_star;
 	private int dlvr_no;
 
 	// 조인 컬럼
@@ -77,11 +77,11 @@ public class TimelineVo {
 		this.time_state = time_state;
 	}
 
-	public double getTime_star() {
+	public int getTime_star() {
 		return time_star;
 	}
 
-	public void setTime_star(double time_star) {
+	public void setTime_star(int time_star) {
 		this.time_star = time_star;
 	}
 

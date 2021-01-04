@@ -24,6 +24,7 @@ public class TimelineServiceImpl implements TimelineService {
 	@Override
 	public String insertArticle(TimelineVo timelineVo) {
 		String result = timelineDao.insertArticle(timelineVo);
+		System.out.println("TimelineService, insertArticle, timelineVo:" + timelineVo);
 		return result;
 	}
 

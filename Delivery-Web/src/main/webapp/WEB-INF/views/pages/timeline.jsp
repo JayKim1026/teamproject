@@ -22,7 +22,7 @@ $("#btnInsert").click(function(e){
 	var writer_no = parseInt("${userVo.user_no}");
 	var writer_state = "2-012";
 	var time_state = $("#category").val();
-	var time_star = $("input[name=rating]").val();
+	var time_star = parseInt($("input[name=rating]:checked").val());
 	console.log(time_star);
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
@@ -210,14 +210,16 @@ function add(ths, sno) {
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
 											<div>
+											<c:if test="${timelineVo.time_star == 5}">
 												<p class="text-left">
-													<span class="text-muted">4.0</span> <span
+													<span class="text-muted">5.0</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-active"></span> <span
 														class="fa fa-star star-active"></span> <span
 														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-inactive"></span>
+														class="fa fa-star star-active"></span>
 												</p>
+											</c:if>
 											</div>
 										</div>
 											<div class="ml-auto">
