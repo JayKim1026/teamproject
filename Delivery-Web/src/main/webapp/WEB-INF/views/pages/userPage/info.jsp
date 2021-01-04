@@ -186,7 +186,6 @@
 <script>
 $(function() {
 	//<비밀번호 변경>
-	
 	// 비밀번호 변경 버튼 클릭
 	$("#btnChgPw").click(function(){
 		$(".pwHide").hide();
@@ -231,7 +230,7 @@ $(function() {
 		$("#chgImgPreview").show();
 	});
 	
-	// 사진 변경 form 전송 //TODO DB에 저장이 되지만 세션에 변경이 안되는 듯. 로그아웃 후 로그인했을 때 사진이 안뜸. 새로 회원가입 후 조회하면 사진 뜸. 
+	// 사진 변경 form 전송 
 	$("#btnChgImg_ok").click(function(e){
 		e.preventDefault();
 		$("#frmImgChange").submit();
