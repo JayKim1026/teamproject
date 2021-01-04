@@ -13,8 +13,8 @@
 					<img src="/resources/images/delivery_logo2.png" id="head_center_img"/>
 				</div>
 				<div class="col-md-2">
-					<img src="/resources/images/profile1.jpg" class="rounded-circle" id="head_icon_img"/>
-					<i id="head_icon_name">김뚜벅</i>
+					<img src="${image_url}${userVo.user_img}" class="rounded-circle" id="head_icon_img"/>
+					<i id="head_icon_name">${userVo.user_name}</i>
 					<i class="far fa-comment-dots" id="head_icon_dots"></i>
 					<i class="fas fa-bell" id="head_icon_bell"></i>
 				</div>

@@ -27,15 +27,14 @@ $("#btnInsert").click(function(e){
 	var f_timeline_img = $("input[type=file]")[0].files[0];
 	var time_content = $("#time_content").val();
 	var writer_no = parseInt("${userVo.user_no}");
-	var writer_state = "2-012";
+	var account_state = "${userVo.account_state}";
 	var time_state = $("#category").val();
 	var time_star = parseInt($("input[name=rating]:checked").val());
-	console.log(time_star);
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
 	formData.append("time_state", time_state);
 	formData.append("writer_no", writer_no);
-	formData.append("writer_state", writer_state);
+	formData.append("writer_state", account_state);
 	formData.append("time_star", time_star);
 	
 	$.ajax({
@@ -140,8 +139,7 @@ function add(ths, sno) {
 								<div class="d-flex justify-content-center">
 									<div class="card_writeform">
 										<div class="row px-3">
-											<img class="profile-pic mr-3"
-												src="https://i.imgur.com/6tPhTUn.jpg">
+											<img class="profile-pic mr-3" src="${image_url}${userVo.user_img}">
 											<div class="flex-column">
 												<h3 class="mb-0 font-weight-normal">${userVo.user_name}</h3>
 												<select id="category" name="privacy" class="privacy">
@@ -211,8 +209,7 @@ function add(ths, sno) {
 								<div class="card_output">
 									<div class="row d-flex">
 										<div class="">
-											<img class="profile-pic"
-												src="https://i.imgur.com/V3ICjlm.jpg">
+											<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
 										</div>
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>

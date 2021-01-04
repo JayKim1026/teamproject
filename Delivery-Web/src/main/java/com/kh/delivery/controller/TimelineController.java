@@ -36,9 +36,11 @@ public class TimelineController implements Codes {
 	public String showTimeline2(String searchType, Model model) throws Exception {
 		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
 		String image_url = BUCKET_URL;
+		String user_img = USER_IMG;
 		System.out.println("showTimeline2, timelineList = " + timelineList);
 		model.addAttribute("timelineList", timelineList);
 		model.addAttribute("image_url", image_url);
+		model.addAttribute("user_img", user_img);
 		return "pages/timeline";
 	}
 	
