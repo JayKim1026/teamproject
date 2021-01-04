@@ -14,54 +14,28 @@ public class TimelineServiceImpl implements TimelineService {
 	
 	@Inject
 	private TimelineDao timelineDao;
-	
-	@Override
-	public void insertArticle(TimelineVo timelineVo) {
-
-		timelineDao.insertArticle(timelineVo);
-			
-	}
 
 	@Override
-	public List<TimelineVo> timelineList() {
-		
-		List<TimelineVo> list = timelineDao.timelineList();
+	public List<TimelineVo> timelineList(String searchType) {
+		List<TimelineVo> list = timelineDao.timelineList(searchType);
 		return list;
 	}
 
 	@Override
-	public void updateArticle(TimelineVo timelineVo) {
-		timelineDao.updateArticle(timelineVo);
-		
-	}
-
-	@Override
-	public void deleteArticle(int review_no) {
-		timelineDao.deleteArticle(review_no);
-		
-	}
-
-	@Override
-	public List<TimelineVo> timelineList2() {
-		List<TimelineVo> list = timelineDao.timelineList();
-		return list;
-	}
-
-	@Override
-	public String insertArticle2(TimelineVo timelineVo) {
-		String result = timelineDao.insertArticle2(timelineVo);
+	public String insertArticle(TimelineVo timelineVo) {
+		String result = timelineDao.insertArticle(timelineVo);
 		return result;
 	}
 
 	@Override
-	public String updateArticle2(TimelineVo timelineVo) {
-		String result = timelineDao.updateArticle2(timelineVo);
+	public String updateArticle(TimelineVo timelineVo) {
+		String result = timelineDao.updateArticle(timelineVo);
 		return result;
 	}
 
 	@Override
-	public String deleteArticle2(int time_no) {
-		String result = timelineDao.deleteArticle2(time_no);
+	public String deleteArticle(int time_no) {
+		String result = timelineDao.deleteArticle(time_no);
 		return result;
 	}
 

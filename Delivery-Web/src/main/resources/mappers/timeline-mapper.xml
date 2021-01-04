@@ -3,38 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.timeline">
-<!-- 	<insert id="insertArticle"> -->
-<!-- 		insert into tbl_board_review -->
-<!-- 		(review_no, user_no, review_content, review_img) -->
-<!-- 		values(seq_board_no.nextval,#{writer_no}, #{time_content}, #{time_img}) -->
-<!-- 	</insert> -->
-	
-<!-- 	<insert id="insertArticleNoPic"> -->
-<!-- 		insert into tbl_board_review -->
-<!-- 		(review_no, user_no, review_content) -->
-<!-- 		values(seq_board_no.nextval,#{writer_no}, #{time_content}) -->
-<!-- 	</insert> -->
-	
-<!-- 	<select id="timelineList" resultType="TimelineVo"> -->
-<!-- 		select t.*, u.user_name -->
-<!-- 		from tbl_board_review t inner join tbl_user u -->
-<!-- 		on t.user_no = u.user_no  -->
-<!-- 		order by review_no desc -->
-<!-- 	</select> -->
-	
-<!-- 	<update id="updateArticle"> -->
-<!-- 		update tbl_board_review set -->
-<!-- 		review_content = #{timeline_content} -->
-<!-- 		where review_no = #{timeline_no} -->
-<!-- 	</update> -->
-	
-<!-- 	<delete id="deleteArticle"> -->
-<!-- 		delete from tbl_board_review -->
-<!-- 		where review_no = #{timeline_no} -->
-<!-- 	</delete> -->
-	
-	
-<!-- 	수정본 -->
+
 	<select id="timelineList" resultType="TimelineVo">
 		select t.*, d.dlvr_name, a.writer_name
 		from tbl_timeline t 
@@ -48,19 +17,20 @@
 		        select dlvr_no, dlvr_name from tbl_deliver
 		    ) a
 		    on t.writer_no = a.account_no
+		<if test="searchType != null">
+			where time_state = #{searchType}
+		</if>
 		order by t.time_no desc
 	</select>
 	
 	<insert id="insertArticle">
-		insert into tbl_timeline
-		(time_no, writer_no, time_content, time_img)
-		values(seq_board_no.nextval, #{writer_no}, #{time_content}, #{time_img})
+		insert into tbl_timeline(time_no, writer_no, writer_state, time_content, time_img, time_state)
+		values(seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, #{time_img}, #{time_state})
 	</insert>
 	
 	<insert id="insertArticleNoPic">
-		insert into tbl_timeline
-		(time_no, writer_no, time_content)
-		values(seq_board_no.nextval, #{writer_no}, #{time_content})
+		insert into tbl_timeline(time_no, writer_no, writer_state, time_content, time_state)
+		values(seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, #{time_state})
 	</insert>
 	
 	<update id="updateArticle">
