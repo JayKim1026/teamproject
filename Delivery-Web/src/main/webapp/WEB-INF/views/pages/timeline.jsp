@@ -15,8 +15,6 @@ $(function(){
 	
 $("#btnInsert").click(function(e){
 	console.log("클릭");
-	var starRating = $(".star-rating").val();
-	console.log(starRating);
 	var url = "/timeline/insertArticle"
 	var formData = new FormData();
 	var f_timeline_img = $("input[type=file]")[0].files[0];
@@ -24,11 +22,15 @@ $("#btnInsert").click(function(e){
 	var writer_no = parseInt("${userVo.user_no}");
 	var writer_state = "2-012";
 	var time_state = $("#category").val();
+	var time_star = $("input[name=rating]").val();
+	console.log(time_star);
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
 	formData.append("time_state", time_state);
 	formData.append("writer_no", writer_no);
 	formData.append("writer_state", writer_state);
+	formData.append("time_star", time_star);
+	
 	$.ajax({
 		"processData"	:	false,
 		"contentType"	:	false,
@@ -124,6 +126,7 @@ function add(ths, sno) {
 					<div class="col-md-2"></div>
 					<div class="col-md-1"></div>
 					<div class="col-md-6">
+					<form enctype="multipart/form-data" method="post" id="frmData">
 						<div class="form-group">
 							<!-- 유저번호  -->
 							
@@ -154,7 +157,6 @@ function add(ths, sno) {
 											<label for="1">☆</label>
 										</div>
 										
-										<form enctype="multipart/form-data" method="post" id="frmData">
 										<div class="row px-3 form-group">
 										
 											<input type="hidden" value="${userVo.user_no}" id="user_no" name="user_no">
@@ -174,11 +176,11 @@ function add(ths, sno) {
 <!-- 											</div> -->
 											<div class="btn btn-success ml-auto" id="btnInsert">글쓰기</div>
 										</div>
-										</form>	
 									</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-md-2"></div>

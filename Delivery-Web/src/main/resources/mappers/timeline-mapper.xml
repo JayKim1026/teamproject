@@ -17,7 +17,7 @@
 		        select dlvr_no, dlvr_name from tbl_deliver
 		    ) a
 		    on t.writer_no = a.account_no
-		<if test="time_state != null">
+		<if test="searchType != null">
 			where time_state = #{searchType}
 		</if>
 		order by t.time_no desc
