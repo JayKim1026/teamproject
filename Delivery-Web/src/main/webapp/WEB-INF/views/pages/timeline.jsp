@@ -15,8 +15,6 @@ $(function(){
 	
 $("#btnInsert").click(function(e){
 	console.log("클릭");
-	var starRating = $(".star-rating").val();
-	console.log(starRating);
 	var url = "/timeline/insertArticle"
 	var formData = new FormData();
 	var f_timeline_img = $("input[type=file]")[0].files[0];
@@ -24,11 +22,15 @@ $("#btnInsert").click(function(e){
 	var writer_no = parseInt("${userVo.user_no}");
 	var writer_state = "2-012";
 	var time_state = $("#category").val();
+	var time_star = parseInt($("input[name=rating]:checked").val());
+	console.log(time_star);
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
 	formData.append("time_state", time_state);
 	formData.append("writer_no", writer_no);
 	formData.append("writer_state", writer_state);
+	formData.append("time_star", time_star);
+	
 	$.ajax({
 		"processData"	:	false,
 		"contentType"	:	false,
@@ -123,6 +125,7 @@ function add(ths, sno) {
 					<div class="col-md-2"></div>
 					<div class="col-md-1"></div>
 					<div class="col-md-6">
+					<form enctype="multipart/form-data" method="post" id="frmData">
 						<div class="form-group">
 							<!-- 유저번호  -->
 							
@@ -153,7 +156,6 @@ function add(ths, sno) {
 											<label for="1">☆</label>
 										</div>
 										
-										<form enctype="multipart/form-data" method="post" id="frmData">
 										<div class="row px-3 form-group">
 										
 											<input type="hidden" value="${userVo.user_no}" id="user_no" name="user_no">
@@ -173,11 +175,11 @@ function add(ths, sno) {
 <!-- 											</div> -->
 											<div class="btn btn-success ml-auto" id="btnInsert">글쓰기</div>
 										</div>
-										</form>	
 									</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-md-2"></div>
@@ -208,14 +210,65 @@ function add(ths, sno) {
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
 											<div>
+											<!-- 별 다섯개 나 머리나빠서 로직 아직 안됨 기다리셈 -->
+											<c:if test="${timelineVo.time_star == 5}">
 												<p class="text-left">
-													<span class="text-muted">4.0</span> <span
+													<span class="text-muted">5</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span>
+												</p>
+											</c:if>
+											<!-- 별 네개 -->
+											<c:if test="${timelineVo.time_star == 4}">
+												<p class="text-left">
+													<span class="text-muted">4</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-active"></span> <span
 														class="fa fa-star star-active"></span> <span
 														class="fa fa-star star-active"></span> <span
 														class="fa fa-star star-inactive"></span>
 												</p>
+											</c:if>
+											
+											<!-- 별 세개 -->
+											<c:if test="${timelineVo.time_star == 3}">
+												<p class="text-left">
+													<span class="text-muted">3</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-active"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
+											<!-- 별 두개 -->
+											<c:if test="${timelineVo.time_star == 2}">
+												<p class="text-left">
+													<span class="text-muted">2</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
+											<!-- 별 한개 -->
+											<c:if test="${timelineVo.time_star == 1}">
+												<p class="text-left">
+													<span class="text-muted">1</span> <span
+														class="fa fa-star star-active ml-3"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span> <span
+														class="fa fa-star star-inactive"></span>
+												</p>
+											</c:if>
+											
 											</div>
 										</div>
 											<div class="ml-auto">

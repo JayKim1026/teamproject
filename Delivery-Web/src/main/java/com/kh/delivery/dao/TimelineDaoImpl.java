@@ -21,7 +21,9 @@ public class TimelineDaoImpl implements TimelineDao {
 
 	@Override
 	public List<TimelineVo> timelineList(String searchType) {
-		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", searchType);
+		Map<String, String> map = new HashMap<>();
+		map.put("searchType", searchType);
+		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", map);
 		return timelineList;
 	}
 
@@ -31,6 +33,7 @@ public class TimelineDaoImpl implements TimelineDao {
 			sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
 		} else {
 			sqlSession.insert(NAMESPACE + "insertArticleNoPic", timelineVo);
+			System.out.println("TimelineDao, insertArticle, timelineVo:" + timelineVo);
 		}
 		return "insertArticle_success";
 	}
