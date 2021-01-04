@@ -44,11 +44,7 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-<<<<<<< HEAD
-	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
-=======
 	public Map insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 			Model model) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		System.out.println("insertArticle2, timelineVo = " + timelineVo);

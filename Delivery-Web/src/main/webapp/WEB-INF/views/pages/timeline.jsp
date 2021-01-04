@@ -26,10 +26,7 @@ $("#btnInsert").click(function(e){
 	var time_state = $("#category").val();
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
-<<<<<<< HEAD
-=======
 	formData.append("time_state", time_state);
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 	formData.append("writer_no", writer_no);
 	formData.append("writer_state", writer_state);
 	$.ajax({
@@ -51,11 +48,7 @@ $("#btnInsert").click(function(e){
 				$("#time_img").val("");
 			} else if(data.fail == "fail"){
 				alert("글쓰기 실패");
-<<<<<<< HEAD
 			}
-=======
-			}	
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 		}
 	});
 // 	javascript:history.go(0);
