@@ -6,38 +6,69 @@
 
 	<select id="login" resultType="UserVo">
 		select * from tbl_user
-		where user_id = #{user_id}
+		where
+		user_id = #{user_id}
 		and user_pw = #{user_pw}
 	</select>
-	
+
 	<insert id="insertUser">
-		insert into tbl_user(user_no, user_id, user_pw, user_name, 
-								user_phone, user_email, user_addr, user_birth, user_img)
-		values(seq_account_no.nextval, #{user_id}, #{user_pw}, #{user_name}, 
-				#{user_phone}, #{user_email}, #{user_addr}, #{user_birth}, #{user_img})
+		insert into tbl_user(user_no, user_id, user_pw,
+		user_name,
+		user_phone, user_email, user_addr, user_birth, user_img)
+		values(seq_account_no.nextval, #{user_id}, #{user_pw}, #{user_name},
+		#{user_phone}, #{user_email}, #{user_addr}, #{user_birth},
+		#{user_img})
 	</insert>
-	
+
 	<select id="checkIdDupl" resultType="UserVo">
 		select * from tbl_user
-		where user_id = #{user_id}
-	</select>
-	
-	<select id="findAccount" resultType="UserVo">
-		select * from tbl_user
-		where user_name = #{user_name}
-		and user_phone = #{user_phone}
-		and user_email = #{user_email}
-	</select>
-	
-	<select id="getUserInfo" resultType="UserVo">
-		select * from tbl_user
-		where user_no = #{user_no}
+		where
+		user_id = #{user_id}
 	</select>
 
-<!-- 사용자 이미지 변경  -->
+	<select id="findAccount" resultType="UserVo">
+		select * from tbl_user
+		where
+		user_name = #{user_name}
+		and user_phone = #{user_phone}
+		and user_email =
+		#{user_email}
+	</select>
+
+	<select id="getUserInfo" resultType="UserVo">
+		select * from tbl_user
+		where
+		user_no = #{user_no}
+	</select>
+
+	<!-- 사용자 이미지 변경 -->
 	<update id="imgChange">
-		update tbl_user set 
+		update tbl_user set
 		user_img = #{user_img}
 		where user_id = #{user_id}
 	</update>
+
+	<!-- 사용자 현재 비밀번호 확인 -->
+	<select id="pwCheck" resultType="userVo">
+		select * from tbl_user
+		where
+		user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
+
+	<!-- 사용자 비밀번호 변경 -->
+	<update id="pwChange">
+		update tbl_user set
+		user_pw = #{user_Npw}
+		where user_id = #{user_id}
+	</update> 
+	
+	
+	<!-- 사용자 이메일 변경 -->
+	<update id="emailChange">
+		update tbl_user set
+		user_email = #{user_email}
+		where user_id = #{user_id}
+	</update>
+	
+	<!-- 사용자 전화번호 변경 -->
 </mapper>

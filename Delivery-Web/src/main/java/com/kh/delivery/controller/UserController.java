@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -234,6 +235,65 @@ public class UserController implements Codes {
 		
 	}
 	
+	// 현재 비밀번호 확인 ajax
+	@RequestMapping(value="/pwCheck", method=RequestMethod.POST)
+	@ResponseBody
+	public String pwCheck(String user_pw, HttpSession session) throws Exception {
+		
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		//System.out.println("컨트롤러 user_pw : " + user_pw);
+		//System.out.println("컨트롤러 user_id : " + user_id);
+
+		String result = userService.pwCheck(user_id, user_pw);
+		//System.out.println("controller result : " + result);
+		return result;
+	}
+	
+	// 비밀번호 변경
+	@RequestMapping(value="/pwChange", method=RequestMethod.POST)
+	public String pwChange(String user_Npw, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("user_Npw : " + user_Npw);
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		String result = userService.pwChange(user_id, user_Npw);
+		if(result == "pwChange_success") {
+			userVo.setUser_pw(user_Npw);
+			rttr.addFlashAttribute("pwChagneResult", "success");
+			return "redirect:userPage/info";
+		} else {
+			rttr.addFlashAttribute("pwChagneResult", "fail");
+			return "redirect:userPage/info";
+		}
+	}
+	
+	// 이메일 변경
+	@RequestMapping(value="/emailChange", method=RequestMethod.POST)
+	public String emailChange(String user_email, HttpSession session, RedirectAttributes rttr)throws Exception {
+		System.out.println("user_email : " + user_email);
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		String result = userService.emailChange(user_id, user_email);
+		if(result == "emailChange_success") {
+			userVo.setUser_email(user_email);
+			rttr.addFlashAttribute("emailChangeResult", "success");
+			return "redirect:userPage/info";
+		} else {
+			rttr.addFlashAttribute("emailChangeResult", "fail");
+			return "redirect:userPage/info";
+
+		}
+	}
+	
+	// 사용자 휴대전화 변경
+	@RequestMapping(value="/phoneChange", method=RequestMethod.POST)
+	public String phoneChange(String user_phone, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		System.out.println("컨트롤러 phone user_id : " + user_id);
+		System.out.println("컨트롤러 phone user_phone : " + user_phone);
+		return null;
+	}
 	
 	// 안드로이드
 	// 유저 정보 가져오기

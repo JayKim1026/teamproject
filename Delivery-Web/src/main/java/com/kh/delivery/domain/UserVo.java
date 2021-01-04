@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UserVo {
+	private String code_no;
 	private int user_no;
 	private String user_id;
 	private String user_pw;
@@ -22,26 +23,12 @@ public class UserVo {
 	private int user_point;
 	private String user_rank;
 
-	public UserVo() {
+	public String getCode_no() {
+		return code_no;
 	}
 
-	public UserVo(int user_no, String user_id, String user_pw, String user_name, String user_phone, String user_email,
-			String user_addr, String user_img, Date user_birth, Timestamp user_date, String user_state, int user_point,
-			String user_rank) {
-		super();
-		this.user_no = user_no;
-		this.user_id = user_id;
-		this.user_pw = user_pw;
-		this.user_name = user_name;
-		this.user_phone = user_phone;
-		this.user_email = user_email;
-		this.user_addr = user_addr;
-		this.user_img = user_img;
-		this.user_birth = user_birth;
-		this.user_date = user_date;
-		this.user_state = user_state;
-		this.user_point = user_point;
-		this.user_rank = user_rank;
+	public void setCode_no(String code_no) {
+		this.code_no = code_no;
 	}
 
 	public int getUser_no() {
@@ -150,12 +137,11 @@ public class UserVo {
 
 	@Override
 	public String toString() {
-		return "UserVo [user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
-				+ user_name + ", user_phone=" + user_phone + ", user_email=" + user_email + ", user_addr=" + user_addr
-				+ ", user_img=" + user_img + ", user_birth=" + user_birth + ", user_date=" + user_date + ", user_state="
-				+ user_state + ", user_point=" + user_point + ", user_rank=" + user_rank + "]";
+		return "UserVo [code_no=" + code_no + ", user_no=" + user_no + ", user_id=" + user_id + ", user_pw=" + user_pw
+				+ ", user_name=" + user_name + ", user_phone=" + user_phone + ", user_email=" + user_email
+				+ ", user_addr=" + user_addr + ", user_img=" + user_img + ", user_birth=" + user_birth + ", user_date="
+				+ user_date + ", user_state=" + user_state + ", user_point=" + user_point + ", user_rank=" + user_rank
+				+ "]";
 	}
-
-	
 
 }

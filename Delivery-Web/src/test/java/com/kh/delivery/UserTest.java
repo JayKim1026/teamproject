@@ -33,4 +33,13 @@ public class UserTest {
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "login", map);
 		System.out.println(userVo);
 	}
+	
+	@Test
+	public void testPwChange() throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", "user01");
+		map.put("user_Npw", "12341234");
+		int result = sqlSession.update(NAMESPACE + "pwChange", map);
+		System.out.println(result);
+	}
 }

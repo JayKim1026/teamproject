@@ -50,4 +50,23 @@ public class UserServiceImpl implements UserService {
 		return "imgChange_success";
 	}
 
+	@Override
+	public String pwCheck(String user_id, String user_pw) throws Exception {
+		String result = userDao.pwCheck(user_id, user_pw);
+		//System.out.println("서비스 result pwCheck : " + result);
+		return result;
+	}
+
+	@Override
+	public String pwChange(String user_id, String user_Npw) throws Exception {
+		String result =	userDao.pwChange(user_id, user_Npw);
+		return result;
+	}
+
+	@Override
+	public String emailChange(String user_id, String user_email) throws Exception {
+		String result = userDao.emailChange(user_id, user_email);
+		return result;
+	}
+
 }

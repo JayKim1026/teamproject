@@ -109,20 +109,22 @@
 					</div>
 				</td>
 				<td class="pwChange">
-					<div>
-						<label class="pw Label"> 현재 비밀번호</label>
-						<input type="password" name="user_pw">
-					</div>
-					<div>
-						<label class="pw Label"> 새 비밀번호</label>
-						<input type="password" name="user_Npw">
-					</div>
-					<div>
-						<label class="pw Label"> 새 비밀번호 확인</label>
-						<input type="password" name="user_Npw2">
-					</div>
+					<form id="frmPw" action="/user/pwChange" method="post">
+						<div>
+							<label class="pw Label"> 현재 비밀번호</label>
+							<input type="password" id="user_pw" name="user_pw">
+						</div>
+						<div>
+							<label class="pw Label"> 새 비밀번호</label>
+							<input type="password" id="user_Npw" name="user_Npw">
+						</div>
+						<div>
+							<label class="pw Label"> 새 비밀번호 확인</label>
+							<input type="password" id="user_Npw2" name="user_Npw2">
+						</div>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
+					</form>
 				</td>
 				<td> 
 					<button type="button" class="btn btn-secondary pwHide" id="btnChgPw">비밀번호 변경</button>
@@ -148,11 +150,13 @@
 				</td>
 				<td class="EmailChange">
 					<div>
-						<label class="email Label">수정 이메일 </label>
-						<input type="email" name="user_name">
-						<br/>
-						<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
-						<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
+						<form id="frmEmail" action="/user/emailChange" method="Post">
+							<label class="email Label">수정 이메일 </label>
+							<input type="email" id="chg_Email" name="user_email">
+							<br/>
+							<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
+							<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
+						</form>
 					</div>
 				</td>
 				<td>
@@ -168,25 +172,45 @@
 				</td>
 				<td class="phoneChange">
 					<div>
-						<label class="phone Label">수정 전화번호</label>
-						<input type="tel" name="user_name">
-						<br/>
-						<button type="button" class="btn btn-secondary" id="btnChgPhone_cancel">취소</button>
-						<button type="submit" class="btn btn-secondary" id="btnChgPhone_ok">완료</button>
+						<form id="frmPhone" action="/user/phoneChange" method="post">
+							<label class="phone Label">수정 전화번호</label>
+							<input type="tel" id="chg_phone" name="chg_phone">
+							<br/>
+							<button type="button" class="btn btn-secondary" id="btnChgPhone_cancel">취소</button>
+							<button type="submit" class="btn btn-secondary" id="btnChgPhone_ok">완료</button>
+						</form>
 					</div>
 				</td>
 				<td>	
 					<button type="button" class="btn btn-secondary" id="btnChgPhone">휴대전화 변경</button>
 				</td>
 			</tr>
+			<%-- <tr>
+				<td>주소</td>
+				<td class="addrHide"> 
+					<div>
+						${sessionScope.userVO.user_addr}
+					</div>
+				</td>
+				<td class="addrChange">
+				</td>
+				<td>
+					<button type="button" class="btn btn-secondary">주소 변경</button>
+				</td>
+			</tr> --%>
 		</tbody>
 	</table>
 </body>
 
 <script>
 $(function() {
-	//<비밀번호 변경>
+	//메세지
+	var pwChagneResult = "${pwChagneResult}";
+	if(pwChagneResult == "success") {
+		alert("비밀번호가 변경되었습니다.");
+	} 
 	
+	//<비밀번호 변경>
 	// 비밀번호 변경 버튼 클릭
 	$("#btnChgPw").click(function(){
 		$(".pwHide").hide();
@@ -199,10 +223,56 @@ $(function() {
 		$(".pwHide").show();
 	});
 	
-	// 비밀번호 변경 - 현재 비밀번호 AJAX 확인하기
-	$("input[name=user_pw]").keyup(function(){
-		
+	// 비밀번호 변경 - 완료버튼 클릭 
+	$("#btnChgPw_ok").click(function(){
+		//비밀번호 AJAX 확인하기
+		var user_pw = $("input[name=user_pw]").val();
+		var url = "/user/pwCheck";
+		var sendData = {
+				"user_pw"	:	user_pw				
+		};
+		$.post(url,sendData,function(result){
+			// 현재 비밀번호가 => 일치 true / 불일치 false
+			if(result == "true") {
+				var Npw = $("#user_Npw").val();
+				var Npw2 = $("#user_Npw2").val();
+				
+				if(Npw != null && Npw != ""){
+					for(var i = 0; i < Npw.length; i++) {
+						var char_Npw = Npw.charCodeAt(i);
+						if( 7 < Npw.length && Npw.length < 17) {
+							if((47 < char_Npw && char_Npw < 58  ) || (64 < char_Npw && char_Npw < 91) || (96 < char_Npw && char_Npw < 123)) {
+								if(Npw == Npw2) {
+									$("#frmPw").submit();
+								} else {
+									alert("새 비밀번호가 일치하지 않습니다.");
+									$("#user_Npw").val("").focus();
+									$("#user_Npw2").val("");
+									return;
+								}
+							} else {
+								alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
+								return;
+							}// 영어 대소문자, 숫자  else
+						} else {
+							alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
+							return;
+						}
+					} //for
+				} else if(Npw == null || Npw == "") {
+					alert("새 비밀번호를 입력해주세요.");
+					$("#user_Npw").focus();
+					return;
+				}
+				
+			} else {
+				alert("현재 비밀번호를 다시 입력해주세요.");
+				$("#user_pw").val("").focus();
+			}
+				
+		});// post
 	});
+	
 	//<이미지 수정>
 	// 사진 변경 버튼
 	$("#btnChgImg").click(function() {
@@ -231,12 +301,14 @@ $(function() {
 		$("#chgImgPreview").show();
 	});
 	
-	// 사진 변경 form 전송 //TODO DB에 저장이 되지만 세션에 변경이 안되는 듯. 로그아웃 후 로그인했을 때 사진이 안뜸. 새로 회원가입 후 조회하면 사진 뜸. 
+	// 사진 변경 form 전송 
 	$("#btnChgImg_ok").click(function(e){
 		e.preventDefault();
 		$("#frmImgChange").submit();
 	});
 	
+	
+	//<이메일 변경>
 	// 이메일 변경 버튼
 	$(".chgEmail").click(function(){
 		$(".EmaileHide").hide();
@@ -249,9 +321,18 @@ $(function() {
 			$(".chgEmail").show();
 			$(".EmailChange").hide();
 		});
-	//TODO 
 	//이메일 변경 - 완료 버튼 
-	
+	$("#btnChgEmail_ok").click(function(e) {
+		e.preventDefault();
+		var chg_email = $("#chg_Email").val();
+		if(chg_email != null && chg_email != "") {
+			$("#frmEmail").submit();
+		} else {
+			alert("이메일을 입력해주세요");
+			$("#chg_Email").focus();
+		}
+		
+	});
 	//휴대전화 변경 버튼
 	$("#btnChgPhone").click(function(){
 		$(".phoneChange").show();
@@ -265,8 +346,30 @@ $(function() {
 		$("#btnChgPhone").show();
 		$(".phoneHide").show();
 	});
-	//TODO
 	//휴대전화 변경 - 완료버튼
+	$("#btnChgPhone_ok").click(function(){
+		var chg_phone = $("#chg_phone").val();
+		if(chg_phone != nll && chg_phone != "") {
+			for(var i = 0; i < chg_phone.length ; i++) {
+				var char_chg_phone = chg_phone.charCodeAt(i);
+				if(9 < chg_phone.length && chg_phone.length <11){
+					if( 47< char_chg_phone && char_chg_phone < 58) {
+						
+						
+					} else {
+						alert("숫자만 입력해주세요");
+						$("#chg_phone").val("").focus();
+						return;
+					}
+				}
+			}
+			
+		} else {
+			alert("휴대전화 번호를 입력해 주세요.");
+			$("#chg_phone").focus();
+			return;
+		}
+	});
 }); // 핸들러
 
 // 바꿀 프로필 사진 미리 보여주기

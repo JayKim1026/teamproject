@@ -73,5 +73,40 @@ public class UserDaoImpl implements UserDao {
 				
 		return "imgChange_success";
 	}
+
+	@Override
+	public String pwCheck(String user_id, String user_pw) throws Exception {
+		Map<String,String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_pw", user_pw);
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "pwCheck" , map);
+		//System.out.println("userDao pwCheck userVo : " + userVo);
+		if(userVo != null) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	@Override
+	public String pwChange(String user_id, String user_Npw) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_Npw", user_Npw);
+		int result = sqlSession.update(NAMESPACE + "pwChange", map);
+		System.out.println("pwChange Dao result" + result);	
+		return "pwChange_success";
+			
+	}
+
+	@Override
+	public String emailChange(String user_id, String user_email) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_email", user_email);
+		int result = sqlSession.update(NAMESPACE + "emailChange" , map);
+		System.out.println("emailChange Dao result : " + result);
+		return "emailChange_success";
+	}
 	
 }
