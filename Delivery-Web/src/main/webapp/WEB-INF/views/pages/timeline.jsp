@@ -13,6 +13,7 @@
 <script>
 
 $(function(){
+/*카테고리 분류*/
 $("#category").on("change", function(){
 	if($(this).val() == "2-002"){
 		$(".rating").show();
@@ -20,6 +21,7 @@ $("#category").on("change", function(){
 		$(".rating").hide();
 	}
 });
+/* 글쓰기 */
 $("#btnInsert").click(function(e){
 	console.log("클릭");
 	var url = "/timeline/insertArticle"
@@ -61,12 +63,12 @@ $("#btnInsert").click(function(e){
 	});
 // 	javascript:history.go(0);
 });
-
+/*모달 트리거*/
 $(".btnUpdate").click(function(e){
 	$("#squarespaceModal > input[name=time_no]").val($(this).attr("data-no"));
 	$("#btnUpdateModal").trigger("click");
 });
-
+/*업데이트 저장*/
 $("#btnUpdateSave").click(function(){
 	var time_no = $("#squarespaceModal > input[name=time_no]").val();
 	var time_content = $("#time_content_update").val();
@@ -96,7 +98,7 @@ $("#btnUpdateSave").click(function(){
 	javascript:history.go(0);
 	$("#btnUpdateClose").trigger("click");	
 });
-
+/*삭제*/
 $(".btnDelete").click(function(){
 	var time_no = $(this).attr("data-no");
 	console.log(time_no);
@@ -107,7 +109,26 @@ $(".btnDelete").click(function(){
 	});
 });
 
+/*사진 미리보기*/
+// $("#time_img").on("change", function(){
+// 	readURL(this);
+// });
+
 });
+
+// function readURL(input){
+// 	if(input.files && input.files[0]){
+// 		var reader = new FileReader();
+// 		reader.onload = function (e) {
+// 			$("#imgPreview").attr("src", e.target.result);
+// 		}
+		
+// 		reader.readAs
+// 		reader.readAsDataURL(input.files[0]);
+// 		console.log("input.files[0] : " + input.files[0]);
+// 	}
+// }
+/*별점*/
 function add(ths, sno) {
 	for (var i = 1; i <= 5; i++) {
 		var cur = document.getElementById("star" + i)
@@ -167,7 +188,7 @@ function add(ths, sno) {
 											<textarea id="time_content" name="time_content"
 												class="text-muted bg-light mt-4 mb-3"
 												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
-										
+<!-- 											<img src="#" id="imgPreview" style="width:60px; height:60px;"> -->
 										</div>
 										<div class="row px-3 form-group">
 											<p class="fa fa-user options mb-0 mr-4"></p>

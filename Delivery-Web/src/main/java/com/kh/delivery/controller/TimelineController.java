@@ -46,7 +46,7 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public Map insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+	public Map<String, String> insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
 			Model model) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		System.out.println("insertArticle2, timelineVo = " + timelineVo);
@@ -100,19 +100,19 @@ public class TimelineController implements Codes {
 	}
 	
 	
-	// 안드로이드
-	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
-	@ResponseBody
-	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
-		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
-		return timelineList;
-	}
-	
-	@RequestMapping(value="/aInsertArticle", method=RequestMethod.POST)
-	@ResponseBody
-	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
-		System.out.println("atimelineVo = " + timelineVo);
-		String result = timelineService.insertArticle(timelineVo);
-		return result;
-	}
+//	// 안드로이드
+//	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
+//	@ResponseBody
+//	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
+//		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
+//		return timelineList;
+//	}
+//	
+//	@RequestMapping(value="/aInsertArticle", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
+//		System.out.println("atimelineVo = " + timelineVo);
+//		String result = timelineService.insertArticle(timelineVo);
+//		return result;
+//	}
 }
