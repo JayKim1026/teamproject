@@ -24,13 +24,13 @@
 	</select>
 	
 	<insert id="insertArticle">
-		insert into tbl_timeline(time_no, writer_no, writer_state, time_content, time_img, time_state, time_star)
-		values(seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, #{time_img}, #{time_state}, #{time_star})
+		insert into tbl_timeline(time_no, writer_no, writer_state, time_content, time_img, time_state, time_star, time_location)
+		values(seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, #{time_img}, #{time_state}, #{time_star}, #{time_location})
 	</insert>
 	
 	<insert id="insertArticleNoPic">
-		insert into tbl_timeline(time_no, writer_no, writer_state, time_content, time_state, time_star)
-		values(seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, #{time_state}, #{time_star})
+		insert into tbl_timeline(time_no, writer_no, writer_state, time_content, time_state, time_star, time_location)
+		values(seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, #{time_state}, #{time_star}, #{time_location})
 	</insert>
 	
 	<update id="updateArticle">

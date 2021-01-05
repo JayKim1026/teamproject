@@ -39,6 +39,9 @@ if(navigator.geolocation) {
 				const strArray = str.split(" ");
 				console.log(strArray);
 				console.log(strArray[2]);
+				
+				$("#time_location").text(strArray[2]);
+				$("#write-map-marker").show();
 			}
 		});
 	});
@@ -71,6 +74,7 @@ $("#btnInsert").click(function(e){
 	var account_state = "${userVo.account_state}";
 	var time_state = $("#category").val();
 	var time_star = parseInt($("input[name=rating]:checked").val());
+	var time_location = $("#time_location").text();
 	if(isNaN(time_star)){
 		time_star = parseInt($("#noValueRating").val());
 	}
@@ -81,7 +85,7 @@ $("#btnInsert").click(function(e){
 	formData.append("writer_no", writer_no);
 	formData.append("writer_state", account_state);
 	formData.append("time_star", time_star);
-	
+	formData.append("time_location", time_location);
 	
 	$.ajax({
 		"processData"	:	false,
@@ -96,7 +100,9 @@ $("#btnInsert").click(function(e){
 				
 				/* 카테고리 */
 				
-				if(data.time_state != "2-002"){
+				if(data.time_state == "2-002"){
+					clone1.find(".output-stars-clone").show();
+				}else if(data.time_state == "2-003"){
 					clone1.find(".output-stars-clone").hide();
 				}
 				
@@ -274,6 +280,8 @@ function add(ths, sno) {
 													<option value="2-002">배달후기</option>
 												</select>
 											</div>
+											<i class="fas fa-map-marker-alt" id="write-map-marker"></i>
+											<h5 id="time_location" style="padding-left:6px; padding-top:3px;"></h5>
 										</div>
 										<div class="rating" style="display:none;">
 											<input type="radio" name="rating" value="5" id="5"> 
@@ -341,7 +349,7 @@ function add(ths, sno) {
 										</div>
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
-											<div class="output-stars">
+											<div class="output-stars" style="padding-top:10px;">
 											<c:if test='${timelineVo.time_state == "2-002"}'>
 											<c:if test="${timelineVo.time_star == 5}">
 												<p class="text-left" id="five-stars-p">
@@ -403,6 +411,11 @@ function add(ths, sno) {
 											</c:if>
 											</div>
 										</div>
+										<c:if test="${timelineVo.time_location != null}">
+										<p style="padding-top:19px; color:gray;">님이</p>
+										<p style="font-size: 16px; padding-left:3px; padding-top:19px; font-weight:bold; ">${timelineVo.time_location}</p>
+										<p style="padding-top:19px; color:gray;">에 있다 이새끼야!</p>
+										</c:if>
 											<div class="ml-auto">
 												<ul class="nav navbar-nav" style="float:right;">
 													<li class="dropdown"><a href="#"
@@ -423,6 +436,7 @@ function add(ths, sno) {
 													</ul>
 													<p class="text-muted" style="padding-right:30px; ">${timelineVo.time_date}</p>
 												</div>
+												
 										</div>
 									<div class="text-left">
 										<p class="content">${timelineVo.time_content}</p>
