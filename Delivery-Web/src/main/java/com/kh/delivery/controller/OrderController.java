@@ -19,6 +19,13 @@ public class OrderController {
 	@Inject
 	OrderService orderService;
 	
+	// 웹
+	// 주문페이지
+	@RequestMapping(value="/orderForm", method=RequestMethod.GET)
+	public String orderForm() throws Exception {
+		return "pages/orderForm";
+	}
+	
 	// 안드로이드
 	// 주문 리스트 찾기
 	@RequestMapping(value="/getOrderList", method=RequestMethod.POST)
