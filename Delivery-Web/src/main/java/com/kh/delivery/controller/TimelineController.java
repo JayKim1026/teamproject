@@ -46,9 +46,9 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+	public Map<String, Object> insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
 			Model model) throws Exception {
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		System.out.println("insertArticle2, timelineVo = " + timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		if (f_timeline_img != null) {
@@ -69,7 +69,8 @@ public class TimelineController implements Codes {
 		
 		String time_img = timelineVo.getTime_img();
 		String time_content = timelineVo.getTime_content();
-		
+		String time_state = timelineVo.getTime_state();
+		int time_star = timelineVo.getTime_star();
 		System.out.println("insertArticle2, timeline_img:" + time_img);
 		System.out.println("insertArticle2, time_content:" + time_content);
 		
@@ -79,7 +80,8 @@ public class TimelineController implements Codes {
 		map.put("time_img", time_img);
 		map.put("time_content", time_content);
 		map.put("result", result);
-		
+		map.put("time_state", time_state);
+		map.put("time_star", time_star);
 		return map;
 	}
 

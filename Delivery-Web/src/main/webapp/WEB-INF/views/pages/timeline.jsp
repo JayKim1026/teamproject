@@ -13,6 +13,7 @@
 <script>
 
 $(function(){
+	
 /*카테고리 분류*/
 $("#category").on("change", function(){
 	if($(this).val() == "2-002"){
@@ -21,6 +22,7 @@ $("#category").on("change", function(){
 		$(".rating").hide();
 	}
 });
+
 /* 글쓰기 */
 $("#btnInsert").click(function(e){
 	console.log("클릭");
@@ -32,16 +34,18 @@ $("#btnInsert").click(function(e){
 	var account_state = "${userVo.account_state}";
 	var time_state = $("#category").val();
 	var time_star = parseInt($("input[name=rating]:checked").val());
+	if(isNaN(time_star)){
+		time_star = parseInt($("#noValueRating").val());
+	}
+	
 	formData.append("f_timeline_img", f_timeline_img);
 	formData.append("time_content", time_content);
 	formData.append("time_state", time_state);
 	formData.append("writer_no", writer_no);
 	formData.append("writer_state", account_state);
 	formData.append("time_star", time_star);
-	for(var value of formData.values()) {
-		console.log(value);
-	}
-	/*
+	
+	
 	$.ajax({
 		"processData"	:	false,
 		"contentType"	:	false,
@@ -49,13 +53,25 @@ $("#btnInsert").click(function(e){
 		"url"			:	url,
 		"data"			:	formData, 
 		"success"		:	function(data) {
+			var clone1 = $("#forclone").clone();
 			console.log(data);
 			if(data.result == "insertArticle_success"){
 				
-				var clone1 = $("#forclone").clone();
+				console.log(data.time_img);
+				
+				if(data.time_img == null){
+					console.log("data없음")
+					clone1.find(".pic").hide();
+				}else{
+					console.log("data있음")
+					clone1.find(".pic").attr("src","${image_url}"+data.time_img);
+				}
+				clone1.find(".output-stars").hide();
+				clone1.find("#profile-pic-output").attr("src","${image_url}${userVo.user_img}");
 				clone1.find("h3").text("${userVo.user_name}");
 				clone1.find(".content").text(data.time_content);
-				clone1.find(".pic").attr("src","${image_url}" + data.time_img);
+				
+				
 				$("#house").prepend(clone1).hide().fadeIn(1000);
 				$("#time_content").val("");
 				$("#time_img").val("");
@@ -64,14 +80,16 @@ $("#btnInsert").click(function(e){
 			}
 		}
 	});
-	*/
-// 	javascript:history.go(0);
+
+
 });
+
 /*모달 트리거*/
 $(".btnUpdate").click(function(e){
 	$("#squarespaceModal > input[name=time_no]").val($(this).attr("data-no"));
 	$("#btnUpdateModal").trigger("click");
 });
+
 /*업데이트 저장*/
 $("#btnUpdateSave").click(function(){
 	var time_no = $("#squarespaceModal > input[name=time_no]").val();
@@ -102,6 +120,7 @@ $("#btnUpdateSave").click(function(){
 	javascript:history.go(0);
 	$("#btnUpdateClose").trigger("click");	
 });
+
 /*삭제*/
 $(".btnDelete").click(function(){
 	var time_no = $(this).attr("data-no");
@@ -114,24 +133,26 @@ $(".btnDelete").click(function(){
 });
 
 /*사진 미리보기*/
-// $("#time_img").on("change", function(){
-// 	readURL(this);
-// });
+$("#time_img").on("change", function(){
+	readURL(this);
+	$("#imgPreview").show();
+	
+});
 
 });
 
-// function readURL(input){
-// 	if(input.files && input.files[0]){
-// 		var reader = new FileReader();
-// 		reader.onload = function (e) {
-// 			$("#imgPreview").attr("src", e.target.result);
-// 		}
+function readURL(input){
+	if(input.files && input.files[0]){
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$("#imgPreview").attr("src", e.target.result);
+		}
 		
-// 		reader.readAs
-// 		reader.readAsDataURL(input.files[0]);
-// 		console.log("input.files[0] : " + input.files[0]);
-// 	}
-// }
+		reader.readAs
+		reader.readAsDataURL(input.files[0]);
+		console.log("input.files[0] : " + input.files[0]);
+	}
+}
 /*별점*/
 function add(ths, sno) {
 	for (var i = 1; i <= 5; i++) {
@@ -184,6 +205,7 @@ function add(ths, sno) {
 											<label for="2">☆</label> 
 											<input type="radio" name="rating" value="1" id="1"> 
 											<label for="1">☆</label>
+											<input type="radio" name="rating" value="0" id="noValueRating">
 										</div>
 										
 										<div class="row px-3 form-group">
@@ -192,7 +214,7 @@ function add(ths, sno) {
 											<textarea id="time_content" name="time_content"
 												class="text-muted bg-light mt-4 mb-3"
 												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
-<!-- 											<img src="#" id="imgPreview" style="width:60px; height:60px;"> -->
+											<img src="#" id="imgPreview" style="width:60px; height:60px; display:none;">
 										</div>
 										<div class="row px-3 form-group">
 											<p class="fa fa-user options mb-0 mr-4"></p>
@@ -234,15 +256,15 @@ function add(ths, sno) {
 								<div class="card_output">
 									<div class="row d-flex">
 										<div class="">
-											<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
+											<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg" id="profile-pic-output">
 										</div>
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
-											<div>
+											<div class="output-stars">
 											<!-- 별 다섯개 나 머리나빠서 로직 아직 안됨 기다리셈 -->
 											<c:if test='${timelineVo.time_state == "2-002"}'>
 											<c:if test="${timelineVo.time_star == 5}">
-												<p class="text-left">
+												<p class="text-left" id="five-stars-p">
 													<span class="text-muted">5</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-active"></span> <span
@@ -253,7 +275,7 @@ function add(ths, sno) {
 											</c:if>
 											<!-- 별 네개 -->
 											<c:if test="${timelineVo.time_star == 4}">
-												<p class="text-left">
+												<p class="text-left" id="four-stars-p">
 													<span class="text-muted">4</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-active"></span> <span
@@ -265,7 +287,7 @@ function add(ths, sno) {
 											
 											<!-- 별 세개 -->
 											<c:if test="${timelineVo.time_star == 3}">
-												<p class="text-left">
+												<p class="text-left" id="three-stars-p">
 													<span class="text-muted">3</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-active"></span> <span
@@ -277,7 +299,7 @@ function add(ths, sno) {
 											
 											<!-- 별 두개 -->
 											<c:if test="${timelineVo.time_star == 2}">
-												<p class="text-left">
+												<p class="text-left" id="two-stars-p">
 													<span class="text-muted">2</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-inactive"></span> <span
@@ -289,7 +311,7 @@ function add(ths, sno) {
 											
 											<!-- 별 한개 -->
 											<c:if test="${timelineVo.time_star == 1}">
-												<p class="text-left">
+												<p class="text-left" id="one-stars-p">
 													<span class="text-muted">1</span> <span
 														class="fa fa-star star-active ml-3"></span> <span
 														class="fa fa-star star-inactive"></span> <span
@@ -326,9 +348,14 @@ function add(ths, sno) {
 										<p class="content">${timelineVo.time_content}</p>
 									</div>
 									<div class="row text-left">
-										<c:if test="${timelineVo.time_img != null}">
+									<c:choose>
+										<c:when test="${timelineVo.time_img != null}">
 											<img class="pic" src="${image_url}${timelineVo.time_img}">
-										</c:if>
+										</c:when>
+										<c:otherwise>
+												<img alt="등록된 이미지가 없습니다."src="#">
+										</c:otherwise>
+									</c:choose>
 									</div>
 									<div class="row text-left mt-4">
 										<div class="like mr-3 vote">
