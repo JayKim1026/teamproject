@@ -220,10 +220,10 @@ $(function(){
 		alert("로그인을 해주세요.")
 	}
 	
-	var login_success = "${login_result}";
-	if(login_success == "login_success") {
-		alert("로그인 성공");
-	}
+// 	var login_success = "${login_result}";
+// 	if(login_success == "login_success") {
+// 		alert("로그인 성공");
+// 	}
 	
 	// 지도
 	var container = document.getElementById('map');
