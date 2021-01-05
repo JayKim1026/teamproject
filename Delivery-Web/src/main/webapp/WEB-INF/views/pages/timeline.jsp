@@ -7,10 +7,42 @@
 <head>
 <%@include file="../include/link.jsp" %>
 <%@include file="../css/timeline.css" %>
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
+<script
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <title>timeLine.jsp</title>
 </head>
 <script>
+// 카카오 주소 검색기
+var geocoder = new kakao.maps.services.Geocoder();
+// 위치 권한 있으면 좌표로 주소 반환
+if(navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(function(position) {
+		console.log(position);
+		var lat = position.coords.latitude
+		var lng = position.coords.longitude;
+		var locPosition = new kakao.maps.LatLng(lat, lng);
+		//좌표로 주소 반환
+		searchDetailAddrFromCoords(locPosition, function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				var detailAddr = "지번주소 : " + result[0].address.address_name;
+				console.log(detailAddr);
+			}
+		});
+	});
+} else {
+	console.log("안됨");
+}
+// 좌표로 주소 얻기
+function searchDetailAddrFromCoords(coords, callback) {
+	// 좌표로 법정동 상세 주소 정보를 요청합니다
+	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
 
 $(function(){
 	
