@@ -57,24 +57,67 @@ $("#btnInsert").click(function(e){
 			console.log(data);
 			if(data.result == "insertArticle_success"){
 				
-				console.log(data.time_img);
+				/* 카테고리 */
 				
-				if(data.time_img == null){
-					console.log("data없음")
-					clone1.find(".pic").hide();
-				}else{
-					console.log("data있음")
-					clone1.find(".pic").attr("src","${image_url}"+data.time_img);
+				if(data.time_state != "2-002"){
+					clone1.find(".output-stars-clone").hide();
 				}
-				clone1.find(".output-stars").hide();
-				clone1.find("#profile-pic-output").attr("src","${image_url}${userVo.user_img}");
+				
+				/*별 클론*/
+			
+				if(data.time_star == 5){
+					console.log("작동");
+					
+				}else if(data.time_star == 4){
+					clone1.find(".pclass").children("span").eq(0).text("4");
+					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+				}else if(data.time_star == 3){
+					clone1.find(".pclass").children("span").eq(0).text("3");
+					clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
+					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+				}else if(data.time_star == 2){
+					clone1.find(".pclass").children("span").eq(0).text("2");
+					clone1.find(".pclass").children("span").eq(3).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(3).addClass("star-inactive");
+					clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
+					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+				}else if(data.time_star == 1){
+					clone1.find(".pclass").children("span").eq(0).text("1");
+					clone1.find(".pclass").children("span").eq(2).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(2).addClass("star-inactive");
+					clone1.find(".pclass").children("span").eq(3).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(3).addClass("star-inactive");
+					clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
+					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+				}
+				
+				/*//별 클론 */
+				
+				/* 이미지 클론*/
+				if(data.time_img != null){
+					clone1.find(".pic-clone").attr("src","${image_url}"+data.time_img).show();
+				}else if(data.time_img == null){
+					clone1.find(".pic-clone").attr("src","#").hide();
+				}
+				
+				/*//이미지 클론 */
+				
+				clone1.find("#profile-pic-output-clone").attr("src","${image_url}${userVo.user_img}");
 				clone1.find("h3").text("${userVo.user_name}");
-				clone1.find(".content").text(data.time_content);
+				clone1.find(".content-clone").text(data.time_content);
 				
 				
 				$("#house").prepend(clone1).hide().fadeIn(1000);
 				$("#time_content").val("");
 				$("#time_img").val("");
+				$("#imgPreview").hide();
 			} else if(data.fail == "fail"){
 				alert("글쓰기 실패");
 			}
@@ -153,6 +196,7 @@ function readURL(input){
 		console.log("input.files[0] : " + input.files[0]);
 	}
 }
+
 /*별점*/
 function add(ths, sno) {
 	for (var i = 1; i <= 5; i++) {
@@ -250,13 +294,13 @@ function add(ths, sno) {
 					<div class="col-md-1"></div>
 					<div class="col-md-6" id="house">
 						<c:forEach var="timelineVo" items="${timelineList}">
-						<div id="forclone">
+						<div>
 							<div class="d-flex justify-content-center">
 								
 								<div class="card_output">
 									<div class="row d-flex">
 										<div class="">
-											<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg" id="profile-pic-output">
+											<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
 										</div>
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
@@ -348,14 +392,9 @@ function add(ths, sno) {
 										<p class="content">${timelineVo.time_content}</p>
 									</div>
 									<div class="row text-left">
-									<c:choose>
-										<c:when test="${timelineVo.time_img != null}">
-											<img class="pic" src="${image_url}${timelineVo.time_img}">
-										</c:when>
-										<c:otherwise>
-												<img alt="등록된 이미지가 없습니다."src="#">
-										</c:otherwise>
-									</c:choose>
+										<c:if test="${timelineVo.time_img != null}">
+											<img class="pic" src="${image_url}${timelineVo.time_img}" style="width:100px; height:100px;">
+										</c:if>
 									</div>
 									<div class="row text-left mt-4">
 										<div class="like mr-3 vote">
@@ -412,7 +451,66 @@ function add(ths, sno) {
 		</div>
 	</div>
 </div>
+<!-- ------------------------글 출력 클론----------------------------- -->
+	<div id="forclone">
+		<div class="d-flex justify-content-center">
+			<div class="card_output">
+				<div class="row d-flex">
+					<div class="">
+						<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg"
+							id="profile-pic-output-clone">
+					</div>
+					<div class="d-flex flex-column">
+						<h3 class="mt-2 mb-0 name-clone"></h3>
+						<div class="output-stars-clone">
+							<p class="text-left pclass" id="five-stars-p-clone">
+								<span class="text-muted">5</span> 
+								<span class="fa fa-star star-active ml-3" id="star1"></span> 
+								<span class="fa fa-star star-active" id="star2"></span> 
+								<span class="fa fa-star star-active" id="star3"></span> 
+								<span class="fa fa-star star-active" id="star4"></span> 
+								<span class="fa fa-star star-active" id="star5"></span>
+							</p>
+						</div>
+					</div>
+					<div class="ml-auto">
+						<ul class="nav navbar-nav" style="float: right;">
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"><span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
 
+									<li><a class="btnUpdate" data-no="${timelineVo.time_no}">수정</a></li>
+									<li><a class="btnDelete" data-no="${timelineVo.time_no}">삭제</a></li>
+
+
+									<li><a id="btnReport">신고</a></li>
+								</ul>
+						</ul>
+						<p class="text-muted pt-2 pt-sm-5">10 Sept</p>
+					</div>
+				</div>
+				<div class="text-left">
+					<p class="content-clone"></p>
+				</div>
+				<div class="row text-left">
+					<img class="pic-clone" src="#" style="display:none; width:100px; height:100px;">
+				</div>
+				<div class="row text-left mt-4">
+					<div class="like mr-3 vote">
+						<img src="https://i.imgur.com/mHSQOaX.png"><span
+							class="blue-text pl-2">20</span>
+					</div>
+					<div class="unlike vote">
+						<img src="https://i.imgur.com/bFBO3J7.png"><span
+							class="text-muted pl-2">4</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--------------------------// 글 출력 클론  -------------------------->
+					
 	<%@include file="../include/footer.jsp" %>
 </body>
 </html>
