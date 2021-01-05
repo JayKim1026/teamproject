@@ -12,44 +12,51 @@ public class UserServiceImpl implements UserService {
 	
 	@Inject
 	private UserDao userDao;
-
+	
+	// 일반회원 로그인
 	@Override
 	public UserVo login(String user_id, String user_pw) throws Exception {
 		UserVo userVo = userDao.login(user_id, user_pw);
 		return userVo;
 	}
-
+	
+	// 일반회원 회원가입
 	@Override
 	public String registUser(UserVo userVo) throws Exception {
 		String result = userDao.registUser(userVo);
 		return result;
 	}
-
+	
+	// 일반회원 아이디 중복 확인
 	@Override
 	public boolean checkIdDupl(String user_id) throws Exception {
 		boolean result = userDao.checkIdDupl(user_id);
 		return result;
 	}
 
+	
 	@Override
 	public UserVo findAccount(String user_name, String user_phone, String user_email) throws Exception {
 		UserVo userVo = userDao.findAccount(user_name, user_phone, user_email);
 		return userVo;
 	}
 	
+	
 	@Override
 	public UserVo getUserInfo(int user_no) throws Exception {
 		UserVo userVo = userDao.getUserInfo(user_no);
 		return userVo;
 	}
-
+	
+	//일반회원 프로필 사진 변경
 	@Override
-	public String imgChange(String user_id, String user_img) throws Exception {
-		System.out.println("유저서비스 : " + user_id + " / " + user_img );
-		userDao.imgChange(user_id, user_img);
+	public String imgChange(String user_id, String chg_img) throws Exception {
+		System.out.println("유저서비스 : " + user_id + " / " + chg_img );
+		userDao.imgChange(user_id, chg_img);
 		return "imgChange_success";
 	}
 
+	//일반회원 기존 비밀번호 확인
 	@Override
 	public String pwCheck(String user_id, String user_pw) throws Exception {
 		String result = userDao.pwCheck(user_id, user_pw);
@@ -57,15 +64,17 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	//일반회원 비밀번호 변경
 	@Override
-	public String pwChange(String user_id, String user_Npw) throws Exception {
-		String result =	userDao.pwChange(user_id, user_Npw);
+	public String pwChange(String user_id, String chg_pw) throws Exception {
+		String result =	userDao.pwChange(user_id, chg_pw);
 		return result;
 	}
+	
 
 	@Override
-	public String emailChange(String user_id, String user_email) throws Exception {
-		String result = userDao.emailChange(user_id, user_email);
+	public String emailChange(String user_id, String chg_email) throws Exception {
+		String result = userDao.emailChange(user_id, chg_email);
 		return result;
 	}
 

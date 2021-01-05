@@ -17,7 +17,8 @@ public class UserDaoImpl implements UserDao {
 	
 	@Inject
 	private SqlSession sqlSession;
-
+	
+	//일반회원 로그인
 	@Override
 	public UserVo login(String user_id, String user_pw) throws Exception {
 		Map<String, String> map = new HashMap<>();
@@ -28,12 +29,14 @@ public class UserDaoImpl implements UserDao {
 		return userVo;
 	}
 
+	//일반회원 회원가입
 	@Override
 	public String registUser(UserVo userVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "insertUser", userVo);
 		return "registSuccess";
 	}
 
+	//일반회원 아이디 중복확인
 	@Override
 	public boolean checkIdDupl(String user_id) throws Exception {
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "checkIdDupl", user_id);
@@ -60,11 +63,12 @@ public class UserDaoImpl implements UserDao {
 		return userVo;
 	}
 
+	//일반회원 프로필 사진 변경
 	@Override
-	public String imgChange(String user_id, String user_img) throws Exception {
+	public String imgChange(String user_id, String chg_img) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("user_img", user_img);
+		map.put("chg_img", chg_img);
 		//System.out.println("유저다오 imgChange : " + map);
 		//System.out.println("유저다오 user_id : " + user_id);
 		//System.out.println("유저다오 user_img : " + user_img);
@@ -74,6 +78,7 @@ public class UserDaoImpl implements UserDao {
 		return "imgChange_success";
 	}
 
+	//일반회원 기존 비밀번호 확인
 	@Override
 	public String pwCheck(String user_id, String user_pw) throws Exception {
 		Map<String,String> map = new HashMap<>();
@@ -88,11 +93,12 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	//일반회원 비밀번호 변경
 	@Override
-	public String pwChange(String user_id, String user_Npw) throws Exception {
+	public String pwChange(String user_id, String chg_pw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("user_Npw", user_Npw);
+		map.put("chg_pw", chg_pw);
 		int result = sqlSession.update(NAMESPACE + "pwChange", map);
 		System.out.println("pwChange Dao result" + result);	
 		return "pwChange_success";
@@ -100,10 +106,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String emailChange(String user_id, String user_email) throws Exception {
+	public String emailChange(String user_id, String chg_email) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("user_email", user_email);
+		map.put("chg_email", chg_email);
 		int result = sqlSession.update(NAMESPACE + "emailChange" , map);
 		System.out.println("emailChange Dao result : " + result);
 		return "emailChange_success";

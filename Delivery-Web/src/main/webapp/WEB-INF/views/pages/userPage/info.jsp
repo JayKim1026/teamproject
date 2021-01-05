@@ -121,11 +121,11 @@
 						</div>
 						<div>
 							<label class="pw Label"> 새 비밀번호</label>
-							<input type="password" id="user_Npw" name="user_Npw">
+							<input type="password" id="chg_pw" name="chg_pw">
 						</div>
 						<div>
 							<label class="pw Label"> 새 비밀번호 확인</label>
-							<input type="password" id="user_Npw2" name="user_Npw2">
+							<input type="password" id="chg_pw2" name="chg_pw2">
 						</div>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
@@ -157,7 +157,7 @@
 					<div>
 						<form id="frmEmail" action="/userPage/emailChange" method="Post">
 							<label class="email Label">수정 이메일 </label>
-							<input type="email" id="chg_Email" name="user_email">
+							<input type="email" id="chg_email" name="chg_email">
 							<br/>
 							<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
 							<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
@@ -273,20 +273,20 @@ $(function() {
 		$.post(url,sendData,function(result){
 			// 현재 비밀번호가 => 일치 true / 불일치 false
 			if(result == "true") {
-				var Npw = $("#user_Npw").val();
-				var Npw2 = $("#user_Npw2").val();
+				var chg_pw = $("#chg_pw").val();
+				var chg_pw2 = $("#chg_pw2").val();
 				
-				if(Npw != null && Npw != ""){
-					for(var i = 0; i < Npw.length; i++) {
-						var char_Npw = Npw.charCodeAt(i);
-						if( 7 < Npw.length && Npw.length < 17) {
-							if((47 < char_Npw && char_Npw < 58  ) || (64 < char_Npw && char_Npw < 91) || (96 < char_Npw && char_Npw < 123)) {
-								if(Npw == Npw2) {
+				if(chg_pw != null && chg_pw != ""){
+					for(var i = 0; i < chg_pw.length; i++) {
+						var char_chg_pw = chg_pw.charCodeAt(i);
+						if( 7 < chg_pw.length && chg_pw.length < 17) {
+							if((47 < char_chg_pw && char_chg_pw < 58  ) || (64 < char_chg_pw && char_chg_pw < 91) || (96 < char_chg_pw && char_chg_pw < 123)) {
+								if(chg_pw == chg_pw2) {
 									$("#frmPw").submit();
 								} else {
 									alert("새 비밀번호가 일치하지 않습니다.");
-									$("#user_Npw").val("").focus();
-									$("#user_Npw2").val("");
+									$("#chg_pw").val("").focus();
+									$("#chg_pw2").val("");
 									return;
 								}
 							} else {
@@ -298,9 +298,9 @@ $(function() {
 							return;
 						}
 					} //for
-				} else if(Npw == null || Npw == "") {
+				} else if(chg_pw == null || chg_pw == "") {
 					alert("새 비밀번호를 입력해주세요.");
-					$("#user_Npw").focus();
+					$("#chg_pw").focus();
 					return;
 				}
 				
@@ -312,7 +312,7 @@ $(function() {
 		});// post
 	});
 	
-	//<이미지 수정>
+	//<프로필 사진 변경>
 	// 사진 변경 버튼
 	$("#btnChgImg").click(function() {
 		$(this).hide();
@@ -363,12 +363,12 @@ $(function() {
 	//이메일 변경 - 완료 버튼 
 	$("#btnChgEmail_ok").click(function(e) {
 		e.preventDefault();
-		var chg_email = $("#chg_Email").val();
+		var chg_email = $("#chg_email").val();
 		if(chg_email != null && chg_email != "") {
 			$("#frmEmail").submit();
 		} else {
 			alert("이메일을 입력해주세요");
-			$("#chg_Email").focus();
+			$("#chg_email").focus();
 		}
 		
 	});
