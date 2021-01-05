@@ -14,7 +14,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -301,6 +300,27 @@ public class UserController implements Codes {
 			rttr.addFlashAttribute("phoneChangeResult", "fail");			
 			return "redirect:userPage/info";
 		}
+	}
+	
+	// 사용자 주소 변경
+	@RequestMapping(value="/addrChange", method=RequestMethod.POST)
+	public String addrChange(String chg_addr, HttpSession session, RedirectAttributes rttr) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_id = userVo.getUser_id();
+		System.out.println("chg_addr : " + chg_addr);
+		System.out.println("user_id : " + user_id);
+		
+		String result = userService.addrChange(chg_addr, user_id);
+		
+		if(result == "addrChange_success") {
+			userVo.setUser_addr(chg_addr);
+			rttr.addFlashAttribute("addrChangeResult", "success");
+			return "redirect:userPage/info";
+		} else {
+			rttr.addFlashAttribute("addrChangeResult", "fail");
+			return "redirect:userPage/info";
+		}
+		
 	}
 	
 	// 안드로이드

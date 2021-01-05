@@ -76,4 +76,11 @@
 		user_phone = #{chg_phone}
 		where user_id = #{user_id}
 	</update>
+	
+	<!-- 사용자 주소 변경 -->
+	<update id="addrChange">
+		update tbl_user set
+		user_addr = #{chg_addr}
+		where user_id = #{user_id}
+	</update>
 </mapper>

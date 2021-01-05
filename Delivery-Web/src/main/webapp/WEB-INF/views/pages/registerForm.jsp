@@ -80,12 +80,6 @@
 						<label for="user_email"> 이메일 </label>
 						<input type="email" class="form-control" id="user_email" name="user_email" required/>
 					</div>
-
-					<!-- <div class="form-group">
-						<label for="user_acc_num"> 계좌번호 </label>
-						<input type="text" class="form-control" id="user_acc_num" />
-					</div> -->
-
 					<button type="submit" class="btn btn-primary" id="btnRegister">가입완료</button>
 				</form>
 				</div>
@@ -124,19 +118,19 @@ $(function(){
 		var phoneCheck = $("#user_phone").val();
 		var emailCheck = $("#user_email").val();
 		
-		if(idCheck == null || idCheck == "") {
+		if(idCheck.trim() == null || idCheck.trim() == "") {
 			alert("아이디를 입력해주세요");
 			$("#user_id").focus();
 			return;
-		} else if(pwCheck == null || pwCheck == "") {
+		} else if(pwCheck.trim() == null || pwCheck.trim() == "") {
 			alert("비밀번호를 입력해 주세요");
 			$("#user_pw").focus();
 			return;
-		} else if(pwCheck2 == null || pwCheck2 == ""){
+		} else if(pwCheck2.trim() == null || pwCheck2.trim() == ""){
 			alert("확인 비밀번호를 입력해 주세요");
 			$("#user_pw2").focus();
 			return;
-		} else if(nameCheck == null || nameCheck == "") {
+		} else if(nameCheck.trim() == null || nameCheck.trim() == "") {
 			alert("이름을 입력해 주세요");
 			$("#user_name").focus();
 			return;
@@ -144,16 +138,16 @@ $(function(){
 			alert("생일을 입력해 주세요");
 			$("#user_birth").focus();
 			return;
-		} else if(sample4_detailAddress == null || sample4_detailAddress == ""){
+		} else if(sample4_detailAddress.trim() == null || sample4_detailAddress.trim() == ""){
 			alert("상세주소를 입력해주세요");
 			$("#sample4_detailAddress").focus();
 			return; 
 		} 
-		else if(phoneCheck == null || phoneCheck == "") {
+		else if(phoneCheck.trim() == null || phoneCheck.trim() == "") {
 			alert("전화번호를 입력해 주세요");
 			$("#user_phone").focus();
 			return;
-		} else if(emailCheck == null || emailCheck == "") {
+		} else if(emailCheck.trim() == null || emailCheck.trim() == "") {
 			alert("이메일을 입력해주세요");
 			$("#user_email").focus();
 			return;
@@ -333,6 +327,10 @@ function sample4_execDaumPostcode() {
                 guideTextBox.innerHTML = '';
                 guideTextBox.style.display = 'none';
             }
+            var detailAddr = $("#sample4_detailAddress").val();
+    		if(detailAddr == null || detailAddr == "") {
+    			$("#sample4_detailAddress").focus();
+    		}
         }
     }).open();
 }

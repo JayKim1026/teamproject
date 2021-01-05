@@ -75,4 +75,10 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public String addrChange(String chg_addr, String user_id) throws Exception {
+		String result = userDao.addrChange(chg_addr, user_id);
+		return result;
+	}
+
 }
