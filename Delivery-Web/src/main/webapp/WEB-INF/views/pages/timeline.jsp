@@ -113,7 +113,7 @@ $("#btnInsert").click(function(e){
 				clone1.find("h3").text("${userVo.user_name}");
 				clone1.find(".content-clone").text(data.time_content);
 				
-				
+				clone1.show();
 				$("#house").prepend(clone1).hide().fadeIn(1000);
 				$("#time_content").val("");
 				$("#time_img").val("");
@@ -300,12 +300,11 @@ function add(ths, sno) {
 								<div class="card_output">
 									<div class="row d-flex">
 										<div class="">
-											<img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
+											<img class="profile-pic" src="${image_url}${timelineVo.writer_img}">
 										</div>
 										<div class="d-flex flex-column">
 											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
 											<div class="output-stars">
-											<!-- 별 다섯개 나 머리나빠서 로직 아직 안됨 기다리셈 -->
 											<c:if test='${timelineVo.time_state == "2-002"}'>
 											<c:if test="${timelineVo.time_star == 5}">
 												<p class="text-left" id="five-stars-p">
@@ -385,7 +384,7 @@ function add(ths, sno) {
 														</ul>
 										
 													</ul>
-													<p class="text-muted pt-2 pt-sm-5">10 Sept</p>
+													<p class="text-muted" style="padding-right:30px; ">${timelineVo.time_date}</p>
 												</div>
 										</div>
 									<div class="text-left">
@@ -452,7 +451,7 @@ function add(ths, sno) {
 	</div>
 </div>
 <!-- ------------------------글 출력 클론----------------------------- -->
-	<div id="forclone">
+	<div id="forclone" style="display:none;">
 		<div class="d-flex justify-content-center">
 			<div class="card_output">
 				<div class="row d-flex">
