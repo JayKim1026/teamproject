@@ -21,17 +21,53 @@
 		)
 	</insert>
 	
-	<select id="checkIdDupl" resultType="deliverVo">
+	<select id="checkIdDupl" resultType="DeliverVo">
 		select * 
 		from tbl_deliver
 		where dlvr_id = #{dlvr_id}
 	</select>
+	
 	<!-- 배달원 프로필 사진 변경 -->
 	<update id="imgChange">
 		update tbl_deliver set
 		dlvr_img = #{chg_img}
 		where dlvr_id = #{dlvr_id}
 	</update>
+	
+	<!-- 배달원 현재 비밀번호 확인 -->
+	<select id="pwCheck" resultType="DeliverVo">
+		select * from tbl_deliver
+		where
+		dlvr_id = #{dlvr_id} and dlvr_pw = #{dlvr_pw}
+	</select>
+
+	<!-- 배달원 비밀번호 변경 -->
+	<update id="pwChange">
+		update tbl_deliver set
+		dlvr_pw = #{chg_pw}
+		where dlvr_id = #{dlvr_id}
+	</update> 
+	
+	<!-- 배달원 이메일 변경  -->
+	<update id="emailChange">
+		update tbl_deliver set
+		dlvr_email = #{chg_email}
+		where dlvr_id = #{dlvr_id}
+	</update>
+	
+	<!-- 배달원 휴대전화 변경 -->
+	<update id="phoneChange">
+		update tbl_deliver set
+		dlvr_phone = #{chg_phone}
+		where dlvr_id = #{dlvr_id}
+	</update>
+	<!-- 배달원 주소 변경 -->
+	<update id="addrChange">
+		update tbl_deliver set
+		dlvr_addr = #{chg_addr}
+		where dlvr_id = #{dlvr_id}
+	</update>
+	
 	
 	<!-- // 웹  -->
 	

@@ -17,10 +17,10 @@ public interface DeliverDao {
 	public String imgChange(String dlvr_id, String chg_img) throws Exception;
 
 	// 배달원 현재 비밀번호 확인
-	public String pwCheck(String dlvr_id, String chg_pw) throws Exception;
+	public String pwCheck(String dlvr_id, String dlvr_pw) throws Exception;
 
 	// 배달원 비밀번호 변경
-	public String pwChange(String dlvr_id, String chg_Npw) throws Exception;
+	public String pwChange(String dlvr_id, String chg_pw) throws Exception;
 
 	// 배달원 이메일 변경
 	public String emailChange(String dlvr_id, String chg_email) throws Exception;

@@ -259,10 +259,10 @@ public class UserController implements Codes {
 		if(result == "pwChange_success") {
 			userVo.setUser_pw(user_Npw);
 			rttr.addFlashAttribute("pwChangeResult", "success");
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		} else {
 			rttr.addFlashAttribute("pwChangeResult", "fail");
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		}
 	}
 	
@@ -276,11 +276,10 @@ public class UserController implements Codes {
 		if(result == "emailChange_success") {
 			userVo.setUser_email(user_email);
 			rttr.addFlashAttribute("emailChangeResult", "success");
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		} else {
 			rttr.addFlashAttribute("emailChangeResult", "fail");
-			return "redirect:userPage/info";
-
+			return "redirect:/user/userPage/info";
 		}
 	}
 	
@@ -295,10 +294,10 @@ public class UserController implements Codes {
 		if(result == "phoneChange_success") {
 			rttr.addFlashAttribute("phoneChangeResult", "success");
 			userVo.setUser_phone(chg_phone);
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		} else {
 			rttr.addFlashAttribute("phoneChangeResult", "fail");			
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		}
 	}
 	
@@ -315,10 +314,10 @@ public class UserController implements Codes {
 		if(result == "addrChange_success") {
 			userVo.setUser_addr(chg_addr);
 			rttr.addFlashAttribute("addrChangeResult", "success");
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		} else {
 			rttr.addFlashAttribute("addrChangeResult", "fail");
-			return "redirect:userPage/info";
+			return "redirect:/user/userPage/info";
 		}
 		
 	}

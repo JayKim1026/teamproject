@@ -117,15 +117,15 @@
 					<form id="frmPw" action="/deliver/pwChange" method="post">
 						<div>
 							<label class="pw Label"> 현재 비밀번호</label>
-							<input type="password" id="chg_pw" name="chg_pw">
+							<input type="password" id="dlvr_pw" name="dlvr_pw">
 						</div>
 						<div>
 							<label class="pw Label"> 새 비밀번호</label>
-							<input type="password" id="dlvr_Npw" name="dlvr_Npw">
+							<input type="password" id="chg_pw" name="chg_pw">
 						</div>
 						<div>
 							<label class="pw Label"> 새 비밀번호 확인</label>
-							<input type="password" id="dlvr_Npw2" name="dlvr_Npw2">
+							<input type="password" id="chg_pw2">
 						</div>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
@@ -157,7 +157,7 @@
 					<div>
 						<form id="frmEmail" action="/deliver/emailChange" method="Post">
 							<label class="email Label">수정 이메일 </label>
-							<input type="email" id="chg_Email" name="dlvr_email">
+							<input type="email" id="chg_email" name="chg_email">
 							<br/>
 							<button type="button" class="btn btn-secondary" id="btnChgEmail_cancel">취소</button>
 							<button type="submit" class="btn btn-secondary" id="btnChgEmail_ok">완료</button>
@@ -300,42 +300,50 @@ $(function() {
 	// 비밀번호 변경 - 완료버튼 클릭 
 	$("#btnChgPw_ok").click(function(){
 		//비밀번호 AJAX 확인하기
-		var dlvr_pw = $("input[name=dlvr_pw]").val();
+		var dlvr_pw = $("#dlvr_pw").val();
+		console.log("dlvr_pw : " + dlvr_pw);
+		
 		var url = "/deliver/pwCheck";
 		var sendData = {
 				"dlvr_pw"	:	dlvr_pw				
 		};
 		$.post(url,sendData,function(result){
+			//console.log("deliver info 비번확인 result******* : " + result);
 			// 현재 비밀번호가 => 일치 true / 불일치 false
 			if(result == "true") {
-				var Npw = $("#dlvr_Npw").val();
-				var Npw2 = $("#dlvr_Npw2").val();
+				var chg_pw = $("#chg_pw").val();
+				var chg_pw2 = $("#chg_pw2").val();
+				console.log("chg_pw, chg_pw2 : " + chg_pw + "  ///  " +chg_pw2)
 				
-				if(Npw != null && Npw != ""){
-					for(var i = 0; i < Npw.length; i++) {
-						var char_Npw = Npw.charCodeAt(i);
-						if( 7 < Npw.length && Npw.length < 17) {
-							if((47 < char_Npw && char_Npw < 58  ) || (64 < char_Npw && char_Npw < 91) || (96 < char_Npw && char_Npw < 123)) {
-								if(Npw == Npw2) {
+				if(chg_pw != null && chg_pw != ""){
+					for(var i = 0; i < chg_pw.length; i++) {
+						var char_chg_pw = chg_pw.charCodeAt(i);
+						if( 7 < chg_pw.length && chg_pw.length < 17) {
+							if((47 < char_chg_pw && char_chg_pw < 58  ) || (64 < char_chg_pw && char_chg_pw < 91) || (96 < char_chg_pw && char_chg_pw < 123)) {
+								if(chg_pw == chg_pw2) {
 									$("#frmPw").submit();
 								} else {
 									alert("새 비밀번호가 일치하지 않습니다.");
-									$("#dlvr_Npw").val("").focus();
-									$("#dlvr_Npw2").val("");
+									$("#chg_pw").val("").focus();
+									$("#chg_pw2").val("");
 									return;
 								}
 							} else {
 								alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
+								$("#chg_pw").val("").focus();
+								$("#chg_pw2").val("");
 								return;
 							}// 영어 대소문자, 숫자  else
 						} else {
 							alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
+							$("#chg_pw").val("").focus();
+							$("#chg_pw2").val("");
 							return;
 						}
 					} //for
-				} else if(Npw == null || Npw == "") {
+				} else if(chg_pw == null || chg_pw == "") {
 					alert("새 비밀번호를 입력해주세요.");
-					$("#dlvr_Npw").focus();
+					$("#chg_pw").focus();
 					return;
 				}
 				
@@ -363,12 +371,12 @@ $(function() {
 	//이메일 변경 - 완료 버튼 
 	$("#btnChgEmail_ok").click(function(e) {
 		e.preventDefault();
-		var chg_email = $("#chg_Email").val();
+		var chg_email = $("#chg_email").val();
 		if(chg_email != null && chg_email != "") {
 			$("#frmEmail").submit();
 		} else {
 			alert("이메일을 입력해주세요");
-			$("#chg_Email").focus();
+			$("#chg_email").focus();
 		}
 		
 	});

@@ -41,34 +41,36 @@ public class DeliverServiceImpl implements DeliverService {
 		return result;
 	}
 
+	// 배달원 현재 비밀번호 확인
 	@Override
-	public String pwCheck(String dlvr_id, String chg_pw) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String pwCheck(String dlvr_id, String dlvr_pw) throws Exception {
+		String result = deliverDao.pwCheck(dlvr_id, dlvr_pw);
+		return result;
 	}
 
+	// 배달원 비밀번호 변경
 	@Override
-	public String pwChange(String dlvr_id, String chg_Npw) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String pwChange(String dlvr_id, String chg_pw) throws Exception {
+		String result = deliverDao.pwChange(dlvr_id, chg_pw);
+		return result;
 	}
 
 	@Override
 	public String emailChange(String dlvr_id, String chg_email) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String result = deliverDao.emailChange(dlvr_id, chg_email);
+		return result;
 	}
 
 	@Override
 	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String result = deliverDao.phoneChange(dlvr_id, chg_phone);
+		return result;
 	}
 
 	@Override
 	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String result = deliverDao.addrChange(dlvr_id, chg_addr);
+		return result;
 	}
 	/*	//웹*/
 	
