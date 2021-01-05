@@ -73,12 +73,12 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th style="border:none;">기본 회원 정보 <span>필수</span></th>
+				<th style="border:none;">deliver 회원 정보 <span>필수</span></th>
 			<tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>사진</td>
+				<td>프로필 사진</td>
 				<td>
 					<div>
 						<img id="dlvr_img" name="dlvr_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">

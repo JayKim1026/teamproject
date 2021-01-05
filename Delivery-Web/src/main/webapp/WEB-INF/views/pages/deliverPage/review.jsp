@@ -16,6 +16,6 @@
 		<li><a href="/deliverPage/question">1:1 문의</a></li>
 	</ul>
 <div>deliverVo:${sessionScope.deliverVo}</div>
-포인트			
+리뷰
 </body>
 </html>

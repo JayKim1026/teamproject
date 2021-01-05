@@ -25,7 +25,7 @@ public class DeliverPageController implements Codes {
 	@Inject
 	DeliverService deliverService;
 
-	// deliverPage 회원정보
+	// deliverPage로 이동 + 배달원 기본 정보
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String deliverInfo(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
@@ -33,34 +33,10 @@ public class DeliverPageController implements Codes {
 			String dlvr_img = deliverVo.getDlvr_img();
 			model.addAttribute("image_url", BUCKET_URL + dlvr_img);
 			return "pages/deliverPage/info";
-
 		} else {
 			rttr.addFlashAttribute("loginPlz", "loginPlz");
 			return "redirect:/";
-
 		}
-
-	}
-
-	// deliverPage 주문 내역 조회
-	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
-	public String deliverOrderList(Model model, HttpSession session) throws Exception {
-		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
-		return "pages/deliverPage/orderList";
-	}
-
-	// deliverPage 포인트
-	@RequestMapping(value = "/point", method = RequestMethod.GET)
-	public String deliverPoint(Model model, HttpSession session) throws Exception {
-		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
-		return "pages/deliverPage/point";
-	}
-
-	// deliverPage 1:1 질문
-	@RequestMapping(value = "/question", method = RequestMethod.GET)
-	public String deliverQuestion(Model model, HttpSession session) throws Exception {
-		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
-		return "pages/deliverPage/question";
 	}
 
 	// 배달원 프로필 사진 변경
@@ -198,5 +174,33 @@ public class DeliverPageController implements Codes {
 			return "redirect:/deliverPage/info";
 		}
 
+	}
+
+	// deliverPage 주문 내역 페이지 이동
+	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	public String deliverOrderList(Model model, HttpSession session) throws Exception {
+		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+		return "pages/deliverPage/orderList";
+	}
+
+	// deliverPage 포인트 페이지 이동
+	@RequestMapping(value = "/point", method = RequestMethod.GET)
+	public String deliverPoint(Model model, HttpSession session) throws Exception {
+		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+		return "pages/deliverPage/point";
+	}
+
+	// deliverPage 1:1 질문 페이지 이동
+	@RequestMapping(value = "/question", method = RequestMethod.GET)
+	public String deliverQuestion(Model model, HttpSession session) throws Exception {
+		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+		return "pages/deliverPage/question";
+	}
+
+	// deliverPage 후기 페이지 이동
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String deliverReview(Model model, HttpSession session) throws Exception {
+		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+		return "pages/deliverPage/question";
 	}
 }

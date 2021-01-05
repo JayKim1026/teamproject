@@ -30,7 +30,7 @@
 			</ul>
 			<ul class="nav__link">
 			<c:if test="${sessionScope.userVo != null }">
-				<li><a class="menu__stuff2" href="/user/userPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
+				<li><a class="menu__stuff2" href="/userPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
 			</c:if>
 			<c:if test="${sessionScope.deliverVo != null }">
 				<li><a class="menu__stuff2" href="/deliverPage/info" style="padding-right: 20;">마이뚜벅이</a></li>

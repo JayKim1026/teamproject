@@ -61,11 +61,11 @@
 		<br /> userVo:${sessionScope.userVo}
 	</header>
 	<ul class="sideMenu">
-		<li><a href="/user/userPage/info">회원정보</a></li>
-		<li><a href="/user/userPage/orderList">주문 내역 조회</a></li>
-		<li><a href="/user/userPage/point">포인트 조회</a></li>
-		<li><a href="/user/userPage/review">내가 작성한 후기</a></li>
-		<li><a href="/user/userPage/question">1:1 문의</a></li>
+		<li><a href="/userPage/info">회원정보</a></li>
+		<li><a href="/userPage/orderList">주문 내역 조회</a></li>
+		<li><a href="/userPage/point">포인트 조회</a></li>
+		<li><a href="/userPage/review">내가 작성한 후기</a></li>
+		<li><a href="/userPage/question">1:1 문의</a></li>
 	</ul>
 
 
@@ -73,12 +73,12 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th style="border:none;">기본 회원 정보 <span>필수</span></th>
+				<th style="border:none;">일반 회원 정보 <span>필수</span></th>
 			<tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>사진</td>
+				<td>프로필 사진</td>
 				<td>
 					<div>
 						<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
@@ -86,7 +86,7 @@
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
 					<div class="imgChange">
-						<form role="form" action="/user/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
+						<form role="form" action="/userPage/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
 							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
 							<input type="hidden" value="${sessionScope.userVo.user_img }" name="orgImg"><!-- 기존 프사  -->
 						</form>
@@ -114,7 +114,7 @@
 					</div>
 				</td>
 				<td class="pwChange">
-					<form id="frmPw" action="/user/pwChange" method="post">
+					<form id="frmPw" action="/userPage/pwChange" method="post">
 						<div>
 							<label class="pw Label"> 현재 비밀번호</label>
 							<input type="password" id="user_pw" name="user_pw">
@@ -155,7 +155,7 @@
 				</td>
 				<td class="EmailChange">
 					<div>
-						<form id="frmEmail" action="/user/emailChange" method="Post">
+						<form id="frmEmail" action="/userPage/emailChange" method="Post">
 							<label class="email Label">수정 이메일 </label>
 							<input type="email" id="chg_Email" name="user_email">
 							<br/>
@@ -177,7 +177,7 @@
 				</td>
 				<td class="phoneChange">
 					<div>
-						<form id="frmPhone" action="/user/phoneChange" method="post">
+						<form id="frmPhone" action="/userPage/phoneChange" method="post">
 							<label class="phone Label">수정 전화번호</label>
 							<input type="tel" id="chg_phone" name="chg_phone">
 							<br/>
@@ -198,7 +198,7 @@
 					</div>
 				</td>
 				<td class="addrChange">
-					<form action="/user/addrChange" method="POST" id="frmAddr">
+					<form action="/userPage/addrChange" method="POST" id="frmAddr">
 						<div>
 							<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
 							<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="btnAddr"><br>
@@ -266,7 +266,7 @@ $(function() {
 	$("#btnChgPw_ok").click(function(){
 		//비밀번호 AJAX 확인하기
 		var user_pw = $("input[name=user_pw]").val();
-		var url = "/user/pwCheck";
+		var url = "/userPage/pwCheck";
 		var sendData = {
 				"user_pw"	:	user_pw				
 		};

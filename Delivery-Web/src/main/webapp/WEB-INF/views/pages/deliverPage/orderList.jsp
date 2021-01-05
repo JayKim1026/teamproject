@@ -9,10 +9,11 @@
 </head>
 <body>
 <ul class="sideMenu">
-		<li><a href="/deliver/deliverPage/info">회원정보</a></li>
-		<li><a href="/deliver/deliverPage/orderList">주문 내역 조회</a></li>
-		<li><a href="/deliver/deliverPage/point">포인트 조회</a></li>
-		<li><a href="/deliver/deliverPage/question">1:1 문의</a></li>
+		<li><a href="/deliverPage/info">회원정보</a></li>
+		<li><a href="/deliverPage/orderList">주문 내역 조회</a></li>
+		<li><a href="/deliverPage/point">포인트 조회</a></li>
+		<li><a href="/deliverPage/review">내가 작성한 후기</a></li>
+		<li><a href="/deliverPage/question">1:1 문의</a></li>
 	</ul>
 <div>deliverVo:${sessionScope.deliverVo}</div>
 주문리스트
