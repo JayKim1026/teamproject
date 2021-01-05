@@ -33,11 +33,12 @@ public class DeliverServiceImpl implements DeliverService {
 		boolean result = deliverDao.checkIdDupl(dlvr_id);
 		return result;
 	}
-
+	
+	// 배달원 프로필 사진변경
 	@Override
 	public String imgChange(String dlvr_id, String chg_img) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String result = deliverDao.imgChange(dlvr_id, chg_img);
+		return result;
 	}
 
 	@Override

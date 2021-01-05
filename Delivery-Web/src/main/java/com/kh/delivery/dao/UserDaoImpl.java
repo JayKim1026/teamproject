@@ -65,9 +65,9 @@ public class UserDaoImpl implements UserDao {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_img", user_img);
-		System.out.println("유저다오 imgChange : " + map);
-		System.out.println("유저다오 user_id : " + user_id);
-		System.out.println("유저다오 user_img : " + user_img);
+		//System.out.println("유저다오 imgChange : " + map);
+		//System.out.println("유저다오 user_id : " + user_id);
+		//System.out.println("유저다오 user_img : " + user_img);
 		
 		sqlSession.update(NAMESPACE + "imgChange", map);
 				

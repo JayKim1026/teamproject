@@ -42,16 +42,19 @@ public class DeliverDaoImpl implements DeliverDao {
 			if(deliverVo == null) {
 				return true;
 			} else {
-				
 				return false;
 			}
 	}
 
 
+	// 배달원 프로필 사진 변경
 	@Override
 	public String imgChange(String dlvr_id, String chg_img) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("chg_img", chg_img);
+		sqlSession.update(NAMESPACE + "imgChange" , map);
+		return "imgChange_success";
 	}
 
 	@Override

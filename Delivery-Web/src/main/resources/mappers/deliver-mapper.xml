@@ -26,8 +26,12 @@
 		from tbl_deliver
 		where dlvr_id = #{dlvr_id}
 	</select>
-	
-	
+	<!-- 배달원 프로필 사진 변경 -->
+	<update id="imgChange">
+		update tbl_deliver set
+		dlvr_img = #{chg_img}
+		where dlvr_id = #{dlvr_id}
+	</update>
 	
 	<!-- // 웹  -->
 	

@@ -139,6 +139,47 @@ public class DeliverController implements Codes {
 		return "pages/deliverPage/question";
 	}
 	
+	// 배달원 프로필 사진 변경
+		@RequestMapping(value="/imgChange", method=RequestMethod.POST)
+		public String imgChange(String orgImg, MultipartFile chgImg, HttpSession session, RedirectAttributes rttr) throws Exception {
+			System.out.println("chgImg : " + chgImg); // 변경할 이미지
+			System.out.println("orgImg : " + orgImg); // 기존의 이미지 (userVo.user_img)
+			
+			DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+			String dlvr_id = deliverVo.getDlvr_id();
+			System.out.println("controller 프사변경 dlvr_id : " + dlvr_id);
+
+			String org_chgImg = chgImg.getOriginalFilename(); // 변경할 이미지의 본래 이름
+			System.out.println("org_chgImg : " + org_chgImg);
+			
+			boolean isImageResult = FileUploadUtil.isImage(org_chgImg);
+			if(!isImageResult) {
+				rttr.addFlashAttribute("isImageResult", "notImge");
+				return "redirect:/deliver/deliverPage/info";
+			} else {
+				
+				FileUploadUtil.delete(orgImg); // 아마존에 저장된 기존 이미지 삭제.
+				String chg_img = DLVR_IMG + dlvr_id + "_" + org_chgImg;
+				System.out.println("아마존이랑 DB에 저장할 이름 chg_img : " +  chg_img);
+				deliverVo.setDlvr_img(chg_img);
+				File chgDlvrImg = new File(org_chgImg);
+				chgImg.transferTo(chgDlvrImg);
+				FileUploadUtil.upload(chgDlvrImg, chg_img); // 아마존에 변경할 사진 저장.
+				
+				String result = deliverService.imgChange(dlvr_id, chg_img);
+				System.out.println("result : " + result );
+				if(result == "imgChange_success") {
+					rttr.addFlashAttribute("imgChangeResult", "success");
+					System.out.println("이미지 저장 성공");
+					return "redirect:/deliver/deliverPage/info";
+				} else {
+					rttr.addFlashAttribute("imgChangeResult", "fail");
+					System.out.println("이미지 저장 실패");
+					return "redirect:/deliver/deliverPage/info";
+				}
+			}
+			
+		}
 	
 	
 	// 안드로이드
