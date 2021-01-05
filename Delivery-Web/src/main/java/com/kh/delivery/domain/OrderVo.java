@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class OrderVo {
+	// 기본 테이블
 	private int order_no;
 	private String order_ca;
 	private String order_req;
@@ -13,23 +14,13 @@ public class OrderVo {
 	private int user_no;
 	private int dlvr_no;
 	private String order_state;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp order_date;
 
-	public OrderVo() {
-	}
+	// 조인으로 가져오는 값
+	private String user_name;
 
-	public OrderVo(int order_no, String order_ca, String order_req, double order_lat, double order_lng, int user_no,
-			int dlvr_no, String order_state, Timestamp order_date) {
-		this.order_no = order_no;
-		this.order_ca = order_ca;
-		this.order_req = order_req;
-		this.order_lat = order_lat;
-		this.order_lng = order_lng;
-		this.user_no = user_no;
-		this.dlvr_no = dlvr_no;
-		this.order_state = order_state;
-		this.order_date = order_date;
+	public OrderVo() {
 	}
 
 	public int getOrder_no() {
@@ -104,11 +95,19 @@ public class OrderVo {
 		this.order_date = order_date;
 	}
 
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderVo [order_no=" + order_no + ", order_ca=" + order_ca + ", order_req=" + order_req + ", order_lat="
 				+ order_lat + ", order_lng=" + order_lng + ", user_no=" + user_no + ", dlvr_no=" + dlvr_no
-				+ ", order_state=" + order_state + ", order_date=" + order_date + "]";
+				+ ", order_state=" + order_state + ", order_date=" + order_date + ", user_name=" + user_name + "]";
 	}
 
 }
