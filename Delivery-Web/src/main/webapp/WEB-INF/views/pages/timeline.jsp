@@ -18,6 +18,8 @@
 <title>timeLine.jsp</title>
 </head>
 <script>
+$(function(){
+$("#map_marker").click(function(){
 // 카카오 주소 검색기
 var geocoder = new kakao.maps.services.Geocoder();
 // 위치 권한 있으면 좌표로 주소 반환
@@ -30,8 +32,13 @@ if(navigator.geolocation) {
 		//좌표로 주소 반환
 		searchDetailAddrFromCoords(locPosition, function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
-				var detailAddr = "지번주소 : " + result[0].address.address_name;
+				var detailAddr = result[0].address.address_name;
 				console.log(detailAddr);
+				
+				const str = detailAddr;
+				const strArray = str.split(" ");
+				console.log(strArray);
+				console.log(strArray[2]);
 			}
 		});
 	});
@@ -43,9 +50,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 	// 좌표로 법정동 상세 주소 정보를 요청합니다
 	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
-
-$(function(){
-	
+});
 /*카테고리 분류*/
 $("#category").on("change", function(){
 	if($(this).val() == "2-002"){
@@ -294,7 +299,7 @@ function add(ths, sno) {
 										</div>
 										<div class="row px-3 form-group">
 											<p class="fa fa-user options mb-0 mr-4"></p>
-											<p class="fa fa-map-marker options mb-0 mr-4"></p>
+											<p class="fa fa-map-marker options mb-0 mr-4" id="map_marker"></p>
 											<label class="fa fa-image options mb-0 mr-4" for="time_img"></label>
 											<input type="file" class="form-control-file" id="time_img" name="time_img" style="display:none" />
 											
