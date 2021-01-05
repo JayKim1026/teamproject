@@ -36,7 +36,10 @@ $("#btnInsert").click(function(e){
 	formData.append("writer_no", writer_no);
 	formData.append("writer_state", account_state);
 	formData.append("time_star", time_star);
-	
+	for(var value of formData.values()) {
+		console.log(value);
+	}
+	/*
 	$.ajax({
 		"processData"	:	false,
 		"contentType"	:	false,
@@ -59,6 +62,7 @@ $("#btnInsert").click(function(e){
 			}
 		}
 	});
+	*/
 // 	javascript:history.go(0);
 });
 
