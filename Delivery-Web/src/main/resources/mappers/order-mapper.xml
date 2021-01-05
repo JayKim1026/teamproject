@@ -10,6 +10,11 @@
 		and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
 		and order_state = '3-001'
 	</select>
+	
+	<insert id="insertOrder">
+		insert into tbl_order(order_no, order_ca, order_req, order_lat, order_lng, user_no)
+		values(seq_order_no.nextval, #{order_ca}, #{order_req}, #{order_lat}, #{order_lng}, #{user_no})
+	</insert>
 
 	<update id="pickOrder">
 		update tbl_order set

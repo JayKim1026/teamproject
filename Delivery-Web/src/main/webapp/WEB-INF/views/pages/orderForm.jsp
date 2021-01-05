@@ -23,26 +23,67 @@
 <title>주문 페이지</title>
 </head>
 <body>
-	<div id="map" style="width: 500px; height: 500px;"></div>
-	<div>
-		<div class="hAddr">
-	        <span class="title">지도중심기준 행정동 주소정보</span>
-	        <span id="centerAddr"></span>
-	    </div>
-		<input type="button" onclick="seacrhAddress()" value="우편번호 찾기">
-		<button type="button" onclick="pointFromAddr()">주소로 좌표 찍기</button>
-		<br>
-		우편 번호
-		도로명 주소
-		<input type="text" class="form-control" id="roadAddr"/>
-		지번
-		<input type="text" class="form-control" id="jibunAddr"/>
-		<span id="guide" style="color:#999;display:none"></span>
-		상세주소
-		<input type="text" class="form-control" id="detailAddr"/>
-		엑스트라
-		<input type="text" class="form-control" id="extraAddr"/>
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+			<div>
+				<form id="frmOrder" action="/order/insertOrder" method="post">
+					<input type="hidden" id="order_lat" name="order_lat" />
+					<input type="hidden" id="order_lng" name="order_lng" />
+					<span class="title">카테고리</span>
+					<select name="order_ca">
+						<option value="3-011">사무용품</option>
+						<option value="3-012">음식</option>
+						<option value="3-013">기타</option>
+					</select>
+					<br>
+					<span class="title">요구사항</span>
+					<input type="text" class="form-control" id="order_req" name="order_req" placeholder="요구사항 입력"/>
+				</form>
+			</div>
+			<div id="map" style="width: 500px; height: 500px;"></div>
+			<div>
+				<div class="hAddr">
+			        <span class="title">지도중심기준 행정동 주소정보</span>
+			    </div>
+				<input type="button" onclick="seacrhAddress()" value="우편번호 찾기">
+				<br>
+				도로명 주소
+				<input type="text" class="form-control" id="roadAddr" readonly/>
+				지번
+				<input type="text" class="form-control" id="jibunAddr" readonly/>
+			</div>
+			<button id="btnInsertOrder">주문 작성 완료</button>
+		</div>
+		<div class="col-md-1">
+		</div>
 	</div>
+	
+	<script>
+		$(function() {
+			$("#btnInsertOrder").click(function() {
+				if(checkValues()) {
+					frmOrder.submit();
+				}
+			});
+			
+			function checkValues() {
+				var order_lat = $("#order_lat").val();
+				var order_lng = $("#order_lng").val();
+				var order_req = $("#order_req").val();
+				
+				if((order_lat == null || order_lat == "") || (order_lng == null || order_lng == "")) {
+					alert("주소 입력하쇼");
+				} else if(order_req == null || order_req == "") {
+					alert("요구사항 입력하쇼");
+				} else {
+					return true;
+				}
+				return false;
+			}
+		});
+	</script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		mapOption = {
@@ -87,9 +128,11 @@
 				}
 			});
 
-			// 마커를 클릭한 위치에 표시 
+			// 마커를 클릭한 위치에 표시, 중심 이동
 			marker.setMap(map);
 			map.setCenter(position);
+			document.getElementById("order_lat").value = lat;
+			document.getElementById("order_lng").value = lng;
 		}
 
 		// 지도에 클릭 이벤트를 등록합니다
@@ -122,16 +165,13 @@
 			});
 		}
 		
-		// 주소 관련 작업
-		function searchAddrFromCoords(coords, callback) {
-			// 좌표로 행정동 주소 정보를 요청합니다
-			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(),callback);
-		}
+		// 좌표로 주소 얻기
 		function searchDetailAddrFromCoords(coords, callback) {
 			// 좌표로 법정동 상세 주소 정보를 요청합니다
 			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 		}
-		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		
+		// 다음 주소 api
 		function seacrhAddress() { 
 			var roadAddr; // 도로명 주소 변수
 			var jibunAddr; // 지명 주소
@@ -142,37 +182,10 @@
 					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 					roadAddr = data.roadAddress; // 도로명 주소 변수
 					jibunAddr = data.jibunAddress; // 지명 주소
-					var extraRoadAddr = ''; // 참고 항목 변수
-
-					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-					if (data.bname !== ''
-							&& /[동|로|가]$/g.test(data.bname)) {
-						extraRoadAddr += data.bname;
-					}
-					
-					// 건물명이 있고, 공동주택일 경우 추가한다.
-					if (data.buildingName !== ''
-							&& data.apartment === 'Y') {
-						extraRoadAddr += (extraRoadAddr !== '' ? ', '
-								+ data.buildingName : data.buildingName);
-					}
-					
-					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-					if (extraRoadAddr !== '') {
-						extraRoadAddr = ' (' + extraRoadAddr + ')';
-					}
 
 					// 주소 정보를 해당 필드에 넣는다.
 					document.getElementById("roadAddr").value = roadAddr;
 					document.getElementById("jibunAddr").value = jibunAddr;
-
-					// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-					if (roadAddr !== '') {
-						document.getElementById("extraAddr").value = extraRoadAddr;
-					} else {
-						document.getElementById("extraAddr").value = '';
-					}
 				}, 
 				onclose : function(state) {
 					if(state == 'COMPLETE_CLOSE') {
@@ -181,60 +194,6 @@
 				}
 			}).open();
 		}
-
-		function getInfo() {
-			// 지도의 현재 중심좌표를 얻어옵니다 
-			var center = map.getCenter();
-			// 지도의 현재 레벨을 얻어옵니다
-			var level = map.getLevel();
-			// 지도타입을 얻어옵니다
-			var mapTypeId = map.getMapTypeId();
-			// 지도의 현재 영역을 얻어옵니다 
-			var bounds = map.getBounds();
-			// 영역의 남서쪽 좌표를 얻어옵니다 
-			var swLatLng = bounds.getSouthWest();
-			// 영역의 북동쪽 좌표를 얻어옵니다 
-			var neLatLng = bounds.getNorthEast();
-			// 영역정보를 문자열로 얻어옵니다. ((남,서), (북,동)) 형식입니다
-			var boundsStr = bounds.toString();
-
-			var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
-			message += '경도 ' + center.getLng() + ' 이고 <br>';
-			message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
-			message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
-			message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', '
-					+ swLatLng.getLng() + ' 이고 <br>';
-			message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', '
-					+ neLatLng.getLng() + ' 입니다';
-
-			// 개발자도구를 통해 직접 message 내용을 확인해 보세요.
-			console.log(message);
-		}
-
-// 		function setUserMarker(position) {
-// 			var url = "/test/getOrderList?odr_lat=" + position.getLat() + "&odr_lng=" + position.getLng() + "&range=1";
-// 			var sendData = {
-// 		    		"odr_lat"			:	position.getLat(),
-// 		    		"odr_lng"			:	position.getLng(),
-// 		    		"range"				:	1
-// 		    };
-
-// 			var orderList;
-
-// 			$.ajax({
-// 				"headers"	:	{
-// 					"Content-Type"	:	"application/json"
-// 				},
-// 				"dataType"	:	"text",
-// 				"method"	:	"post",
-// 				"url"		:	url,
-// 				"async"		:	false,
-// 				"success"	:	function(data) {
-// 					orderList = JSON.parse(data);
-// 				},
-// 			});
-// 			return orderList;
-// 		}
 	</script>
 </body>
 </html>

@@ -20,6 +20,12 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderVo> orderList = orderDao.getOrderList(order_lat, order_lng, range);
 		return orderList;
 	}
+
+	@Override
+	public String insertOrder(OrderVo orderVo) throws Exception {
+		String result = orderDao.insertOrder(orderVo);
+		return result;
+	}
 	
 	@Override
 	public String pickOrder(int order_no, int dlvr_no) throws Exception {

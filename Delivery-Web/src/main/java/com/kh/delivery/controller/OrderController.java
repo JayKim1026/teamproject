@@ -3,13 +3,16 @@ package com.kh.delivery.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.OrderService;
 
 @Controller
@@ -24,6 +27,16 @@ public class OrderController {
 	@RequestMapping(value="/orderForm", method=RequestMethod.GET)
 	public String orderForm() throws Exception {
 		return "pages/orderForm";
+	}
+	
+	@RequestMapping(value="/insertOrder", method=RequestMethod.POST)
+	public String insertOrder(OrderVo orderVo, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("orderVo = " + orderVo);
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		orderVo.setUser_no(userVo.getUser_no());
+		String result = orderService.insertOrder(orderVo);
+		rttr.addFlashAttribute("msg", result);
+		return "redirect:/";
 	}
 	
 	// 안드로이드
