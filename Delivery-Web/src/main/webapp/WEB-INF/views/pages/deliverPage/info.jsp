@@ -61,11 +61,11 @@
 		<br /> deliverVo:${sessionScope.deliverVo}
 	</header>
 	<ul class="sideMenu">
-		<li><a href="/deliver/deliverPage/info">회원정보</a></li>
-		<li><a href="/deliver/deliverPage/orderList">주문 내역 조회</a></li>
-		<li><a href="/deliver/deliverPage/point">포인트 조회</a></li>
-		<li><a href="/deliver/deliverPage/review">내가 작성한 후기</a></li>
-		<li><a href="/deliver/deliverPage/question">1:1 문의</a></li>
+		<li><a href="/deliverPage/info">회원정보</a></li>
+		<li><a href="/deliverPage/orderList">주문 내역 조회</a></li>
+		<li><a href="/deliverPage/point">포인트 조회</a></li>
+		<li><a href="/deliverPage/review">내가 작성한 후기</a></li>
+		<li><a href="/deliverPage/question">1:1 문의</a></li>
 	</ul>
 
 
@@ -86,7 +86,7 @@
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
 					<div class="imgChange">
-						<form role="form" action="/deliver/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
+						<form role="form" action="/deliverPage/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
 							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
 							<input type="hidden" value="${sessionScope.deliverVo.dlvr_img }" name="orgImg"><!-- 기존 프사  -->
 						</form>
@@ -114,7 +114,7 @@
 					</div>
 				</td>
 				<td class="pwChange">
-					<form id="frmPw" action="/deliver/pwChange" method="post">
+					<form id="frmPw" action="/deliverPage/pwChange" method="post">
 						<div>
 							<label class="pw Label"> 현재 비밀번호</label>
 							<input type="password" id="dlvr_pw" name="dlvr_pw">
@@ -155,7 +155,7 @@
 				</td>
 				<td class="EmailChange">
 					<div>
-						<form id="frmEmail" action="/deliver/emailChange" method="Post">
+						<form id="frmEmail" action="/deliverPage/emailChange" method="Post">
 							<label class="email Label">수정 이메일 </label>
 							<input type="email" id="chg_email" name="chg_email">
 							<br/>
@@ -177,7 +177,7 @@
 				</td>
 				<td class="phoneChange">
 					<div>
-						<form id="frmPhone" action="/deliver/phoneChange" method="post">
+						<form id="frmPhone" action="/deliverPage/phoneChange" method="post">
 							<label class="phone Label">수정 전화번호</label>
 							<input type="tel" id="chg_phone" name="chg_phone">
 							<br/>
@@ -198,7 +198,7 @@
 					</div>
 				</td>
 				<td class="addrChange">
-					<form action="/deliver/addrChange" method="POST" id="frmAddr">
+					<form action="/deliverPage/addrChange" method="POST" id="frmAddr">
 						<div>
 							<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
 							<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="btnAddr"><br>
@@ -303,7 +303,7 @@ $(function() {
 		var dlvr_pw = $("#dlvr_pw").val();
 		console.log("dlvr_pw : " + dlvr_pw);
 		
-		var url = "/deliver/pwCheck";
+		var url = "/deliverPage/pwCheck";
 		var sendData = {
 				"dlvr_pw"	:	dlvr_pw				
 		};

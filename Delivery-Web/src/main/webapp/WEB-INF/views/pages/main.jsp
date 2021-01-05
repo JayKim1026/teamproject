@@ -33,7 +33,7 @@
 				<li><a class="menu__stuff2" href="/user/userPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
 			</c:if>
 			<c:if test="${sessionScope.deliverVo != null }">
-				<li><a class="menu__stuff2" href="/deliver/deliverPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
+				<li><a class="menu__stuff2" href="/deliverPage/info" style="padding-right: 20;">마이뚜벅이</a></li>
 			</c:if>
 				<li><a class="menu__stuff2" href="">Membership</a></li>
 			</ul>
