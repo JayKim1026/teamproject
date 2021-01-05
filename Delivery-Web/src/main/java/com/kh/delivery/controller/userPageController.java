@@ -61,14 +61,14 @@ public class userPageController implements Codes {
 		} else {
 
 			FileUploadUtil.delete(orgImg); // 아마존에 저장된 기존 이미지 삭제.
-			String user_img = USER_IMG + user_id + "_" + org_chgImg;
-			System.out.println("아마존이랑 DB에 저장할 이름 user_img : " + user_img);
-			userVo.setUser_img(user_img);
+			String chg_img = USER_IMG + user_id + "_" + org_chgImg;
+			System.out.println("아마존이랑 DB에 저장할 이름 user_img : " + chg_img);
+			userVo.setUser_img(chg_img);
 			File chgUserImg = new File(org_chgImg);
 			chgImg.transferTo(chgUserImg);
-			FileUploadUtil.upload(chgUserImg, user_img); // 아마존에 변경할 사진 저장.
+			FileUploadUtil.upload(chgUserImg, chg_img); // 아마존에 변경할 사진 저장.
 
-			String result = userService.imgChange(user_id, user_img);
+			String result = userService.imgChange(user_id, chg_img);
 			System.out.println("result : " + result);
 			if (result == "imgChange_success") {
 				rttr.addFlashAttribute("imgChangeResult", "success");
@@ -100,13 +100,13 @@ public class userPageController implements Codes {
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/pwChange", method = RequestMethod.POST)
-	public String pwChange(String user_Npw, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("user_Npw : " + user_Npw);
+	public String pwChange(String chg_pw, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("chg_pw : " + chg_pw);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
-		String result = userService.pwChange(user_id, user_Npw);
+		String result = userService.pwChange(user_id, chg_pw);
 		if (result == "pwChange_success") {
-			userVo.setUser_pw(user_Npw);
+			userVo.setUser_pw(chg_pw);
 			rttr.addFlashAttribute("pwChangeResult", "success");
 			return "redirect:/userPage/info";
 		} else {
@@ -117,13 +117,13 @@ public class userPageController implements Codes {
 
 	// 이메일 변경
 	@RequestMapping(value = "/emailChange", method = RequestMethod.POST)
-	public String emailChange(String user_email, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("user_email : " + user_email);
+	public String emailChange(String chg_email, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("chg_email : " + chg_email);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
-		String result = userService.emailChange(user_id, user_email);
+		String result = userService.emailChange(user_id, chg_email);
 		if (result == "emailChange_success") {
-			userVo.setUser_email(user_email);
+			userVo.setUser_email(chg_email);
 			rttr.addFlashAttribute("emailChangeResult", "success");
 			return "redirect:/userPage/info";
 		} else {
