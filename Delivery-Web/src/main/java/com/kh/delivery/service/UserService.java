@@ -31,7 +31,13 @@ public interface UserService {
 	// 사용자 전화번호 변경
 	public String phoneChange(String user_id, String chg_phone) throws Exception;
 
+	// 사용자 주소 변경
+	public String addrChange(String chg_addr, String user_id) throws Exception;
+	
+	
 	// 안드로이드
 	// 유저 정보 찾기
 	public UserVo getUserInfo(int user_no) throws Exception;
+
+
 }

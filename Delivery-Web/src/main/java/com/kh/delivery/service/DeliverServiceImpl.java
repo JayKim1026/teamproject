@@ -33,17 +33,54 @@ public class DeliverServiceImpl implements DeliverService {
 		boolean result = deliverDao.checkIdDupl(dlvr_id);
 		return result;
 	}
+	
+	// 배달원 프로필 사진변경
+	@Override
+	public String imgChange(String dlvr_id, String chg_img) throws Exception {
+		String result = deliverDao.imgChange(dlvr_id, chg_img);
+		return result;
+	}
 
+	// 배달원 현재 비밀번호 확인
+	@Override
+	public String pwCheck(String dlvr_id, String dlvr_pw) throws Exception {
+		String result = deliverDao.pwCheck(dlvr_id, dlvr_pw);
+		return result;
+	}
+
+	// 배달원 비밀번호 변경
+	@Override
+	public String pwChange(String dlvr_id, String chg_pw) throws Exception {
+		String result = deliverDao.pwChange(dlvr_id, chg_pw);
+		return result;
+	}
+
+	@Override
+	public String emailChange(String dlvr_id, String chg_email) throws Exception {
+		String result = deliverDao.emailChange(dlvr_id, chg_email);
+		return result;
+	}
+
+	@Override
+	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
+		String result = deliverDao.phoneChange(dlvr_id, chg_phone);
+		return result;
+	}
+
+	@Override
+	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
+		String result = deliverDao.addrChange(dlvr_id, chg_addr);
+		return result;
+	}
+	/*	//웹*/
+	
+	
+	
+	
+	/*	안드로이드*/
 	@Override
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
 		String result = deliverDao.modifyDeliver(deliverVo);
 		return result;
 	}
-
-	@Override
-	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception {
-		String result = deliverDao.updateDlvrImg(dlvr_no, dlvr_img);
-		return result;
-	}
-
 }

@@ -8,7 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My page</title>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
+<title>My page for user</title>
 <%@ include file="../../include/link.jsp"%>
 <style>
 .imgChange{
@@ -40,6 +41,10 @@
 .phoneChange{
 	display: none;
 }
+
+.addrChange{
+	display: none;
+}
 </style>
 </head>
 
@@ -56,11 +61,11 @@
 		<br /> userVo:${sessionScope.userVo}
 	</header>
 	<ul class="sideMenu">
-		<li><a href="/user/userPage/info">회원정보</a></li>
-		<li><a href="/user/userPage/orderList">주문 내역 조회</a></li>
-		<li><a href="/user/userPage/point">포인트 조회</a></li>
-		<li><a href="/user/userPage/review">내가 작성한 후기</a></li>
-		<li><a href="/user/userPage/question">1:1 문의</a></li>
+		<li><a href="/userPage/info">회원정보</a></li>
+		<li><a href="/userPage/orderList">주문 내역 조회</a></li>
+		<li><a href="/userPage/point">포인트 조회</a></li>
+		<li><a href="/userPage/review">내가 작성한 후기</a></li>
+		<li><a href="/userPage/question">1:1 문의</a></li>
 	</ul>
 
 
@@ -68,12 +73,12 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th style="border:none;">기본 회원 정보 <span>필수</span></th>
+				<th style="border:none;">일반 회원 정보 <span>필수</span></th>
 			<tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>사진</td>
+				<td>프로필 사진</td>
 				<td>
 					<div>
 						<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
@@ -81,7 +86,7 @@
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
 					<div class="imgChange">
-						<form role="form" action="/user/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
+						<form role="form" action="/userPage/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
 							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
 							<input type="hidden" value="${sessionScope.userVo.user_img }" name="orgImg"><!-- 기존 프사  -->
 						</form>
@@ -109,7 +114,7 @@
 					</div>
 				</td>
 				<td class="pwChange">
-					<form id="frmPw" action="/user/pwChange" method="post">
+					<form id="frmPw" action="/userPage/pwChange" method="post">
 						<div>
 							<label class="pw Label"> 현재 비밀번호</label>
 							<input type="password" id="user_pw" name="user_pw">
@@ -150,7 +155,7 @@
 				</td>
 				<td class="EmailChange">
 					<div>
-						<form id="frmEmail" action="/user/emailChange" method="Post">
+						<form id="frmEmail" action="/userPage/emailChange" method="Post">
 							<label class="email Label">수정 이메일 </label>
 							<input type="email" id="chg_Email" name="user_email">
 							<br/>
@@ -172,7 +177,7 @@
 				</td>
 				<td class="phoneChange">
 					<div>
-						<form id="frmPhone" action="/user/phoneChange" method="post">
+						<form id="frmPhone" action="/userPage/phoneChange" method="post">
 							<label class="phone Label">수정 전화번호</label>
 							<input type="tel" id="chg_phone" name="chg_phone">
 							<br/>
@@ -185,19 +190,34 @@
 					<button type="button" class="btn btn-secondary" id="btnChgPhone">휴대전화 변경</button>
 				</td>
 			</tr>
-			<%-- <tr>
+			 <tr>
 				<td>주소</td>
 				<td class="addrHide"> 
 					<div>
-						${sessionScope.userVO.user_addr}
+						${sessionScope.userVo.user_addr}
 					</div>
 				</td>
 				<td class="addrChange">
+					<form action="/userPage/addrChange" method="POST" id="frmAddr">
+						<div>
+							<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
+							<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="btnAddr"><br>
+							<input type="text" class="form-control user_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
+							<input type="text"class="form-control "  id="sample4_jibunAddress" placeholder="지번주소">
+							<span id="guide" style="color:#999;display:none"></span>
+							<input type="text" class="form-control addr3" id="sample4_detailAddress" placeholder="상세주소(필수)" required>
+							<input type="text" class="form-control addr2"  id="sample4_extraAddress" placeholder="참고항목">
+							<input type="hidden" id="chg_addr" name="chg_addr">
+						</div>
+						<br/>
+						<button type="button" class="btn btn-secondary" id="btnChgAddr_cancel">취소</button>
+						<button type="submit" class="btn btn-secondary" id="btnChgAddr_ok">완료</button>
+					</form>
 				</td>
 				<td>
-					<button type="button" class="btn btn-secondary">주소 변경</button>
+					<button type="button" class="btn btn-secondary" id="btnChgAddr">주소 변경</button>
 				</td>
-			</tr> --%>
+			</tr>
 		</tbody>
 	</table>
 </body>
@@ -225,6 +245,10 @@ $(function() {
 		alert("이메일이 변경되었습니다.");
 	}
 	
+	var addrChangeResult = "${addrChangeResult}";
+	if(addrChangeResult == "success") {
+		alert("주소가 변경 되었습니다.")
+	}
 	//<비밀번호 변경>
 	// 비밀번호 변경 버튼 클릭
 	$("#btnChgPw").click(function(){
@@ -242,7 +266,7 @@ $(function() {
 	$("#btnChgPw_ok").click(function(){
 		//비밀번호 AJAX 확인하기
 		var user_pw = $("input[name=user_pw]").val();
-		var url = "/user/pwCheck";
+		var url = "/userPage/pwCheck";
 		var sendData = {
 				"user_pw"	:	user_pw				
 		};
@@ -390,6 +414,43 @@ $(function() {
 			return;
 		}
 	});
+	
+	// 주소 변경 버튼 클릭
+	$("#btnChgAddr").click(function(){
+		$(".addrChange").show();
+		$(this).hide();
+		$(".addrHide").hide();
+	});
+	
+	// 주소 변경 - 취소 버튼
+	$("#btnChgAddr_cancel").click(function(){
+		$(".addrChange").hide();
+		$("#btnChgAddr").show();
+		$(".addrHide").show();
+	});
+	
+	//주소 변경 - 완료 버튼
+	$("#btnChgAddr_ok").click(function(e){
+		e.preventDefault();
+		var road1 = $("#sample4_roadAddress").val();
+		var road2 = $("#sample4_extraAddress").val();
+		var road3 = $("#sample4_detailAddress").val();
+		
+		// 상세주소가 없는 경우 return
+		if(road3.trim() == null || road3.trim() == "") {
+			alert("상세주소를 입력해 주세요");
+			$("#sample4_detailAddress").focus();
+			return;
+		} else {
+			if(road2 == null || road2 == "") {
+				$("#chg_addr").val(road1 + road3);
+				$("#frmAddr").submit();
+			} else {
+				$("#chg_addr").val(road1 + road2 + " " + road3);
+				$("#frmAddr").submit();
+			}
+		}
+	});
 }); // 핸들러
 
 // 바꿀 프로필 사진 미리 보여주기
@@ -403,6 +464,61 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
        	console.log("input.files[0] : " + input.files[0]);
     }
+}
+
+//<다음 주소 JS> 
+//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+function sample4_execDaumPostcode() {
+  new daum.Postcode({
+      oncomplete: function(data) {
+          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+          // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+          // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+          var roadAddr = data.roadAddress; // 도로명 주소 변수
+          var extraRoadAddr = ''; // 참고 항목 변수
+          // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+          // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+          if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+              extraRoadAddr += data.bname;
+          }
+          // 건물명이 있고, 공동주택일 경우 추가한다.
+          if(data.buildingName !== '' && data.apartment === 'Y'){
+             extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+          }
+          // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+          if(extraRoadAddr !== ''){
+              extraRoadAddr = ' (' + extraRoadAddr + ')';
+          }
+          // 우편번호와 주소 정보를 해당 필드에 넣는다.
+          document.getElementById('sample4_postcode').value = data.zonecode;
+          document.getElementById("sample4_roadAddress").value = roadAddr;
+          document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+          // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+          if(roadAddr !== ''){
+              document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+          } else {
+              document.getElementById("sample4_extraAddress").value = '';
+          }
+          var guideTextBox = document.getElementById("guide");
+          // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+          if(data.autoRoadAddress) {
+              var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+              guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+              guideTextBox.style.display = 'block';
+          } else if(data.autoJibunAddress) {
+              var expJibunAddr = data.autoJibunAddress;
+              guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+              guideTextBox.style.display = 'block';
+          } else {
+              guideTextBox.innerHTML = '';
+              guideTextBox.style.display = 'none';
+          }
+		var detailAddr = $("#sample4_detailAddress").val();
+		if(detailAddr == null || detailAddr == "") {
+			$("#sample4_detailAddress").focus();
+		}
+      }
+  }).open();
 }
 </script>
 </html>

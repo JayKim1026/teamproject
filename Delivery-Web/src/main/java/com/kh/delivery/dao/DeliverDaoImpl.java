@@ -42,24 +42,83 @@ public class DeliverDaoImpl implements DeliverDao {
 			if(deliverVo == null) {
 				return true;
 			} else {
-				
 				return false;
 			}
 	}
 
+
+	// 배달원 프로필 사진 변경
+	@Override
+	public String imgChange(String dlvr_id, String chg_img) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("chg_img", chg_img);
+		sqlSession.update(NAMESPACE + "imgChange" , map);
+		return "imgChange_success";
+	}
+	
+	// 배달원 현재 비밀번호 확인
+	@Override
+	public String pwCheck(String dlvr_id, String dlvr_pw) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("dlvr_pw", dlvr_pw);
+		DeliverVo deliverVo= sqlSession.selectOne(NAMESPACE + "pwCheck", map);
+		if(deliverVo != null) {
+			return "true";
+		} else {
+			
+			return "false";
+		}
+	}
+
+	// 배달원 비밀번호 변경
+	@Override
+	public String pwChange(String dlvr_id, String chg_pw) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("chg_pw", chg_pw);
+		sqlSession.update(NAMESPACE + "pwChange", map);
+		return "pwChange_success";
+	}
+
+	// 배달원 이메일 변경
+	@Override
+	public String emailChange(String dlvr_id, String chg_email) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("chg_email", chg_email);
+		sqlSession.update(NAMESPACE + "emailChange", map);
+		return "emailChange_success";
+	}
+
+	@Override
+	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("chg_phone", chg_phone);
+		sqlSession.update(NAMESPACE + "phoneChange", map);
+		return "phoneChange_success";
+	}
+
+	@Override
+	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("dlvr_id", dlvr_id);
+		map.put("chg_addr", chg_addr);
+		sqlSession.update(NAMESPACE + "addrChange", map);
+		return "addrChange_success";
+	}
+	
+	/* // 웹*/ 
+	
+	
+	
+	/* 안드로이드*/ 
 	@Override
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
 		sqlSession.update(NAMESPACE + "modifyDeliver", deliverVo);
 		return "modify_deliver_success";
 	}
-
-	@Override
-	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("dlvr_no", dlvr_no);
-		map.put("dlvr_img", dlvr_img);
-		sqlSession.update(NAMESPACE + "updateDlvrImg", map);
-		return "updateDlvrImg_success";
-	}
-
+	
 }

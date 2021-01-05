@@ -65,9 +65,9 @@ public class UserDaoImpl implements UserDao {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_img", user_img);
-		System.out.println("유저다오 imgChange : " + map);
-		System.out.println("유저다오 user_id : " + user_id);
-		System.out.println("유저다오 user_img : " + user_img);
+		//System.out.println("유저다오 imgChange : " + map);
+		//System.out.println("유저다오 user_id : " + user_id);
+		//System.out.println("유저다오 user_img : " + user_img);
 		
 		sqlSession.update(NAMESPACE + "imgChange", map);
 				
@@ -117,6 +117,16 @@ public class UserDaoImpl implements UserDao {
 		int result = sqlSession.update(NAMESPACE + "phoneChange", map);
 		System.out.println("phoneChange Dao result : " + result);
 		return "phoneChange_success";
+	}
+
+	@Override
+	public String addrChange(String chg_addr, String user_id) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("chg_addr", chg_addr);
+		int result = sqlSession.update(NAMESPACE + "addrChange", map);
+		System.out.println("addrChange Dao result : " + result);
+		return "addrChange_success";
 	}
 	
 }
