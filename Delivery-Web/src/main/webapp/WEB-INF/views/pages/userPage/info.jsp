@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
-<title>My page</title>
+<title>My page for user</title>
 <%@ include file="../../include/link.jsp"%>
 <style>
 .imgChange{

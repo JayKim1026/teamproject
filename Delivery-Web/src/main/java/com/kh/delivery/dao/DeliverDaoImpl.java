@@ -47,19 +47,52 @@ public class DeliverDaoImpl implements DeliverDao {
 			}
 	}
 
+
+	@Override
+	public String imgChange(String dlvr_id, String chg_img) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pwCheck(String dlvr_id, String chg_pw) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pwChange(String dlvr_id, String chg_Npw) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String emailChange(String dlvr_id, String chg_email) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/* // 웹*/ 
+	
+	
+	
+	/* 안드로이드*/ 
 	@Override
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
 		sqlSession.update(NAMESPACE + "modifyDeliver", deliverVo);
 		return "modify_deliver_success";
 	}
-
-	@Override
-	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("dlvr_no", dlvr_no);
-		map.put("dlvr_img", dlvr_img);
-		sqlSession.update(NAMESPACE + "updateDlvrImg", map);
-		return "updateDlvrImg_success";
-	}
-
+	
 }

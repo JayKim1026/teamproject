@@ -3,20 +3,38 @@ package com.kh.delivery.service;
 import com.kh.delivery.domain.DeliverVo;
 
 public interface DeliverService {
-	
+
+	//웹 
 	// 로그인
 	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception;
-
+	
 	// 회원가입
 	public String registDeliver(DeliverVo deliverVo) throws Exception;
 
 	// 아이디 중복 체크
 	public boolean checkIdDupl(String dlvr_id) throws Exception;
 
+	// 배달원 프로필 사진 변경
+	public String imgChange(String dlvr_id, String chg_img) throws Exception;
+
+	// 배달원 현재 비밀번호 확인
+	public String pwCheck(String dlvr_id, String chg_pw) throws Exception;
+
+	// 배달원 비밀번호 변경
+	public String pwChange(String dlvr_id, String chg_Npw) throws Exception;
+
+	// 배달원 이메일 변경
+	public String emailChange(String dlvr_id, String chg_email) throws Exception;
+
+	// 배달원 휴대전화 변경
+	public String phoneChange(String dlvr_id, String chg_phone) throws Exception;
+
+	// 배달원 주소 변경
+	public String addrChange(String dlvr_id, String chg_addr) throws Exception;
+	
+	
+	//안드로이드
 	// 배달원 정보 수정
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception;
-	
-	// 배달원 이미지 수정
-	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception;
 	
 }

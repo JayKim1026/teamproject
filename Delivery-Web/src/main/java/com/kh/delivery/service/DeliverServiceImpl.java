@@ -35,15 +35,49 @@ public class DeliverServiceImpl implements DeliverService {
 	}
 
 	@Override
+	public String imgChange(String dlvr_id, String chg_img) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pwCheck(String dlvr_id, String chg_pw) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pwChange(String dlvr_id, String chg_Npw) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String emailChange(String dlvr_id, String chg_email) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/*	//웹*/
+	
+	
+	
+	
+	/*	안드로이드*/
+	@Override
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
 		String result = deliverDao.modifyDeliver(deliverVo);
 		return result;
 	}
-
-	@Override
-	public String updateDlvrImg(int dlvr_no, String dlvr_img) throws Exception {
-		String result = deliverDao.updateDlvrImg(dlvr_no, dlvr_img);
-		return result;
-	}
-
 }

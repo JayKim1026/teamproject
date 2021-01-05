@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My page</title>
+<title>My page for deliver</title>
 <%@ include file="../../include/link.jsp"%>
 <style>
 .imgChange{
