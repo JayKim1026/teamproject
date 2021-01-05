@@ -5,10 +5,14 @@
 <mapper namespace="com.kh.delivery.order">
 	
 	<select id="getOrderList" resultType="OrderVo">
-		select * from tbl_order
+		select * 
+		from (
+		    select o.*, u.user_name 
+		    from tbl_order o inner join tbl_user u 
+		    on o.user_no = u.user_no)
 		where (order_lat between #{order_lat} - #{range} * 0.013 and #{order_lat} + #{range} * 0.013)
-			and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
-			and order_state = '3-001'
+		    and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
+		    and order_state = '3-001'
 		order by order_no desc
 	</select>
 	
