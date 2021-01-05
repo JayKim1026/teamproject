@@ -20,6 +20,7 @@ public class TimelineVo {
 	// 조인 컬럼
 	private String writer_name;
 	private String dlvr_name;
+	private String writer_img;
 
 	public int getTime_no() {
 		return time_no;
@@ -109,12 +110,20 @@ public class TimelineVo {
 		this.dlvr_name = dlvr_name;
 	}
 
+	public String getWriter_img() {
+		return writer_img;
+	}
+
+	public void setWriter_img(String writer_img) {
+		this.writer_img = writer_img;
+	}
+
 	@Override
 	public String toString() {
 		return "TimelineVo [time_no=" + time_no + ", writer_no=" + writer_no + ", writer_state=" + writer_state
 				+ ", time_content=" + time_content + ", time_img=" + time_img + ", time_date=" + time_date
 				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no + ", writer_name="
-				+ writer_name + ", dlvr_name=" + dlvr_name + "]";
+				+ writer_name + ", dlvr_name=" + dlvr_name + ", writer_img=" + writer_img + "]";
 	}
 
 }
