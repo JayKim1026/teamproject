@@ -28,6 +28,12 @@ public class OrderDaoImpl implements OrderDao {
 		List<OrderVo> orderList = sqlSession.selectList(NAMESPACE + "getOrderList", map);
 		return orderList;
 	}
+
+	@Override
+	public String insertOrder(OrderVo orderVo) throws Exception {
+		sqlSession.insert(NAMESPACE + "insertOrder", orderVo);
+		return "insertOrder_success";
+	}
 	
 	@Override
 	public String pickOrder(int order_no, int dlvr_no) throws Exception {

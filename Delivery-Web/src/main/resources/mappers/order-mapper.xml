@@ -7,9 +7,15 @@
 	<select id="getOrderList" resultType="OrderVo">
 		select * from tbl_order
 		where (order_lat between #{order_lat} - #{range} * 0.013 and #{order_lat} + #{range} * 0.013)
-		and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
-		and order_state = '3-001'
+			and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
+			and order_state = '3-001'
+		order by order_no desc
 	</select>
+	
+	<insert id="insertOrder">
+		insert into tbl_order(order_no, order_ca, order_req, order_lat, order_lng, user_no)
+		values(seq_order_no.nextval, #{order_ca}, #{order_req}, #{order_lat}, #{order_lng}, #{user_no})
+	</insert>
 
 	<update id="pickOrder">
 		update tbl_order set
@@ -21,7 +27,7 @@
 	<select id="getPickedOrder" resultType="OrderVo">
 		select * from tbl_order
 		where dlvr_no = #{dlvr_no}
-		and order_state = '3-002'
+			and order_state = '3-002'
 	</select>
 
 	<update id="cancelDelivery">
@@ -29,20 +35,20 @@
 			dlvr_no = null, 
 			order_state = '3-001'
 		where order_no = #{order_no}
-		and dlvr_no = #{dlvr_no}
+			and dlvr_no = #{dlvr_no}
 	</update>
 	
 	<update id="deliveryCompleted">
 		update tbl_order set
 			order_state = '3-003'
 		where order_no = #{order_no}
-		and dlvr_no = #{dlvr_no}
+			and dlvr_no = #{dlvr_no}
 	</update>
 
 	<select id="getCompletedOrder" resultType="OrderVo">
 		select * from tbl_order
 		where dlvr_no = #{dlvr_no}
-		and order_state = '3-003'
+			and order_state = '3-003'
 	</select>
 
 </mapper>
