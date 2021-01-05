@@ -42,6 +42,7 @@
 					<input type="text" class="form-control" id="order_req" name="order_req" placeholder="요구사항 입력"/>
 				</form>
 			</div>
+<!-- 			지도 -->
 			<div id="map" style="width: 500px; height: 500px;"></div>
 			<div>
 				<div class="hAddr">
@@ -88,9 +89,19 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		mapOption = {
 			center : new kakao.maps.LatLng(37.56682, 126.97865), // 지도의 중심좌표
-			level : 4, // 지도의 확대 레벨
+			level : 5, // 지도의 확대 레벨
 			mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
 		};
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var lat = position.coords.latitude
+				var lng = position.coords.longitude;
+				var locPosition = new kakao.maps.LatLng(lat, lng);
+				map.setCenter(locPosition);
+			});
+		} else {
+			console.log("안됨");
+		}
 		// 픽업위치 마커
 		var marker = new kakao.maps.Marker();
 		// 지도를 생성 
