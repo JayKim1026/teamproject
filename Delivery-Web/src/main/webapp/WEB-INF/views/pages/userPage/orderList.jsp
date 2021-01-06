@@ -8,7 +8,7 @@
 <%@ include file="../../include/link.jsp"%>
 </head>
 <body>
-	<%@include file="../../include/myPageHeader.jsp"%>
+	<%@include file="../../include/userPageHeader.jsp"%>
 	orderList: ${orderList}
 	<section>
 		<div class="container-fluid">

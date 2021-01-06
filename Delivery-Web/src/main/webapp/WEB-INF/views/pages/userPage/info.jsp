@@ -46,7 +46,7 @@
 
 <body>
 <!-- header -->
-<%@include file = "../../include/myPageHeader.jsp" %>
+<%@include file = "../../include/userPageHeader.jsp" %>
 <!-- //header -->
 <section>
 	<!-- 회원 정보 테이블  -->

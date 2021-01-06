@@ -11,10 +11,12 @@
 			</c:if>
 		<br /> userVo:${sessionScope.userVo}
 	</header>
-	<ul class="sideMenu">
-		<li><a href="/userPage/info">회원정보</a></li>
-		<li><a href="/userPage/orderList">주문 내역 조회</a></li>
-		<li><a href="/userPage/point">포인트 조회</a></li>
-		<li><a href="/userPage/review">내가 작성한 후기</a></li>
-		<li><a href="/userPage/question">1:1 문의</a></li>
-	</ul>
+	<nav>
+		<ul class="sideMenu">
+			<li><a href="/userPage/info">회원정보</a></li>
+			<li><a href="/userPage/orderList">주문 내역 조회</a></li>
+			<li><a href="/userPage/point">포인트 조회</a></li>
+			<li><a href="/userPage/review">내가 작성한 후기</a></li>
+			<li><a href="/userPage/question">1:1 문의</a></li>
+		</ul>
+	</nav>
