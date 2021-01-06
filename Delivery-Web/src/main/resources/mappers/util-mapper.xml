@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.util">
+	
+	<select id="findAccountId" resultType="String">
+		select acc_id 
+		from (
+		    select user_id acc_id, user_name acc_name, user_email acc_email, user_phone acc_phone from tbl_user
+		    union
+		    select dlvr_id, dlvr_name, dlvr_email, dlvr_phone from tbl_deliver
+		)
+		where acc_name = #{acc_name}
+		and acc_email = #{acc_email}
+		and acc_phone = #{acc_phone}
+	</select>
+	
+	<select id="findAccountPw" resultType="String">
+		select acc_pw 
+		from (
+		    select user_id acc_id, user_pw acc_pw, user_name acc_name, user_email acc_email, user_phone acc_phone from tbl_user
+		    union
+		    select dlvr_id, dlvr_pw, dlvr_name, dlvr_email, dlvr_phone from tbl_deliver
+		)
+		where acc_id = #{acc_id}
+		and acc_name = #{acc_name}
+		and acc_email = #{acc_email}
+		and acc_phone = #{acc_phone}
+	</select>
+	
+</mapper>
