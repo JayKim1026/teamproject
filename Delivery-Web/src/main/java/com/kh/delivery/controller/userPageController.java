@@ -1,6 +1,7 @@
 package com.kh.delivery.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.UserService;
 import com.kh.delivery.util.Codes;
@@ -171,11 +173,26 @@ public class userPageController implements Codes {
 
 	}
 
-	// userPage 주문 내역 조회 페이지로 이동
+	// userPage 주문 내역 조회 페이지로 이동 + 주문 내역 조회
 	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
-	public String userOrderList(Model model, HttpSession session) throws Exception {
+	public String userOrderList(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
-		return "pages/userPage/orderList";
+		if(userVo != null) {
+			int user_no = userVo.getUser_no();
+			List<OrderVo> orderList = userService.getOrderList(user_no);
+			if(orderList != null) {
+				model.addAttribute("orderList", orderList);
+			} else {
+				model.addAttribute("orderList", "주문 정보가 없습니다.");
+			}
+			
+			return "pages/userPage/orderList";
+		
+		} else {
+			rttr.addFlashAttribute("loginPlz", "loginPlz");
+			return "redirect:/";
+		}
+		
 	}
 
 	// userPage 포인트 페이지로 이동

@@ -176,11 +176,11 @@ public class DeliverPageController implements Codes {
 
 	}
 
-	// deliverPage 주문 내역 페이지 이동
-	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	// deliverPage 배달 내역 페이지 이동
+	@RequestMapping(value = "/deliveryList", method = RequestMethod.GET)
 	public String deliverOrderList(Model model, HttpSession session) throws Exception {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
-		return "pages/deliverPage/orderList";
+		return "pages/deliverPage/deliveryList";
 	}
 
 	// deliverPage 포인트 페이지 이동
