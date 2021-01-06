@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,26 +45,10 @@
 </head>
 
 <body>
-	<!-- 헤더 -->
-	<header id="head_Container">
-		<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
-		<h1 id="header_title">마이 페이지</h1>
-			<c:if test="${sessionScope.userVo.user_id != null }">
-				<form action="/user/logout" method="get">
-					<button type="submit" class="btn-default" id="btnLogout">로그아웃</button>
-				</form>
-			</c:if>
-		<br /> userVo:${sessionScope.userVo}
-	</header>
-	<ul class="sideMenu">
-		<li><a href="/userPage/info">회원정보</a></li>
-		<li><a href="/userPage/orderList">주문 내역 조회</a></li>
-		<li><a href="/userPage/point">포인트 조회</a></li>
-		<li><a href="/userPage/review">내가 작성한 후기</a></li>
-		<li><a href="/userPage/question">1:1 문의</a></li>
-	</ul>
-
-
+<!-- header -->
+<%@include file = "../../include/myPageHeader.jsp" %>
+<!-- //header -->
+<section>
 	<!-- 회원 정보 테이블  -->
 	<table class="table">
 		<thead>
@@ -220,6 +200,7 @@
 			</tr>
 		</tbody>
 	</table>
+</section>
 </body>
 
 <script>

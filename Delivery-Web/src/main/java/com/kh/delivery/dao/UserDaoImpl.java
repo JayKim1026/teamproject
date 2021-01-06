@@ -1,6 +1,8 @@
 package com.kh.delivery.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -8,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 
 @Repository
@@ -104,7 +107,8 @@ public class UserDaoImpl implements UserDao {
 		return "pwChange_success";
 			
 	}
-
+	
+	// 일반회원 이메일 변경
 	@Override
 	public String emailChange(String user_id, String chg_email) throws Exception {
 		Map<String, String> map = new HashMap<>();
@@ -114,7 +118,8 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("emailChange Dao result : " + result);
 		return "emailChange_success";
 	}
-
+	
+	// 일반회원 휴대전화 변경
 	@Override
 	public String phoneChange(String user_id, String chg_phone) throws Exception {
 		Map<String, String> map = new HashMap<>();
@@ -125,6 +130,7 @@ public class UserDaoImpl implements UserDao {
 		return "phoneChange_success";
 	}
 
+	// 일반 회원 주소 변경
 	@Override
 	public String addrChange(String chg_addr, String user_id) throws Exception {
 		Map<String, String> map = new HashMap<>();
@@ -133,6 +139,14 @@ public class UserDaoImpl implements UserDao {
 		int result = sqlSession.update(NAMESPACE + "addrChange", map);
 		System.out.println("addrChange Dao result : " + result);
 		return "addrChange_success";
+	}
+
+	// 일반회원 주문내역 조회
+	@Override
+	public List<OrderVo> getOrderList(int user_no) throws Exception {
+		List<OrderVo> orderList	= sqlSession.selectList(NAMESPACE + "getOrderList", user_no);
+		System.out.println("userDaoImpl getOrderList : " + orderList);
+		return orderList;
 	}
 	
 }

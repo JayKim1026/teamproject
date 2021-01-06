@@ -19,6 +19,24 @@ public class OrderVo {
 
 	// 조인으로 가져오는 값
 	private String user_name;
+	private String code_detail;
+	private String dlvr_name;
+
+	public String getDlvr_name() {
+		return dlvr_name;
+	}
+
+	public void setDlvr_name(String dlvr_name) {
+		this.dlvr_name = dlvr_name;
+	}
+
+	public String getCode_detail() {
+		return code_detail;
+	}
+
+	public void setCode_detail(String code_detail) {
+		this.code_detail = code_detail;
+	}
 
 	public OrderVo() {
 	}
@@ -107,7 +125,8 @@ public class OrderVo {
 	public String toString() {
 		return "OrderVo [order_no=" + order_no + ", order_ca=" + order_ca + ", order_req=" + order_req + ", order_lat="
 				+ order_lat + ", order_lng=" + order_lng + ", user_no=" + user_no + ", dlvr_no=" + dlvr_no
-				+ ", order_state=" + order_state + ", order_date=" + order_date + ", user_name=" + user_name + "]";
+				+ ", order_state=" + order_state + ", order_date=" + order_date + ", user_name=" + user_name
+				+ ", code_detail=" + code_detail + ", dlvr_name=" + dlvr_name + "]";
 	}
 
 }

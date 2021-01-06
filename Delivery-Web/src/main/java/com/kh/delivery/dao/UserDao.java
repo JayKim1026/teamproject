@@ -1,5 +1,8 @@
 package com.kh.delivery.dao;
 
+import java.util.List;
+
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 
 public interface UserDao {
@@ -33,6 +36,9 @@ public interface UserDao {
 
 	// 사용자 주소 변경
 	public String addrChange(String chg_addr, String user_id) throws Exception;
+	
+	// 사용자 주문내역 조회
+	public List<OrderVo> getOrderList(int user_no) throws Exception;
 
 	// 안드로이드
 	// 유저 정보 찾기
