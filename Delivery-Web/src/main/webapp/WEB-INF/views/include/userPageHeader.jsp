@@ -9,7 +9,7 @@
 					<button type="submit" class="btn btn-secondary" id="btnLogout">로그아웃</button>
 				</form>
 			</c:if>
-		<br /> userVo:${sessionScope.userVo}
+		<br /> userVo 	: ${sessionScope.userVo}
 	</header>
 	<nav>
 		<ul class="sideMenu">

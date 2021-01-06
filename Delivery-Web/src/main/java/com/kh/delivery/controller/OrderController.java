@@ -35,8 +35,8 @@ public class OrderController {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		orderVo.setUser_no(userVo.getUser_no());
 		String result = orderService.insertOrder(orderVo);
-		rttr.addFlashAttribute("msg", result);
-		return "redirect:/";
+		rttr.addFlashAttribute("orderResult", result);
+		return "redirect:/userPage/orderList";
 	}
 	
 	// 안드로이드

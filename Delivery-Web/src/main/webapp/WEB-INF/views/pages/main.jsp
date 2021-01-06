@@ -29,17 +29,20 @@
 				</c:if>
 			</ul>
 			<ul class="nav__link">
+				<!-- 일반 회원  -->
+				<c:if test="${sessionScope.userVo != null }">
+					<li><a class="menu__stuff2" href="/order/orderForm" style="padding-right: 20;">주문하기</a></li>
+				</c:if>
+
 				<c:if test="${sessionScope.userVo != null }">
 					<li><a class="menu__stuff2" href="/userPage/info" style="padding-right: 20;">마이페이지</a></li>
 				</c:if>
-
+				
+				<!-- 배달원 -->
 				<c:if test="${sessionScope.deliverVo != null }">
 					<li><a class="menu__stuff2" href="/deliverPage/info" style="padding-right: 20;">마이페이지</a></li>
 				</c:if>
 
-				<c:if test="${sessionSecope.userVo != null }">
-					<li><a class="menu__stuff2" href="/order/orderForm">주문하기</a></li>
-				</c:if>
 			</ul>
 			<div class="nav__textArea">
 				<%@include file="../util/adressMain.jsp" %>
