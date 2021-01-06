@@ -14,4 +14,6 @@ public interface TimelineDao {
 	public String updateArticle(TimelineVo timelineVo);
 	/*글 삭제*/
 	public String deleteArticle(int time_no);
+	/*따 봉!*/
+	public void insertLike(int time_no, int time_like);
 }

@@ -49,4 +49,14 @@ public class TimelineDaoImpl implements TimelineDao {
 		sqlSession.update(NAMESPACE + "deleteArticle", time_no);
 		return "deleteArticle_success";
 	}
+
+	@Override
+	public void insertLike(int time_no, int time_like) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		map.put("time_like", time_like);
+		
+		sqlSession.insert(NAMESPACE  + "insertLike", map);
+		
+	}
 }

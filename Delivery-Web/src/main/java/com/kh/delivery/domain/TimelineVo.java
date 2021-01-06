@@ -17,6 +17,7 @@ public class TimelineVo {
 	private int time_star;
 	private int dlvr_no;
 	private String time_location;
+	private int time_like;
 
 	// 조인 컬럼
 	private String writer_name;
@@ -25,6 +26,14 @@ public class TimelineVo {
 	
 	
 	
+	public int getTime_like() {
+		return time_like;
+	}
+
+	public void setTime_like(int time_like) {
+		this.time_like = time_like;
+	}
+
 	public String getTime_location() {
 		return time_location;
 	}
@@ -134,9 +143,11 @@ public class TimelineVo {
 		return "TimelineVo [time_no=" + time_no + ", writer_no=" + writer_no + ", writer_state=" + writer_state
 				+ ", time_content=" + time_content + ", time_img=" + time_img + ", time_date=" + time_date
 				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no
-				+ ", time_location=" + time_location + ", writer_name=" + writer_name + ", dlvr_name=" + dlvr_name
-				+ ", writer_img=" + writer_img + "]";
+				+ ", time_location=" + time_location + ", time_like=" + time_like + ", writer_name=" + writer_name
+				+ ", dlvr_name=" + dlvr_name + ", writer_img=" + writer_img + "]";
 	}
+
+	
 
 	
 

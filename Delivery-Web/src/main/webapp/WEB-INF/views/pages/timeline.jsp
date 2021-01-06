@@ -220,10 +220,57 @@ $(".btnDelete").click(function(){
 
 /*사진 미리보기*/
 $("#time_img").on("change", function(){
+	var inputFile = $("input[type=file]")[0].files[0];
+	console.log("업데이트파일:" + inputFile);
 	readURL(this);
 	$("#imgPreview").show();
+	$("#deleteImg").show();
 	
 });
+
+/*사진 업로드 취소*/
+$("#deleteImg").click(function(){
+	$("input[type=file]").val("");
+	$("#imgPreview").hide();
+	$("#deleteImg").hide();
+	
+});
+
+/*따봉!*/
+$(".likeEvent").click(function(){
+	
+	console.log("따봉클릭")
+	var time_no = $(this).attr("data-no");
+	var user_id = $(this).attr("data-id");
+	console.log(user_id);
+	console.log(time_no);
+// 	var has = $(this).hasClass("blue-color");
+// 	var count = parseInt($("#likeCount").text());
+	var url = "/timeline/insertLike/" + time_no + "/" + user_id;
+	
+// 	if(has){
+// 		url = "/timeline/deleteLike/${timelineVo.time_no}"
+// 	}else{
+// 		console.log("이벤트발생");
+// 		url = "/timeline/insertLike/${timelineVo.time_no}"
+// 	}
+	
+	$.get(url, function(data){
+		console.log(data);
+		if(data == "success"){
+			
+// 			if(has){
+// 				that.removeClass("blue-color");				
+// 				count --;
+// 			}else{
+// 				that.addClass("blue-color");
+// 				count ++;
+// 			}
+// 			$("#likeCount").text(count);
+		}
+	});
+});
+/*따봉 끝*/
 
 });
 
@@ -253,9 +300,11 @@ function add(ths, sno) {
 		}
 	}
 }
+
 </script>
 <body>
 <%@include file="../include/timelineHeader.jsp" %>
+${likeList}
 	<!-------------------------- 글 입력  --------------------------> 
 	<div class="container-fluid" style="background-color: #f0f2f5;">
 		<div class="row">
@@ -304,6 +353,7 @@ function add(ths, sno) {
 												class="text-muted bg-light mt-4 mb-3"
 												placeholder="안녕하세요 오늘은 무슨 생각을 하고있나요?"></textarea>
 											<img src="#" id="imgPreview" style="width:60px; height:60px; display:none;">
+											<i class="fas fa-times" id="deleteImg" style="display:none;"></i>
 										</div>
 										<div class="row px-3 form-group">
 											<p class="fa fa-user options mb-0 mr-4"></p>
@@ -414,7 +464,7 @@ function add(ths, sno) {
 										<c:if test="${timelineVo.time_location != null}">
 										<p style="padding-top:19px; color:gray;">님이</p>
 										<p style="font-size: 16px; padding-left:3px; padding-top:19px; font-weight:bold; ">${timelineVo.time_location}</p>
-										<p style="padding-top:19px; color:gray;">에 있다 이새끼야!</p>
+										<p style="padding-top:19px; color:gray;">에 있습니다.</p>
 										</c:if>
 											<div class="ml-auto">
 												<ul class="nav navbar-nav" style="float:right;">
@@ -443,17 +493,25 @@ function add(ths, sno) {
 									</div>
 									<div class="row text-left">
 										<c:if test="${timelineVo.time_img != null}">
-											<img class="pic" src="${image_url}${timelineVo.time_img}" style="width:100px; height:100px;">
+											<img class="pic" src="${image_url}${timelineVo.time_img}" style="width:100px; height:100px;" onclick="window.open(this.src)">
 										</c:if>
 									</div>
 									<div class="row text-left mt-4">
 										<div class="like mr-3 vote">
-											<img src="https://i.imgur.com/mHSQOaX.png"><span
-												class="blue-text pl-2">20</span>
-										</div>
-										<div class="unlike vote">
-											<img src="https://i.imgur.com/bFBO3J7.png"><span
-												class="text-muted pl-2">4</span>
+											<i 
+											<c:forEach var="likeVo" items="${likeList}">
+												<c:choose>
+													<c:when test="${likeVo.time_no == timelineVo.time_no && likeVo.user_id == userVo.user_id}">
+														class="far fa-thumbs-up red-color likeEvent" 
+													</c:when>
+													<c:otherwise>
+														class="far fa-thumbs-up blue-color likeEvent" 
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											
+											data-no="${timelineVo.time_no}" data-id="${userVo.user_id}"></i>
+											<span class="blue-text pl-2" id="likeCount">테스트중</span>
 										</div>
 									</div>
 								</div>	

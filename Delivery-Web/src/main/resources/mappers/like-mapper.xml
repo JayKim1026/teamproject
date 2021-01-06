@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.like">
+	
+	<insert id="insertLike">
+		insert into tbl_like(time_no, user_id)
+		values(#{time_no}, #{user_id})
+	</insert>
+	
+	<select id="isLike" resultType="int">
+		select count(*) from tbl_like
+		where user_id = #{user_id}
+		and time_no = #{time_no}
+	</select>
+	
+	<select id="likeList" resultType="LikeVo">
+		select * from tbl_like
+	</select>
+	
+</mapper>
+

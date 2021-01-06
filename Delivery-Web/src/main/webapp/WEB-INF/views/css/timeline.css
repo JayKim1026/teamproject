@@ -1,6 +1,14 @@
 
 <style>
 
+.red-color{
+	color:red;
+}
+
+.blue-color{
+	color:blue;
+}
+
 #write-map-marker{
 	padding-left:35px; 
 	padding-top:5px;
