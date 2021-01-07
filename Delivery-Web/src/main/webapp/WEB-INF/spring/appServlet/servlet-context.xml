@@ -30,4 +30,48 @@
 		<beans:property name="maxUploadSize" value="10485760"/>
 	</beans:bean>
 	
+	<beans:bean
+		id="userInterceptor"
+		class="com.kh.delivery.interceptor.UserInterceptor">
+	</beans:bean>
+	<beans:bean
+		id="deliverInterceptor"
+		class="com.kh.delivery.interceptor.DeliverInterceptor">
+	</beans:bean>
+	<beans:bean
+		id="otherInterceptor"
+		class="com.kh.delivery.interceptor.OtherInterceptor">
+	</beans:bean>
+	
+	<!-- 인터셉터 -->
+	<interceptors>
+	<!-- 사용자 인터셉터 -->
+		<interceptor>
+			<mapping path="/user/**/*"/>
+			<mapping path="/order/**/*"/>
+			<exclude-mapping path="/user/registerRun"/>
+			<exclude-mapping path="/user/loginRun"/>
+			<exclude-mapping path="/user/android/*"/>
+			<exclude-mapping path="/order/android/*"/>
+			<beans:ref bean="userInterceptor"/>
+		</interceptor>
+	
+	<!-- 배달원 인터셉터 -->
+		<interceptor>
+			<mapping path="/deliver/**/*"/>
+			<exclude-mapping path="/deliver/dlvr_RegisterRun"/>
+			<exclude-mapping path="/deliver/loginRun"/>
+			<exclude-mapping path="/deliver/android/*"/>
+			<beans:ref bean="deliverInterceptor"/>
+		</interceptor>
+	
+	<!-- 기타 인터셉터 -->
+		<interceptor>
+			<mapping path="/timeline/**/*"/>
+			<exclude-mapping path="/timeline/showTimeline"/>
+			<exclude-mapping path="/timeline/android/*"/>
+			<beans:ref bean="otherInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>

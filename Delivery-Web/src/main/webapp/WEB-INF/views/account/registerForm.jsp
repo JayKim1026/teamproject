@@ -182,12 +182,12 @@ $(function(){
 			}
 		//<아이디칸>아이디 중복확인
 		if(result) {
-			var url = "/user/checkIdDupl";
+			var url = "/account/checkIdDupl";
 			var user_id = $("#user_id").val();
 			sendData = {
-					"user_id" :  user_id
+					"acc_id" :  user_id
 			};
-			$.get(url, sendData, function(data){
+			$.post(url, sendData, function(data){
 				if(data == true){
 					$(".id_state").text("멋진 아이디네요!").css("color", "green");
 				} else {

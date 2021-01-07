@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
-<title>My page for deliver</title>
-<%@ include file="../../include/link.jsp"%>
+<title>My page for user</title>
+<%@ include file="../include/link.jsp"%>
 <style>
 .imgChange{
 	display:none;
@@ -49,12 +45,15 @@
 </head>
 
 <body>
-<%@include file="../../include/deliverPageHeader.jsp" %>
+<!-- header -->
+<%@include file = "../include/userPageHeader.jsp" %>
+<!-- //header -->
+<section>
 	<!-- 회원 정보 테이블  -->
 	<table class="table">
 		<thead>
 			<tr>
-				<th style="border:none;">deliver 회원 정보 <span>필수</span></th>
+				<th style="border:none;">일반 회원 정보 <span>필수</span></th>
 			<tr>
 		</thead>
 		<tbody>
@@ -62,14 +61,14 @@
 				<td>프로필 사진</td>
 				<td>
 					<div>
-						<img id="dlvr_img" name="dlvr_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
+						<img id="user_img" name="user_img" src="${image_url}" alt="프로필 사진" style="width: 80px; height: 80px;">
 						<img id="chgImgPreview" src="#" alt="변경한 프로필 사진" style="width: 80px; height: 80px;"/>
 						<p>회원님을 나타내는 사진을 등록해 주세요.<br> 등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다.</p>
 					</div>
 					<div class="imgChange">
-						<form role="form" action="/deliverPage/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
+						<form role="form" action="/user/imgChange" method="POST" enctype="multipart/form-data" id="frmImgChange">
 							<input type="file" class="upload-hidden" id="file-upload" name="chgImg" accept="image/, .jpg, .png, .gif">
-							<input type="hidden" value="${sessionScope.deliverVo.dlvr_img }" name="orgImg"><!-- 기존 프사  -->
+							<input type="hidden" value="${sessionScope.userVo.user_img }" name="orgImg"><!-- 기존 프사  -->
 						</form>
 							<button type="button" class="btn btn-secondary" id="upload-click"> 사진 선택</button>
 							<button type="button" class="btn btn-secondary" > 기본 이미지로 변경 </button>
@@ -84,21 +83,21 @@
 			</tr>
 			<tr>
 				<td>아이디</td>
-				<td>${sessionScope.deliverVo.dlvr_id}</td>
+				<td>${sessionScope.userVo.user_id}</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
 				<td class="pwHide">
 					<div >
-						<input type="password" value="${sessionScope.deliverVo.dlvr_pw}" style="border: none; cursor: default;" readonly />
+						<input type="password" value="${sessionScope.userVo.user_pw}" style="border: none; cursor: default;" readonly />
 					</div>
 				</td>
 				<td class="pwChange">
-					<form id="frmPw" action="/deliverPage/pwChange" method="post">
+					<form id="frmPw" action="/user/pwChange" method="post">
 						<div>
 							<label class="pw Label"> 현재 비밀번호</label>
-							<input type="password" id="dlvr_pw" name="dlvr_pw">
+							<input type="password" id="user_pw" name="user_pw">
 						</div>
 						<div>
 							<label class="pw Label"> 새 비밀번호</label>
@@ -106,7 +105,7 @@
 						</div>
 						<div>
 							<label class="pw Label"> 새 비밀번호 확인</label>
-							<input type="password" id="chg_pw2">
+							<input type="password" id="chg_pw2" name="chg_pw2">
 						</div>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_cancel">취소</button>
 					<button type="button" class="btn btn-secondary pwChange" id="btnChgPw_ok">완료</button>
@@ -121,7 +120,7 @@
 				<td>이름</td>
 				<td>
 					<div>
-						${sessionScope.deliverVo.dlvr_name}
+						${sessionScope.userVo.user_name}
 					</div>
 				</td>
 				<td>
@@ -131,12 +130,12 @@
 				<td>이메일</td>
 				<td class="EmaileHide">
 					<div>
-						${sessionScope.deliverVo.dlvr_email}
+						${sessionScope.userVo.user_email}
 					</div>
 				</td>
 				<td class="EmailChange">
 					<div>
-						<form id="frmEmail" action="/deliverPage/emailChange" method="Post">
+						<form id="frmEmail" action="/user/emailChange" method="Post">
 							<label class="email Label">수정 이메일 </label>
 							<input type="email" id="chg_email" name="chg_email">
 							<br/>
@@ -153,12 +152,12 @@
 				<td>휴대전화</td>
 				<td class="phoneHide">
 					<div>
-						${sessionScope.deliverVo.dlvr_phone}
+						${sessionScope.userVo.user_phone}
 					</div>
 				</td>
 				<td class="phoneChange">
 					<div>
-						<form id="frmPhone" action="/deliverPage/phoneChange" method="post">
+						<form id="frmPhone" action="/user/phoneChange" method="post">
 							<label class="phone Label">수정 전화번호</label>
 							<input type="tel" id="chg_phone" name="chg_phone">
 							<br/>
@@ -175,15 +174,15 @@
 				<td>주소</td>
 				<td class="addrHide"> 
 					<div>
-						${sessionScope.deliverVo.dlvr_addr}
+						${sessionScope.userVo.user_addr}
 					</div>
 				</td>
 				<td class="addrChange">
-					<form action="/deliverPage/addrChange" method="POST" id="frmAddr">
+					<form action="/user/addrChange" method="POST" id="frmAddr">
 						<div>
 							<input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
 							<input type="button" class="btn btn-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="btnAddr"><br>
-							<input type="text" class="form-control dlvr_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
+							<input type="text" class="form-control user_addr addr1" id="sample4_roadAddress" placeholder="도로명주소">
 							<input type="text"class="form-control "  id="sample4_jibunAddress" placeholder="지번주소">
 							<span id="guide" style="color:#999;display:none"></span>
 							<input type="text" class="form-control addr3" id="sample4_detailAddress" placeholder="상세주소(필수)" required>
@@ -201,6 +200,7 @@
 			</tr>
 		</tbody>
 	</table>
+</section>
 </body>
 
 <script>
@@ -230,41 +230,6 @@ $(function() {
 	if(addrChangeResult == "success") {
 		alert("주소가 변경 되었습니다.")
 	}
-	
-	//<프로필 사진 변경>
-	// 사진 변경 버튼
-	$("#btnChgImg").click(function() {
-		$(this).hide();
-		$(".imgChange").show();
-	});
-	
-	// 사진변경 - 취소 버튼
-	$("#btnChgImg_cancel").click(function() {
-		$(this).hide();
-		$(".imgChange").hide();
-		$("#btnChgImg").show();
-		$("#chgImgPreview").hide();
-		$("#dlvr_img").show();
-	});
-	
-	// 사진변경 - 사진 선택 버튼 -> input file 실행
-	$("#upload-click").click(function() {
-		$("#file-upload").trigger("click")
-	});
-	
-	// 사진변경 - 실행된 input file에서 이미지를 선택 => 미리보기 이미지 띄우기
-	$("#file-upload").on("change" , function() {
-		readURL(this);
-		$("#dlvr_img").hide();
-		$("#chgImgPreview").show();
-	});
-	
-	// 사진 변경 form 전송 
-	$("#btnChgImg_ok").click(function(e){
-		e.preventDefault();
-		$("#frmImgChange").submit();
-	});
-	
 	//<비밀번호 변경>
 	// 비밀번호 변경 버튼 클릭
 	$("#btnChgPw").click(function(){
@@ -281,20 +246,16 @@ $(function() {
 	// 비밀번호 변경 - 완료버튼 클릭 
 	$("#btnChgPw_ok").click(function(){
 		//비밀번호 AJAX 확인하기
-		var dlvr_pw = $("#dlvr_pw").val();
-		console.log("dlvr_pw : " + dlvr_pw);
-		
-		var url = "/deliverPage/pwCheck";
+		var user_pw = $("input[name=user_pw]").val();
+		var url = "/user/pwCheck";
 		var sendData = {
-				"dlvr_pw"	:	dlvr_pw				
+				"user_pw"	:	user_pw				
 		};
 		$.post(url,sendData,function(result){
-			//console.log("deliver info 비번확인 result******* : " + result);
 			// 현재 비밀번호가 => 일치 true / 불일치 false
 			if(result == "true") {
 				var chg_pw = $("#chg_pw").val();
 				var chg_pw2 = $("#chg_pw2").val();
-				console.log("chg_pw, chg_pw2 : " + chg_pw + "  ///  " +chg_pw2)
 				
 				if(chg_pw != null && chg_pw != ""){
 					for(var i = 0; i < chg_pw.length; i++) {
@@ -311,14 +272,10 @@ $(function() {
 								}
 							} else {
 								alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
-								$("#chg_pw").val("").focus();
-								$("#chg_pw2").val("");
 								return;
 							}// 영어 대소문자, 숫자  else
 						} else {
 							alert("8~16자의 영문 대소문자와 숫자만 입력가능 합니다.");
-							$("#chg_pw").val("").focus();
-							$("#chg_pw2").val("");
 							return;
 						}
 					} //for
@@ -330,11 +287,46 @@ $(function() {
 				
 			} else {
 				alert("현재 비밀번호를 다시 입력해주세요.");
-				$("#dlvr_pw").val("").focus();
+				$("#user_pw").val("").focus();
 			}
 				
 		});// post
 	});
+	
+	//<프로필 사진 변경>
+	// 사진 변경 버튼
+	$("#btnChgImg").click(function() {
+		$(this).hide();
+		$(".imgChange").show();
+	});
+	
+	// 사진변경 - 취소 버튼
+	$("#btnChgImg_cancel").click(function() {
+		$(this).hide();
+		$(".imgChange").hide();
+		$("#btnChgImg").show();
+		$("#chgImgPreview").hide();
+		$("#user_img").show();
+	});
+	
+	// 사진변경 - 사진 선택 버튼 -> input file 실행
+	$("#upload-click").click(function() {
+		$("#file-upload").trigger("click")
+	});
+	
+	// 사진변경 - 실행된 input file에서 이미지를 선택 => 미리보기 이미지 띄우기
+	$("#file-upload").on("change" , function() {
+		readURL(this);
+		$("#user_img").hide();
+		$("#chgImgPreview").show();
+	});
+	
+	// 사진 변경 form 전송 
+	$("#btnChgImg_ok").click(function(e){
+		e.preventDefault();
+		$("#frmImgChange").submit();
+	});
+	
 	
 	//<이메일 변경>
 	// 이메일 변경 버튼

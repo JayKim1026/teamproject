@@ -19,12 +19,12 @@
 			</div>
 			<ul class="nav__main">
 				<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
-				<li><a class="menu__stuff" href="/user/loginForm">Login</a></li>
-				<li><a class="menu__stuff" href="/user/registerForm">Join us</a></li>
-				<li><a class="menu__stuff" href="/deliver/dlvr_RegisterForm">Deliver Join</a></li>
+				<li><a class="menu__stuff" href="/account/loginForm">Login</a></li>
+				<li><a class="menu__stuff" href="/account/registerForm">Join us</a></li>
+				<li><a class="menu__stuff" href="/account/dlvr_RegisterForm">Deliver Join</a></li>
 				</c:if>
 				<c:if test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
-				<li><a class="menu__stuff" href="/user/logout">Logout</a></li>
+				<li><a class="menu__stuff" href="/account/logout">Logout</a></li>
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
 				</c:if>
 			</ul>
@@ -35,12 +35,12 @@
 				</c:if>
 
 				<c:if test="${sessionScope.userVo != null }">
-					<li><a class="menu__stuff2" href="/userPage/info" style="padding-right: 20;">마이페이지</a></li>
+					<li><a class="menu__stuff2" href="/user/info" style="padding-right: 20;">마이페이지</a></li>
 				</c:if>
 				
 				<!-- 배달원 -->
 				<c:if test="${sessionScope.deliverVo != null }">
-					<li><a class="menu__stuff2" href="/deliverPage/info" style="padding-right: 20;">마이페이지</a></li>
+					<li><a class="menu__stuff2" href="/deliver/info" style="padding-right: 20;">마이페이지</a></li>
 				</c:if>
 
 			</ul>

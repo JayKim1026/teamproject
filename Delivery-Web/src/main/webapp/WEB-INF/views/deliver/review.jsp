@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file = "../../include/link.jsp" %>
+<%@ include file = "../include/link.jsp" %>
 </head>
 <body>
-<%@include file="../../include/deliverPageHeader.jsp" %>
-포인트			
+<%@include file="../include/deliverPageHeader.jsp" %>
+<div>deliverVo:${sessionScope.deliverVo}</div>
+리뷰
 </body>
 </html>

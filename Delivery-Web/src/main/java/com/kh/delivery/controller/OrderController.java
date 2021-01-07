@@ -26,7 +26,7 @@ public class OrderController {
 	// 주문페이지
 	@RequestMapping(value="/orderForm", method=RequestMethod.GET)
 	public String orderForm() throws Exception {
-		return "pages/orderForm";
+		return "user/orderForm";
 	}
 	
 	@RequestMapping(value="/insertOrder", method=RequestMethod.POST)
@@ -36,7 +36,7 @@ public class OrderController {
 		orderVo.setUser_no(userVo.getUser_no());
 		String result = orderService.insertOrder(orderVo);
 		rttr.addFlashAttribute("orderResult", result);
-		return "redirect:/userPage/orderList";
+		return "redirect:/user/orderList";
 	}
 	
 	// 안드로이드

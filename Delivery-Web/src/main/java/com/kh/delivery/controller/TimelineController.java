@@ -47,7 +47,7 @@ public class TimelineController implements Codes {
 		model.addAttribute("timelineList", timelineList);
 		model.addAttribute("image_url", image_url);
 		model.addAttribute("user_img", user_img);
-		return "pages/timeline";
+		return "timeline/timeline";
 	}
 	
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
