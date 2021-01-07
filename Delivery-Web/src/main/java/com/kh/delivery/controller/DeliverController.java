@@ -267,7 +267,7 @@ public class DeliverController implements Codes {
 	}
 
 	// 배달원 회원가입
-	@RequestMapping(value = "/registDeliver", method = RequestMethod.POST)
+	@RequestMapping(value = "/android/registDeliver", method = RequestMethod.POST)
 	@ResponseBody
 	public String registDeliver(DeliverVo deliverVo, String str_dlvr_birth) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -279,7 +279,7 @@ public class DeliverController implements Codes {
 	}
 
 	// 배달원 정보 수정
-	@RequestMapping(value = "/modifyDeliver", method = RequestMethod.POST)
+	@RequestMapping(value = "/android/modifyDeliver", method = RequestMethod.POST)
 	@ResponseBody
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
 		System.out.println("mod, deliverVo = " + deliverVo.toString());
