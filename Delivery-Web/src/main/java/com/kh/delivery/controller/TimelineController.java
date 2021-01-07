@@ -117,19 +117,19 @@ public class TimelineController implements Codes {
 	}
 	
 	
-//	// 안드로이드
-//	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
-//	@ResponseBody
-//	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
-//		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
-//		return timelineList;
-//	}
-//	
-//	@RequestMapping(value="/aInsertArticle", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
-//		System.out.println("atimelineVo = " + timelineVo);
-//		String result = timelineService.insertArticle(timelineVo);
-//		return result;
-//	}
+	// 안드로이드
+	@RequestMapping(value="/android/getTimelineList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
+		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
+		return timelineList;
+	}
+	
+	@RequestMapping(value="/android/aInsertArticle", method=RequestMethod.POST)
+	@ResponseBody
+	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
+		System.out.println("atimelineVo = " + timelineVo);
+		String result = timelineService.insertArticle(timelineVo);
+		return result;
+	}
 }

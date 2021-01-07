@@ -258,7 +258,7 @@ public class UserController implements Codes {
 	
 	// 안드로이드
 	// 유저 정보 가져오기
-	@RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/android/getUserInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public UserVo getUserInfo(int user_no) throws Exception {
 		System.out.println("getUserInfo, user_no = " + user_no);
