@@ -31,7 +31,7 @@ public class TimelineController implements Codes {
 
 	@Inject
 	private TimelineService timelineService;
-
+	
 	// 웹
 	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
 	public String showTimeline2(String searchType, Model model) throws Exception {
@@ -40,10 +40,13 @@ public class TimelineController implements Codes {
 		String user_img = USER_IMG;
 		
 		List<LikeVo> likeList = timelineService.likeList();
+		LikeVo likeVo = new LikeVo();
+		
+		int time_no = likeVo.getTime_no();
+		System.out.println("showTimeline2, time_no:" + time_no);
 		
 		System.out.println("showTimeline2, likeList:" + likeList);
 		System.out.println("showTimeline2, timelineList:" + timelineList);
-		model.addAttribute("likeList", likeList);
 		model.addAttribute("timelineList", timelineList);
 		model.addAttribute("image_url", image_url);
 		model.addAttribute("user_img", user_img);
@@ -109,11 +112,16 @@ public class TimelineController implements Codes {
 	
 	@RequestMapping(value = "/insertLike/{time_no}/{user_id}", method = RequestMethod.GET)
 	@ResponseBody
-	public void insertLike(@PathVariable("time_no") int time_no,
-							@PathVariable("user_id") String user_id)throws Exception {
+	public Map<String, Object> insertLike(@PathVariable("time_no") int time_no,
+							@PathVariable("user_id") String user_id, HttpSession session)throws Exception {
 		System.out.println("TimelineController, insertLike, time_no:" + time_no);
 		System.out.println("TimelineController, insertLike, user_id:" + user_id);
+		boolean isLike = timelineService.isLike(time_no, user_id);
 		timelineService.insertLike(time_no, user_id);
+		System.out.println("TimelineController, insertLike, isLike:" + isLike);
+		Map<String, Object> map = new HashMap<>();
+		map.put("isLike", isLike);
+		return map;
 	}
 	
 	
