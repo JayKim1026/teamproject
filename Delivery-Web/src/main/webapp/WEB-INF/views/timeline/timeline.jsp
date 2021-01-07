@@ -218,6 +218,8 @@ $(".btnDelete").click(function(){
 	});
 });
 
+
+
 /*사진 미리보기*/
 $("#time_img").on("change", function(){
 	var inputFile = $("input[type=file]")[0].files[0];
@@ -237,16 +239,16 @@ $("#deleteImg").click(function(){
 });
 
 /*따봉!*/
-$(".likeEvent").click(function(){
+// $(".likeEvent").click(function(){
 	
-	console.log("따봉클릭")
-	var time_no = $(this).attr("data-no");
-	var user_id = $(this).attr("data-id");
-	console.log(user_id);
-	console.log(time_no);
+// 	console.log("따봉클릭")
+// 	var time_no = $(this).attr("data-no");
+// 	var user_id = $(this).attr("data-id");
+// 	console.log(user_id);
+// 	console.log(time_no);
 // 	var has = $(this).hasClass("blue-color");
 // 	var count = parseInt($("#likeCount").text());
-	var url = "/timeline/insertLike/" + time_no + "/" + user_id;
+// 	var url = "/timeline/insertLike/" + time_no + "/" + user_id;
 	
 // 	if(has){
 // 		url = "/timeline/deleteLike/${timelineVo.time_no}"
@@ -255,25 +257,36 @@ $(".likeEvent").click(function(){
 // 		url = "/timeline/insertLike/${timelineVo.time_no}"
 // 	}
 	
-	$.get(url, function(data){
-		console.log(data);
-		if(data == "success"){
+// 	$.get(url, function(data){
+// 		console.log(data);
+// 		if(data.isLike == false){
+// 			$(this).addClass("blue-color");
 			
-// 			if(has){
-// 				that.removeClass("blue-color");				
-// 				count --;
-// 			}else{
-// 				that.addClass("blue-color");
-// 				count ++;
-// 			}
-// 			$("#likeCount").text(count);
-		}
-	});
+// 		}else{
+// 			$(this).removeClass("blue-color");
+// 		}
+// 	});
+// });
+// /*따봉 끝*/
+
+
+
+/*댓글보기*/
+$(".showComment").click(function(){
+	console.log("클릭클릭");
+	$(".commentList").show();
+	$(this).hide();
+	$(".closeComment").show();
+	
 });
-/*따봉 끝*/
+
+$(".closeComment").click(function(){
+	$(".commentList").hide();
+	$(".showComment").show();
+	$(".closeComment").hide();
+});
 
 });
-
 function readURL(input){
 	if(input.files && input.files[0]){
 		var reader = new FileReader();
@@ -496,22 +509,42 @@ ${likeList}
 											<img class="pic" src="${image_url}${timelineVo.time_img}" style="width:100px; height:100px;" onclick="window.open(this.src)">
 										</c:if>
 									</div>
-									<div class="row text-left mt-4">
-										<div class="like mr-3 vote">
-											<i 
-											<c:forEach var="likeVo" items="${likeList}">
-												<c:choose>
-													<c:when test="${likeVo.time_no == timelineVo.time_no && likeVo.user_id == userVo.user_id}">
-														class="far fa-thumbs-up red-color likeEvent" 
-													</c:when>
-													<c:otherwise>
-														class="far fa-thumbs-up blue-color likeEvent" 
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-											
-											data-no="${timelineVo.time_no}" data-id="${userVo.user_id}"></i>
-											<span class="blue-text pl-2" id="likeCount">테스트중</span>
+									
+									<!-- 댓글보기 버튼 -->
+									<div class="row mt-4" style= "padding-bottom:15px;">
+										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}">댓글보기</a>
+										<a class="ml-auto closeComment"  id="closeComment" style="display:none;" data-no="${timelineVo.time_no}">댓글접기</a>
+									</div>
+									
+									<!-- 경계선 -->
+									<div class="row" style="border-width: 1px; border-color:gray; border-style:solid; opacity:0.5;">
+									</div>
+									
+									<!-- 댓글작성-->
+									<div class="row">
+										<div class="col-md-10">
+											<input class="mt-4 mb-3 form-control" placeholder="댓글을 작성해주세요"></input>
+										</div>
+										<div class="col-md-2">
+											<button type="button" class="form-control mt-4 mb-3" style="background:#BFFBBE;">작성</button>
+										</div>
+									</div>
+									
+									<!-- 댓글보기 -->
+									<div class="row commentList" style="padding-top:10px; display:none;" data-no="${timelineVo.time_no}">
+										<img src="https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147_960_720.jpg"  class="commenter-image" alt="commenter_image">			
+										
+										<div class="comment-content col-md-11">
+											<div class="commenter-head">
+												<span class="commenter-name"><a href="">김범준</a></span> <span class="comment-date">
+												<i class="far fa-clock"></i>2 days ago</span>
+											</div>
+											<div class="comment-body">
+												<span class="comment">This is comment content Here is nice comment And you are beautiful</span>
+											</div>
+											<div class="comment-footer">		
+												<a href="" class="comment-action">답글</a>
+											</div>
 										</div>
 									</div>
 								</div>	

@@ -608,4 +608,19 @@ td {
 .vote {
     cursor: pointer
 } 			
+
+/*코멘트*/
+.commenter-image{
+    height:40px;
+    width:40px;
+    border-radius:50%;
+}
+.comment-content{
+   
+  background:#f2f3f5;
+  margin-left:5px;
+  padding:4px 20px;
+  border-radius:10px;
+}
+
 </style>

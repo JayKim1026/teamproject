@@ -34,8 +34,10 @@ public class LikeDaoImpl implements LikeDao{
 		Map<String,Object> map = new HashMap<>();
 		map.put("time_no", time_no);
 		map.put("user_id", user_id);
+		System.out.println("LikeDao, map:" + map);
 		
-		int count = sqlSession.insert(NAMESPACE + "isLike", map);
+		int count = sqlSession.selectOne(NAMESPACE + "isLike", map);
+		System.out.println("LikeDao, count:" + count);
 		
 		if(count > 0) {
 			return true;
