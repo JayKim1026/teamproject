@@ -18,7 +18,9 @@
 <title>timeLine.jsp</title>
 </head>
 <script>
+
 $(function(){
+
 $("#map_marker").click(function(){
 // 카카오 주소 검색기
 var geocoder = new kakao.maps.services.Geocoder();
