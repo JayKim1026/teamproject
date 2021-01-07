@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 <%@ include file="../include/link.jsp"%>
 <style>
-tr, th, td {
-	max-width: 80px;
-	max-height: 50px;
+table {
+	table-layout: fixed; word-break:break-all;
 }
 </style>
 </head>
@@ -25,8 +24,9 @@ tr, th, td {
 				</thead>
 				<thead>
 					<tr>
-						<th>요청 사항</th>
-						<th>주문 일자</th>
+						<th>주문번호</th>
+						<th>요청사항</th>
+						<th>주문일자</th>
 						<th>배달원</th>
 						<th>주문 상태</th>
 					</tr>
@@ -35,6 +35,7 @@ tr, th, td {
 					<c:forEach var="orderVo" items="${orderList }">
 						<c:if test="${orderVo.code_detail == '주문대기'}">
 							<tr>
+								<td>${orderVo.order_no }</td>
 								<td>${orderVo.order_req }</td>
 								<td>${orderVo.order_date }</td>
 								<c:choose>
@@ -63,16 +64,18 @@ tr, th, td {
 				</thead>
 				<thead>
 					<tr>
-						<th>요청 사항</th>
-						<th>주문 일자</th>
+						<th>주문번호</th>
+						<th>요청사항</th>
+						<th>주문일자</th>
 						<th>배달원</th>
-						<th>주문 상태</th>
+						<th>주문상태</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="orderVo" items="${orderList }">
 						<c:if test="${orderVo.code_detail == '배달중'}">
 							<tr>
+								<td>${orderVo.order_no }</td>
 								<td>${orderVo.order_req }</td>
 								<td>${orderVo.order_date }</td>
 								<c:choose>
@@ -105,8 +108,9 @@ tr, th, td {
 				</thead>
 				<thead>
 					<tr>
-						<th>주문 정보</th>
-						<th>주문 일자</th>
+						<th>주문번호</th>
+						<th>주문정보</th>
+						<th>주문일자</th>
 						<th>배달원</th>
 						<th>주문 상태</th>
 					</tr>
@@ -116,6 +120,7 @@ tr, th, td {
 						<c:if
 							test="${orderVo.code_detail == '배달완료' or orderVo.code_detail == '배달취소' or orderVo.code_detail == '주문취소'}">
 							<tr>
+								<td>${orderVo.order_no }</td>
 								<td>${orderVo.order_req }</td>
 								<td>${orderVo.order_date }</td>
 								<c:choose>

@@ -68,6 +68,14 @@
 		where dlvr_id = #{dlvr_id}
 	</update>
 	
+	<!-- 배달원 배달 목록 조회 -->
+	<select id="getDeliveryList" resultType="OrderVo">
+		select o.*, c.code_detail
+		from tbl_order o 
+		inner join tbl_code c on c.code_no = o.order_state
+		where o.dlvr_no = #{dlvr_no}
+		order by o.order_date desc  
+	</select>
 	
 	<!-- // 웹  -->
 	

@@ -14,7 +14,7 @@
 	<nav>
 		<ul class="sideMenu">
 			<li><a href="/deliver/info">회원정보</a></li>
-			<li><a href="/deliver/deliveryList">주문 내역 조회</a></li>
+			<li><a href="/deliver/deliveryList">배달 내역 조회</a></li>
 			<li><a href="/deliver/point">포인트 조회</a></li>
 			<li><a href="/deliver/question">1:1 문의</a></li>
 		</ul>

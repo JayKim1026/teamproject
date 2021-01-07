@@ -1,6 +1,9 @@
 package com.kh.delivery.service;
 
+import java.util.List;
+
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
 
 public interface DeliverService {
 
@@ -32,6 +35,8 @@ public interface DeliverService {
 	// 배달원 주소 변경
 	public String addrChange(String dlvr_id, String chg_addr) throws Exception;
 	
+	// 배달원 배달목록 조회
+	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception;
 	
 	//안드로이드
 	// 배달원 정보 수정

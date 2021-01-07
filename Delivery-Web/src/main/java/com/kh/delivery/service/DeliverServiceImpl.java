@@ -1,11 +1,14 @@
 package com.kh.delivery.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.kh.delivery.dao.DeliverDao;
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
 
 @Service
 public class DeliverServiceImpl implements DeliverService {
@@ -54,24 +57,35 @@ public class DeliverServiceImpl implements DeliverService {
 		String result = deliverDao.pwChange(dlvr_id, chg_pw);
 		return result;
 	}
-
+	
+	// 배달원 이메일 변경
 	@Override
 	public String emailChange(String dlvr_id, String chg_email) throws Exception {
 		String result = deliverDao.emailChange(dlvr_id, chg_email);
 		return result;
 	}
 
+	// 배달원 휴대전화 변경
 	@Override
 	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
 		String result = deliverDao.phoneChange(dlvr_id, chg_phone);
 		return result;
 	}
 
+	// 배달원 주소 변경
 	@Override
 	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
 		String result = deliverDao.addrChange(dlvr_id, chg_addr);
 		return result;
 	}
+	
+	// 배달원 배달목록 조회
+	@Override
+	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
+		List<OrderVo> deliveryList = deliverDao.getDeliveryList(dlvr_no);
+		return deliveryList;
+	}
+	
 	/*	//웹*/
 	
 	
@@ -83,4 +97,6 @@ public class DeliverServiceImpl implements DeliverService {
 		String result = deliverDao.modifyDeliver(deliverVo);
 		return result;
 	}
+
+	
 }
