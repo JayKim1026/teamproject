@@ -2,7 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kh.delivery.util">
+<mapper namespace="com.kh.delivery.account">
+
+	<select id="checkIdDupl" resultType="String">
+		select acc_id from (
+		    select user_id acc_id from tbl_user
+		    union
+		    select dlvr_id from tbl_deliver)
+		where acc_id = #{acc_id}
+	</select>
 	
 	<select id="findAccountId" resultType="String">
 		select acc_id 

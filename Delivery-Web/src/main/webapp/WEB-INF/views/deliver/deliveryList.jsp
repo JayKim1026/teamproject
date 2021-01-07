@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="../../include/link.jsp"%>
+<%@ include file="../include/link.jsp"%>
 </head>
 <body>
-	<%@include file="../../include/deliverPageHeader.jsp"%>
+	<%@include file="../include/deliverPageHeader.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">

@@ -10,8 +10,8 @@
 				</div>
 				<div class="col-md-8">
 					<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
-					<a class="main-menu" id="main_login" href="/user/loginForm">로그인</a>
-					<a class="main-menu" id="main_Joinus" href="/user/registerForm">회원가입</a>
+					<a class="main-menu" id="main_login" href="/account/loginForm">로그인</a>
+					<a class="main-menu" id="main_Joinus" href="/account/registerForm">회원가입</a>
 				</div>
 				<div class="col-md-2">
 				</div>

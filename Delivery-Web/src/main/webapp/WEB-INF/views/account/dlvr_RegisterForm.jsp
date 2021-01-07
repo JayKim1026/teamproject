@@ -215,10 +215,10 @@ $(function() {
 			}
 			//<아이디칸>아이디 중복확인
 			if (result) {
-				var url = "/deliver/dlvr_checkIdDupl";
+				var url = "/account/checkIdDupl";
 				var dlvr_id = $("#dlvr_id").val();
 				sendData = {
-					"dlvr_id" : dlvr_id
+					"acc_id" : dlvr_id
 				};
 				$.post(url, sendData, function(data) {
 					if (data == true) {

@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file = "../../include/link.jsp" %>
+<%@ include file = "../include/link.jsp" %>
 </head>
 <body>
-<%@include file="../../include/deliverPageHeader.jsp" %>
-질문
+<%@include file = "../include/userPageHeader.jsp" %>
+포인트			
 </body>
 </html>
