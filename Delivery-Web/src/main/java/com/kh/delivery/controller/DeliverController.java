@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.DeliverService;
 import com.kh.delivery.util.Codes;
@@ -208,7 +211,6 @@ public class DeliverController implements Codes {
 	}
 
 	// deliverPage 배달원 주소 변경
-	// 사용자 주소 변경
 	@RequestMapping(value = "/addrChange", method = RequestMethod.POST)
 	public String addrChange(String chg_addr, HttpSession session, RedirectAttributes rttr) throws Exception {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
@@ -231,7 +233,12 @@ public class DeliverController implements Codes {
 	// deliverPage 배달 내역 페이지 이동
 	@RequestMapping(value = "/deliveryList", method = RequestMethod.GET)
 	public String deliverOrderList(Model model, HttpSession session) throws Exception {
-		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+		DeliverVo deliverVo = (DeliverVo)session.getAttribute("deliverVo");
+		int dlvr_no = deliverVo.getDlvr_no();
+		System.out.println("dlvr_no : " + dlvr_no);
+		List<OrderVo> deliveryList = deliverService.getDeliveryList(dlvr_no);
+		System.out.println("controller deliveryList : " + deliveryList);
+		model.addAttribute("deliveryList", deliveryList);
 		return "deliver/deliveryList";
 	}
 

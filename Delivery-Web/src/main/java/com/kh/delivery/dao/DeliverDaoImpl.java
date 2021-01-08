@@ -1,6 +1,7 @@
 package com.kh.delivery.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 
 @Repository
 public class DeliverDaoImpl implements DeliverDao {
@@ -92,6 +95,7 @@ public class DeliverDaoImpl implements DeliverDao {
 		return "emailChange_success";
 	}
 
+	// 배달원 전화번호 변경
 	@Override
 	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
 		Map<String, String> map = new HashMap<>();
@@ -100,7 +104,8 @@ public class DeliverDaoImpl implements DeliverDao {
 		sqlSession.update(NAMESPACE + "phoneChange", map);
 		return "phoneChange_success";
 	}
-
+	
+	// 배달원 주소 변경
 	@Override
 	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
 		Map<String, String> map = new HashMap<>();
@@ -109,6 +114,16 @@ public class DeliverDaoImpl implements DeliverDao {
 		sqlSession.update(NAMESPACE + "addrChange", map);
 		return "addrChange_success";
 	}
+	
+	// 배달원 배달 내역 조회
+	@Override
+	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
+		//System.out.println("dliver dao 배달 내역 조회 : " + dlvr_no);
+		List<OrderVo> deliveryList = sqlSession.selectList(NAMESPACE + "getDeliveryList", dlvr_no);
+		return deliveryList;
+	}
+
+	
 	
 	/* // 웹*/ 
 	
@@ -120,5 +135,5 @@ public class DeliverDaoImpl implements DeliverDao {
 		sqlSession.update(NAMESPACE + "modifyDeliver", deliverVo);
 		return "modify_deliver_success";
 	}
-	
+
 }

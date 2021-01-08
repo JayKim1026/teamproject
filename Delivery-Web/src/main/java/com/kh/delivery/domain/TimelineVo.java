@@ -24,8 +24,6 @@ public class TimelineVo {
 	private String dlvr_name;
 	private String writer_img;
 	
-	
-	
 	public int getTime_like() {
 		return time_like;
 	}
