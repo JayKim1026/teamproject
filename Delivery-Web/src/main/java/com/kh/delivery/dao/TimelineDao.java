@@ -16,4 +16,7 @@ public interface TimelineDao {
 	public String deleteArticle(int time_no);
 	/*따 봉!*/
 	public void insertLike(int time_no, int time_like);
+	/* 글 불러오기 */
+	public TimelineVo selectByNo(int time_no);
+	
 }

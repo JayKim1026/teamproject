@@ -21,4 +21,6 @@ public interface TimelineService {
 	public boolean isLike(int time_no, String user_id);
 	/*누가 따봉을 하였느냐*/
 	public List<LikeVo> likeList();
+	/* 글 불러오기 */
+	public TimelineVo selectByNo(int time_no);
 }

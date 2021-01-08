@@ -272,12 +272,17 @@ $("#deleteImg").click(function(){
 
 
 /*댓글보기*/
-$(".showComment").click(function(){
-	console.log("클릭클릭");
-	$(".commentList").show();
-	$(this).hide();
-	$(".closeComment").show();
-	
+$(".showComment").each(function(){
+	$(this).click(function(){
+		var time_no = $(this).attr("data-no");
+		var user_id = $(this).attr("data-id");
+		console.log(time_no);
+		console.log(user_id);
+		$("#frm > input[name=time_no]").val(time_no);
+		$("#frm > input[name=user_id]").val(user_id);
+		$("#frm").attr("action", "/timeline/content")
+		$("#frm").submit();	
+	});	
 });
 
 $(".closeComment").click(function(){
@@ -285,6 +290,8 @@ $(".closeComment").click(function(){
 	$(".showComment").show();
 	$(".closeComment").hide();
 });
+
+
 
 });
 function readURL(input){
@@ -316,6 +323,7 @@ function add(ths, sno) {
 
 </script>
 <body>
+<%@ include file="../include/frm.jsp"%>
 <%@include file="../include/timelineHeader.jsp" %>
 ${likeList}
 	<!-------------------------- 글 입력  --------------------------> 
@@ -512,8 +520,7 @@ ${likeList}
 									
 									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style= "padding-bottom:15px;">
-										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}">댓글보기</a>
-										<a class="ml-auto closeComment"  id="closeComment" style="display:none;" data-no="${timelineVo.time_no}">댓글접기</a>
+										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">글 상세보기</a>	
 									</div>
 									
 									<!-- 경계선 -->
@@ -526,12 +533,12 @@ ${likeList}
 											<input class="mt-4 mb-3 form-control" placeholder="댓글을 작성해주세요"></input>
 										</div>
 										<div class="col-md-2">
-											<button type="button" class="form-control mt-4 mb-3" style="background:#BFFBBE;">작성</button>
+											<button type="button" class="form-control mt-4 mb-3 insertCommentBtn" style="background:#BFFBBE;">작성</button>
 										</div>
 									</div>
 									
 									<!-- 댓글보기 -->
-									<div class="row commentList" style="padding-top:10px; display:none;" data-no="${timelineVo.time_no}">
+									<div class="row commentList" style="padding-top:10px; display:none;" data-no="${timelineVo.time_no}" id="commentList">
 										<img src="https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147_960_720.jpg"  class="commenter-image" alt="commenter_image">			
 										
 										<div class="comment-content col-md-11">
