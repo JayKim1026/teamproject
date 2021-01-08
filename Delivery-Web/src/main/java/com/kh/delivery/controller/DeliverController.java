@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.DeliverService;
 import com.kh.delivery.util.Codes;
@@ -236,7 +237,7 @@ public class DeliverController implements Codes {
 		int dlvr_no = deliverVo.getDlvr_no();
 		System.out.println("dlvr_no : " + dlvr_no);
 		List<OrderVo> deliveryList = deliverService.getDeliveryList(dlvr_no);
-		System.out.println("deliveryList : " + deliveryList);
+		System.out.println("controller deliveryList : " + deliveryList);
 		model.addAttribute("deliveryList", deliveryList);
 		return "deliver/deliveryList";
 	}

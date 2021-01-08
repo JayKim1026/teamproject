@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 
 @Repository
 public class DeliverDaoImpl implements DeliverDao {
@@ -114,13 +115,15 @@ public class DeliverDaoImpl implements DeliverDao {
 		return "addrChange_success";
 	}
 	
-	// 배달원 배달목록 조회
+	// 배달원 배달 내역 조회
 	@Override
 	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
-		System.out.println("딜리버 다오 : " + dlvr_no);
+		//System.out.println("dliver dao 배달 내역 조회 : " + dlvr_no);
 		List<OrderVo> deliveryList = sqlSession.selectList(NAMESPACE + "getDeliveryList", dlvr_no);
 		return deliveryList;
 	}
+
+	
 	
 	/* // 웹*/ 
 	
@@ -133,5 +136,4 @@ public class DeliverDaoImpl implements DeliverDao {
 		return "modify_deliver_success";
 	}
 
-	
 }

@@ -113,6 +113,8 @@ drop table tbl_user;
 
 create SEQUENCE seq_account_no;
 
+create sequence seq_c_no;
+
 create sequence seq_timeline_no;
 
 create sequence seq_report_no;

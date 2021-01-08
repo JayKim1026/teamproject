@@ -59,4 +59,11 @@ public class TimelineDaoImpl implements TimelineDao {
 		sqlSession.insert(NAMESPACE  + "insertLike", map);
 		
 	}
+
+	@Override
+	public TimelineVo selectByNo(int time_no) {
+		
+		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "selectByNo", time_no);
+		return timelineVo;
+	}
 }

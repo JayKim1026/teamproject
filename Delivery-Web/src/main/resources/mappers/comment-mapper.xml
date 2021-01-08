@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.comment">
+	
+	<insert id="insertComment">
+		insert into tbl_comment
+		(c_no, c_content, time_no, user_id)
+		values(seq_c_no.nextval, #{c_content}, #{time_no}, #{user_id})
+	</insert>
+	
+	<select id="getCommentList" resultType="CommentVo">
+		select * from tbl_comment
+		where time_no = #{time_no}
+		order by c_no desc
+	</select>
+	
+</mapper>
+

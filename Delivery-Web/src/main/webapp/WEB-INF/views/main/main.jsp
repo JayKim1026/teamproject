@@ -22,7 +22,9 @@
 				<li><a class="menu__stuff" href="/account/loginForm">Login</a></li>
 				<li><a class="menu__stuff" href="/account/registerForm">Join us</a></li>
 				<li><a class="menu__stuff" href="/account/dlvr_RegisterForm">Deliver Join</a></li>
+				<li><a class="menu__stuff" href="/serviceCenter/FAQ">고객센터</a></li>
 				</c:if>
+				
 				<c:if test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
 				<li><a class="menu__stuff" href="/account/logout">Logout</a></li>
 				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>

@@ -72,4 +72,10 @@ public class TimelineServiceImpl implements TimelineService {
 		return likeList;
 	}
 
+	@Override
+	public TimelineVo selectByNo(int time_no) {
+		TimelineVo timelineVo = timelineDao.selectByNo(time_no);
+		return timelineVo;
+	}
+
 }
