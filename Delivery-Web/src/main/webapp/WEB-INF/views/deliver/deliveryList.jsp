@@ -81,10 +81,47 @@ table {
 					<td>${orderVo.code_detail }</td>
 					<td>
 						<c:choose>
-						<c:when test ="${orderVo.time_star == 0 }">
-						평가가 되지 않았습니다.
-						</c:when>
-						<c:otherwise>${orderVo.time_star}</c:otherwise>
+							<c:when test ="${orderVo.time_star == 0 }">
+							평가가 되지 않았습니다.
+							</c:when>
+							<c:otherwise>
+								<c:if test="${orderVo.time_star == 1}">
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">☆</label>
+									<label style="color: #FFD600">☆</label>
+									<label style="color: #FFD600">☆</label>
+									<label style="color: #FFD600">☆</label>
+								
+								</c:if>
+								<c:if test ="${orderVo.time_star == 2 }">
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">☆</label>
+									<label style="color: #FFD600">☆</label>
+									<label style="color: #FFD600">☆</label>
+								</c:if>
+								<c:if test ="${orderVo.time_star == 3 }">
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">☆</label>
+									<label style="color: #FFD600">☆</label>
+								</c:if>
+								<c:if test ="${orderVo.time_star == 4 }">
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">☆</label>
+								</c:if>
+								<c:if test ="${orderVo.time_star == 5 }">
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+									<label style="color: #FFD600">★</label>
+								</c:if>
+							</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>
