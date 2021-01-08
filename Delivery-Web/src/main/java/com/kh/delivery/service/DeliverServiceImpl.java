@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.delivery.dao.DeliverDao;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 
 @Service
 public class DeliverServiceImpl implements DeliverService {
@@ -79,12 +80,13 @@ public class DeliverServiceImpl implements DeliverService {
 		return result;
 	}
 	
-	// 배달원 배달목록 조회
+	// 배달원 배달내역 조회
 	@Override
 	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
 		List<OrderVo> deliveryList = deliverDao.getDeliveryList(dlvr_no);
 		return deliveryList;
 	}
+
 	
 	/*	//웹*/
 	

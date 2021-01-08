@@ -21,6 +21,15 @@ public class OrderVo {
 	private String user_name;
 	private String code_detail;
 	private String dlvr_name;
+	private int time_star;
+
+	public int getTime_star() {
+		return time_star;
+	}
+
+	public void setTime_star(int time_star) {
+		this.time_star = time_star;
+	}
 
 	public String getDlvr_name() {
 		return dlvr_name;
@@ -126,7 +135,7 @@ public class OrderVo {
 		return "OrderVo [order_no=" + order_no + ", order_ca=" + order_ca + ", order_req=" + order_req + ", order_lat="
 				+ order_lat + ", order_lng=" + order_lng + ", user_no=" + user_no + ", dlvr_no=" + dlvr_no
 				+ ", order_state=" + order_state + ", order_date=" + order_date + ", user_name=" + user_name
-				+ ", code_detail=" + code_detail + ", dlvr_name=" + dlvr_name + "]";
+				+ ", code_detail=" + code_detail + ", dlvr_name=" + dlvr_name + ", time_star=" + time_star + "]";
 	}
 
 }
