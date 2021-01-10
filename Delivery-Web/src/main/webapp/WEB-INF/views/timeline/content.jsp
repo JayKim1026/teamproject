@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../include/link.jsp"%>
-<%@include file="../css/timeline.css"%>
+<%-- <%@include file="../include/link.jsp"%> --%>
+<%-- <%@include file="../css/timeline.css"%> --%>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script
@@ -215,10 +215,8 @@ $(function(){
 
 									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style="padding-bottom: 15px;">
-										<a class="ml-auto showComment" id="showComment"
-											data-no="${timelineVo.time_no}">댓글보기</a> <a
-											class="ml-auto closeComment" id="closeComment"
-											style="display: none;" data-no="${timelineVo.time_no}">댓글접기</a>
+										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${timelineVo.user_id}" href="/timeline/content">댓글보기</a> 
+										<a class="ml-auto closeComment" id="closeComment" style="display: none;" data-no="${timelineVo.time_no}">댓글접기</a>
 									</div>
 
 									<!-- 경계선 -->

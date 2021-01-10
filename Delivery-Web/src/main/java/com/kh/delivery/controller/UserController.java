@@ -87,6 +87,15 @@ public class UserController implements Codes {
 		model.addAttribute("image_url", BUCKET_URL + user_img);
 		return "user/info";
 	}
+	
+	// by, 범준 css작업중
+	@RequestMapping(value = "/newInfo")
+	public String userInfo2(/*Model model, HttpSession session, RedirectAttributes rttr*/) throws Exception {
+//		UserVo userVo = (UserVo) session.getAttribute("userVo");
+//		String user_img = userVo.getUser_img();
+//		model.addAttribute("image_url", BUCKET_URL + user_img);
+		return "user/newInfo";
+	}
 
 	// 프로필 사진 변경
 	@RequestMapping(value = "/imgChange", method = RequestMethod.POST)
