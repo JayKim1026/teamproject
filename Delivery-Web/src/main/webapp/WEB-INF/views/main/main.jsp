@@ -38,6 +38,7 @@
 
 				<c:if test="${sessionScope.userVo != null }">
 					<li><a class="menu__stuff2" href="/user/info" style="padding-right: 20;">마이페이지</a></li>
+					<li><a class="menu__stuff2" href="/user/newInfo" style="padding-right: 20;">새로운마이페이지</a></li>
 				</c:if>
 				
 				<!-- 배달원 -->

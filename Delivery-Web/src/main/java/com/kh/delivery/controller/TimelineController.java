@@ -124,17 +124,17 @@ public class TimelineController implements Codes {
 		return map;
 	}
 	
-	@RequestMapping(value="/content", method = {RequestMethod.POST, RequestMethod.GET})
-	public String content(/*int time_no, String user_id, HttpSession session,Model model*/) throws Exception {
+	@RequestMapping(value="/goContent", method = RequestMethod.POST)
+	public String content(int time_no, String user_id, HttpSession session,Model model) throws Exception {
 		System.out.println("content...");
-//		String image_url = BUCKET_URL;
-//		String user_img = USER_IMG;
-//		System.out.println("TimelineController, content, time_no:" + time_no);
-//		System.out.println("TimelineController, content, user_id:" + user_id);
-//		TimelineVo timelineVo = timelineService.selectByNo(time_no);
-//		System.out.println("TimelineController, content, timelineVo:" + timelineVo);
-//		model.addAttribute("timelineVo", timelineVo);
-//		model.addAttribute("image_url", image_url);
+		String image_url = BUCKET_URL;
+		String user_img = USER_IMG;
+		System.out.println("TimelineController, content, time_no:" + time_no);
+		System.out.println("TimelineController, content, user_id:" + user_id);
+		TimelineVo timelineVo = timelineService.selectByNo(time_no);
+		System.out.println("TimelineController, content, timelineVo:" + timelineVo);
+		model.addAttribute("timelineVo", timelineVo);
+		model.addAttribute("image_url", image_url);
 	return "timeline/content";	
 	}
 	
