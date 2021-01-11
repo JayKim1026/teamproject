@@ -52,13 +52,13 @@
 	<select id="pwCheck" resultType="userVo">
 		select * from tbl_user
 		where
-		user_id = #{user_id} and user_pw = #{user_pw}
+		user_id = #{user_id} and user_pw = #{orgPw}
 	</select>
 
 	<!-- 일반회원 비밀번호 변경 -->
 	<update id="pwChange">
 		update tbl_user set
-		user_pw = #{chg_pw}
+		user_pw = #{chgPw}
 		where user_id = #{user_id}
 	</update> 
 	
@@ -66,21 +66,21 @@
 	<!-- 일반회원 이메일 변경 -->
 	<update id="emailChange">
 		update tbl_user set
-		user_email = #{chg_email}
+		user_email = #{chgEmail}
 		where user_id = #{user_id}
 	</update>
 	
 	<!-- 일반회원 전화번호 변경 -->
 	<update id="phoneChange">
 		update tbl_user set
-		user_phone = #{chg_phone}
+		user_phone = #{chgPhone}
 		where user_id = #{user_id}
 	</update>
 	
 	<!-- 일반회원 주소 변경 -->
 	<update id="addrChange">
 		update tbl_user set
-		user_addr = #{chg_addr}
+		user_addr = #{chgAddr}
 		where user_id = #{user_id}
 	</update>
 	

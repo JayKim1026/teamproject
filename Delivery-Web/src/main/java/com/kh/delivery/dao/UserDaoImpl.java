@@ -83,10 +83,10 @@ public class UserDaoImpl implements UserDao {
 
 	//일반회원 기존 비밀번호 확인
 	@Override
-	public String pwCheck(String user_id, String user_pw) throws Exception {
+	public String pwCheck(String user_id, String orgPw) throws Exception {
 		Map<String,String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("user_pw", user_pw);
+		map.put("orgPw", orgPw);
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "pwCheck" , map);
 		//System.out.println("userDao pwCheck userVo : " + userVo);
 		if(userVo != null) {
@@ -98,10 +98,10 @@ public class UserDaoImpl implements UserDao {
 
 	//일반회원 비밀번호 변경
 	@Override
-	public String pwChange(String user_id, String chg_pw) throws Exception {
+	public String pwChange(String user_id, String chgPw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("chg_pw", chg_pw);
+		map.put("chgPw", chgPw);
 		int result = sqlSession.update(NAMESPACE + "pwChange", map);
 		System.out.println("pwChange Dao result" + result);	
 		return "pwChange_success";
@@ -110,10 +110,10 @@ public class UserDaoImpl implements UserDao {
 	
 	// 일반회원 이메일 변경
 	@Override
-	public String emailChange(String user_id, String chg_email) throws Exception {
+	public String emailChange(String user_id, String chgEmail) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("chg_email", chg_email);
+		map.put("chgEmail", chgEmail);
 		int result = sqlSession.update(NAMESPACE + "emailChange" , map);
 		System.out.println("emailChange Dao result : " + result);
 		return "emailChange_success";
@@ -121,10 +121,10 @@ public class UserDaoImpl implements UserDao {
 	
 	// 일반회원 휴대전화 변경
 	@Override
-	public String phoneChange(String user_id, String chg_phone) throws Exception {
+	public String phoneChange(String user_id, String chgPhone) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("chg_phone", chg_phone);
+		map.put("chgPhone", chgPhone);
 		int result = sqlSession.update(NAMESPACE + "phoneChange", map);
 		System.out.println("phoneChange Dao result : " + result);
 		return "phoneChange_success";
@@ -132,10 +132,10 @@ public class UserDaoImpl implements UserDao {
 
 	// 일반 회원 주소 변경
 	@Override
-	public String addrChange(String chg_addr, String user_id) throws Exception {
+	public String addrChange(String user_id , String chgAddr ) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
-		map.put("chg_addr", chg_addr);
+		map.put("chgAddr", chgAddr);
 		int result = sqlSession.update(NAMESPACE + "addrChange", map);
 		System.out.println("addrChange Dao result : " + result);
 		return "addrChange_success";
