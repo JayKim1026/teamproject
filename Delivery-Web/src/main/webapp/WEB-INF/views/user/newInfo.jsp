@@ -241,7 +241,7 @@
 																<div class="col-md-2">
 																	<button class="form-control form-control-alternative btnChgImg" style="margin-top: 23px;">변경하기</button>
 																	<button type="button" class="form-control form-control-alternative btnCancelImg" style="display:none; margin-top: 23px;">취소</button>
-																	<button type="sumbit" class="form-control form-control-alternative btnChgImgRun" style="display:none; margin-top: 23px;">완료</button>
+																	<button type="submit" class="form-control form-control-alternative btnChgImgRun" style="display:none; margin-top: 23px;">완료</button>
 																</div>
 															</div>
 														</div>
