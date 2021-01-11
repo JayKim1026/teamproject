@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../include/link.jsp" %>
-<%@include file="../css/newInfoCSS.css" %>
+<%@include file="../include/link.jsp"%>
+<%@include file="../css/newInfoCSS.css"%>
 <meta charset="UTF-8">
 <title>newInfo.jsp</title>
 </head>
 <body>
-<%@include file="../include/newInfoheader.jsp" %>
+	<%@include file="../include/newInfoheader.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -19,8 +19,7 @@
 						<div class="main-content">
 							<div class="container mt-7">
 								<!-- Table -->
-								<h2 class="mb-5" style="text-align: center;">반갑습니다, 이진형님
-									어떤 정보를 변경하고 싶으신가요?</h2>
+								<h2 class="mb-5" style="text-align: center;">반갑습니다, 이진형님 어떤 정보를 변경하고 싶으신가요?</h2>
 								<div class="row">
 									<div class="col-xl-8 m-auto order-xl-1">
 										<div class="card bg-secondary shadow">
@@ -30,7 +29,7 @@
 														<h3 class="mb-0">회원정보</h3>
 													</div>
 													<div class="col-4 text-right">
-				<!-- 									<a href="#!" class="btn btn-sm btn-primary">변경</a> -->
+														<!-- <a href="#!" class="btn btn-sm btn-primary">변경</a> -->
 													</div>
 												</div>
 											</div>
@@ -204,6 +203,6 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="../include/footer.jsp" %>
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>
