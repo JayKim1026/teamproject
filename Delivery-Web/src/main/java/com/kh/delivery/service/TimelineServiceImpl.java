@@ -22,34 +22,68 @@ public class TimelineServiceImpl implements TimelineService {
 	private LikeDao likeDao;
 
 	@Override
-	public List<TimelineVo> timelineList(String searchType) {
+	public List<TimelineVo> timelineList(String searchType) throws Exception {
 		List<TimelineVo> list = timelineDao.timelineList(searchType);
 		return list;
 	}
 
 	@Override
-	public String insertArticle(TimelineVo timelineVo) {
+	public String insertArticle(TimelineVo timelineVo) throws Exception {
 		String result = timelineDao.insertArticle(timelineVo);
 		System.out.println("TimelineService, insertArticle, timelineVo:" + timelineVo);
 		return result;
 	}
 
 	@Override
-	public String updateArticle(TimelineVo timelineVo) {
+	public String updateArticle(TimelineVo timelineVo) throws Exception {
 		String result = timelineDao.updateArticle(timelineVo);
 		return result;
 	}
 
 	@Override
-	public String deleteArticle(int time_no) {
+	public String deleteArticle(int time_no) throws Exception {
 		String result = timelineDao.deleteArticle(time_no);
 		return result;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	@Transactional
+	public void insertLike(int time_no, String user_id) throws Exception {
+		
+		int time_like = 1;
+		
+		timelineDao.insertLike(time_no, time_like);
+		likeDao.insertLike(time_no, user_id);
+		
+	}
 
 	@Override
-	public TimelineVo selectByNo(int time_no) {
+	public boolean isLike(int time_no, String user_id) throws Exception {
+		
+		boolean isLike = likeDao.isLike(time_no, user_id);
+		
+		return isLike;
+	}
+
+	@Override
+	public List<LikeVo> likeList() throws Exception {
+		
+		List<LikeVo> likeList = likeDao.likeList();
+		return likeList;
+	}
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
+
+	@Override
+	public TimelineVo selectByNo(int time_no) throws Exception {
 		TimelineVo timelineVo = timelineDao.selectByNo(time_no);
+		return timelineVo;
+	}
+
+	@Override
+	public TimelineVo getLastTimeline() throws Exception {
+		TimelineVo timelineVo = timelineDao.getLastTimeline();
 		return timelineVo;
 	}
 

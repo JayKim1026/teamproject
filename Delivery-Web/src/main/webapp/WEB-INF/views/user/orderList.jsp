@@ -10,11 +10,14 @@
 table {
 	table-layout: fixed; word-break:break-all;
 }
+.content {
+	
+}
 </style>
 </head>
 <body>
-	<%@include file="../include/userPageHeader.jsp"%>
-	<section>
+	<%@include file="../include/newInfoheader.jsp"%>
+	<section class="content">
 		<div>
 			<table class="table">
 				<thead>

@@ -88,12 +88,12 @@ public class UserController implements Codes {
 		return "user/info";
 	}
 	
-	// by, 범준 css작업중
+	// newInfo 이동 + user 기본 정보
 	@RequestMapping(value = "/newInfo")
-	public String userInfo2(/*Model model, HttpSession session, RedirectAttributes rttr*/) throws Exception {
-//		UserVo userVo = (UserVo) session.getAttribute("userVo");
-//		String user_img = userVo.getUser_img();
-//		model.addAttribute("image_url", BUCKET_URL + user_img);
+	public String userInfo2(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		String user_img = userVo.getUser_img();
+		model.addAttribute("image_url", BUCKET_URL + user_img);
 		return "user/newInfo";
 	}
 
@@ -108,18 +108,18 @@ public class UserController implements Codes {
 		String user_id = userVo.getUser_id();
 		System.out.println("user_id : " + user_id);
 
-		String org_chgImg = chgImg.getOriginalFilename(); // 변경할 이미지의 본래 이름
-		System.out.println("org_chgImg : " + org_chgImg);
+		String orgChgImg = chgImg.getOriginalFilename(); // 변경할 이미지의 본래 이름
+		System.out.println("orgChgImg : " + orgChgImg);
 
-		boolean isImageResult = FileUploadUtil.isImage(org_chgImg);
+		boolean isImageResult = FileUploadUtil.isImage(orgChgImg);
 		if (!isImageResult) {
 			rttr.addFlashAttribute("isImageResult", "notImge");
 		} else {
 			FileUploadUtil.delete(orgImg); // 아마존에 저장된 기존 이미지 삭제.
-			String chg_img = USER_IMG + user_id + "_" + org_chgImg;
+			String chg_img = USER_IMG + user_id + "_" + orgChgImg;
 			System.out.println("아마존이랑 DB에 저장할 이름 user_img : " + chg_img);
 			userVo.setUser_img(chg_img);
-			File chgUserImg = new File(org_chgImg);
+			File chgUserImg = new File(orgChgImg);
 			chgImg.transferTo(chgUserImg);
 			FileUploadUtil.upload(chgUserImg, chg_img); // 아마존에 변경할 사진 저장.
 
@@ -133,69 +133,69 @@ public class UserController implements Codes {
 				System.out.println("이미지 저장 실패");
 			}
 		}
-		return "redirect:/user/info";
+		return "redirect:/user/newInfo";
 	}
 
 	// 현재 비밀번호 확인 ajax
 	@RequestMapping(value = "/pwCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public String pwCheck(String user_pw, HttpSession session) throws Exception {
+	public String pwCheck(String orgPw, HttpSession session) throws Exception {
 
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
-		// System.out.println("컨트롤러 user_pw : " + user_pw);
-		// System.out.println("컨트롤러 user_id : " + user_id);
+		 System.out.println("컨트롤러 orgPw : " + orgPw);
+		 System.out.println("컨트롤러 user_id : " + user_id);
 
-		String result = userService.pwCheck(user_id, user_pw);
-		// System.out.println("controller result : " + result);
+		String result = userService.pwCheck(user_id, orgPw);
+		 System.out.println("controller result : " + result);
 		return result;
 	}
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/pwChange", method = RequestMethod.POST)
-	public String pwChange(String chg_pw, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("chg_pw : " + chg_pw);
+	public String pwChange(String chgPw, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("chgPw : " + chgPw);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
-		String result = userService.pwChange(user_id, chg_pw);
+		String result = userService.pwChange(user_id, chgPw);
 		if (result == "pwChange_success") {
 			rttr.addFlashAttribute("pwChangeResult", "success");
-			userVo.setUser_pw(chg_pw);
+			userVo.setUser_pw(chgPw);
 			session.setAttribute("userVo", userVo);
 		} else {
 			rttr.addFlashAttribute("pwChangeResult", "fail");
 		}
-		return "redirect:/user/info";
+		return "redirect:/user/newInfo";
 	}
 
 	// 이메일 변경
 	@RequestMapping(value = "/emailChange", method = RequestMethod.POST)
-	public String emailChange(String chg_email, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("chg_email : " + chg_email);
+	public String emailChange(String chgEmail, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("chgEmail : " + chgEmail);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
-		String result = userService.emailChange(user_id, chg_email);
+		String result = userService.emailChange(user_id, chgEmail);
 		if (result == "emailChange_success") {
 			rttr.addFlashAttribute("emailChangeResult", "success");
-			userVo.setUser_email(chg_email);
+			userVo.setUser_email(chgEmail);
 			session.setAttribute("userVo", userVo);
 		} else {
 			rttr.addFlashAttribute("emailChangeResult", "fail");
 		}
-		return "redirect:/user/info";
+		return "redirect:/user/newInfo";
 	}
 
 	// 사용자 휴대전화 변경
 	@RequestMapping(value = "/phoneChange", method = RequestMethod.POST)
-	public String phoneChange(String chg_phone, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String phoneChange(String chgPhone, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
 		System.out.println("컨트롤러 phone user_id : " + user_id);
-		System.out.println("컨트롤러 phone user_phone : " + chg_phone);
-		String result = userService.phoneChange(user_id, chg_phone);
+		System.out.println("컨트롤러 phone chgPhone : " + chgPhone);
+		String result = userService.phoneChange(user_id, chgPhone);
 		if (result == "phoneChange_success") {
 			rttr.addFlashAttribute("phoneChangeResult", "success");
-			userVo.setUser_phone(chg_phone);
+			userVo.setUser_phone(chgPhone);
 			session.setAttribute("userVo", userVo);
 		} else {
 			rttr.addFlashAttribute("phoneChangeResult", "fail");
@@ -205,22 +205,22 @@ public class UserController implements Codes {
 
 	// 사용자 주소 변경
 	@RequestMapping(value = "/addrChange", method = RequestMethod.POST)
-	public String addrChange(String chg_addr, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String addrChange(String chgAddr, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_id = userVo.getUser_id();
-		System.out.println("chg_addr : " + chg_addr);
+		System.out.println("chgAddr : " + chgAddr);
 		System.out.println("user_id : " + user_id);
 
-		String result = userService.addrChange(chg_addr, user_id);
+		String result = userService.addrChange(chgAddr, user_id);
 
 		if (result == "addrChange_success") {
-			userVo.setUser_addr(chg_addr);
+			userVo.setUser_addr(chgAddr);
 			rttr.addFlashAttribute("addrChangeResult", "success");
 			session.setAttribute("userVo", userVo);
 		} else {
 			rttr.addFlashAttribute("addrChangeResult", "fail");
 		}
-		return "redirect:/user/info";
+		return "redirect:/user/newInfo";
 	}
 
 	// userPage 주문 내역 조회 페이지로 이동 + 주문 내역 조회

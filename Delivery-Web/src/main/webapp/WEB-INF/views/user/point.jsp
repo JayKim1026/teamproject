@@ -8,7 +8,9 @@
 <%@ include file = "../include/link.jsp" %>
 </head>
 <body>
-<%@include file = "../include/userPageHeader.jsp" %>
+<%@include file="../include/newInfoheader.jsp"%>
+<section>
 포인트			
+</section>
 </body>
 </html>

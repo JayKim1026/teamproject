@@ -23,19 +23,19 @@ public interface UserDao {
 	public String imgChange(String user_id, String chg_img) throws Exception;
 
 	// 사용자 현재 비밀번호 확인
-	public String pwCheck(String user_id, String user_pw) throws Exception;
+	public String pwCheck(String user_id, String orgPw) throws Exception;
 
 	// 사용자 비밀번호 변경
-	public String pwChange(String user_id, String chg_pw) throws Exception;
+	public String pwChange(String user_id, String chgPw) throws Exception;
 
 	// 사용자 이메일 변경
-	public String emailChange(String user_id, String chg_email) throws Exception;
+	public String emailChange(String user_id, String chgPhone) throws Exception;
 
 	// 사용자 휴대전화 변경
 	public String phoneChange(String user_id, String chg_phone) throws Exception;
 
 	// 사용자 주소 변경
-	public String addrChange(String chg_addr, String user_id) throws Exception;
+	public String addrChange(String user_id , String chgAddr) throws Exception;
 	
 	// 사용자 주문내역 조회
 	public List<OrderVo> getOrderList(int user_no) throws Exception;
