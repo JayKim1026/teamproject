@@ -46,31 +46,6 @@ public class TimelineServiceImpl implements TimelineService {
 		return result;
 	}
 
-	@Override
-	@Transactional
-	public void insertLike(int time_no, String user_id) {
-		
-		int time_like = 1;
-		
-		timelineDao.insertLike(time_no, time_like);
-		likeDao.insertLike(time_no, user_id);
-		
-	}
-
-	@Override
-	public boolean isLike(int time_no, String user_id) {
-		
-		boolean isLike = likeDao.isLike(time_no, user_id);
-		
-		return isLike;
-	}
-
-	@Override
-	public List<LikeVo> likeList() {
-		
-		List<LikeVo> likeList = likeDao.likeList();
-		return likeList;
-	}
 
 	@Override
 	public TimelineVo selectByNo(int time_no) {

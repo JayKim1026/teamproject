@@ -32,6 +32,18 @@ public class CommentDaoImpl implements CommentDao{
 		List<CommentVo> list = sqlSession.selectList(NAMESPACE + "getCommentList", time_no);
 		return list;
 	}
+
+	@Override
+	public void updateComment(CommentVo commentVo) {
+		sqlSession.update(NAMESPACE + "updateComment", commentVo);
+		
+	}
+
+	@Override
+	public void deleteComment(int c_no) {
+		sqlSession.delete(NAMESPACE + "deleteComment", c_no);
+		
+	}
 	
 
 }

@@ -6,15 +6,32 @@
 	
 	<insert id="insertComment">
 		insert into tbl_comment
-		(c_no, c_content, time_no, user_id)
-		values(seq_c_no.nextval, #{c_content}, #{time_no}, #{user_id})
+		(c_no, c_content, time_no, writer_no)
+		values(seq_c_no.nextval, #{c_content}, #{time_no}, #{writer_no})
 	</insert>
-	
+
 	<select id="getCommentList" resultType="CommentVo">
-		select * from tbl_comment
-		where time_no = #{time_no}
-		order by c_no desc
+		select c.*,
+		a.writer_name, a.writer_img
+		from tbl_comment c
+		inner join (
+		select user_no writer_no, user_name writer_name, user_img writer_img from
+		tbl_user
+		union
+		select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
+		on c.writer_no = a.writer_no
 	</select>
+	
+	<update id="updateComment">
+		update tbl_comment set
+		c_content = #{c_content}
+		where c_no = #{c_no}
+	</update>
+	
+	<delete id="deleteComment">
+		delete from tbl_comment
+		where c_no = #{c_no}
+	</delete>
 	
 </mapper>
 

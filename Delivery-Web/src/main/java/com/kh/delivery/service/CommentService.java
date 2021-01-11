@@ -13,4 +13,10 @@ public interface CommentService {
 	
 	/*get CommentList*/
 	public List<CommentVo> getCommentList(int time_no);
+	
+	/*Update Comment*/
+	public void updateComment(CommentVo commentVo);
+	
+	/*Delete Comment*/
+	public void deleteComment(int c_no);
 }

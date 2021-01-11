@@ -43,10 +43,28 @@ public class CommentController implements Codes {
 	}
 	
 	@RequestMapping(value="/getCommentList/{time_no}", method = RequestMethod.GET)
-	public List<CommentVo> getCommentList(@PathVariable("time_no")int time_no)throws Exception{
+	public List<CommentVo> getCommentList(@PathVariable("time_no")int time_no, Model model)throws Exception{
+		String image_url = BUCKET_URL;
+		String user_img = USER_IMG;
 		System.out.println("CommentController, getCommentList, time_no:" + time_no);
 		List<CommentVo> list = commentService.getCommentList(time_no);
 		System.out.println("CommentController, getCommentList, list:" + list);
+		model.addAttribute("image_url", image_url);
 		return list;
+	}
+	
+	@RequestMapping(value="/updateComment", method=RequestMethod.POST)
+	public String updateComment(@RequestBody CommentVo commentVo) throws Exception{
+		System.out.println("updateComment..");
+		System.out.println("CommentController, updateComment, commentVo:" + commentVo);
+		commentService.updateComment(commentVo);
+		return "success";
+	}
+	
+	@RequestMapping(value="/deleteComment/{c_no}", method=RequestMethod.GET)
+	public String deleteComment(@PathVariable("c_no") int c_no)throws Exception{
+		System.out.println("CommentController, deleteComment, c_no:" + c_no);
+		commentService.deleteComment(c_no);
+		return "success";
 	}
 }

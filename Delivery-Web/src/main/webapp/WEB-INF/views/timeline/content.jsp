@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <%@include file="../include/link.jsp"%> --%>
-<%-- <%@include file="../css/timeline.css"%> --%>
+<%@include file="../include/link.jsp"%>
+<%@include file="../css/timeline.css"%>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script
@@ -16,57 +16,63 @@
 <title>Insert title here</title>
 </head>
 <script>
+
 $(function(){
-	
+	/* Show CommentList */
 	$("#showComment").click(function(){
 		$(this).hide();
 		$("#closeComment").show();
-		$("#commentList").show();
-		
 		var time_no = ${timelineVo.time_no};
-		console.log(time_no);
-		
 		var url = "/comment/getCommentList/" + time_no;
-		
 		$.get(url, function(data){
-			console.log(data);
 			$("#newCommentList").empty();
-			$.each(data, function(){
-				
-				var div = ("#commentList").clone();
-				
-				div.find("img").eq(0).attr();
-				div.find(".commenter-head").children("span").eq(0).text(this.user_id);
-				div.find(".commenter-head").children("span").eq(1).text(this.c_date);
-				div.find(".comment-body").children("span").eq(0).text(this.c_content);
-				
+			$.each(data, function(index, comment){
+				var div = $(".commentListNew").eq(0).clone();
+				div.find("img").attr("src", "${image_url}"+this.writer_img);
+				div.find(".commenter-name").text(this.writer_name);
+				div.find(".comment-date").text(this.c_date);
+				div.find(".comment").text(this.c_content);
+				if(parseInt("${userVo.user_no}") == this.writer_no){
+					div.find(".btnUpdate").attr("data-no", this.c_no);
+					div.find(".btnUpdate").attr("data-content", this.c_content);
+					div.find(".btnDelete").attr("data-no", this.c_no);
+				}else{
+					div.find(".btnUpdate").empty();
+					div.find(".btnDelete").empty();
+				}
 				$("#newCommentList").append(div);
-				
+				$("#newCommentList").show();
 			});
 		});
 		
 	});
+	/*// End of Show CommentList //*/
 	
+	/*댓글보기 댓글접기 버튼 변경*/
 	$("#closeComment").click(function(){
 		$(this).hide();
 		$("#showComment").show();
-		$("#commentList").hide();
+		$("#newCommentList").hide();
 	});
+	/*// End of 댓글보기 댓글접기 버튼 변경 //*/
 	
+	/*Insert Comment*/
 	$("#insertCommentBtn").click(function(){
 		var time_no = "${timelineVo.time_no}";
 		var user_id = "${userVo.user_id}";
 		var c_content = $("#c_content").val();
-		
+		var writer_no = "${userVo.user_no}";
 		console.log(time_no);
 		console.log(user_id);
 		console.log(c_content);
+		console.log(writer_no);
 		
 		var url = "/comment/insertComment";
 		var sendData = {
 				"time_no"	:	time_no,
 				"user_id"	:	user_id,
-				"c_content" :	c_content
+				"c_content" :	c_content,
+				"writer_no"	:	writer_no
 		};
 		
 		$.ajax({
@@ -81,14 +87,100 @@ $(function(){
 				console.log(data);
 				if(data == "success"){
 					console.log("댓글 입력성공");
+					$("#showComment").trigger("click");
 					
 					
 				}
 			}
 		});
 	});
-	/*//InserComment 끝*/
+	/*// End of Insert Comment //*/
 	
+	/*Modify Comment*/
+	$(document).on("click", ".btnUpdate",function(){
+		console.log("클릭되엇다!");
+		var c_no = parseInt($(this).attr("data-no"));
+		var c_content = $(this).attr("data-content");
+		console.log(c_content);
+		
+		$("#Modal_c_no").val(c_no);
+		$("#Modal_c_content").val(c_content);
+		
+		$("#commentModal").trigger("click");
+	});
+	/*// End of Modify Comment //*/
+	
+	/*Modify Comment Save*/
+	
+	$("#commentModalSave").click(function(){
+		var url = "/comment/updateComment"
+		var sendData = {
+				"c_content"	:	$("#Modal_c_content").val(),
+				"c_no"		:	parseInt($("#Modal_c_no").val())
+		};
+		$.ajax({
+			"url"		:	url,
+			"headers"	:	{
+		"Content-Type"	:	"application/json"
+							},
+			"dataType"	:	"text",
+			"data"		:	JSON.stringify(sendData),
+			"method"	:	"post",
+			"success"	:	function(data){
+				console.log(data);
+				if(data =="success"){
+					$("#commentModalCancel").trigger("click");
+					console.log("댓글 수정 성공");
+					$("#showComment").trigger("click");
+				}
+			}
+		});
+	});
+	/*// End of Modify Comment Save //*/
+	
+	/* Delete Comment */
+	$(document).on("click",".btnDelete" ,function(){
+		var c_no = parseInt($(this).attr("data-no"));
+		console.log(c_no);
+		console.log("클릭클릭삭제클릭");
+		var url = "/comment/deleteComment/" + c_no;
+		$.get(url, function(data){
+			console.log(data);
+			if(data == "success"){
+				console.log("삭제성공");
+				$("#showComment").trigger("click");
+			}
+		});
+		
+	});
+	/*// End of Delete Comment //*/
+	
+	/* Insert Like */
+	$("#like").click(function(){
+		console.log("라이크클릭");
+		var that = $(this);
+		var has = $(this).hasClass("red-color");
+		var url = "";
+		
+		if(has){
+			url = "/like/deleteLike/${timelineVo.time_no}/${userVo.user_id}"
+		}else{
+			url = "/like/insertLike/${timelineVo.time_no}/${userVo.user_id}"
+		}
+		
+		console.log(url);
+		$.get(url, function(data){
+			console.log(data);
+			if(data == "success"){
+				if(has){
+					that.removeClass("red-color");
+				}else{
+					that.addClass("red-color");
+				}
+			}
+		});
+		
+	});		
 });
 </script>
 <body>
@@ -183,22 +275,15 @@ $(function(){
 										</c:if>
 										<div class="ml-auto">
 											<ul class="nav navbar-nav" style="float: right;">
-												<li class="dropdown"><a href="#"
-													class="dropdown-toggle" data-toggle="dropdown"><span
-														class="caret"></span></a>
+												<li class="dropdown">
+													<a href="#"class="dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
 													<ul class="dropdown-menu" role="menu">
-														<c:if
-															test="${sessionScope.userVo.user_no == timelineVo.writer_no}">
-															<li><a class="btnUpdate"
-																data-no="${timelineVo.time_no}">수정</a></li>
-															<li><a class="btnDelete"
-																data-no="${timelineVo.time_no}">삭제</a></li>
-
-														</c:if>
+														<li><a class="btnUpdate" id="btnUpdateComment" onclick="">수정</a></li>
+														<li><a class="btnDelete" id="btnDeleteComment">삭제</a></li>
 														<li><a id="btnReport">신고</a></li>
 													</ul>
+												</li>
 											</ul>
-											<p class="text-muted" style="padding-right: 30px;">${timelineVo.time_date}</p>
 										</div>
 
 									</div>
@@ -212,10 +297,15 @@ $(function(){
 												onclick="window.open(this.src)">
 										</c:if>
 									</div>
-
-									댓글보기 버튼
+									
+									<div class="row text-left mt-4">
+										<i class="far fa-heart" style="font-size:30px;" id="like"></i>
+										<span>1000000</span>
+									</div>
+									
+									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style="padding-bottom: 15px;">
-										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}" href="/timeline/content">댓글보기</a> 
+										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">댓글보기</a> 
 										<a class="ml-auto closeComment" id="closeComment" style="display: none;" data-no="${timelineVo.time_no}">댓글접기</a>
 									</div>
 
@@ -240,25 +330,38 @@ $(function(){
 									<!-- 댓글보기 -->
 									<div class="row commentList"
 										style="padding-top: 10px; display: none;" id="commentList">
-										<img src="" class="commenter-image" alt="commenter_image">
+										<div class="row commentListNew"
+										style="padding-top: 10px;" id="commentListNew">
+											<img class="commenter-image" alt="commenter_image">
 
-										<div class="comment-content col-md-11">
-										
-											<div class="commenter-head">
-												<span class="commenter-name"><a href="#">이름</a></span> 
-												<span class="comment-date"><i class="far fa-clock"></i>
-												2days ago
-												</span>
+											<div class="comment-content col-md-11">
+												<div class="ml-auto">
+												<ul class="nav navbar-nav" style="float: right;">
+													<li class="dropdown"><a
+														class="dropdown-toggle" data-toggle="dropdown"><span
+															class="caret"></span></a>
+														<ul class="dropdown-menu" role="menu">
+																<li><a class="btnUpdate">수정</a></li>
+																<li><a class="btnDelete">삭제</a></li>
+															<li><a id="btnReport">신고</a></li>
+														</ul>
+												</ul>
 											</div>
-											<div class="comment-body">
-												<span class="comment">내용</span>
+												<div class="commenter-head">
+													<span class="commenter-name">이름</span> 
+													<span class="comment-date"><i class="far fa-clock"></i>
+													2days ago
+													</span>
+												</div>
+												<div class="comment-body">
+													<span class="comment">내용</span>
+												</div>
+												
+												<div class="comment-footer">
+													<a href="#" class="comment-action">답글</a>
+												</div>
 											</div>
-											<div class="comment-footer">
-												<a href="#" class="comment-action">답글</a>
-											</div>
-											
 										</div>
-										
 									</div>
 									
 									<div id="newCommentList">
@@ -275,4 +378,40 @@ $(function(){
 	</div>
 	<%@include file="../include/footer.jsp"%>
 </body>
+<!-- 댓글 수정 모달 -->
+
+<div class="center">
+<button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block" style="display:none;" id="commentModal">Click Me</button>
+</div>
+
+
+<!-- line modal -->
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h3 class="modal-title" id="lineModalLabel" style="text-align:center;">댓글 수정</h3>
+		</div>
+		<div class="modal-body">
+			
+            <!-- content goes here -->
+              <div class="form-group">
+                <label for="exampleInputEmail1">내용</label>
+                <input type="hidden" id="Modal_c_no">
+                <input type="text" class="form-control" id="Modal_c_content">
+              </div>
+		</div>
+		<div class="modal-footer">
+			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" data-dismiss="modal"  role="button" id="commentModalCancel" >취소</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default btn-hover-green" role="button" id="commentModalSave">저장</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
 </html>

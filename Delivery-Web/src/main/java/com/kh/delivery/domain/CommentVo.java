@@ -2,13 +2,19 @@ package com.kh.delivery.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CommentVo {
 	
 	private int c_no;
 	private String c_content;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp c_date;
 	private int time_no;
-	private String user_id;
+	private int writer_no;
+	//조인
+	private String writer_name;
+	private String writer_img;
 	
 	
 	public int getC_no() {
@@ -35,17 +41,31 @@ public class CommentVo {
 	public void setTime_no(int time_no) {
 		this.time_no = time_no;
 	}
-	public String getUser_id() {
-		return user_id;
+	public int getWriter_no() {
+		return writer_no;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setWriter_no(int writer_no) {
+		this.writer_no = writer_no;
+	}
+	
+	public String getWriter_name() {
+		return writer_name;
+	}
+	public void setWriter_name(String writer_name) {
+		this.writer_name = writer_name;
+	}
+	public String getWriter_img() {
+		return writer_img;
+	}
+	public void setWriter_img(String writer_img) {
+		this.writer_img = writer_img;
 	}
 	
 	@Override
 	public String toString() {
 		return "CommentVo [c_no=" + c_no + ", c_content=" + c_content + ", c_date=" + c_date + ", time_no=" + time_no
-				+ ", user_id=" + user_id + "]";
+				+ ", writer_no=" + writer_no + ", writer_name=" + writer_name + ", writer_img=" + writer_img + "]";
 	}
+	
 	
 }

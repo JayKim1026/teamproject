@@ -39,13 +39,6 @@ public class TimelineController implements Codes {
 		String image_url = BUCKET_URL;
 		String user_img = USER_IMG;
 		
-		List<LikeVo> likeList = timelineService.likeList();
-		LikeVo likeVo = new LikeVo();
-		
-		int time_no = likeVo.getTime_no();
-		System.out.println("showTimeline2, time_no:" + time_no);
-		
-		System.out.println("showTimeline2, likeList:" + likeList);
 		System.out.println("showTimeline2, timelineList:" + timelineList);
 		model.addAttribute("timelineList", timelineList);
 		model.addAttribute("image_url", image_url);
@@ -110,21 +103,8 @@ public class TimelineController implements Codes {
 		return result;
 	}
 	
-	@RequestMapping(value = "/insertLike/{time_no}/{user_id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> insertLike(@PathVariable("time_no") int time_no,
-							@PathVariable("user_id") String user_id, HttpSession session)throws Exception {
-		System.out.println("TimelineController, insertLike, time_no:" + time_no);
-		System.out.println("TimelineController, insertLike, user_id:" + user_id);
-		boolean isLike = timelineService.isLike(time_no, user_id);
-		timelineService.insertLike(time_no, user_id);
-		System.out.println("TimelineController, insertLike, isLike:" + isLike);
-		Map<String, Object> map = new HashMap<>();
-		map.put("isLike", isLike);
-		return map;
-	}
 	
-	@RequestMapping(value="/goContent", method = RequestMethod.POST)
+	@RequestMapping(value="/content", method = RequestMethod.POST)
 	public String content(int time_no, String user_id, HttpSession session,Model model) throws Exception {
 		System.out.println("content...");
 		String image_url = BUCKET_URL;
