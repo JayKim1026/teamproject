@@ -22,33 +22,33 @@ public class TimelineServiceImpl implements TimelineService {
 	private LikeDao likeDao;
 
 	@Override
-	public List<TimelineVo> timelineList(String searchType) {
+	public List<TimelineVo> timelineList(String searchType) throws Exception {
 		List<TimelineVo> list = timelineDao.timelineList(searchType);
 		return list;
 	}
 
 	@Override
-	public String insertArticle(TimelineVo timelineVo) {
+	public String insertArticle(TimelineVo timelineVo) throws Exception {
 		String result = timelineDao.insertArticle(timelineVo);
 		System.out.println("TimelineService, insertArticle, timelineVo:" + timelineVo);
 		return result;
 	}
 
 	@Override
-	public String updateArticle(TimelineVo timelineVo) {
+	public String updateArticle(TimelineVo timelineVo) throws Exception {
 		String result = timelineDao.updateArticle(timelineVo);
 		return result;
 	}
 
 	@Override
-	public String deleteArticle(int time_no) {
+	public String deleteArticle(int time_no) throws Exception {
 		String result = timelineDao.deleteArticle(time_no);
 		return result;
 	}
 
 	@Override
 	@Transactional
-	public void insertLike(int time_no, String user_id) {
+	public void insertLike(int time_no, String user_id) throws Exception {
 		
 		int time_like = 1;
 		
@@ -58,7 +58,7 @@ public class TimelineServiceImpl implements TimelineService {
 	}
 
 	@Override
-	public boolean isLike(int time_no, String user_id) {
+	public boolean isLike(int time_no, String user_id) throws Exception {
 		
 		boolean isLike = likeDao.isLike(time_no, user_id);
 		
@@ -66,15 +66,21 @@ public class TimelineServiceImpl implements TimelineService {
 	}
 
 	@Override
-	public List<LikeVo> likeList() {
+	public List<LikeVo> likeList() throws Exception {
 		
 		List<LikeVo> likeList = likeDao.likeList();
 		return likeList;
 	}
 
 	@Override
-	public TimelineVo selectByNo(int time_no) {
+	public TimelineVo selectByNo(int time_no) throws Exception {
 		TimelineVo timelineVo = timelineDao.selectByNo(time_no);
+		return timelineVo;
+	}
+
+	@Override
+	public TimelineVo getLastTimeline() throws Exception {
+		TimelineVo timelineVo = timelineDao.getLastTimeline();
 		return timelineVo;
 	}
 
