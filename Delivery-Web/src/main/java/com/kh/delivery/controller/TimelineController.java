@@ -135,7 +135,7 @@ public class TimelineController implements Codes {
 		System.out.println("TimelineController, content, timelineVo:" + timelineVo);
 		model.addAttribute("timelineVo", timelineVo);
 		model.addAttribute("image_url", image_url);
-	return "timeline/content";	
+		return "timeline/content";	
 	}
 	
 	
