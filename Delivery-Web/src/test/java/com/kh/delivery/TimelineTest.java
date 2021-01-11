@@ -50,4 +50,10 @@ public class TimelineTest {
 		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", map);
 		System.out.println(timelineList);
 	}
+	
+	@Test
+	public void testGetLastTimeline() throws Exception {
+		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "getLastTimeline");
+		System.out.println(timelineVo);
+	}
 }

@@ -66,4 +66,11 @@
 		    where time_no = #{time_no}
 	</select>
 	
+	<select id="getLastTimeline" resultType="TimelineVo">
+		select * from (
+		    select * from tbl_timeline
+		    order by time_no desc)
+		where rownum = 1
+	</select>
+	
 </mapper>

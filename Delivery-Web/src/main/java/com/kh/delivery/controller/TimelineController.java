@@ -147,11 +147,18 @@ public class TimelineController implements Codes {
 		return timelineList;
 	}
 	
-	@RequestMapping(value="/android/aInsertArticle", method=RequestMethod.POST)
+	@RequestMapping(value="/android/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
 		System.out.println("atimelineVo = " + timelineVo);
 		String result = timelineService.insertArticle(timelineVo);
 		return result;
+	}
+	
+	@RequestMapping(value="/android/getLastTimeline")
+	@ResponseBody
+	public TimelineVo getLastTimeline() throws Exception {
+		TimelineVo timelineVo = timelineService.getLastTimeline();
+		return timelineVo;
 	}
 }

@@ -20,7 +20,7 @@ public class TimelineDaoImpl implements TimelineDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<TimelineVo> timelineList(String searchType) {
+	public List<TimelineVo> timelineList(String searchType) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("searchType", searchType);
 		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", map);
@@ -28,7 +28,7 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public String insertArticle(TimelineVo timelineVo) {
+	public String insertArticle(TimelineVo timelineVo) throws Exception {
 		if(timelineVo.getTime_img() != null) {
 			sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
 		} else {
@@ -39,19 +39,19 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public String updateArticle(TimelineVo timelineVo) {
+	public String updateArticle(TimelineVo timelineVo) throws Exception {
 		sqlSession.update(NAMESPACE + "updateArticle", timelineVo);
 		return "updateArticle_success";
 	}
 
 	@Override
-	public String deleteArticle(int time_no) {
+	public String deleteArticle(int time_no) throws Exception {
 		sqlSession.update(NAMESPACE + "deleteArticle", time_no);
 		return "deleteArticle_success";
 	}
 
 	@Override
-	public void insertLike(int time_no, int time_like) {
+	public void insertLike(int time_no, int time_like) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		map.put("time_no", time_no);
 		map.put("time_like", time_like);
@@ -61,9 +61,15 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public TimelineVo selectByNo(int time_no) {
+	public TimelineVo selectByNo(int time_no) throws Exception {
 		
 		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "selectByNo", time_no);
+		return timelineVo;
+	}
+
+	@Override
+	public TimelineVo getLastTimeline() throws Exception {
+		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "getLastTimeline");
 		return timelineVo;
 	}
 }
