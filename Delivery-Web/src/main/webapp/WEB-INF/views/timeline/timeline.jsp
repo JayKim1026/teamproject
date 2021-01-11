@@ -284,7 +284,7 @@ $(".showComment").each(function(){
 		console.log(user_id);
 		$("#frm > input[name=time_no]").val(time_no);
 		$("#frm > input[name=user_id]").val(user_id);
-		
+		$("#frm").submit();
 	});	
 });
 
