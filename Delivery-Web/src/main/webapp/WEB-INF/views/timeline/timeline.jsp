@@ -18,6 +18,10 @@
 <title>timeLine.jsp</title>
 </head>
 <script>
+ function contentSubmit(){
+	$("#frm").submit();
+ }
+
 $(function(){
 $("#map_marker").click(function(){
 // 카카오 주소 검색기
@@ -273,15 +277,15 @@ $("#deleteImg").click(function(){
 
 /*댓글보기*/
 $(".showComment").each(function(){
-	$(this).click(function(){
+	$(this).click(function(e){
+		e.preventDefault();
 		var time_no = $(this).attr("data-no");
 		var user_id = $(this).attr("data-id");
 		console.log(time_no);
 		console.log(user_id);
 		$("#frm > input[name=time_no]").val(time_no);
 		$("#frm > input[name=user_id]").val(user_id);
-		$("#frm").attr("action", "/timeline/content")
-		$("#frm").submit();	
+		$("#frm").submit();
 	});	
 });
 
@@ -520,7 +524,9 @@ ${likeList}
 									
 									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style= "padding-bottom:15px;">
-										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">글 상세보기</a>	
+										<button type="button" class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}"
+										 >글 상세보기</button>	
+										 <button onclick='location.href="memberRegi.do?userName=33&userId=44";'>url전송</button>
 									</div>
 									
 									<!-- 경계선 -->
@@ -550,7 +556,7 @@ ${likeList}
 												<span class="comment">This is comment content Here is nice comment And you are beautiful</span>
 											</div>
 											<div class="comment-footer">		
-												<a href="" class="comment-action">답글</a>
+												<a class="comment-action">답글</a>
 											</div>
 										</div>
 									</div>
