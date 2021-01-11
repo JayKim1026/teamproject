@@ -46,35 +46,6 @@ public class TimelineServiceImpl implements TimelineService {
 		return result;
 	}
 
-<<<<<<< HEAD
-=======
-	@Override
-	@Transactional
-	public void insertLike(int time_no, String user_id) throws Exception {
-		
-		int time_like = 1;
-		
-		timelineDao.insertLike(time_no, time_like);
-		likeDao.insertLike(time_no, user_id);
-		
-	}
-
-	@Override
-	public boolean isLike(int time_no, String user_id) throws Exception {
-		
-		boolean isLike = likeDao.isLike(time_no, user_id);
-		
-		return isLike;
-	}
-
-	@Override
-	public List<LikeVo> likeList() throws Exception {
-		
-		List<LikeVo> likeList = likeDao.likeList();
-		return likeList;
-	}
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
-
 	@Override
 	public TimelineVo selectByNo(int time_no) throws Exception {
 		TimelineVo timelineVo = timelineDao.selectByNo(time_no);

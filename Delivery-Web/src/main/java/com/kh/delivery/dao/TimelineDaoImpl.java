@@ -51,22 +51,7 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public TimelineVo selectByNo(int time_no) {
-=======
-	public void insertLike(int time_no, int time_like) throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		map.put("time_no", time_no);
-		map.put("time_like", time_like);
-		
-		sqlSession.insert(NAMESPACE  + "insertLike", map);
-		
-	}
-
-	@Override
 	public TimelineVo selectByNo(int time_no) throws Exception {
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
-		
 		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "selectByNo", time_no);
 		return timelineVo;
 	}
