@@ -100,7 +100,7 @@ public class DeliverDaoImpl implements DeliverDao {
 	public String phoneChange(String dlvr_id, String chgPhone) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("dlvr_id", dlvr_id);
-		map.put("chg_phone", chgPhone);
+		map.put("chgPhone", chgPhone);
 		sqlSession.update(NAMESPACE + "phoneChange", map);
 		return "phoneChange_success";
 	}

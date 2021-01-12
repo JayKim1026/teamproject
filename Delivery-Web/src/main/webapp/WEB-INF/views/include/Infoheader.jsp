@@ -18,7 +18,7 @@
 								id="sidebar-wrapper" role="navigation">
 								<ul class="nav sidebar-nav">
 									<li class="sidebar-brand"><a href="#"> 메뉴 </a></li>
-									<li><a href="/user/newInfo">회원정보</a></li>
+									<li><a href="/user/info">회원정보</a></li>
 									<li><a href="/user/orderList">주문 내역 조회</a></li>
 									<li><a href="/user/point">포인트 조회</a></li>
 									<li><a href="/user/review">내가 작성한 후기</a></li>
