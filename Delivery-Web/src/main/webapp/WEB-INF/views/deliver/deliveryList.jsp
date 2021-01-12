@@ -14,10 +14,14 @@ table {
 </style>
 </head>
 <body>
-
-
-</body>
-<table class="table">
+<%@include file="../include/Infoheader.jsp"%>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<!-- 배달 완료  -->
+		<div class="col-md-8">
+		<table class="table">
 	<thead>
 		<tr>
 			<th style="border-style: none;">&#91;완료목록&#93;</th>
@@ -53,9 +57,17 @@ table {
 		</c:forEach>
 	</tbody>
 </table>
-
-
-<table class="table">
+		
+		
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		<table class="table">
 	<thead>
 		<tr>
 			<th style="border-style: none;">&#91;취소목록&#93;</th>
@@ -128,4 +140,13 @@ table {
 		</c:forEach>
 	</tbody>
 </table>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</div>
+</body>
+
+
+
 </html>
