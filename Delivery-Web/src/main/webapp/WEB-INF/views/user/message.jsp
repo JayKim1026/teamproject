@@ -38,7 +38,7 @@ $(function() {
 			console.log(data);
 			if(data != null) {
 				appendMessage(data);
-// 				start();
+				start();
 			}
 		});
 	};
@@ -113,14 +113,14 @@ $(function() {
 </script>
 </head>
 <body>
-	<div class="senderForm" style="display: none; ">
+	<div class="senderForm" style="display: none;">
 		<span></span>
 		<span></span>
 		<span></span>
 		<img alt="senderImg" src="" class="profile-pic">
 		<hr/>
 	</div>
-	<div class="receiverForm" style="display: none">
+	<div class="receiverForm" style="display: none;">
 		<img alt="receiverImg" src="" class="profile-pic">
 		<span></span>
 		<span></span>
