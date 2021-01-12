@@ -8,7 +8,7 @@
 <%@ include file = "../include/link.jsp" %>
 </head>
 <body>
-<%@include file="../include/newInfoheader.jsp"%>
+<%@include file="../include/Infoheader.jsp"%>
 <section>
 
 </section>

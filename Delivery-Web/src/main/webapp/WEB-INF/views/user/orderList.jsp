@@ -18,7 +18,7 @@ table {
 </style>
 </head>
 <body>
-<%@include file="../include/newInfoheader.jsp"%>
+<%@include file="../include/Infoheader.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">

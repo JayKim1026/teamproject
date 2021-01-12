@@ -79,16 +79,8 @@ public class UserController implements Codes {
 		}
 	}
 
-	// userPage로 이동 + user 기본 정보
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String userInfo(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
-		UserVo userVo = (UserVo) session.getAttribute("userVo");
-		String user_img = userVo.getUser_img();
-		model.addAttribute("image_url", BUCKET_URL + user_img);
-		return "user/info";
-	}
 	
-	// newInfo 이동 + user 기본 정보
+	// userInfo 이동 + user 기본 정보
 	@RequestMapping(value = "/newInfo")
 	public String userInfo2(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");

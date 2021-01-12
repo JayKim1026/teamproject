@@ -14,7 +14,6 @@ table {
 </style>
 </head>
 <body>
-	<%@include file="../include/deliverPageHeader.jsp"%>
 
 
 </body>

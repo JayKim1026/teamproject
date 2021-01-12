@@ -50,7 +50,7 @@
 
 					<div class="col-md-8">
 					<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
-					<c:if test="${sessionScope.userVo == null || sessionScope.deliverVo == null}">
+					<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null}">
 					<a class="main-menu" id="main_login" href="/account/loginForm">로그인</a>
 					<a class="main-menu" id="main_Joinus" href="/account/registerForm">회원가입</a>
 					</c:if>

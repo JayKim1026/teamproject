@@ -49,7 +49,6 @@
 </head>
 
 <body>
-<%@include file="../include/deliverPageHeader.jsp" %>
 	<!-- 회원 정보 테이블  -->
 	<table class="table">
 		<thead>
