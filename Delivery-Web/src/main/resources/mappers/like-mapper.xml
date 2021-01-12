@@ -9,15 +9,16 @@
 		values(#{time_no}, #{user_id})
 	</insert>
 	
+	<delete id="deleteLike">
+		delete from tbl_like
+		where user_id = #{user_id}
+		and time_no = #{time_no}
+	</delete>
+	
 	<select id="isLike" resultType="int">
 		select count(*) from tbl_like
 		where user_id = #{user_id}
 		and time_no = #{time_no}
 	</select>
-	
-	<select id="likeList" resultType="LikeVo">
-		select * from tbl_like
-	</select>
-	
 </mapper>
 

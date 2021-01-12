@@ -155,7 +155,7 @@ $(function(){
 	});
 	/*// End of Delete Comment //*/
 	
-	/* Insert Like */
+	/* Insert Like, Delete Like */
 	$("#like").click(function(){
 		console.log("라이크클릭");
 		var that = $(this);
@@ -167,14 +167,18 @@ $(function(){
 		}else{
 			url = "/like/insertLike/${timelineVo.time_no}/${userVo.user_id}"
 		}
-		
+		/*far 빈하트 fas 꽉 찬 하트*/
 		console.log(url);
 		$.get(url, function(data){
 			console.log(data);
 			if(data == "success"){
 				if(has){
+					that.removeClass("fas");
+					that.addClass("far");
 					that.removeClass("red-color");
 				}else{
+					that.removeClass("far");
+					that.addClass("fas");
 					that.addClass("red-color");
 				}
 			}
@@ -298,22 +302,35 @@ $(function(){
 										</c:if>
 									</div>
 									
+									<!-- 좋아요.. -->
 									<div class="row text-left mt-4">
-										<i class="far fa-heart" style="font-size:30px;" id="like"></i>
-										<span>1000000</span>
+										<i
+										<c:choose>
+											<c:when test="${isLike == true}">
+												class="fas fa-heart red-color"
+											</c:when>
+											<c:otherwise>
+												class="far fa-heart"
+											</c:otherwise>
+										</c:choose>
+										  style="font-size:30px;" id="like"></i>
+										(<span>${timelineVo.time_like}</span>)
 									</div>
+									<!-- 좋아요 끝 -->
 									
 									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style="padding-bottom: 15px;">
 										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">댓글보기</a> 
 										<a class="ml-auto closeComment" id="closeComment" style="display: none;" data-no="${timelineVo.time_no}">댓글접기</a>
 									</div>
-
+									<!-- 댓글보기 버튼 끝 -->
+									
 									<!-- 경계선 -->
 									<div class="row"
 										style="border-width: 1px; border-color: gray; border-style: solid; opacity: 0.5;">
 									</div>
-
+									<!-- 경계선 끝 -->
+									
 									<!-- 댓글작성-->
 									<div class="row">
 										<div class="col-md-10">
@@ -326,8 +343,9 @@ $(function(){
 												style="background: #BFFBBE;" id="insertCommentBtn">작성</button>
 										</div>
 									</div>
-
-									<!-- 댓글보기 -->
+									<!-- 댓글작성 끝-->
+									
+									<!-- 댓글보기 클론 참고용 -->
 									<div class="row commentList"
 										style="padding-top: 10px; display: none;" id="commentList">
 										<div class="row commentListNew"
@@ -363,10 +381,13 @@ $(function(){
 											</div>
 										</div>
 									</div>
+									<!-- 댓글보기 클론 참고용 끝 -->
 									
+									<!-- 댓글 보기 -->
 									<div id="newCommentList">
 									
 									</div>
+									<!-- 댓글 보기 끝 -->
 									
 								</div>
 							</div>

@@ -21,14 +21,34 @@ public class LikeDaoImpl implements LikeDao{
 
 	@Override
 	public void insertLike(int time_no, String user_id) {
-		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		map.put("user_id", user_id);
+		
+		sqlSession.insert(NAMESPACE + "insertLike", map);
 		
 	}
 
 	@Override
 	public void deleteLike(int time_no, String user_id) {
-		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		map.put("user_id", user_id);
 		
+		sqlSession.insert(NAMESPACE + "deleteLike", map);
+		
+	}
+
+	@Override
+	public boolean isLike(String user_id, int time_no) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		map.put("user_id", user_id);
+		int count = sqlSession.selectOne(NAMESPACE + "isLike", map);
+		if(count > 0 ) {
+			return true;
+		}
+		return false;
 	}
 
 	
