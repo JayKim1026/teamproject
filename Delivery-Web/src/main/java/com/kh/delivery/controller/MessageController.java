@@ -64,14 +64,6 @@ public class MessageController implements Codes {
 
 	
 	// 웹
-	@RequestMapping(value="/messageForm", method=RequestMethod.GET)
-	public String messageForm(HttpSession session, Model model) throws Exception {
-		UserVo userVo = (UserVo) session.getAttribute("userVo");
-		OrderVo orderVo = orderService.getMyOrder(userVo.getUser_no());
-		model.addAttribute("orderVo", orderVo);
-		model.addAttribute("image_url", BUCKET_URL);
-		return "user/message";
-	}
 	
 	
 

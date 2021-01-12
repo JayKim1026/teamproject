@@ -38,7 +38,7 @@ $(function() {
 			console.log(data);
 			if(data != null) {
 				appendMessage(data);
-				start();
+// 				start();
 			}
 		});
 	};
@@ -71,13 +71,17 @@ $(function() {
 			var clone;
 			if(user_no == sender_no) {
 				clone = $(".senderForm").eq(0).clone();
+				clone.children().eq(0).text(this.msg_date);
+				clone.children().eq(1).text(this.msg_content);
+				clone.children().eq(2).text(this.sender_name);
+				clone.children().eq(3).attr("src", "${image_url}" + this.sender_img);
 			} else {
 				clone = $(".receiverForm").eq(0).clone();
+				clone.children().eq(0).attr("src", "${image_url}" + this.sender_img);
+				clone.children().eq(1).text(this.sender_name);
+				clone.children().eq(2).text(this.msg_content);
+				clone.children().eq(3).text(this.msg_date);
 			}
-			clone.children().eq(0).attr("src", "${image_url}" + this.sender_img);
-			clone.children().eq(1).text(this.sender_name);
-			clone.children().eq(2).text(this.msg_content);
-			clone.children().eq(3).text(this.msg_date);
 			
 			$("#chatForm").append(clone);
 			clone.show(500);
@@ -101,26 +105,33 @@ $(function() {
 			console.log(data);
 		});
 	});
+	
+	$("#btnStopInterval").click(function() {
+		clearInterval(interval);
+	});
 });
 </script>
 </head>
 <body>
-	<div class="senderForm" style="display: none; float: right">
+	<div class="senderForm" style="display: none; ">
+		<span></span>
+		<span></span>
+		<span></span>
 		<img alt="senderImg" src="" class="profile-pic">
-		<span></span>
-		<span></span>
-		<span></span>
+		<hr/>
 	</div>
 	<div class="receiverForm" style="display: none">
 		<img alt="receiverImg" src="" class="profile-pic">
 		<span></span>
 		<span></span>
 		<span></span>
+		<hr/>
 	</div>
 	<h1>${orderVo}</h1>
 	<h2>${userVo}</h2>
 	<input type="text" class="form-control" id="msgContent"/>
 	<button type="button" class="btn btn-primary" id="btnSendMsg">보내기</button>
+	<button type="button" class="btn btn-warning" id="btnStopInterval">중지</button>
 	
 	<div class="container-fluid">
 		<div class="row">
