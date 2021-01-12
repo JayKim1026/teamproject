@@ -29,7 +29,10 @@
 	</update>
 
 	<select id="getPickedOrder" resultType="OrderVo">
-		select * from tbl_order
+		select o.*, u.user_name
+		from tbl_order o
+		inner join tbl_user u
+		on o.user_no = u.user_no
 		where dlvr_no = #{dlvr_no}
 			and order_state = '3-002'
 	</select>
