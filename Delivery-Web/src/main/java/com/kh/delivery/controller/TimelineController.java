@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.delivery.domain.LikeVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
+import com.kh.delivery.service.LikeService;
 import com.kh.delivery.service.TimelineService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
@@ -31,6 +32,9 @@ public class TimelineController implements Codes {
 
 	@Inject
 	private TimelineService timelineService;
+	
+	@Inject
+	private LikeService likeService;
 	
 	// 웹
 	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
@@ -112,9 +116,11 @@ public class TimelineController implements Codes {
 		System.out.println("TimelineController, content, time_no:" + time_no);
 		System.out.println("TimelineController, content, user_id:" + user_id);
 		TimelineVo timelineVo = timelineService.selectByNo(time_no);
+		boolean isLike = likeService.isLike(time_no, user_id);
 		System.out.println("TimelineController, content, timelineVo:" + timelineVo);
 		model.addAttribute("timelineVo", timelineVo);
 		model.addAttribute("image_url", image_url);
+		model.addAttribute("isLike", isLike);
 		return "timeline/content";	
 	}
 	
