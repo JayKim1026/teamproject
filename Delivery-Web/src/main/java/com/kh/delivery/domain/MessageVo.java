@@ -2,6 +2,8 @@ package com.kh.delivery.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MessageVo {
 	private int msg_no;
 	private int order_no;
@@ -9,6 +11,7 @@ public class MessageVo {
 	private int receiver_no;
 	private String msg_content;
 	private String msg_img;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp msg_date;
 
 	// 조인 값

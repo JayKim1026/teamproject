@@ -22,14 +22,20 @@ public class MessageController {
 	@RequestMapping(value="/android/getMessageList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<MessageVo> getMessageList(MessageVo messageVo) throws Exception {
+		System.out.println("getMessageList");
+		System.out.println(messageVo);
 		List<MessageVo> messageList = messageService.getMessageList(messageVo);
+		System.out.println(messageList);
 		return messageList;
 	}
 	
 	@RequestMapping(value="/android/getCurrentMessage", method=RequestMethod.POST)
 	@ResponseBody
 	public List<MessageVo> getCurrentMessage(MessageVo messageVo) throws Exception {
+		System.out.println("getCurrentMessage");
+		System.out.println(messageVo);
 		List<MessageVo> messageList = messageService.getCurrentMessage(messageVo);
+		System.out.println(messageList);
 		return messageList;
 	}
 	
