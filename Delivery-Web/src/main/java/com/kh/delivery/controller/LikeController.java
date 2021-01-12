@@ -40,7 +40,7 @@ public class LikeController implements Codes {
 		System.out.println("LikeController, insertLike, time_no:" + time_no);
 		System.out.println("LikeController, insertLike, user_id:" + user_id);
 		likeService.insertLike(time_no, user_id);
-		return null;
+		return "success";
 	}
 	
 	@RequestMapping(value="deleteLike/{time_no}/{user_id}", method=RequestMethod.GET)
@@ -50,7 +50,8 @@ public class LikeController implements Codes {
 		System.out.println("deleteLike...");
 		System.out.println("LikeController, deleteLike, time_no:" + time_no);
 		System.out.println("LikeController, deleteLike, user_id:" + user_id);
-		return null;
+		likeService.deleteLike(time_no, user_id);
+		return "success";
 	}
 	
 }

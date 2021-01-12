@@ -11,4 +11,7 @@ public interface LikeDao {
 	
 	/* Delete Like */
 	public void deleteLike(int time_no, String user_id);
+	
+	/* isLike */
+	public boolean isLike(String user_id, int time_no);
 }

@@ -44,7 +44,7 @@
 		where time_no = #{time_no}
 	</delete>
 	
-	<update id="insertLike">
+	<update id="updateLikeCount">
 		update tbl_timeline set
 		time_like = time_like + #{time_like}
 		where time_no = #{time_no}

@@ -20,6 +20,7 @@
 		union
 		select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
 		on c.writer_no = a.writer_no
+		where time_no = #{time_no}
 	</select>
 	
 	<update id="updateComment">

@@ -241,39 +241,6 @@ $("#deleteImg").click(function(){
 	
 });
 
-/*따봉!*/
-// $(".likeEvent").click(function(){
-	
-// 	console.log("따봉클릭")
-// 	var time_no = $(this).attr("data-no");
-// 	var user_id = $(this).attr("data-id");
-// 	console.log(user_id);
-// 	console.log(time_no);
-// 	var has = $(this).hasClass("blue-color");
-// 	var count = parseInt($("#likeCount").text());
-// 	var url = "/timeline/insertLike/" + time_no + "/" + user_id;
-	
-// 	if(has){
-// 		url = "/timeline/deleteLike/${timelineVo.time_no}"
-// 	}else{
-// 		console.log("이벤트발생");
-// 		url = "/timeline/insertLike/${timelineVo.time_no}"
-// 	}
-	
-// 	$.get(url, function(data){
-// 		console.log(data);
-// 		if(data.isLike == false){
-// 			$(this).addClass("blue-color");
-			
-// 		}else{
-// 			$(this).removeClass("blue-color");
-// 		}
-// 	});
-// });
-// /*따봉 끝*/
-
-
-
 /*댓글보기*/
 $(".showComment").each(function(){
 	$(this).click(function(e){
@@ -523,9 +490,8 @@ ${likeList}
 									
 									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style= "padding-bottom:15px;">
-										<button type="button" class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}"
-										 >글 상세보기</button>	
-										 <button onclick='location.href="memberRegi.do?userName=33&userId=44";'>url전송</button>
+										<a class="ml-auto showComment" id="showComment" 
+										data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">글 상세보기</a>	
 									</div>
 									
 									<!-- 경계선 -->
