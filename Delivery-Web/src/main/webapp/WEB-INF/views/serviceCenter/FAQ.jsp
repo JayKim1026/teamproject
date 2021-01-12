@@ -9,21 +9,42 @@
 <meta charset="UTF-8">
 <title>자주하는 질문</title>
 <style>
-	
+.logo {
+	float: left;
+	font-family : 'Nanum Pen Script', cursive;
+	text-decoration: none;
+	font-size: 35px;
+	color : black;
+}
+.topMenu_ul {
+	list-style: none; 
+	display: flex; 
+	float: right;
+}
+
+.topMenu_stuff {
+	margin: 3px;
+	font-family : 'Nanum Pen Script', cursive;
+}
+.topMenu_a {
+	text-decoration: none;
+	font-size: 15px;
+	color: black;
+}
+
 </style>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="top_menu">
-					<a class="logo" href="/" style="float: left;">뚜벅뚜벅Company</a>
-					<ul style="list-style: none; display: flex; float: right;">
-						<li class="menu__stuff"><a href="/account/loginForm">로그인</a></li>
-						<li class="menu__stuff"><a href="/account/logout">로그아웃</a></li>
-						<li class="menu__stuff"><a href="/account/registerForm">회원가입</a></li>
-						<li class="menu__stuff"><a href="/account/dlvr_RegisterForm">뚜벅이
-								지원하기</a></li>
+				<div class="topMenu">
+					<a class="logo" href="/">뚜벅뚜벅Company</a>
+					<ul class="topMenu_ul">
+						<li class="topMenu_stuff"><a class="topMenu_a" href="/account/loginForm">로그인</a></li>
+						<li class="topMenu_stuff"><a href="/account/logout">로그아웃</a></li>
+						<li class="topMenu_stuff"><a href="/account/registerForm">회원가입</a></li>
+						<li class="topMenu_stuff"><a href="/account/dlvr_RegisterForm">뚜벅이 지원하기</a></li>
 					</ul>
 				</div>
 			</div>
