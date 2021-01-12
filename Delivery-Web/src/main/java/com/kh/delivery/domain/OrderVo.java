@@ -14,7 +14,7 @@ public class OrderVo {
 	private int user_no;
 	private int dlvr_no;
 	private String order_state;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp order_date;
 
 	// 조인으로 가져오는 값

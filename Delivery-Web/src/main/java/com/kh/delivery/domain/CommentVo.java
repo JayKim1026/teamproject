@@ -8,7 +8,7 @@ public class CommentVo {
 	
 	private int c_no;
 	private String c_content;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp c_date;
 	private int time_no;
 	private int writer_no;

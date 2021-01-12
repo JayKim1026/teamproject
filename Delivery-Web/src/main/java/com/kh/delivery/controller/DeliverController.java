@@ -36,7 +36,8 @@ public class DeliverController implements Codes {
 	// 배달원 회원가입 run
 	@RequestMapping(value = "/dlvr_RegisterRun", method = RequestMethod.POST)
 	public String dlvr_RegisterRun(DeliverVo deliverVo, MultipartFile f_dlvr_img, MultipartFile f_dlvr_idcard,
-			String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
+		   String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
+		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
