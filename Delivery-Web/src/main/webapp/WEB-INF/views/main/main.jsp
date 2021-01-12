@@ -34,6 +34,7 @@
 				<!-- 일반 회원  -->
 				<c:if test="${sessionScope.userVo != null }">
 					<li><a class="menu__stuff2" href="/order/orderForm" style="padding-right: 20;">주문하기</a></li>
+					<li><a class="menu__stuff2" href="/order/newOrderForm" style="padding-right: 20;">새로운 주문하기</a></li>
 				</c:if>
 
 				<c:if test="${sessionScope.userVo != null }">
