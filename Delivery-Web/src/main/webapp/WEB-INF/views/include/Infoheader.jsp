@@ -18,11 +18,20 @@
 								id="sidebar-wrapper" role="navigation">
 								<ul class="nav sidebar-nav">
 									<li class="sidebar-brand"><a href="#"> 메뉴 </a></li>
-									<li><a href="/user/newInfo">회원정보</a></li>
+									<c:if test="${sessionScope.userVo != null }">
+									<li><a href="/user/info">회원정보</a></li>
 									<li><a href="/user/orderList">주문 내역 조회</a></li>
-									<li><a href="/user/point">포인트 조회</a></li>
-									<li><a href="/user/review">내가 작성한 후기</a></li>
-									<li><a href="/user/question">1:1 문의</a></li>
+									<li><a href="#">1:1 문의</a></li>
+									<li><a href="#">자주하는 질문</a></li>
+									</c:if>
+									
+									<c:if test="${sessionScope.deliverVo != null }">
+									<li><a href="/deliver/info">회원정보</a></li>
+									<li><a href="/deliver/deliveryList">배달 내역 조회</a></li>
+									<li><a href="#">1:1 문의</a></li>
+									<li><a href="#">자주하는 질문</a></li>
+									</c:if>
+									
 								</ul>
 							</nav>
 							<!-- /#sidebar-wrapper -->
@@ -47,13 +56,22 @@
 
 						</div>
 					</div>
-
 					<div class="col-md-8">
 					<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
-					<a class="main-menu" id="main_login" href="/account/loginForm">로그인</a>
-					<a class="main-menu" id="main_Joinus" href="/account/registerForm">회원가입</a>
+					<div class="loginMenu" style="float:right; width: 80px;">
+						<c:choose>
+							<c:when test ="${sessionScope.userVo == null && sessionScope.deliverVo == null}">
+								<a class="main-menu" id="main_login" href="/account/loginForm">로그인</a>
+								<a class="main-menu" id="main_Joinus" href="/account/registerForm">회원가입</a>
+							</c:when>
+							<c:otherwise>
+								<a class="main-menu" id="main_logout" href="/account/logout">로그아웃</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
 				<div class="col-md-2">
+				
 				</div>
 			</div>
 		</div>

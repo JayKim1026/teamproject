@@ -19,15 +19,14 @@
 			</div>
 			<ul class="nav__main">
 				<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
-				<li><a class="menu__stuff" href="/account/loginForm">Login</a></li>
-				<li><a class="menu__stuff" href="/account/registerForm">Join us</a></li>
-				<li><a class="menu__stuff" href="/account/dlvr_RegisterForm">Deliver Join</a></li>
-				<li><a class="menu__stuff" href="/serviceCenter/FAQ">고객센터</a></li>
+					<li><a class="menu__stuff" href="/account/loginForm">Login</a></li>
+					<li><a class="menu__stuff" href="/account/registerForm">Join us</a></li>
+					<li><a class="menu__stuff" href="/account/dlvr_RegisterForm">Deliver Join</a></li>
 				</c:if>
 				
 				<c:if test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
-				<li><a class="menu__stuff" href="/account/logout">Logout</a></li>
-				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
+					<li><a class="menu__stuff" href="/account/logout">Logout</a></li>
+					<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
 				</c:if>
 			</ul>
 			<ul class="nav__link">
@@ -39,14 +38,13 @@
 
 				<c:if test="${sessionScope.userVo != null }">
 					<li><a class="menu__stuff2" href="/user/info" style="padding-right: 20;">마이페이지</a></li>
-					<li><a class="menu__stuff2" href="/user/newInfo" style="padding-right: 20;">새로운마이페이지</a></li>
 				</c:if>
 				
 				<!-- 배달원 -->
 				<c:if test="${sessionScope.deliverVo != null }">
 					<li><a class="menu__stuff2" href="/deliver/info" style="padding-right: 20;">마이페이지</a></li>
 				</c:if>
-
+					<li><a class="menu__stuff" href="/serviceCenter/FAQ">고객센터</a></li>
 			</ul>
 			<div class="nav__textArea">
 				<%@include file="../util/adressMain.jsp" %>
