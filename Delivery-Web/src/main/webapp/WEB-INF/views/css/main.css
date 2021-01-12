@@ -4,21 +4,12 @@ body{
 margin : 0;
 }
 
-.navbar{
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: #ABEBC6 ;
-background-image:url('/resources/images/pic4.jpg');
-background-size: cover;
-width: auto;
-height: 500px;
-}
-
-
-.nav__logo{
-position : relative;
-top : -200px;
+header{
+	width: auto;
+	height: 500px;	
+	background-image:url('/resources/images/delivery_bike.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .logo__font{
@@ -27,47 +18,13 @@ font-size : 35px;
 color : white;
 }
 
-.nav__main{
-display : flex;
-list-style : none;
-padding-left : 0;
-position : relative;
-left : 350px;
-top : -200px;
-}
-
-.nav__main li{
-padding : 12px 16px;
-}
-
-.nav__link{
-display : flex;
-list-style : none;
-padding-left : 0;
-position : relative;
-left : 720px;
-top : -200px;
-}
-
-.menu__stuff{
+.menu__font{
 font-family : 'Nanum Pen Script', cursive;
-font-size : 25px;
+font-size : 35px;
 color : white;
+padding-right:20px;
 }
 
-.menu__stuff2{
-font-family : 'Nanum Pen Script', cursive;
-font-size : 25px;
-color : white;
-}
-
-.nav__textArea{
-display : flex;
-list-style : none;
-position : relative;
-top : 200px;
-left : -715px;
-}
 
 #sample2_address{
 width : 400px;
