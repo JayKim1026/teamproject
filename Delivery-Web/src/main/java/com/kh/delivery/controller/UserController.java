@@ -81,12 +81,12 @@ public class UserController implements Codes {
 
 	
 	// userInfo 이동 + user 기본 정보
-	@RequestMapping(value = "/newInfo")
+	@RequestMapping(value = "/info")
 	public String userInfo2(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_img = userVo.getUser_img();
 		model.addAttribute("image_url", BUCKET_URL + user_img);
-		return "user/newInfo";
+		return "user/info";
 	}
 
 	// 프로필 사진 변경
@@ -125,7 +125,7 @@ public class UserController implements Codes {
 				System.out.println("이미지 저장 실패");
 			}
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// 현재 비밀번호 확인 ajax
@@ -157,7 +157,7 @@ public class UserController implements Codes {
 		} else {
 			rttr.addFlashAttribute("pwChangeResult", "fail");
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// 이메일 변경
@@ -174,7 +174,7 @@ public class UserController implements Codes {
 		} else {
 			rttr.addFlashAttribute("emailChangeResult", "fail");
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// 사용자 휴대전화 변경
@@ -212,7 +212,7 @@ public class UserController implements Codes {
 		} else {
 			rttr.addFlashAttribute("addrChangeResult", "fail");
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// userPage 주문 내역 조회 페이지로 이동 + 주문 내역 조회

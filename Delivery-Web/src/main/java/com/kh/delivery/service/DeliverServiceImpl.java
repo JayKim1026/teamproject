@@ -47,36 +47,36 @@ public class DeliverServiceImpl implements DeliverService {
 
 	// 배달원 현재 비밀번호 확인
 	@Override
-	public String pwCheck(String dlvr_id, String dlvr_pw) throws Exception {
-		String result = deliverDao.pwCheck(dlvr_id, dlvr_pw);
+	public String pwCheck(String dlvr_id, String orgPw) throws Exception {
+		String result = deliverDao.pwCheck(dlvr_id, orgPw);
 		return result;
 	}
 
 	// 배달원 비밀번호 변경
 	@Override
-	public String pwChange(String dlvr_id, String chg_pw) throws Exception {
-		String result = deliverDao.pwChange(dlvr_id, chg_pw);
+	public String pwChange(String dlvr_id, String chgPw) throws Exception {
+		String result = deliverDao.pwChange(dlvr_id, chgPw);
 		return result;
 	}
 	
 	// 배달원 이메일 변경
 	@Override
-	public String emailChange(String dlvr_id, String chg_email) throws Exception {
-		String result = deliverDao.emailChange(dlvr_id, chg_email);
+	public String emailChange(String dlvr_id, String chgEmail) throws Exception {
+		String result = deliverDao.emailChange(dlvr_id, chgEmail);
 		return result;
 	}
 
 	// 배달원 휴대전화 변경
 	@Override
-	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
-		String result = deliverDao.phoneChange(dlvr_id, chg_phone);
+	public String phoneChange(String dlvr_id, String chgPhone) throws Exception {
+		String result = deliverDao.phoneChange(dlvr_id, chgPhone);
 		return result;
 	}
 
 	// 배달원 주소 변경
 	@Override
-	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
-		String result = deliverDao.addrChange(dlvr_id, chg_addr);
+	public String addrChange(String dlvr_id, String chgAddr) throws Exception {
+		String result = deliverDao.addrChange(dlvr_id, chgAddr);
 		return result;
 	}
 	
