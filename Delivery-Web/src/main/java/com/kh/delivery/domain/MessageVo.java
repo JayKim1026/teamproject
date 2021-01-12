@@ -11,7 +11,7 @@ public class MessageVo {
 	private int receiver_no;
 	private String msg_content;
 	private String msg_img;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp msg_date;
 
 	// 조인 값
