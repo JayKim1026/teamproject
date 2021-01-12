@@ -67,9 +67,15 @@
 	</select>
 	
 	<select id="getLastTimeline" resultType="TimelineVo">
-		select * from (
+		select * 
+		from (
 		    select * from tbl_timeline
-		    order by time_no desc)
+		    order by time_no desc) t 
+		inner join (
+			select user_no writer_no, user_name writer_name from tbl_user
+			union
+			select dlvr_no, dlvr_name from tbl_deliver) a
+		on t.writer_no = a.writer_no
 		where rownum = 1
 	</select>
 	

@@ -18,6 +18,9 @@
      object-fit: contain;
      background-color: #E0E0E0
  }
+ .message_image {
+ 	width: 300px;
+ }
 </style>
 <script>
 $(function() {
@@ -70,16 +73,26 @@ $(function() {
 			console.log(sender_no);
 			var clone;
 			if(user_no == sender_no) {
-				clone = $(".senderForm").eq(0).clone();
+				if(this.msg_content != null && this.msg_content != "") {
+					clone = $(".senderForm").eq(0).clone();
+					clone.children().eq(1).text(this.msg_content);
+				} else {
+					clone = $(".senderImgForm").eq(0).clone();
+					clone.children().eq(1).attr("src", "${image_url}" + this.msg_img);
+				}
 				clone.children().eq(0).text(this.msg_date);
-				clone.children().eq(1).text(this.msg_content);
 				clone.children().eq(2).text(this.sender_name);
 				clone.children().eq(3).attr("src", "${image_url}" + this.sender_img);
 			} else {
-				clone = $(".receiverForm").eq(0).clone();
+				if(this.msg_content != null && this.msg_content != "") {
+					clone = $(".receiverForm").eq(0).clone();
+					clone.children().eq(2).text(this.msg_content);
+				} else {
+					clone = $(".receiverImgForm").eq(0).clone();
+					clone.children().eq(2).attr("src", "${image_url}" + this.msg_img);
+				}
 				clone.children().eq(0).attr("src", "${image_url}" + this.sender_img);
 				clone.children().eq(1).text(this.sender_name);
-				clone.children().eq(2).text(this.msg_content);
 				clone.children().eq(3).text(this.msg_date);
 			}
 			
@@ -102,12 +115,34 @@ $(function() {
 				"msg_content"	:	msg_content
 		};
 		$.post(url, sendData, function(data) {
-			console.log(data);
+			getCurrentMessage();
 		});
 	});
 	
 	$("#btnStopInterval").click(function() {
 		clearInterval(interval);
+	});
+	
+	$("#msgImg").change(function(e) {
+		var url = "/message/sendMsgImg"
+		var f_msg_img = $("input[type=file]")[0].files[0];
+		var formData = new FormData();
+		formData.append("f_msg_img", f_msg_img);
+		formData.append("order_no", order_no);
+		formData.append("sender_no", user_no);
+		formData.append("receiver_no", dlvr_no);
+		
+		$.ajax({
+			"processData"	:	false,
+			"contentType"	:	false,
+			"type"			:	"post",
+			"url"			:	url,
+			"data"			:	formData, 
+			"success"		:	function(data) {
+				getCurrentMessage();
+			}
+		});
+		
 	});
 });
 </script>
@@ -127,10 +162,25 @@ $(function() {
 		<span></span>
 		<hr/>
 	</div>
+	<div class="senderImgForm" style="display: none; ">
+		<span></span>
+		<img alt="msgImg" src="" class="message_image">
+		<span></span>
+		<img alt="senderImg" src="" class="profile-pic">
+		<hr/>
+	</div>
+	<div class="receiverImgForm" style="display: none">
+		<img alt="receiverImg" src="" class="profile-pic">
+		<span></span>
+		<img alt="msgImg" src="" class="message_image">
+		<span></span>
+		<hr/>
+	</div>
 	<h1>${orderVo}</h1>
 	<h2>${userVo}</h2>
 	<input type="text" class="form-control" id="msgContent"/>
 	<button type="button" class="btn btn-primary" id="btnSendMsg">보내기</button>
+	<input type="file" class="btn btn-dark" id="msgImg" accept="image/,.jpg,.png,.gif"/>
 	<button type="button" class="btn btn-warning" id="btnStopInterval">중지</button>
 	
 	<div class="container-fluid">
