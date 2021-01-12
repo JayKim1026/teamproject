@@ -97,7 +97,7 @@ public class DeliverController implements Codes {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		String dlvr_img = deliverVo.getDlvr_img();
 		model.addAttribute("image_url", BUCKET_URL + dlvr_img);
-		return "deliver/info";
+		return "/deliver/info";
 	}
 
 	// 배달원 프로필 사진 변경
@@ -144,30 +144,30 @@ public class DeliverController implements Codes {
 	// 현재 비밀번호 확인 ajax
 	@RequestMapping(value = "/pwCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public String pwCheck(String dlvr_pw, HttpSession session) throws Exception {
+	public String pwCheck(String orgPw, HttpSession session) throws Exception {
 
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		String dlvr_id = deliverVo.getDlvr_id();
-		// System.out.println("컨트롤러 비밀번호 확인 dlvr_pw : " + dlvr_pw);
+		// System.out.println("컨트롤러 비밀번호 확인 orgPw : " + orgPw);
 		// System.out.println("컨트롤러 비밀번호 확인 dlvr_id : " + dlvr_id);
 
-		String result = deliverService.pwCheck(dlvr_id, dlvr_pw);
+		String result = deliverService.pwCheck(dlvr_id, orgPw);
 		// System.out.println("controller 비밀번호 확인 result : " + result);
 		return result;
 	}
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/pwChange", method = RequestMethod.POST)
-	public String pwChange(String chg_pw, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String pwChange(String chgPw, HttpSession session, RedirectAttributes rttr) throws Exception {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		String dlvr_id = deliverVo.getDlvr_id();
-		System.out.println("deliver controller 비번 변경 chg_pw : " + chg_pw);
+		System.out.println("deliver controller 비번 변경 chgPw : " + chgPw);
 		System.out.println("deliver controller 비번 변경 dlvr_id : " + dlvr_id);
 
-		String result = deliverService.pwChange(dlvr_id, chg_pw);
+		String result = deliverService.pwChange(dlvr_id, chgPw);
 		System.out.println("deliver 컨트롤러 비번 변경 result : " + result);
 		if (result == "pwChange_success") {
-			deliverVo.setDlvr_pw(chg_pw);
+			deliverVo.setDlvr_pw(chgPw);
 			rttr.addFlashAttribute("pwChangeResult", "success");
 		} else {
 			rttr.addFlashAttribute("pwChangeResult", "fail");
@@ -177,14 +177,14 @@ public class DeliverController implements Codes {
 
 	// deliverPage 배달원 이메일 변경
 	@RequestMapping(value = "/emailChange", method = RequestMethod.POST)
-	public String emailChange(String chg_email, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("chg_email : " + chg_email);
+	public String emailChange(String chgEmail, HttpSession session, RedirectAttributes rttr) throws Exception {
+		System.out.println("chgEmail : " + chgEmail);
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		String dlvr_id = deliverVo.getDlvr_id();
-		String result = deliverService.emailChange(dlvr_id, chg_email);
+		String result = deliverService.emailChange(dlvr_id, chgEmail);
 		if (result == "emailChange_success") {
 			rttr.addFlashAttribute("emailChangeResult", "success");
-			deliverVo.setDlvr_email(chg_email);
+			deliverVo.setDlvr_email(chgEmail);
 			session.setAttribute("deliverVo", deliverVo);
 		} else {
 			rttr.addFlashAttribute("emailChangeResult", "fail");
@@ -194,15 +194,15 @@ public class DeliverController implements Codes {
 
 	// deliverPage 배달원 휴대전화 변경
 	@RequestMapping(value = "/phoneChange", method = RequestMethod.POST)
-	public String phoneChange(String chg_phone, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String phoneChange(String chgPhone, HttpSession session, RedirectAttributes rttr) throws Exception {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		String dlvr_id = deliverVo.getDlvr_id();
 		System.out.println("컨트롤러 phone dlvr_id : " + dlvr_id);
-		System.out.println("컨트롤러 phone chg_phone : " + chg_phone);
-		String result = deliverService.phoneChange(dlvr_id, chg_phone);
+		System.out.println("컨트롤러 phone chgPhone : " + chgPhone);
+		String result = deliverService.phoneChange(dlvr_id, chgPhone);
 		if (result == "phoneChange_success") {
 			rttr.addFlashAttribute("phoneChangeResult", "success");
-			deliverVo.setDlvr_phone(chg_phone);
+			deliverVo.setDlvr_phone(chgPhone);
 			session.setAttribute("deliverVo", deliverVo);
 		} else {
 			rttr.addFlashAttribute("phoneChangeResult", "fail");
@@ -212,17 +212,17 @@ public class DeliverController implements Codes {
 
 	// deliverPage 배달원 주소 변경
 	@RequestMapping(value = "/addrChange", method = RequestMethod.POST)
-	public String addrChange(String chg_addr, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String addrChange(String chgAddr, HttpSession session, RedirectAttributes rttr) throws Exception {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		String dlvr_id = deliverVo.getDlvr_id();
-		System.out.println("chg_addr : " + chg_addr);
+		System.out.println("chgAddr : " + chgAddr);
 		System.out.println("dlvr_id : " + dlvr_id);
 
-		String result = deliverService.addrChange(chg_addr, dlvr_id);
+		String result = deliverService.addrChange(chgAddr, dlvr_id);
 
 		if (result == "addrChange_success") {
 			rttr.addFlashAttribute("addrChangeResult", "success");
-			deliverVo.setDlvr_addr(chg_addr);
+			deliverVo.setDlvr_addr(chgAddr);
 			session.setAttribute("deliverVo", deliverVo);
 		} else {
 			rttr.addFlashAttribute("addrChangeResult", "fail");

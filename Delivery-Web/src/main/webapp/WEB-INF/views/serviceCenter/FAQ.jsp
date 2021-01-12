@@ -7,64 +7,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="../include/link.jsp"%>
 <meta charset="UTF-8">
-<title>support center</title>
+<title>자주하는 질문</title>
 <style>
-.miniBarWrap { 
-	margin: 8px;
 	
-}
-
-.miniBar_logo {
-	
-}
-
-.miniBar_menu { 
-	display: flex;
-	list-style: none;
-	float:right;
-}
-
-.menu__stuff{
-	padding: 2px;
-	margin: 3px;
-}
-	
-
 </style>
 </head>
-
-	<div class="miniBarWrap"> 
-		<a class="miniBar_logo" href="/">뚜벅뚜벅Company</a>
-
-		<ul class="miniBar_menu">
-			<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
-				<li class="menu__stuff"><a href="/account/loginForm">로그인</a></li>
-				<li class="menu__stuff"><a href="/account/logout">로그아웃</a></li>
-				<li class="menu__stuff"><a href="/account/registerForm">회원가입</a></li>
-				<li class="menu__stuff"><a href="/account/dlvr_RegisterForm">뚜벅이 지원하기</a></li>
-			</c:if>
-		</ul>
-	</div>
-
-	<div>
-		<h1><strong>고객센터</strong></h1>
-	</div>
-	
-	<div> 
-		<a href="#">아이디 찾기</a>
-		<a href="#">비밀번호 찾기</a>
-		<a href="#">마이페이지</a>
-	</div>
-	
-	<nav>
-		<a href="#">공지사항</a>
-		<a href="#">자주하는 질문</a>
-		<a href="#">1:1 문의</a>
-	</nav>
-	<section>
-		<h2></h2>
-	</section>
 <body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="top_menu">
+					<a class="logo" href="/" style="float: left;">뚜벅뚜벅Company</a>
+					<ul style="list-style: none; display: flex; float: right;">
+						<li class="menu__stuff"><a href="/account/loginForm">로그인</a></li>
+						<li class="menu__stuff"><a href="/account/logout">로그아웃</a></li>
+						<li class="menu__stuff"><a href="/account/registerForm">회원가입</a></li>
+						<li class="menu__stuff"><a href="/account/dlvr_RegisterForm">뚜벅이
+								지원하기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- content Left -->
+			<div class="col-md-2 contentLeft"></div>
+			<!-- // content Left -->
 
+
+			<!-- content main -->
+			<div class="col-md-8 contentMain">
+				<h1 style="text-align: center;">
+					<strong>고객센터</strong>
+				</h1>
+			</div>
+			<!--// content main -->
+
+
+			<!-- content right -->
+			<div class="col-md-2 contentRight"></div>
+			<!-- // content right -->
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<%@ include file="../include/footer.jsp"%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

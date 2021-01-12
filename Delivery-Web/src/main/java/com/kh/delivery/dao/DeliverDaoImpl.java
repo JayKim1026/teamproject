@@ -62,10 +62,10 @@ public class DeliverDaoImpl implements DeliverDao {
 	
 	// 배달원 현재 비밀번호 확인
 	@Override
-	public String pwCheck(String dlvr_id, String dlvr_pw) throws Exception {
+	public String pwCheck(String dlvr_id, String orgPw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("dlvr_id", dlvr_id);
-		map.put("dlvr_pw", dlvr_pw);
+		map.put("orgPw", orgPw);
 		DeliverVo deliverVo= sqlSession.selectOne(NAMESPACE + "pwCheck", map);
 		if(deliverVo != null) {
 			return "true";
@@ -77,40 +77,40 @@ public class DeliverDaoImpl implements DeliverDao {
 
 	// 배달원 비밀번호 변경
 	@Override
-	public String pwChange(String dlvr_id, String chg_pw) throws Exception {
+	public String pwChange(String dlvr_id, String chgPw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("dlvr_id", dlvr_id);
-		map.put("chg_pw", chg_pw);
+		map.put("chgPw", chgPw);
 		sqlSession.update(NAMESPACE + "pwChange", map);
 		return "pwChange_success";
 	}
 
 	// 배달원 이메일 변경
 	@Override
-	public String emailChange(String dlvr_id, String chg_email) throws Exception {
+	public String emailChange(String dlvr_id, String chgEmail) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("dlvr_id", dlvr_id);
-		map.put("chg_email", chg_email);
+		map.put("chgEmail", chgEmail);
 		sqlSession.update(NAMESPACE + "emailChange", map);
 		return "emailChange_success";
 	}
 
 	// 배달원 전화번호 변경
 	@Override
-	public String phoneChange(String dlvr_id, String chg_phone) throws Exception {
+	public String phoneChange(String dlvr_id, String chgPhone) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("dlvr_id", dlvr_id);
-		map.put("chg_phone", chg_phone);
+		map.put("chgPhone", chgPhone);
 		sqlSession.update(NAMESPACE + "phoneChange", map);
 		return "phoneChange_success";
 	}
 	
 	// 배달원 주소 변경
 	@Override
-	public String addrChange(String dlvr_id, String chg_addr) throws Exception {
+	public String addrChange(String dlvr_id, String chgAddr) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("dlvr_id", dlvr_id);
-		map.put("chg_addr", chg_addr);
+		map.put("chgAddr", chgAddr);
 		sqlSession.update(NAMESPACE + "addrChange", map);
 		return "addrChange_success";
 	}
