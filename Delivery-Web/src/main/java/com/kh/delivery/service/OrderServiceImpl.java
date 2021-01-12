@@ -15,6 +15,15 @@ public class OrderServiceImpl implements OrderService {
 	@Inject
 	OrderDao orderDao;
 
+	// 웹
+	@Override
+	public OrderVo getMyOrder(int user_no) throws Exception {
+		OrderVo orderVo = orderDao.getMyOrder(user_no);
+		return orderVo;
+	}
+
+	
+	// 안드로이드
 	@Override
 	public List<OrderVo> getOrderList(double order_lat, double order_lng, int range) throws Exception {
 		List<OrderVo> orderList = orderDao.getOrderList(order_lat, order_lng, range);
