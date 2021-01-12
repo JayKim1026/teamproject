@@ -34,7 +34,8 @@
 					<input type="text" class="form-control" id="order_req" name="order_req" placeholder="요구사항 입력"/>
 				</form>
 			</div>
-<!-- 			지도 -->
+			<!--지도 -->
+
 			<div id="map" style="width: 500px; height: 500px;"></div>
 			<div>
 				<div class="hAddr">
