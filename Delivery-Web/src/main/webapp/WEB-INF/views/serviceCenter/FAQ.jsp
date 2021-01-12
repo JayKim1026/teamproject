@@ -172,7 +172,7 @@
 	<script>
 		$(function(){
 			$(".showInfo").click(function(){
-				$("#test").slideDown();
+				$("#test").slideDown().addClass("Down");
 			});
 		});
 	</script>
