@@ -3,6 +3,7 @@ package com.kh.delivery.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,27 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.delivery.domain.MessageVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.MessageService;
 import com.kh.delivery.service.OrderService;
+import com.kh.delivery.util.Codes;
 
 @Controller
 @RequestMapping(value="/message")
-public class MessageController {
+public class MessageController implements Codes {
 
 	@Inject
 	MessageService messageService;
 	@Inject
 	OrderService orderService;
-	
-	
-	@RequestMapping(value="/messageForm", method=RequestMethod.GET)
-	public String messageForm(int user_no, Model model) throws Exception {
-		OrderVo orderVo = orderService.getMyOrder(user_no);
-		model.addAttribute("orderVo", orderVo);
-		return "user/message";
-	}
-	
-	@RequestMapping(value="/android/getMessageList", method=RequestMethod.POST)
+
+	// 공용
+	@RequestMapping(value="/getMessageList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<MessageVo> getMessageList(MessageVo messageVo) throws Exception {
 		System.out.println("getMessageList");
@@ -42,7 +38,7 @@ public class MessageController {
 		return messageList;
 	}
 	
-	@RequestMapping(value="/android/getCurrentMessage", method=RequestMethod.POST)
+	@RequestMapping(value="/getCurrentMessage", method=RequestMethod.POST)
 	@ResponseBody
 	public List<MessageVo> getCurrentMessage(MessageVo messageVo) throws Exception {
 		System.out.println("getCurrentMessage");
@@ -52,18 +48,25 @@ public class MessageController {
 		return messageList;
 	}
 	
-	@RequestMapping(value="/android/sendMsgContent", method=RequestMethod.POST)
+	@RequestMapping(value="/sendMsgContent", method=RequestMethod.POST)
 	@ResponseBody
 	public String sendMsgContent(MessageVo messageVo) throws Exception {
 		String result = messageService.sendMsgContent(messageVo);
 		return result;
 	}
 	
-	@RequestMapping(value="/android/sendMsgImg", method=RequestMethod.POST)
+	@RequestMapping(value="/sendMsgImg", method=RequestMethod.POST)
 	@ResponseBody
 	public String sendMsgImg(MessageVo messageVo) throws Exception {
 		String result = messageService.sendMsgImg(messageVo);
 		return result;
 	}
+
+	
+	// 웹
+	
+	
+
+	// 안드로이드
 	
 }

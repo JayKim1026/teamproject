@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
+import com.kh.delivery.service.OrderService;
 import com.kh.delivery.service.UserService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
@@ -29,6 +30,8 @@ public class UserController implements Codes {
 
 	@Inject
 	private UserService userService;
+	@Inject
+	private OrderService orderService;
 
 	// 웹
 	// 로그인
@@ -255,6 +258,16 @@ public class UserController implements Codes {
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address() throws Exception {
 		return "util/address";
+	}
+	
+	// 메시지 페이지
+	@RequestMapping(value="/messageForm", method=RequestMethod.GET)
+	public String messageForm(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		OrderVo orderVo = orderService.getMyOrder(userVo.getUser_no());
+		model.addAttribute("orderVo", orderVo);
+		model.addAttribute("image_url", BUCKET_URL);
+		return "user/message";
 	}
 	
 	// 안드로이드
