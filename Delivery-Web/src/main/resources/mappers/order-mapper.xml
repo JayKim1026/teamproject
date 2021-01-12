@@ -54,5 +54,11 @@
 		where dlvr_no = #{dlvr_no}
 			and order_state = '3-003'
 	</select>
+	
+	<select id="getMyOrder" resultType="OrderVo">
+		select * from tbl_order
+		where user_no = #{user_no}
+			and order_state = '3-002'
+	</select>
 
 </mapper>

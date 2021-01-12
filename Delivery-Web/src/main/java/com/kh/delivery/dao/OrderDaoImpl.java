@@ -18,7 +18,18 @@ public class OrderDaoImpl implements OrderDao {
 	
 	@Inject
 	SqlSession sqlSession;
-
+	
+	// 웹
+	@Override
+	public OrderVo getMyOrder(int user_no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_no", user_no);
+		OrderVo orderVo = sqlSession.selectOne(NAMESPACE + "getMyOrder", map);
+		return orderVo;
+	}
+	
+	
+	// 안드로이드
 	@Override
 	public List<OrderVo> getOrderList(double order_lat, double order_lng, int range) throws Exception {
 		Map<String, Object> map = new HashMap<>();
