@@ -60,7 +60,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2">${FAQList }</div>
+			<div class="col-md-2"></div>
 			<div class="col-md-8 topMenuWrapper">
 				<div class="topMenu">
 					<a class="logo" href="/">뚜벅뚜벅Company</a>
@@ -126,14 +126,12 @@
 						</thead>
 						<tbody>
 						<c:forEach var="FAQVo" items="${FAQList }">
-							<tr>
+							<tr style="border-bottom: ">
 								<td>${FAQVo.faq_no }</td>
-								<td>${FAQVo.faq_title }</td>
-								<td><button></button></td>
+								<td><a href="#" class="faqContent">${FAQVo.faq_title }</a></td>
 							</tr>
-							<tr>
-								<td></td>
-								<td>${FAQVo.faq_content } </td>
+							<tr style="display:none;" class="FAQcontent">
+								<td colspan="2" style=" background-color: whitesmoke; align-content:center; text-align: center;">${FAQVo.faq_content } </td>
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -153,12 +151,14 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(function(){
-			$(".showInfo").click(function(){
-				$("#test").slideDown().addClass("Down");
-			});
-		});
-	</script>
+<script>
+$(function(){
+	// FAQ 내용 보여주기
+	$(".faqContent").click(function(){
+		$(".FAQcontent").slideDown();
+	});
+	
+});
+</script>
 </body>
 </html>
