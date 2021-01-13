@@ -178,7 +178,7 @@ $(function(){
 		url += time_no + "/" + account_no;
 		/*far 빈하트 fas 꽉 찬 하트*/
 		console.log(url);
-		$.get(url, function(data){
+		$.post(url, function(data){
 			console.log(data);
 			if(data == "insertLike_success"){
 				that.removeClass("far");

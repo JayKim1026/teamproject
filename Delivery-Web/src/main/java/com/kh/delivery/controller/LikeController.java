@@ -32,7 +32,7 @@ public class LikeController implements Codes {
 	@Inject
 	private LikeService likeService;
 	
-	@RequestMapping(value="/insertLike/{time_no}/{account_no}", method=RequestMethod.GET)
+	@RequestMapping(value="/insertLike/{time_no}/{account_no}", method=RequestMethod.POST)
 	public String insertLike(@PathVariable("time_no")int time_no,
 								@PathVariable("account_no")int account_no) throws Exception {
 		System.out.println("insertLike...");
@@ -42,7 +42,7 @@ public class LikeController implements Codes {
 		return result;
 	}
 	
-	@RequestMapping(value="deleteLike/{time_no}/{account_no}", method=RequestMethod.GET)
+	@RequestMapping(value="deleteLike/{time_no}/{account_no}", method=RequestMethod.POST)
 	public String deleteLike(@PathVariable("time_no")int time_no,
 								@PathVariable("account_no")int account_no) throws Exception{
 		System.out.println("deleteLike...");
@@ -59,17 +59,4 @@ public class LikeController implements Codes {
 		return result;
 	}
 	
-	@RequestMapping(value="/android/insertLike", method=RequestMethod.POST)
-	public String aInsertLike(int time_no, int account_no) throws Exception {
-		String result = likeService.insertLike(time_no, account_no);
-		System.out.println("aInsertLike");
-		return result;
-	}
-	
-	@RequestMapping(value="/android/deleteLike", method=RequestMethod.POST)
-	public String aDeleteLike(int time_no, int account_no) throws Exception {
-		String result = likeService.deleteLike(time_no, account_no);
-		System.out.println("aDeleteLike");
-		return result;
-	}
 }
