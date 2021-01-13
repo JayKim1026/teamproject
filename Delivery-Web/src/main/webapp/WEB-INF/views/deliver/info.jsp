@@ -91,6 +91,22 @@
 																<div class="row">
 																	<div class="col-md-10">
 																		<div class="focused">
+																			<label class="form-control-label" >생년월일</label> 
+																			<input type="text" class="form-control form-control-alternative" value="${deliverVo.dlvr_birth}" style="background-color: white;"readonly="readonly">
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<p class="form-control form-control-alternative" 
+																		style="margin-top: 23px; color: red;">변경불가</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row" style="margin-top: 10px;">
+															<div class="col-md-12">
+																<div class="row">
+																	<div class="col-md-10">
+																		<div class="focused">
 																		<div class="divOrgPw">
 																			<label class="form-control-label">비밀번호</label>
 																			<span class="orgPwCheckResult"></span>
