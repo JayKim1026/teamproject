@@ -18,30 +18,28 @@ public class LikeServiceImpl implements LikeService {
 	@Inject
 	private LikeDao likeDao;
 	
-	@Inject
-	private TimelineDao timelineDao;
-	
 	@Override
-	@Transactional
-	public void insertLike(int time_no, String user_id) throws Exception {
-	
-		likeDao.insertLike(time_no, user_id);
-		timelineDao.updateLikeCount(1, time_no);
-		
+	public String insertLike(int time_no, int account_no) throws Exception {
+		String result = likeDao.insertLike(time_no, account_no);
+		return result;
 	}
 
 	@Override
-	public void deleteLike(int time_no, String user_id) throws Exception {
-		likeDao.deleteLike(time_no, user_id);
-		
+	public String deleteLike(int time_no, int account_no) throws Exception {
+		String result = likeDao.deleteLike(time_no, account_no);
+		return result;
 	}
 
 	@Override
-	public boolean isLike(int time_no, String user_id) throws Exception {
-		boolean isLike = likeDao.isLike(user_id, time_no);
+	public boolean isLike(int time_no, int account_no) throws Exception {
+		boolean isLike = likeDao.isLike(time_no, account_no);
 		return isLike;
 	}
-	
-	
+
+	@Override
+	public int getLikeCount(int time_no) throws Exception {
+		int count = likeDao.getLikeCount(time_no);
+		return count;
+	}
 
 }

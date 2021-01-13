@@ -32,26 +32,44 @@ public class LikeController implements Codes {
 	@Inject
 	private LikeService likeService;
 	
-	@RequestMapping(value="/insertLike/{time_no}/{user_id}", method=RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value="/insertLike/{time_no}/{account_no}", method=RequestMethod.GET)
 	public String insertLike(@PathVariable("time_no")int time_no,
-								@PathVariable("user_id")String user_id) throws Exception{
+								@PathVariable("account_no")int account_no) throws Exception {
 		System.out.println("insertLike...");
 		System.out.println("LikeController, insertLike, time_no:" + time_no);
-		System.out.println("LikeController, insertLike, user_id:" + user_id);
-		likeService.insertLike(time_no, user_id);
-		return "success";
+		System.out.println("LikeController, insertLike, account_no:" + account_no);
+		String result = likeService.insertLike(time_no, account_no);
+		return result;
 	}
 	
-	@RequestMapping(value="deleteLike/{time_no}/{user_id}", method=RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value="deleteLike/{time_no}/{account_no}", method=RequestMethod.GET)
 	public String deleteLike(@PathVariable("time_no")int time_no,
-								@PathVariable("user_id")String user_id) throws Exception{
+								@PathVariable("account_no")int account_no) throws Exception{
 		System.out.println("deleteLike...");
 		System.out.println("LikeController, deleteLike, time_no:" + time_no);
-		System.out.println("LikeController, deleteLike, user_id:" + user_id);
-		likeService.deleteLike(time_no, user_id);
-		return "success";
+		System.out.println("LikeController, deleteLike, account_no:" + account_no);
+		String result = likeService.deleteLike(time_no, account_no);
+		return result;
 	}
 	
+	@RequestMapping(value="/isLike", method=RequestMethod.POST)
+	public Boolean isLike(int time_no, int account_no) throws Exception {
+		Boolean result = likeService.isLike(time_no, account_no);
+		System.out.println("isLike = " + result);
+		return result;
+	}
+	
+	@RequestMapping(value="/android/insertLike", method=RequestMethod.POST)
+	public String aInsertLike(int time_no, int account_no) throws Exception {
+		String result = likeService.insertLike(time_no, account_no);
+		System.out.println("aInsertLike");
+		return result;
+	}
+	
+	@RequestMapping(value="/android/deleteLike", method=RequestMethod.POST)
+	public String aDeleteLike(int time_no, int account_no) throws Exception {
+		String result = likeService.deleteLike(time_no, account_no);
+		System.out.println("aDeleteLike");
+		return result;
+	}
 }

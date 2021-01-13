@@ -46,7 +46,7 @@
 	
 	<update id="updateLikeCount">
 		update tbl_timeline set
-		time_like = time_like + #{time_like}
+		time_like = time_like + #{likeCount}
 		where time_no = #{time_no}
 	</update>
 	
