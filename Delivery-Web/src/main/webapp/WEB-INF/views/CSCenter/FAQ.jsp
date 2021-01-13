@@ -117,7 +117,19 @@
 					</ul>
 				</div>
 				<section class="content_view">
-					<div><h3>자주하는 질문</h3></div>
+					<div style="margin-bottom: 30px;">
+						<h3><strong>자주하는 질문</strong></h3>
+						<select class="category" name="category">
+							<option selected="selected">주문문의</option>
+							<option>배달문의</option>
+							<option>웹이용문의</option>
+							<option>앱이용문의</option>
+							<option>기타문의</option>
+						</select>
+						<input type="text" class="form keyword" name="search">
+						<button type="button" class="btnSearch">검색</button>
+					</div>
+					
 					<table class="table">
 						<thead>
 							<tr>
@@ -128,8 +140,8 @@
 						</thead>
 						<tbody>
 						<c:forEach var="FAQVo" items="${FAQList }">
-							<tr style="border-bottom: ">
-								<td style="text-align: center">${FAQVo.faq_no }</td>
+							<tr>
+								<td style="text-align: center"><span>${FAQVo.r }</span></td>
 								<td style="text-align: center">${FAQVo.code_detail }</td>
 								<td style="text-align: left; "><a class="faqTitle" href="#" style="margin-left: 30px;">${FAQVo.faq_title }</a></td>
 							</tr>
@@ -162,7 +174,20 @@ $(function(){
 			$(".FAQcontentTr").eq(index).slideToggle("slow");
 		});
 	});
-});
+	
+	// 검색하기
+	$(".btnSearch").click(function(){
+		var category = $(".category").val();
+		var keyword = $(".keyword").val();
+		console.log(category + " + " + keyword);
+		var url = "/CSCenter/search"
+		var sendData = {	"category"	: category,		"keyword"	: keyword }
+		$.get(url, sendData, function(data){
+			
+		});
+	});
+	
+}); // 핸들러
 </script>
 </body>
 </html>

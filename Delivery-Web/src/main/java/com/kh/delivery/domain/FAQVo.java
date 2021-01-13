@@ -10,8 +10,15 @@ public class FAQVo {
 	
 	// 조인 컬럼
 	private String code_detail;
+	private int r; // rownum
 		
 
+	public int getR() {
+		return r;
+	}
+	public void setR(int r) {
+		this.r = r;
+	}
 	public String getCode_detail() {
 		return code_detail;
 	}
@@ -46,7 +53,7 @@ public class FAQVo {
 	@Override
 	public String toString() {
 		return "FAQVo [faq_no=" + faq_no + ", faq_title=" + faq_title + ", faq_content=" + faq_content + ", faq_state="
-				+ faq_state + ", code_detail=" + code_detail + "]";
+				+ faq_state + ", code_detail=" + code_detail + ", r=" + r + "]";
 	}
 	
 	
