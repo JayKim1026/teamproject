@@ -4,9 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.CS">
 
-	<select id="getFAQList" resultType="FAQVo">
-		select * from tbl_FAQ
-	</select>
+<select id="getFAQList" resultType="FAQVo">
+	select f.*, c.code_detail from tbl_faq f
+	inner join tbl_code c
+	on f.faq_state =c.code_no
+	order by f.faq_no asc
+</select>
 
 	
 </mapper>

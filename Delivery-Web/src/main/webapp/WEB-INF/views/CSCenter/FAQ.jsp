@@ -101,9 +101,10 @@
 				</div>
 				<div class="content_section" style="background-color: #787878; height: 40px">
 					<ul class="content_ul">
+					<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
 						<li class="content_li"><a class="content_a" href="/account/findAccountForm">아이디 찾기</a></li>
 						<li class="content_li"><a class="content_a" href="/account/findAccountForm">비밀번호 찾기</a></li>
-						<li class="content_li"><a class="content_a" href="/user/info">마이페이지</a></li>
+					</c:if>
 						<c:if test="${sessionScope.userVo != null}">
 							<li class="content_li"><a class="content_a"
 								href="/user/info">마이페이지</a></li>
@@ -120,18 +121,20 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>번호</th>
-								<th>내용</th>
+								<th style="text-align: center">번호</th>
+								<th style="text-align: center">분류</th>
+								<th style="text-align: left; margin-left: 30px;"><span style="margin-left: 30px;">내용</span></th>
 							</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="FAQVo" items="${FAQList }">
 							<tr style="border-bottom: ">
-								<td>${FAQVo.faq_no }</td>
-								<td><a href="#" class="faqContent">${FAQVo.faq_title }</a></td>
+								<td style="text-align: center">${FAQVo.faq_no }</td>
+								<td style="text-align: center">${FAQVo.code_detail }</td>
+								<td style="text-align: left; "><a class="faqTitle" href="#" style="margin-left: 30px;">${FAQVo.faq_title }</a></td>
 							</tr>
-							<tr style="display:none;" class="FAQcontent">
-								<td colspan="2" style=" background-color: whitesmoke; align-content:center; text-align: center;">${FAQVo.faq_content } </td>
+							<tr style="display:none;" class="FAQcontentTr">
+								<td colspan="3" class="FAQcontentTd" style="background-color: whitesmoke; align-content: center; "><span style="margin-left: 342px">${FAQVo.faq_content }</span></td>
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -154,10 +157,11 @@
 <script>
 $(function(){
 	// FAQ 내용 보여주기
-	$(".faqContent").click(function(){
-		$(".FAQcontent").slideDown();
+	$(".faqTitle").each(function(index){
+		$(this).click(function(){
+			$(".FAQcontentTr").eq(index).slideToggle("slow");
+		});
 	});
-	
 });
 </script>
 </body>

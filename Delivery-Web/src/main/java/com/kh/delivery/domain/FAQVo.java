@@ -2,12 +2,22 @@ package com.kh.delivery.domain;
 
 public class FAQVo {
 
+	// 테이블 컬럼
 	private int faq_no;
 	private String faq_title;
 	private String faq_content;
 	private String faq_state;
 	
+	// 조인 컬럼
+	private String code_detail;
 		
+
+	public String getCode_detail() {
+		return code_detail;
+	}
+	public void setCode_detail(String code_detail) {
+		this.code_detail = code_detail;
+	}
 	public int getFaq_no() {
 		return faq_no;
 	}
@@ -36,7 +46,7 @@ public class FAQVo {
 	@Override
 	public String toString() {
 		return "FAQVo [faq_no=" + faq_no + ", faq_title=" + faq_title + ", faq_content=" + faq_content + ", faq_state="
-				+ faq_state + "]";
+				+ faq_state + ", code_detail=" + code_detail + "]";
 	}
 	
 	
