@@ -17,7 +17,7 @@ public interface TimelineDao {
 	/* 글 불러오기 */
 	public TimelineVo selectByNo(int time_no) throws Exception;
 	/* Update Like */
-	public void updateLikeCount(int time_like, int time_no) throws Exception;
+	public void updateLikeCount(int time_no, int likeCount) throws Exception;
 	//	안드로이드 마지막 글 불러오기
 	public TimelineVo getLastTimeline() throws Exception;
 }

@@ -17,9 +17,9 @@ public class TimelineVo {
 	private int time_star;
 	private int dlvr_no;
 	private String time_location;
-	private int time_like;
 
 	// 조인 컬럼
+	private int time_like;
 	private String writer_name;
 	private String dlvr_name;
 	private String writer_img;

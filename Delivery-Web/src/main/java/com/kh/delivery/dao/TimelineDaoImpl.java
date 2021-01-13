@@ -63,10 +63,10 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public void updateLikeCount(int time_like, int time_no) throws Exception {
+	public void updateLikeCount(int time_no, int likeCount) throws Exception {
 		Map<String, Object> map = new HashMap<>();
-		map.put("time_like", time_like);
 		map.put("time_no", time_no);
+		map.put("likeCount", likeCount);
 		sqlSession.update(NAMESPACE + "updateLikeCount", map);
 		
 	}

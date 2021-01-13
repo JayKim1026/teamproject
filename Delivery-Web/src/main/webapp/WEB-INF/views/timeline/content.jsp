@@ -18,6 +18,14 @@
 <script>
 
 $(function(){
+	var time_no = "${timelineVo.time_no}";
+	var account_no;
+	if("${userVo.user_no}" != "") {
+		account_no = "${userVo.user_no}";
+	} else if("${deliverVo.dlvr_no}" != ""){
+		account_no = "${deliverVo.dlvr_no}";
+	}
+	
 	/* Show CommentList */
 	$("#showComment").click(function(){
 		$(this).hide();
@@ -163,24 +171,23 @@ $(function(){
 		var url = "";
 		
 		if(has){
-			url = "/like/deleteLike/${timelineVo.time_no}/${userVo.user_id}"
+			url = "/like/deleteLike/";
 		}else{
-			url = "/like/insertLike/${timelineVo.time_no}/${userVo.user_id}"
+			url = "/like/insertLike/";
 		}
+		url += time_no + "/" + account_no;
 		/*far 빈하트 fas 꽉 찬 하트*/
 		console.log(url);
 		$.get(url, function(data){
 			console.log(data);
-			if(data == "success"){
-				if(has){
-					that.removeClass("fas");
-					that.addClass("far");
-					that.removeClass("red-color");
-				}else{
-					that.removeClass("far");
-					that.addClass("fas");
-					that.addClass("red-color");
-				}
+			if(data == "insertLike_success"){
+				that.removeClass("far");
+				that.addClass("fas");
+				that.addClass("red-color");
+			} else if(data == "deleteLike_success") {
+				that.removeClass("fas");
+				that.addClass("far");
+				that.removeClass("red-color");
 			}
 		});
 		
