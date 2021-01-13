@@ -4,26 +4,19 @@ body{
 margin : 0;
 }
 
-header{
-	width: auto;
-	height: 500px;	
-	background-image:url('/resources/images/delivery_bike.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-}
-
 .logo__font{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 35px;
-color : white;
+color : black;
 }
 
 .menu__font{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 35px;
-color : white;
+color : black;
 padding-right:20px;
 }
+
 
 
 #sample2_address{
