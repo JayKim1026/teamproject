@@ -55,6 +55,20 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-12" style="margin-top: 200px;">
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-8" style="text-align: center;">
+					<h1 style="color:white; font-family : 'Nanum Pen Script', cursive;">
+						배달 그 이상의 가치.
+					</h1>
+				</div>
+				<div class="col-md-2">
+				</div>
+			</div>
+		</div>
+	</div>
 	</header>
 	
 <body>

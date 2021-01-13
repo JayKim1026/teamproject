@@ -5,21 +5,29 @@ margin : 0;
 }
 
 header{
-	background-image:
+	height:70%;
+}
+
+header{
+	background-image:url("/resources/images/pic4.jpg"); 
+	background-size:cover; 
+	width:100%;
 }
 
 .logo__font{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 35px;
-color : black;
+color:white
 }
 
 .menu__font{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 35px;
-color : black;
+color:white;
 padding-right:20px;
 }
+
+
 
 
 
