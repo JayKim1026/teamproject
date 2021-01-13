@@ -5,25 +5,30 @@ margin : 0;
 }
 
 header{
-	width: auto;
-	height: 500px;	
-	background-image:url('/resources/images/delivery_bike.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
+	height:70%;
+}
+
+header{
+	background-image:url("/resources/images/pic4.jpg"); 
+	background-size:cover; 
+	width:100%;
 }
 
 .logo__font{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 35px;
-color : white;
+color:white
 }
 
 .menu__font{
 font-family : 'Nanum Pen Script', cursive;
 font-size : 35px;
-color : white;
+color:white;
 padding-right:20px;
 }
+
+
+
 
 
 #sample2_address{
