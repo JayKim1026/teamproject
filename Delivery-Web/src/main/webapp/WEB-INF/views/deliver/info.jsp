@@ -76,7 +76,7 @@
 																	<div class="col-md-10">
 																		<div class="focused">
 																			<label class="form-control-label" >아이디</label> 
-																			<input type="text" class="form-control form-control-alternative" value="${deliverVo.dlvr_name}" style="background-color: white;"readonly="readonly">
+																			<input type="text" class="form-control form-control-alternative" value="${deliverVo.dlvr_id}" style="background-color: white;"readonly="readonly">
 																		</div>
 																	</div>
 																	<div class="col-md-2">
