@@ -61,6 +61,7 @@ table {
 		
 		</div>
 		<div class="col-md-2">
+		${deliveryList }
 		</div>
 	</div>
 	<div class="row">

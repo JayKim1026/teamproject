@@ -48,7 +48,7 @@
 							<c:if test="${sessionScope.deliverVo != null }">
 								<a class="menu__font" href="/deliver/info">마이페이지</a>
 							</c:if>
-							<a class="menu__font" href="/serviceCenter/FAQ">고객센터</a>
+							<a class="menu__font" href="/CSCenter/FAQ">고객센터</a>
 							
 						</div>
 					</div>

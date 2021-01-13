@@ -60,7 +60,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2"></div>
+			<div class="col-md-2">${FAQList }</div>
 			<div class="col-md-8 topMenuWrapper">
 				<div class="topMenu">
 					<a class="logo" href="/">뚜벅뚜벅Company</a>
@@ -125,33 +125,17 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="FAQVo" items="${FAQList }">
 							<tr>
-								<td><a href="#" class="showInfo">1<a/></td>
-								<td></td>
-							</tr>
-							<tr id="test" style="display:none">
-								<td></td>
-								<td>배달 물품 분실 </td>
+								<td>${FAQVo.faq_no }</td>
+								<td>${FAQVo.faq_title }</td>
+								<td><button></button></td>
 							</tr>
 							<tr>
-								<td>2</td>
 								<td></td>
-								
+								<td>${FAQVo.faq_content } </td>
 							</tr>
-							<tr>
-								<td>3</td>
-								<td></td>
-								
-							</tr>
-							<tr>
-								<td>4</td>
-								<td></td>
-															
-							</tr>
-							<tr>
-								<td>5</td>
-								<td></td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</section>
