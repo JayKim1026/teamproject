@@ -71,14 +71,12 @@ $(function(){
 		var c_content = $("#c_content").val();
 		var writer_no = "${userVo.user_no}";
 		console.log(time_no);
-		console.log(user_id);
 		console.log(c_content);
 		console.log(writer_no);
 		
 		var url = "/comment/insertComment";
 		var sendData = {
 				"time_no"	:	time_no,
-				"user_id"	:	user_id,
 				"c_content" :	c_content,
 				"writer_no"	:	writer_no
 		};

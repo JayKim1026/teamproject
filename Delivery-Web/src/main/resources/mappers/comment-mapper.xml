@@ -34,5 +34,18 @@
 		where c_no = #{c_no}
 	</update>
 	
+	<select id="getCurrentComment" resultType="CommentVo">
+		select c.*, a.writer_name, a.writer_img
+		from tbl_comment c
+		inner join (
+			select user_no writer_no, user_name writer_name, user_img writer_img from tbl_user
+			union
+			select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
+		on c.writer_no = a.writer_no
+		where c.time_no = #{time_no}
+		and c.c_no > #{c_no}
+		and c.c_state = '5-001'
+	</select>
+	
 </mapper>
 
