@@ -32,7 +32,7 @@ $(function(){
 		$("#closeComment").show();
 		var time_no = ${timelineVo.time_no};
 		var url = "/comment/getCommentList/" + time_no;
-		$.get(url, function(data){
+		$.post(url, function(data){
 			$("#newCommentList").empty();
 			$.each(data, function(index, comment){
 				var div = $(".commentListNew").eq(0).clone();
@@ -93,11 +93,10 @@ $(function(){
 			"data" 		:	JSON.stringify(sendData),
 			"success"	:	function(data){
 				console.log(data);
-				if(data == "success"){
+				if(data == "insertComment_success"){
 					console.log("댓글 입력성공");
 					$("#showComment").trigger("click");
-					
-					
+					$("#c_content").val("");
 				}
 			}
 		});
@@ -136,7 +135,7 @@ $(function(){
 			"method"	:	"post",
 			"success"	:	function(data){
 				console.log(data);
-				if(data =="success"){
+				if(data =="updateComment_success"){
 					$("#commentModalCancel").trigger("click");
 					console.log("댓글 수정 성공");
 					$("#showComment").trigger("click");
@@ -152,9 +151,9 @@ $(function(){
 		console.log(c_no);
 		console.log("클릭클릭삭제클릭");
 		var url = "/comment/deleteComment/" + c_no;
-		$.get(url, function(data){
+		$.post(url, function(data){
 			console.log(data);
-			if(data == "success"){
+			if(data == "deleteComment_success"){
 				console.log("삭제성공");
 				$("#showComment").trigger("click");
 			}

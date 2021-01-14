@@ -17,27 +17,27 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	@Override
-	public void insertComment(CommentVo commentVo) {
-		commentDao.insertComment(commentVo);
-		
+	public String insertComment(CommentVo commentVo) throws Exception {
+		String result = commentDao.insertComment(commentVo);
+		return result;
 	}
 
 	@Override
-	public List<CommentVo> getCommentList(int time_no) {
+	public List<CommentVo> getCommentList(int time_no) throws Exception {
 		List<CommentVo> list = commentDao.getCommentList(time_no);
 		return list;
 	}
 
 	@Override
-	public void updateComment(CommentVo commentVo) {
-		commentDao.updateComment(commentVo);
-		
+	public String updateComment(CommentVo commentVo) throws Exception {
+		String result = commentDao.updateComment(commentVo);
+		return result;
 	}
 
 	@Override
-	public void deleteComment(int c_no) {
-		commentDao.deleteComment(c_no);
-		
+	public String deleteComment(int c_no) throws Exception {
+		String result = commentDao.deleteComment(c_no);
+		return result;
 	}
 
 	
