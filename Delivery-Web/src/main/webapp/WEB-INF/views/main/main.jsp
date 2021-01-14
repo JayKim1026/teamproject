@@ -5,8 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="../include/link.jsp" %>
+<script src="jquery.fadethis.min.js"></script>
 <meta charset="UTF-8">
 <title>Main.jsp</title>
 </head>
@@ -55,61 +61,266 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12" style="margin-top: 200px;">
+		<div class="col-md-12" style="margin-top: 300px;">
 			<div class="row">
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8" style="text-align: center;">
-					<h1 style="color:white; font-family : 'Nanum Pen Script', cursive;">
-						배달 그 이상의 가치.
+					<h1 class="animate__animated animate__fadeInDown animate__delay-1s" style="color:white; font-family : 'Nanum Pen Script', cursive;">
+						배달 그 이상의 가치,
+					</h1>
+					<h1 class="animate__animated animate__fadeInDown animate__delay-2s" style="color:white; font-family : 'Nanum Pen Script', cursive;">
+						행복을 배달합니다.
 					</h1>
 				</div>
 				<div class="col-md-2">
 				</div>
 			</div>
 		</div>
-	</div>
 	</header>
 	
 <body>
-	<div class="introduce__first">
-		userVo:${sessionScope.userVo}
-		<br/>
-		<br/>
-		dlvrVo:${sessionScope.deliverVo}
-		<p class="introduce__first_p">초록색 행복을 배달합니다.</p>
-		<p class="introduce__first_p">We are Green Delivery</p>
+
+<!-- First Content -->
+<div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<!-- Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!-- Center -->
+				<div class="col-md-8" style="margin-top:150px; justify-content: ceter;">
+					<div style="display:flex; justify-content: center;">
+						<p class="introduce__first_p">걸어서 지구 한바퀴, 초록색 행복을 배달하는 우리 
+						<span style="color:green; text-decoration: underline; font-weight: 600;">"뚜벅뚜벅COMPANY"</span> 를 소개합니다!</p>
+					</div>
+					
+					<div style="display:flex; justify-content: center;">
+						<p class="font_Naum" style="font-size:28px;">익숙한 우리동네 안에서 간단한 장보기, 사무용품, 음식 등을 배달하는 친환경 배달 전용 플랫폼 입니다.<br>
+						뚜벅뚜벅COMPANY와 함께하는 성인이라면, 별도의 면허, 장비없이 오직 튼튼한 두다리로만 배달에 참여할수있습니다.</p>
+					</div>
+					
+					<div style="display:flex; justify-content:center;">
+						<img src="/resources/images/walkman.png"
+						style="width:350px; height:350px; border-radius:10px;">
+					</div>
+					
+					<div style="display:flex; justify-content: center;">
+						<p class="font_Naum introduce__first_p">초록색 행복을 배달하는 우리, 지금 당신에게 배달갑니다!</p>
+					</div>
+					
+				</div>
+				<!-- End of Center -->
+				
+				<!-- Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- Enf of Right Space -->
+			</div>
+		</div>
 	</div>
+</div>
+<!-- End of First Content -->
+
+<!-- Second Content -->
+<div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!-- Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!-- Center -->
+				<div class="col-md-8">
+				
+					<div style="text-align: left;">
+						<p class="font_Naum" style="font-size:40px;"><span style="color:green; text-decoration: underline;">우리는</span>, 이렇게 배달해요!</p>
+					</div>
+				
+					<div class="flex_box" style="margin-top:60px;">
+						<img src="/resources/images/Grandparents.png" class="introduce__second_pic" id="introduce__second_pic_left">
+						<img src="/resources/images/chill.jpg" class="introduce__second_pic">
+						<img src="/resources/images/delivery_cu.jpg" class="introduce__second_pic" id="introduce__second_pic_right">
+					</div>
+					<div class="flex_box" style="margin-top:30px;">
+						
+						<div>
+						<p class="font_Naum title"><span style="color:green;">누구나, 쉽게</span> 그리고 안전하게 배달해요.</p>
+						<p class="font_Naum second_title">청년부터 어르신까지 쉽고 안전한 배달</p>
+						<p class="font_Naum describe_content"><span style="text-decoration: underline; font-weight: 600;">저용량</span> 위주의 가벼운 물품들을 누구든 쉽게 배달할수있어요!</p>
+						</div>
+						
+						<div>
+						<p class="font_Naum title"><span style="color:green;">소중한 당신의 시간,</span> 휴식은 선택이아닌 필수!</p>
+						<p class="font_Naum second_title">유연한 근무시간, 배달은 내가 원할때만해요.</p>
+						<p class="font_Naum describe_content">동네를 산책하듯 혹은 쇼핑을 가듯 자유로운 근무제도</p>
+						</div>
+						<div style="text-align: right;">
+						<p class="font_Naum title"><span style="color:green;">튼튼한 두다리로</span> 사고 걱정없이 자유로운 배달</p>
+						<p class="font_Naum second_title" ><span style="color:green;">걸어서</span> Ok, <span style="color:green;">뛰어서</span> Ok, <span style="color:green;">자전거</span> Ok</p>
+						<p class="font_Naum describe_content">우리는 두다리를 이용해 배달하는 뚜벅이 입니다!</p>
+						</div>
+					</div>
+					
+				</div>
+				<!-- End of Center -->
+				
+				<!-- Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- Enf of Right Space -->
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Second Content -->
+
+<!-- Third Content -->
+<div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!--Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!--Center -->
+				<div class="col-md-8">
+				
+					<!-- Hire Icon -->
+					<div style="margin-top:60px; text-align: left;">
+						<p class="font_Naum" style="font-size:40px;"><span style="color:green; text-decoration: underline;">뚜벅뚜벅</span>, 뚜벅이!<br></p>
+						<p class="font_Naum" style="font-size:40px;"><span style="color:green; text-decoration: underline;">누구나</span> 쉽게, 뚜벅이가 될 수있어요!</p>
+					</div>
+					<!-- end of Hire Icon -->
+					
+					<!-- pictures -->
+					<div class="flex_box" style="margin-top: 80px;">
+						<img src="/resources/images/hire1.png" class="introduce__hire_img"> 
+						<i class="fas fa-arrow-right" id="introduce__hire_icon_left"></i> 
+						<img src="/resources/images/hire2.png" class="introduce__hire_img"> 
+						<i class="fas fa-arrow-right" id="introduce__hire_icon_right"></i> 
+						<img src="/resources/images/hire3.png" class="introduce__hire_img">
+					</div>
+					<!-- end of pictures -->
+					
+					<!-- text -->
+					<div class="flex_box">
+						<p class="introduce__five_font">이력서는 필요없어요!쉬운 가입만하면 누구나!</p>
+						<p class="introduce__five_font">원하는 주문만 쏙쏙!</p>
+						<p class="introduce__five_font" id="introduce__five_font_right">매주 금요일, 배달 완료건에 대한 금액 지급!</p>
+					</div>
+					
+					<div style="float:right; margin-top:100px;">
+						<img src="/resources/images/delivery_logo2.png"  style="width:70px; height:70px; margin-left:40px;">
+						<div>
+							<a href="/account/dlvr_RegisterForm"><span class="font_Naum" style="font-size:29px;">라이더 등록하러가기</span></a>
+						</div>
+					</div>
+				
+					<!-- end of text -->
+				</div>
+				<!--End of Center -->
+				
+				<!--Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!--Enf of Right Space -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Third Content -->
+
+<!-- Third Content -->
+<div class="container-fluid content_box" style="background-color:black;"> <!-- data-aos="fade-up" data-aos-duration="2000"-->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!--Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!--Center -->
+				<div class="col-md-4">
+				
+					<!-- Hire Icon -->
+					<div style="margin-top:60px; text-align: left;">
+						<p class="font_Naum" style="font-size:40px;"><span style="color:white; text-decoration: underline;">FAQ</span></p>
+						<p class="font_Naum" style="font-size:40px;"><span style="color:white; text-decoration: underline;">자주하는 질문</span></p>
+					</div>
+					<!-- end of Hire Icon -->
+					
+					
+					<!-- end of pictures -->
+					
+					<!-- text -->
+					<ul style="list-style: none; padding-left:0px;">
+					
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 뚜벅이가 되고싶어요! 자격조건이 따로있나요?<br></p>	
+								<p class="faq_font">A 만 18세이상, 남녀노소 누구나 뚜벅이가 될수있습니다.<br>
+												단, 배달받으시는 고객분들을 위해 깔끔한 복장 아시죠?</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 자전거도 없고 자동차도 없어요 ㅠ_ㅠ 어떻게 배달하나요?<br></p>	
+								<p class="faq_font">A 자동차도 없는, 자전거도 없는 당신! 우리는 걸어서 배달해요!</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 회원가입시 필요한 서류는 어떻게되나요?<br></p>	
+								<p class="faq_font">A 본인 명의 계좌, 그리고 신분확인을 위한 신분증사진을 필요로합니다.</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 배달 중 상품을 분실/파손 했어요ㅠㅠ 어떻게하죠?<br></p>	
+								<p class="faq_font">A 당황하지마시고 먼저 고객님에게 알린 후, 고객센터로 전화주세요!</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font">더 많은것들이 궁금하다면?<br></p>
+								<a href="/CSCenter/FAQ"><span class="faq_font" style="text-decoration: underline;">고객센터<br></span></a>	
+								<i class="far fa-hand-point-up" style="color:white;"></i>
+							</div>
+						</li>
+						
+					</ul>
+				
+					<!-- end of text -->
+				</div>
+				<!--End of Center -->
+				
+				<!--Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!--Enf of Right Space -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Third Content -->
 	
-	<div class="introduce__second">
-		<img src="/resources/images/ubereats.jpg" class="introduce__second_pic" id="introduce__second_pic_left">
-		<img src="/resources/images/green.jpg" class="introduce__second_pic">
-		<img src="/resources/images/walk.jpg" class="introduce__second_pic" id="introduce__second_pic_right">
-	</div>
-	
-	<div class="introduce__third">
-		<p class="introduce__third_p" id="introduce__third_p_left">누구나, 가볍게 그리고 안전하게 배달해요.</p>
-		<p class="introduce__third_p">누구나 쉽게, 초록색 행복을 지킬수있어요.</p>
-		<p class="introduce__third_p" id="introduce__third_p_right">튼튼한 두다리로 사고 걱정없이 자유롭게!</p>
-	</div>
-	
-	<div class="introduce__icon">
-		<img src="/resources/images/hiring.png" class="hiring_icon">
-	</div>
-	
-	<div class="introduce__four">
-		<img src="/resources/images/hire1.png" class="introduce__hire_img" id="introduce__hire_img_left"> 
-		<i class="fas fa-arrow-right" id="introduce__hire_icon_left"></i> 
-		<img src="/resources/images/hire2.png" class="introduce__hire_img" id="introduce__hire_img"> 
-		<i class="fas fa-arrow-right" id="introduce__hire_icon_right"></i> 
-		<img src="/resources/images/hire3.png" class="introduce__hire_img" id="introduce__hire_img_right">
-	</div>
-	
-	<div class="introduce__five">
-		<p class="introduce__five_font" id="introduce__five_font_left">누구나, 가볍게 그리고 안전하게 배달해요.</p>
-		<p class="introduce__five_font">누구나 쉽게, 초록색 행복을 지킬수있어요.</p>
-		<p class="introduce__five_font" id="introduce__five_font_right">튼튼한 두다리로 사고 걱정없이 자유롭게!</p>
-	</div>
 </body>
 
 <!-- Footer -->
@@ -284,5 +495,9 @@ $(function(){
 	});
 });	
 </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>

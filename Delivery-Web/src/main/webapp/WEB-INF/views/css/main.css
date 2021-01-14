@@ -1,17 +1,14 @@
 <style>
 
-body{
-margin : 0;
-}
-
-header{
-	height:70%;
+html, body{
+	height:100%;
 }
 
 header{
 	background-image:url("/resources/images/pic4.jpg"); 
 	background-size:cover; 
 	width:100%;
+	height:100%;
 }
 
 .logo__font{
@@ -29,7 +26,16 @@ padding-right:20px;
 
 
 
+.content_box{
+	position : relative;
+	width:100%;
+	height:110%; 
+}
 
+.flex_box{
+	display : flex;
+	justify-content: space-between;
+}
 
 #sample2_address{
 width : 400px;
@@ -38,6 +44,31 @@ opacity : 0.79;
 .introduce__first{
 position : relative;
 top : 50px;
+}
+
+.font_Naum{
+	font-family : 'Nanum Pen Script', cursive;
+}
+
+.faq_font{
+	font-family : 'Nanum Pen Script', cursive;
+	font-size: 25px;
+	color:white;
+}
+
+.title{
+	font-size:25px;
+	font-weight: 600;
+}
+
+.second_title{
+	font-size:23px;
+	font-weight: 500;
+	text-decoration: underline;
+}
+
+.describe_content{
+	font-size: 20px;
 }
 
 .introduce__first_p{
@@ -59,15 +90,7 @@ height : 400px;
 border-radius : 10px;
 }
 
-#introduce__second_pic_left{
-position : relative;
-left : 10%;
-}
 
-#introduce__second_pic_right{
-position : relative;
-left : -10%;
-}
 
 .introduce__third{
 position : relative;
@@ -76,14 +99,8 @@ justify-content: space-between;
 top : 250px;
 }
 
-.introduce__icon{
-	position : relative;
-	top		: 400px;
-}
-
 .hiring_icon{
-	position	:	relative;
-	left		:	45%;
+
 	width  : 180px;
 	height : 180px;
 }
@@ -122,29 +139,19 @@ left : 17%;
 }
 
 #introduce__hire_icon_left{
-position : relative;
-left : 7.5%;
+
 font-size : 60px;
-top : 100px
+margin-top: 100px;
 }
 
 #introduce__hire_icon_right{
-position : relative;
-left : -7.5%;
 font-size : 60px;
-top : 100px
+margin-top: 100px;
 }
 
 #introduce__hire_img_right{
 position : relative;
 left : -17%
-}
-
-.introduce__five{
-position : relative;
-display : flex;
-justify-content: space-between;
-top : 500px;
 }
 
 .introduce__five_font{
@@ -153,15 +160,6 @@ font-size : 25px;
 color : black;
 }
 
-#introduce__five_font_left{
-position : relative;
-left : 14%;
-}
-
-#introduce__five_font_right{
-position : relative;
-left : -14%;
-}
 
 #footer{
 position : relative;
