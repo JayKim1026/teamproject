@@ -55,7 +55,7 @@ public class UserController implements Codes {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date user_birth = new Date(df.parse(str_user_birth).getTime());
 		userVo.setUser_birth(user_birth);
-		
+				
 		String org_user_img = f_user_img.getOriginalFilename();
 		boolean isImage_img = FileUploadUtil.isImage(org_user_img);
 		

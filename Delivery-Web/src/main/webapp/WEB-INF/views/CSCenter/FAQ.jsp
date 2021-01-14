@@ -101,9 +101,10 @@
 				</div>
 				<div class="content_section" style="background-color: #787878; height: 40px">
 					<ul class="content_ul">
+					<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
 						<li class="content_li"><a class="content_a" href="/account/findAccountForm">아이디 찾기</a></li>
 						<li class="content_li"><a class="content_a" href="/account/findAccountForm">비밀번호 찾기</a></li>
-						<li class="content_li"><a class="content_a" href="/user/info">마이페이지</a></li>
+					</c:if>
 						<c:if test="${sessionScope.userVo != null}">
 							<li class="content_li"><a class="content_a"
 								href="/user/info">마이페이지</a></li>
@@ -116,42 +117,38 @@
 					</ul>
 				</div>
 				<section class="content_view">
-					<div><h3>자주하는 질문</h3></div>
+					<div style="margin-bottom: 30px;">
+						<h3><strong>자주하는 질문</strong></h3>
+						<select class="category" name="category">
+							<option selected="selected">주문문의</option>
+							<option>배달문의</option>
+							<option>웹이용문의</option>
+							<option>앱이용문의</option>
+							<option>기타문의</option>
+						</select>
+						<input type="text" class="form keyword" name="search">
+						<button type="button" class="btnSearch">검색</button>
+					</div>
+					
 					<table class="table">
 						<thead>
 							<tr>
-								<th>번호</th>
-								<th>내용</th>
+								<th style="text-align: center">번호</th>
+								<th style="text-align: center">분류</th>
+								<th style="text-align: left; margin-left: 30px;"><span style="margin-left: 30px;">내용</span></th>
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="FAQVo" items="${FAQList }">
 							<tr>
-								<td><a href="#" class="showInfo">1<a/></td>
-								<td></td>
+								<td style="text-align: center"><span>${FAQVo.r }</span></td>
+								<td style="text-align: center">${FAQVo.code_detail }</td>
+								<td style="text-align: left; "><a class="faqTitle" href="#" style="margin-left: 30px;">${FAQVo.faq_title }</a></td>
 							</tr>
-							<tr id="test" style="display:none">
-								<td></td>
-								<td>배달 물품 분실 </td>
+							<tr style="display:none;" class="FAQcontentTr">
+								<td colspan="3" class="FAQcontentTd" style="background-color: whitesmoke; align-content: center; "><span style="margin-left: 342px">${FAQVo.faq_content }</span></td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td></td>
-								
-							</tr>
-							<tr>
-								<td>3</td>
-								<td></td>
-								
-							</tr>
-							<tr>
-								<td>4</td>
-								<td></td>
-															
-							</tr>
-							<tr>
-								<td>5</td>
-								<td></td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</section>
@@ -169,12 +166,28 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(function(){
-			$(".showInfo").click(function(){
-				$("#test").slideDown();
-			});
+<script>
+$(function(){
+	// FAQ 내용 보여주기
+	$(".faqTitle").each(function(index){
+		$(this).click(function(){
+			$(".FAQcontentTr").eq(index).slideToggle("slow");
 		});
-	</script>
+	});
+	
+	// 검색하기
+	$(".btnSearch").click(function(){
+		var category = $(".category").val();
+		var keyword = $(".keyword").val();
+		console.log(category + " + " + keyword);
+		var url = "/CSCenter/search"
+		var sendData = {	"category"	: category,		"keyword"	: keyword }
+		$.get(url, sendData, function(data){
+			
+		});
+	});
+	
+}); // 핸들러
+</script>
 </body>
 </html>

@@ -47,8 +47,11 @@ public class TimelineServiceImpl implements TimelineService {
 	}
 
 	@Override
+	@Transactional
 	public TimelineVo selectByNo(int time_no) throws Exception {
 		TimelineVo timelineVo = timelineDao.selectByNo(time_no);
+		int likeCount = likeDao.getLikeCount(time_no);
+		timelineVo.setTime_like(likeCount);
 		return timelineVo;
 	}
 
