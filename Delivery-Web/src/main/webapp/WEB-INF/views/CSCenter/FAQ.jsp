@@ -133,19 +133,19 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="text-align: center">번호</th>
+								<th class="" style="text-align: center">번호</th>
 								<th style="text-align: center">분류</th>
 								<th style="text-align: left; margin-left: 30px;"><span style="margin-left: 30px;">내용</span></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="orgTbody">
 						<c:forEach var="FAQVo" items="${FAQList }">
-							<tr>
+							<tr class="trTitle">
 								<td style="text-align: center"><span>${FAQVo.r }</span></td>
 								<td style="text-align: center">${FAQVo.code_detail }</td>
 								<td style="text-align: left; "><a class="faqTitle" href="#" style="margin-left: 30px;">${FAQVo.faq_title }</a></td>
 							</tr>
-							<tr style="display:none;" class="FAQcontentTr">
+							<tr style="display:none;" class="trAnswer">
 								<td colspan="3" class="FAQcontentTd" style="background-color: whitesmoke; align-content: center; "><span style="margin-left: 342px">${FAQVo.faq_content }</span></td>
 							</tr>
 						</c:forEach>
@@ -171,19 +171,23 @@ $(function(){
 	// FAQ 내용 보여주기
 	$(".faqTitle").each(function(index){
 		$(this).click(function(){
-			$(".FAQcontentTr").eq(index).slideToggle("slow");
+			$(".trAnswer").eq(index).slideToggle("slow");
 		});
 	});
+	
 	
 	// 검색하기
 	$(".btnSearch").click(function(){
 		var category = $(".category").val();
 		var keyword = $(".keyword").val();
-		console.log(category + " + " + keyword);
 		var url = "/CSCenter/search"
 		var sendData = {	"category"	: category,		"keyword"	: keyword }
-		$.get(url, sendData, function(data){
-			
+		$.get(url, sendData, function(serchList){
+			console.log("serchList : " + serchList);
+			$.each(serchList, function(){
+				
+				
+			});
 		});
 	});
 	
