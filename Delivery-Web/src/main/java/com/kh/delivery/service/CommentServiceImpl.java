@@ -40,5 +40,11 @@ public class CommentServiceImpl implements CommentService {
 		return result;
 	}
 
+	@Override
+	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception {
+		List<CommentVo> commentList = commentDao.getCurrentComment(commentVo);
+		return commentList;
+	}
+
 	
 }

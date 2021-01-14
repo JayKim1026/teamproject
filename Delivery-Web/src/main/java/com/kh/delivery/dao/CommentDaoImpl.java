@@ -44,6 +44,12 @@ public class CommentDaoImpl implements CommentDao{
 		sqlSession.update(NAMESPACE + "deleteComment", c_no);
 		return "deleteComment_success";
 	}
+
+	@Override
+	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception {
+		List<CommentVo> commentList = sqlSession.selectList(NAMESPACE + "getCurrentComment", commentVo);
+		return commentList;
+	}
 	
 
 }

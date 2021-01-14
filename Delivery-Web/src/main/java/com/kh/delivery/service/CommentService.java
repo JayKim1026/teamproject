@@ -19,4 +19,7 @@ public interface CommentService {
 	
 	/*Delete Comment*/
 	public String deleteComment(int c_no) throws Exception;
+	
+	// getCurrentComment
+	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception;
 }

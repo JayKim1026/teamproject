@@ -36,7 +36,7 @@ public class CommentController implements Codes {
 	private CommentService commentService;
 	
 	@RequestMapping(value="/insertComment", method = RequestMethod.POST)
-	public String insertComment(@RequestBody CommentVo commentVo)throws Exception{
+	public String insertComment(CommentVo commentVo)throws Exception{
 		System.out.println("CommentController, insertComment, commentVo:" + commentVo);
 		String result = commentService.insertComment(commentVo);
 		return result;
@@ -45,7 +45,6 @@ public class CommentController implements Codes {
 	@RequestMapping(value="/getCommentList/{time_no}", method = RequestMethod.POST)
 	public List<CommentVo> getCommentList(@PathVariable("time_no")int time_no, Model model)throws Exception{
 		String image_url = BUCKET_URL;
-		String user_img = USER_IMG;
 		System.out.println("CommentController, getCommentList, time_no:" + time_no);
 		List<CommentVo> list = commentService.getCommentList(time_no);
 		System.out.println("CommentController, getCommentList, list:" + list);
@@ -54,7 +53,7 @@ public class CommentController implements Codes {
 	}
 	
 	@RequestMapping(value="/updateComment", method=RequestMethod.POST)
-	public String updateComment(@RequestBody CommentVo commentVo) throws Exception{
+	public String updateComment(CommentVo commentVo) throws Exception{
 		System.out.println("updateComment..");
 		System.out.println("CommentController, updateComment, commentVo:" + commentVo);
 		String result = commentService.updateComment(commentVo);
@@ -66,5 +65,12 @@ public class CommentController implements Codes {
 		System.out.println("CommentController, deleteComment, c_no:" + c_no);
 		String result = commentService.deleteComment(c_no);
 		return result;
+	}
+	
+	@RequestMapping(value="/getCurrentComment", method=RequestMethod.POST)
+	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception {
+		System.out.println("CommentController, getCurrentComment, commentVo:" + commentVo);
+		List<CommentVo> commentList = commentService.getCurrentComment(commentVo);
+		return commentList;
 	}
 }
