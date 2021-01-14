@@ -265,6 +265,8 @@ public class UserController implements Codes {
 	public String messageForm(HttpSession session, Model model) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		OrderVo orderVo = orderService.getMyOrder(userVo.getUser_no());
+		System.out.println("orderVo : " + orderVo);
+		System.out.println("userVo : " + userVo);
 		model.addAttribute("orderVo", orderVo);
 		model.addAttribute("image_url", BUCKET_URL);
 		return "user/message";
