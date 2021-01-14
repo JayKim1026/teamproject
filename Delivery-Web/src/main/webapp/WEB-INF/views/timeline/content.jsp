@@ -180,15 +180,20 @@ $(function(){
 		console.log(url);
 		$.post(url, function(data){
 			console.log(data);
+			var likeCount = parseInt($("#likeCount").text());
 			if(data == "insertLike_success"){
 				that.removeClass("far");
 				that.addClass("fas");
 				that.addClass("red-color");
+				likeCount++;
 			} else if(data == "deleteLike_success") {
 				that.removeClass("fas");
 				that.addClass("far");
 				that.removeClass("red-color");
+				likeCount--;
 			}
+			console.log(likeCount);
+			$("#likeCount").text(likeCount);
 		});
 		
 	});		
@@ -321,7 +326,7 @@ $(function(){
 											</c:otherwise>
 										</c:choose>
 										  style="font-size:30px;" id="like"></i>
-										(<span>${timelineVo.time_like}</span>)
+										(<span id="likeCount">${timelineVo.time_like}</span>)
 									</div>
 									<!-- 좋아요 끝 -->
 									
