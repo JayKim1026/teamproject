@@ -8,14 +8,17 @@ import com.kh.delivery.domain.LikeVo;
 public interface CommentDao {
 	
 	/*Insert Comment*/
-	public void insertComment(CommentVo commentVo);
+	public String insertComment(CommentVo commentVo) throws Exception;
 	
 	/*get CommentList*/
-	public List<CommentVo> getCommentList(int time_no); 
+	public List<CommentVo> getCommentList(int time_no) throws Exception;
 	
 	/*Update Comment*/
-	public void updateComment(CommentVo commentVo);
+	public String updateComment(CommentVo commentVo) throws Exception;
 	
 	/*Delete Comment*/
-	public void deleteComment(int c_no);
+	public String deleteComment(int c_no) throws Exception;
+	
+	// getCurrentComment
+	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception;
 }
