@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.delivery.domain.FAQVo;
 import com.kh.delivery.service.CSService;
@@ -21,11 +22,20 @@ public class CSController {
 	CSService csService;
 	
 	@RequestMapping(value="/FAQ" , method=RequestMethod.GET)
-	public String supportCenter(Model model) throws Exception {
+	public String CSCenter(Model model) throws Exception {
 		List<FAQVo> FAQList = csService.getFAQList();
 		model.addAttribute("FAQList", FAQList);
 		return "CSCenter/FAQ";
 	}
 	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	@ResponseBody
+	public List<FAQVo> search(String category, String keyword, Model model) throws Exception {
+		System.out.println("category : " + category);
+		System.out.println("keyword : " + keyword);
+		List<FAQVo> searchList = csService.getSearchList(category, keyword);
+		System.out.println("serchList controller : " + searchList);
+		return searchList;
+	}
 	
 }
