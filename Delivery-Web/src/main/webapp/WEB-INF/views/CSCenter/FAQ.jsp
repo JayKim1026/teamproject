@@ -182,20 +182,19 @@ $(function(){
 		var keyword = $(".keyword").val();
 		var url = "/CSCenter/search"
 		var sendData = {	"category"	: category,		"keyword"	: keyword }
+			
 		$.get(url, sendData, function(data){
 			console.log(data);
+			$("tbody > tr").empty();	
 			$.each(data, function(){
-				var trTitle = $(".trTitle").clone();
-				var trAnswer = $(".trAnswer").clone();
-
-				$("tbody").empty();
-				
-				trTitle.find("td").eq(0).text(this.faq_no);
-				trTitle.find("td").eq(1).text(this.code_detail);
-				trTitle.find("td").eq(2).find("a").text(this.faq_title);
-				trAnswer.find("td").find("span").text(this.faq_content);
-				
-				$("tbody").append(trTitle);
+				$("tbody > tr > td").eq(0).text("this.faq_no");
+				$("tbody > tr > td").eq(1).text("this.code_detail");
+				$("tbody > tr > td").eq(2).text("this.faq_title");
+				$("tbody > tr").eq(1).find("td").find("a").text("this.faq_title");
+				console.log(this.faq_no);
+				console.log(this.code_detail);
+				console.log(this.faq_title);
+				console.log(this.faq_content);
 			});
 		});
 	});

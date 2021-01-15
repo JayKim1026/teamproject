@@ -15,11 +15,11 @@
 <!-- FAQ 페이지에서 검색 -->
 	
 	<select id="getSearchList" resultType="FAQVo">
-		select ROWNUM r, s.* from(select * from tbl_faq f
-		inner join tbl_code c
-		on f.faq_state = c.code_no)s
-		where code_detail = #{category} and (faq_content like '%' || #{keyword} || '%' or faq_title like '%' || #{keyword} || '%')
-		order by r asc
+	select ROWNUM r, f.*, c.code_detail 
+	from tbl_faq f Left Join tbl_code c on f.faq_state = c.code_no
+	where c.code_detail like #{category} and (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
+	order by r asc
+
 		
 	</select>
 </mapper>
