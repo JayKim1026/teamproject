@@ -16,13 +16,7 @@ public class CSServiceImpl implements CSService {
 	CSDao csDao;
 	
 	
-	@Override
-	public List<FAQVo> getFAQList() throws Exception {
-		List<FAQVo> FAQList = csDao.getFAQList();
-		return FAQList;
-	}
-
-
+	
 	@Override
 	public List<FAQVo> getSearchList (String category, String keyword) throws Exception {
 		List<FAQVo> searchList = csDao.getSearchList(category, keyword);

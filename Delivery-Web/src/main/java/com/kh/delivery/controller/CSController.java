@@ -23,8 +23,7 @@ public class CSController {
 	
 	@RequestMapping(value="/FAQ" , method=RequestMethod.GET)
 	public String CSCenter(Model model) throws Exception {
-		List<FAQVo> FAQList = csService.getFAQList();
-		model.addAttribute("FAQList", FAQList);
+		
 		return "CSCenter/FAQ";
 	}
 	
