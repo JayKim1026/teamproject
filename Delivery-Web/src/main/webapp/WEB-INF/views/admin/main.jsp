@@ -122,33 +122,36 @@
 								<!-- 오른쪽 첫번째 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>Mobilebox Geedbox - #240</h6>
-										<p class="text-black-50 content mb-5">Lorem ipsum dolor
-											sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-											incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-											veniam, quis nostrud exercitation ullamco</p>
+										<h6>배달</h6>
+										<p class="text-black-50 content mb-2">요청 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;">80</span></p>
+										<p class="text-black-50 content mb-2">진행중 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;">50</span></p>
+										<p class="text-black-50 content mb-4">배달 완료건수: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
+										
+										<!-- 합계 -->
 										<div class="d-flex flex-row">
 											<div class="mr-4">
-												<span>Developers</span>
+												<span>완료된 배달</span>
 												<div class="mt-1">
-													<span class="alpha alpha-red">M</span> <span
-														class="alpha alpha-green">W</span> <span
-														class="alpha alpha-red">N</span>
+													<span class="alpha alpha-red">50</span>
 												</div>
 											</div>
+											
 											<div class="mr-4">
-												<span>Deadline</span>
+												<span>취소된 배달</span>
 												<div class="mt-2">
-													<span class="text-black-50">20 Dec 2020</span>
+													<span class="text-black-50">80</span>
 												</div>
 											</div>
-											<div class="mr-4">
-												<span>Budget</span>
-												<div class="mt-2">
-													<span class="text-black-50">$12,000</span>
-												</div>
-											</div>
+											
+<!-- 											<div class="mr-4"> -->
+<!-- 												<span>Budget</span> -->
+<!-- 												<div class="mt-2"> -->
+<!-- 													<span class="text-black-50">$12,000</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 										</div>
+										<!-- 합계 -->
+										
 									</div>
 								</div>
 								<!-- 오른쪽 첫번쨰 컨테이너 끝 -->
@@ -156,34 +159,35 @@
 								<!-- 왼쪽 두번쨰(밑에칸) 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>Online Store - #239</h6>
-										<p class="text-black-50 content mb-5">Lorem ipsum dolor
-											sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-											incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-											veniam, quis nostrud exercitation ullamco</p>
+										<h6>게시물</h6>
+										<p class="text-black-50 content mb-2">새로운 일반글: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
+										<p class="text-black-50 content mb-2">새로운 리뷰글: <span style="font-weight: 600px; text-decoration: underline; color:black;">40</span></p>
+										<p class="text-black-50 content mb-4">새로운 공지사항: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
+										<!-- 합계 -->
 										<div class="d-flex flex-row">
+										
 											<div class="mr-4">
-												<span>Developers</span>
+												<span>전체 일반글</span>
 												<div class="mt-1">
-													<span class="alpha alpha-red">M</span> <span
-														class="alpha alpha-green">W</span> <span
-														class="alpha alpha-red">C</span> <span
-														class="alpha alpha-green">D</span>
+													<span class="alpha alpha-red">500</span> 
 												</div>
 											</div>
+											
 											<div class="mr-4">
-												<span>Deadline</span>
+												<span>전체 리뷰글</span>
 												<div class="mt-2">
-													<span class="text-black-50">24 Dec 2020</span>
+													<span class="text-black-50">350</span>
 												</div>
 											</div>
+											
 											<div class="mr-4">
-												<span>Budget</span>
+												<span>전체 게시글</span>
 												<div class="mt-2">
-													<span class="text-black-50">$10,000</span>
+													<span class="text-black-50">850</span>
 												</div>
 											</div>
 										</div>
+										<!-- 합계 -->
 									</div>
 								</div>
 								<!-- 왼쪽 두번쨰(밑에칸) 컨테이너 끝-->
@@ -191,32 +195,30 @@
 								<!-- 오른쪽 투번째(밑에칸) 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>Landing page Boostand - #238</h6>
-										<p class="text-black-50 content mb-5">Lorem ipsum dolor
-											sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-											incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-											veniam, quis nostrud exercitation ullamco</p>
+										<h6>신고접수</h6>
+										<p class="text-black-50 content mb-2">새로운 신고접수: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
 										<div class="d-flex flex-row">
 											<div class="mr-4">
-												<span>Developers</span>
+												<span>완료된 신고접수</span>
 												<div class="mt-1">
-													<span class="alpha alpha-red">M</span> <span
-														class="alpha alpha-green">W</span>
+													<span class="alpha alpha-red">30</span> 
 												</div>
 											</div>
-											<div class="mr-4">
-												<span>Deadline</span>
-												<div class="mt-2">
-													<span class="text-black-50">30 Dec 2020</span>
-												</div>
-											</div>
-											<div class="mr-4">
-												<span>Budget</span>
-												<div class="mt-2">
-													<span class="text-black-50">$17,000</span>
-												</div>
-											</div>
+											
+<!-- 											<div class="mr-4"> -->
+<!-- 												<span>Deadline</span> -->
+<!-- 												<div class="mt-2"> -->
+<!-- 													<span class="text-black-50">30 Dec 2020</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="mr-4"> -->
+<!-- 												<span>Budget</span> -->
+<!-- 												<div class="mt-2"> -->
+<!-- 													<span class="text-black-50">$17,000</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 										</div>
+										<!-- 합계 -->
 									</div>
 								</div>
 								 <!-- 오른쪽 투번째(밑에칸) 컨테이너 끝-->
