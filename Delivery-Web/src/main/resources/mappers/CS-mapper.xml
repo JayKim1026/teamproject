@@ -10,11 +10,10 @@
 	from tbl_faq f 
 	left join tbl_code c 
 	on f.faq_state = c.code_no
-	<if test='category != "all"'>
-		where c.code_no like #{category}
-		and (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
+	where (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
+	<if test='category != "4-000"'>
+		and c.code_no like #{category}
 	</if>
-	where f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%'
 	order by r asc
 	</select>
 </mapper>

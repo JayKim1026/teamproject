@@ -120,7 +120,7 @@
 					<div style="margin-bottom: 30px;">
 						<h3><strong>자주하는 질문</strong></h3>
 						<select class="category" name="category">
-							<option value="4-006" selected="selected">전체</option>
+							<option value="4-000" selected="selected">전체</option>
 							<option value="4-001">주문문의</option>
 							<option value="4-002">배달문의</option>
 							<option value="4-003">웹이용문의</option>
@@ -177,12 +177,16 @@
 <script>
 
 $(function() {
-	
-	getFAQ("4-006", "");
+	var category = $(".category").val();
+	var keyword = $(".keyword").val();
+	getFAQ(category, keyword);
 	
 	function getFAQ(category, keyword) {
 		var url = "/CSCenter/search"
-		var sendData = {	"category"	: category,		"keyword"	: keyword }
+		var sendData = {	
+				"category"	: $(".category").val(),		
+				"keyword"	: $(".keyword").val() 
+		};
 		
 		$.get(url, sendData, function(data){
 			console.log(data);
@@ -204,9 +208,6 @@ $(function() {
 	
 	// 검색하기
 	$(".btnSearch").click(function(){
-		var category = $(".category").val();
-		var keyword = $(".keyword").val();
-		console.log(category);
 		getFAQ(category, keyword);
 	});
 
