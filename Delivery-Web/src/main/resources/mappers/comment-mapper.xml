@@ -20,6 +20,7 @@
 		on c.writer_no = a.writer_no
 		where time_no = #{time_no}
 		and c_state = '5-001'
+		order by c.c_no asc
 	</select>
 	
 	<update id="updateComment">
@@ -45,6 +46,7 @@
 		where c.time_no = #{time_no}
 		and c.c_no > #{c_no}
 		and c.c_state = '5-001'
+		order by c.c_no asc
 	</select>
 	
 </mapper>
