@@ -61,4 +61,10 @@ public class TimelineServiceImpl implements TimelineService {
 		return timelineVo;
 	}
 
+	@Override
+	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
+		List<TimelineVo> timelineList = timelineDao.getCurrentTimeline(time_no);
+		return timelineList;
+	}
+
 }

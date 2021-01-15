@@ -66,6 +66,114 @@ $("#category").on("change", function(){
 	}
 });
 
+var lastTimeNo;
+
+getTimelineList(true);
+
+function getTimelineList(first) {
+	var url = "/timeline/getTimelineList";
+	$.post(url, function(data) {
+		console.log(data);
+		$.each(data, function(index) {
+			if(index == 0) {
+				lastTimeNo = this.time_no;
+				console.log("getTimelineList, lastTimeNo = " + lastTimeNo);
+			}
+			setTimeline(this, false);
+		});
+	});
+}
+
+function getCurrentTimeline() {
+	var url = "/timeline/getCurrentTimeline";
+	var sendData = {
+			"time_no"	:	lastTimeNo
+	}
+	$.post(url, sendData, function(data) {
+		console.log(data);
+		$.each(data, function(index) {
+			if(index == 0) {
+				lastTimeNo = this.time_no;
+			}
+			setTimeline(this, false);
+		});
+	});
+}
+
+function setTimeline(data, first) {
+	console.log(data);
+	// 클론
+	var clone1 = $("#forclone").clone();
+	
+	/* 카테고리 */
+	
+	if(data.time_state == "2-002"){
+		clone1.find(".output-stars-clone").show();
+	}else if(data.time_state == "2-003"){
+		clone1.find(".output-stars-clone").hide();
+	}
+	
+	/*별 클론*/
+
+	if(data.time_star == 5){
+		console.log("작동");
+	}else if(data.time_star == 4){
+		clone1.find(".pclass").children("span").eq(0).text("4");
+		clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+	}else if(data.time_star == 3){
+		clone1.find(".pclass").children("span").eq(0).text("3");
+		clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
+		clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+	}else if(data.time_star == 2){
+		clone1.find(".pclass").children("span").eq(0).text("2");
+		clone1.find(".pclass").children("span").eq(3).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(3).addClass("star-inactive");
+		clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
+		clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+	}else if(data.time_star == 1){
+		clone1.find(".pclass").children("span").eq(0).text("1");
+		clone1.find(".pclass").children("span").eq(2).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(2).addClass("star-inactive");
+		clone1.find(".pclass").children("span").eq(3).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(3).addClass("star-inactive");
+		clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
+		clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
+		clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
+	}
+	
+	/*//별 클론 */
+	
+	/* 이미지 클론*/
+	if(data.time_img != null){
+		clone1.find(".pic-clone").attr("src","${image_url}"+data.time_img).show();
+	}else if(data.time_img == null){
+		clone1.find(".pic-clone").attr("src","#").hide();
+	}
+	/*//이미지 클론 */
+	
+	clone1.find("#profile-pic-output-clone").attr("src","${image_url}${userVo.user_img}");
+	clone1.find("h3").text("${userVo.user_name}");
+	clone1.find(".content-clone").text(data.time_content);
+	clone1.find(".date-clone").text(data.time_date);
+	clone1.find(".location-clone").text(data.time_location);
+	clone1.find(".showComment").attr("data-no", data.time_no);
+	
+	clone1.show();
+	$("#house").prepend(clone1).hide().fadeIn(1000);
+	
+	if(!first) {
+		$("#time_content").val("");
+		$("#time_img").val("");
+		$("#imgPreview").hide();
+	}
+}
+
 /* 글쓰기 */
 $("#btnInsert").click(function(e){
 	console.log("클릭");
@@ -97,73 +205,9 @@ $("#btnInsert").click(function(e){
 		"url"			:	url,
 		"data"			:	formData, 
 		"success"		:	function(data) {
-			var clone1 = $("#forclone").clone();
 			console.log(data);
 			if(data.result == "insertArticle_success"){
-				
-				/* 카테고리 */
-				
-				if(data.time_state == "2-002"){
-					clone1.find(".output-stars-clone").show();
-				}else if(data.time_state == "2-003"){
-					clone1.find(".output-stars-clone").hide();
-				}
-				
-				/*별 클론*/
-			
-				if(data.time_star == 5){
-					console.log("작동");
-					
-				}else if(data.time_star == 4){
-					clone1.find(".pclass").children("span").eq(0).text("4");
-					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
-				}else if(data.time_star == 3){
-					clone1.find(".pclass").children("span").eq(0).text("3");
-					clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
-					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
-				}else if(data.time_star == 2){
-					clone1.find(".pclass").children("span").eq(0).text("2");
-					clone1.find(".pclass").children("span").eq(3).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(3).addClass("star-inactive");
-					clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
-					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
-				}else if(data.time_star == 1){
-					clone1.find(".pclass").children("span").eq(0).text("1");
-					clone1.find(".pclass").children("span").eq(2).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(2).addClass("star-inactive");
-					clone1.find(".pclass").children("span").eq(3).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(3).addClass("star-inactive");
-					clone1.find(".pclass").children("span").eq(4).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(4).addClass("star-inactive");
-					clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
-					clone1.find(".pclass").children("span").eq(5).addClass("star-inactive");
-				}
-				
-				/*//별 클론 */
-				
-				/* 이미지 클론*/
-				if(data.time_img != null){
-					clone1.find(".pic-clone").attr("src","${image_url}"+data.time_img).show();
-				}else if(data.time_img == null){
-					clone1.find(".pic-clone").attr("src","#").hide();
-				}
-				
-				/*//이미지 클론 */
-				
-				clone1.find("#profile-pic-output-clone").attr("src","${image_url}${userVo.user_img}");
-				clone1.find("h3").text("${userVo.user_name}");
-				clone1.find(".content-clone").text(data.time_content);
-				
-				clone1.show();
-				$("#house").prepend(clone1).hide().fadeIn(1000);
-				$("#time_content").val("");
-				$("#time_img").val("");
-				$("#imgPreview").hide();
+				getCurrentTimeline();
 			} else if(data.fail == "fail"){
 				alert("글쓰기 실패");
 			}
@@ -241,25 +285,68 @@ $("#deleteImg").click(function(){
 	
 });
 
-/*댓글보기*/
-$(".showComment").each(function(){
-	$(this).click(function(e){
-		e.preventDefault();
-		var time_no = $(this).attr("data-no");
-		var user_id = $(this).attr("data-id");
-		console.log(time_no);
-		console.log(user_id);
-		$("#frm > input[name=time_no]").val(time_no);
-		$("#frm > input[name=user_id]").val(user_id);
-		$("#frm").submit();
-	});	
+// 댓글 가져오기
+function getCommentList(time_no, commentList) {
+	var url = "/comment/getCommentList/" + time_no;
+	$.post(url, function(data) {
+		console.log(data);
+		commentList.empty();
+		$.each(data, function() {
+			console.log(commentList);
+			setComment(this, commentList);
+		});
+		console.log(commentList);
+		commentList.show();
+	});
+}
+
+// 댓글 세팅
+function setComment(comment, commentList) {
+	var commentClone = $("#commentClone").clone();
+	commentClone.find("img").attr("src", "${image_url}" + comment.writer_img);
+	commentClone.find(".writer-name").text(comment.writer_name);
+	commentClone.find(".comment-date").text(comment.c_date);
+	commentClone.find(".comment-content").text(comment.c_content);
+	commentClone.show();
+	console.log(commentClone);
+	commentList.append(commentClone);
+}
+
+// 글 마다 있는 댓글보기버튼
+$(document).on("click", ".showComment", function(index) {
+	var btnName = $(this).text();
+ 	var time_no = $(this).attr("data-no");
+	var commentList = $(this).parent().next().next().next();
+	console.log(time_no);
+	console.log(commentList);
+	if(btnName == "글 상세보기") {
+		$(this).text("글 닫기");
+		getCommentList(time_no, commentList);
+	} else if(btnName == "글 닫기") {
+		$(this).text()
+		commentList.hide();
+	}
 });
 
-$(".closeComment").click(function(){
-	$(".commentList").hide();
-	$(".showComment").show();
-	$(".closeComment").hide();
-});
+/*댓글보기*/
+// $(".showComment").each(function(){
+// 	$(this).click(function(e){
+// 		e.preventDefault();
+// 		var time_no = $(this).attr("data-no");
+// 		var user_id = $(this).attr("data-id");
+// 		console.log(time_no);
+// 		console.log(user_id);
+// 		$("#frm > input[name=time_no]").val(time_no);
+// 		$("#frm > input[name=user_id]").val(user_id);
+// 		$("#frm").submit();
+// 	});	
+// });
+
+// $(".closeComment").click(function(){
+// 	$(".commentList").hide();
+// 	$(".showComment").show();
+// 	$(".closeComment").hide();
+// });
 
 
 
@@ -379,156 +466,7 @@ ${likeList}
 					<div class="col-md-2"></div>
 					<div class="col-md-1"></div>
 					<div class="col-md-6" id="house">
-						<c:forEach var="timelineVo" items="${timelineList}">
-						<div>
-							<div class="d-flex justify-content-center">
-								
-								<div class="card_output">
-									<div class="row d-flex">
-										<div class="">
-											<img class="profile-pic" src="${image_url}${timelineVo.writer_img}">
-										</div>
-										<div class="d-flex flex-column">
-											<h3 class="mt-2 mb-0">${timelineVo.writer_name}</h3>
-											<div class="output-stars" style="padding-top:10px;">
-											<c:if test='${timelineVo.time_state == "2-002"}'>
-											<c:if test="${timelineVo.time_star == 5}">
-												<p class="text-left" id="five-stars-p">
-													<span class="text-muted">5</span> <span
-														class="fa fa-star star-active ml-3"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-active"></span>
-												</p>
-											</c:if>
-											<!-- 별 네개 -->
-											<c:if test="${timelineVo.time_star == 4}">
-												<p class="text-left" id="four-stars-p">
-													<span class="text-muted">4</span> <span
-														class="fa fa-star star-active ml-3"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-inactive"></span>
-												</p>
-											</c:if>
-											
-											<!-- 별 세개 -->
-											<c:if test="${timelineVo.time_star == 3}">
-												<p class="text-left" id="three-stars-p">
-													<span class="text-muted">3</span> <span
-														class="fa fa-star star-active ml-3"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-active"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span>
-												</p>
-											</c:if>
-											
-											<!-- 별 두개 -->
-											<c:if test="${timelineVo.time_star == 2}">
-												<p class="text-left" id="two-stars-p">
-													<span class="text-muted">2</span> <span
-														class="fa fa-star star-active ml-3"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span>
-												</p>
-											</c:if>
-											
-											<!-- 별 한개 -->
-											<c:if test="${timelineVo.time_star == 1}">
-												<p class="text-left" id="one-stars-p">
-													<span class="text-muted">1</span> <span
-														class="fa fa-star star-active ml-3"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span> <span
-														class="fa fa-star star-inactive"></span>
-												</p>
-											</c:if>
-											</c:if>
-											</div>
-										</div>
-										<c:if test="${timelineVo.time_location != null}">
-										<p style="padding-top:19px; color:gray;">님이</p>
-										<p style="font-size: 16px; padding-left:3px; padding-top:19px; font-weight:bold; ">${timelineVo.time_location}</p>
-										<p style="padding-top:19px; color:gray;">에 있습니다.</p>
-										</c:if>
-											<div class="ml-auto">
-												<ul class="nav navbar-nav" style="float:right;">
-													<li class="dropdown"><a href="#"
-														class="dropdown-toggle" data-toggle="dropdown"><span
-															class="caret"></span></a>
-														<ul class="dropdown-menu" role="menu">
-															<c:if
-																test="${sessionScope.userVo.user_no == timelineVo.writer_no}">
-																<li><a class="btnUpdate"
-																	data-no="${timelineVo.time_no}">수정</a></li>
-																<li><a class="btnDelete"
-																	data-no="${timelineVo.time_no}">삭제</a></li>
-															
-															</c:if>
-															<li><a id="btnReport">신고</a></li>
-														</ul>
-										
-													</ul>
-													<p class="text-muted" style="padding-right:30px; ">${timelineVo.time_date}</p>
-												</div>
-												
-										</div>
-									<div class="text-left">
-										<p class="content">${timelineVo.time_content}</p>
-									</div>
-									<div class="row text-left">
-										<c:if test="${timelineVo.time_img != null}">
-											<img class="pic" src="${image_url}${timelineVo.time_img}" style="width:100px; height:100px;" onclick="window.open(this.src)">
-										</c:if>
-									</div>
-									
-									<!-- 댓글보기 버튼 -->
-									<div class="row mt-4" style= "padding-bottom:15px;">
-										<a class="ml-auto showComment" id="showComment" 
-										data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">글 상세보기</a>	
-									</div>
-									
-									<!-- 경계선 -->
-									<div class="row" style="border-width: 1px; border-color:gray; border-style:solid; opacity:0.5;">
-									</div>
-									
-									<!-- 댓글작성-->
-									<div class="row">
-										<div class="col-md-10">
-											<input class="mt-4 mb-3 form-control" placeholder="댓글을 작성해주세요"></input>
-										</div>
-										<div class="col-md-2">
-											<button type="button" class="form-control mt-4 mb-3 insertCommentBtn" style="background:#BFFBBE;">작성</button>
-										</div>
-									</div>
-									
-									<!-- 댓글보기 -->
-									<div class="row commentList" style="padding-top:10px; display:none;" data-no="${timelineVo.time_no}" id="commentList">
-										<img src="https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147_960_720.jpg"  class="commenter-image" alt="commenter_image">			
-										
-										<div class="comment-content col-md-11">
-											<div class="commenter-head">
-												<span class="commenter-name"><a href="">김범준</a></span> <span class="comment-date">
-												<i class="far fa-clock"></i>2 days ago</span>
-											</div>
-											<div class="comment-body">
-												<span class="comment">This is comment content Here is nice comment And you are beautiful</span>
-											</div>
-											<div class="comment-footer">		
-												<a class="comment-action">답글</a>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>
-						</div>
-						</c:forEach>
+						
 						<!--------------------------// 글 출력  -------------------------->
 					</div>
 					<div class="col-md-1"></div>
@@ -571,6 +509,9 @@ ${likeList}
 	</div>
 </div>
 <!-- ------------------------글 출력 클론----------------------------- -->
+												
+									
+
 	<div id="forclone" style="display:none;">
 		<div class="d-flex justify-content-center">
 			<div class="card_output">
@@ -592,20 +533,20 @@ ${likeList}
 							</p>
 						</div>
 					</div>
+						<p style="padding-top:19px; color:gray;">님이</p>
+						<p class="location-clone" style="font-size: 16px; padding-left:3px; padding-top:19px; font-weight:bold; ">위치</p>
+						<p style="padding-top:19px; color:gray;">에 있습니다.</p>
 					<div class="ml-auto">
 						<ul class="nav navbar-nav" style="float: right;">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"><span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-
-									<li><a class="btnUpdate" data-no="${timelineVo.time_no}">수정</a></li>
-									<li><a class="btnDelete" data-no="${timelineVo.time_no}">삭제</a></li>
-
-
-									<li><a id="btnReport">신고</a></li>
+									<li><a class="btnUpdate">수정</a></li>
+									<li><a class="btnDelete">삭제</a></li>
+									<li><a class="btnReport">신고</a></li>
 								</ul>
 						</ul>
-						<p class="text-muted pt-2 pt-sm-5">10 Sept</p>
+						<p class="text-muted date-clone" style="padding-right:30px; ">날짜</p>
 					</div>
 				</div>
 				<div class="text-left">
@@ -624,11 +565,55 @@ ${likeList}
 							class="text-muted pl-2">4</span>
 					</div>
 				</div>
+				
+				<!-- 댓글보기 버튼 -->
+				<div class="row mt-4" style= "padding-bottom:15px;">
+					<a class="ml-auto showComment" >글 상세보기</a>	
+				</div>
+				
+				<!-- 경계선 -->
+				<div class="row" style="border-width: 1px; border-color:gray; border-style:solid; opacity:0.5;">
+				</div>
+				
+				<!-- 댓글작성-->
+				<div class="row">
+					<div class="col-md-10">
+						<input class="mt-4 mb-3 form-control" placeholder="댓글을 작성해주세요"></input>
+					</div>
+					<div class="col-md-2">
+						<button type="button" class="form-control mt-4 mb-3 insertCommentBtn" style="background:#BFFBBE;">작성</button>
+					</div>
+				</div>
+				
+				<!-- 댓글보기 -->
+				<div class="commentList" style="padding-top:10px; " data-no="" id="commentList">
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<!--------------------------// 글 출력 클론  -------------------------->
+	
+	<!-- -----------------------댓글 클론 -->
+	<div id="commentClone" style="display: none">
+		<div class="row commentInfo" style="padding-top:10px;">
+			<img src="https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147_960_720.jpg"  class="commenter-image" alt="commenter_image">			
+			<div class="comment-content col-md-11">
+				<div class="commenter-head">
+					<span class="commenter-name"><a class="writer-name" href="#">김범준</a></span> 
+					<span class="comment-date"><i class="far fa-clock"></i>댓글날짜</span>
+				</div>
+				<div class="comment-body">
+					<span class="comment comment-content">댓글내용</span>
+				</div>
+				<div class="comment-footer">		
+					<a class="comment-action"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -----------------------// 댓글 클론 -->
+	
 					
 	<%@include file="../include/footer.jsp" %>
 </body>

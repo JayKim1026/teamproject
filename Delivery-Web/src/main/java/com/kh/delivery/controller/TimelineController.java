@@ -132,15 +132,23 @@ public class TimelineController implements Codes {
 		return "timeline/content";	
 	}
 	
-	
-	// 안드로이드
-	@RequestMapping(value="/android/getTimelineList", method=RequestMethod.POST)
+	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
 		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
 		return timelineList;
 	}
 	
+	
+	@RequestMapping(value="/getCurrentTimeline", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
+		List<TimelineVo> timelineList = timelineService.getCurrentTimeline(time_no);
+		return timelineList;
+	}
+
+	
+	// 안드로이드
 	@RequestMapping(value="/android/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
