@@ -29,16 +29,18 @@ public class ReportController {
 	
 	// 관리자
 	// 신고 타입으로 검색 가능
-	@RequestMapping(value="/geReportList", method=RequestMethod.POST)
-	public List<ReportVo> getReportList(String reportType) throws Exception {
-		List<ReportVo> reportList = reportService.getReportList(reportType);
+	@RequestMapping(value="/getReportList", method=RequestMethod.POST)
+	public List<ReportVo> getReportList(String report_type) throws Exception {
+		List<ReportVo> reportList = reportService.getReportList(report_type);
 		return reportList;
 	}
 	
 	// reportno, adminno 로 신고 승인
 	@RequestMapping(value="/approveReport", method=RequestMethod.POST)
 	public String approveReport(ReportVo reportVo) throws Exception {
+		System.out.println("reportController, approveReport / " + reportVo);
 		String result = reportService.approveReport(reportVo);
+		System.out.println(result);
 		return result;
 	}
 	
