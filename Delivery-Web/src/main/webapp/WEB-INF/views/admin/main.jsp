@@ -12,7 +12,7 @@
 <!-- Header -->
 <%@include file="../include/adminHeader.jsp"%>
 <!-- end of Header -->
-
+${sessionScope.adminVo}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -238,4 +238,41 @@
 <%@include file="../include/footer.jsp"%>
 <!-- end of footer -->
 </body>
+<script>
+
+function getMemberList(){
+	var url = "/admin/getMemberList"
+	$.post(url, function(){
+		
+	});
+}
+
+function getDeliveryList(){
+	var url = "/admin/getDeliveryList"
+	$.post(url, function(){
+			
+	});
+}
+
+function getTimelineList(){
+	var url = "/admin/getTimelineList"
+	$.post(url, function(){
+				
+	});
+}
+
+function getRepotList(){
+	var url = "/admin/getReportList"
+	$.post(url, function(){
+			
+	});
+}
+
+$(function(){
+	getMemberList()
+	getDeliveryList()
+	getTimelineList()
+	getRepotList()
+});
+</script>
 </html>

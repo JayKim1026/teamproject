@@ -11,7 +11,7 @@
 				<div class="col-md-8">
 				</div>
 				<div class="col-md-2">
-					<span style="text-decoration: underline;">${userVo.user_name}</span> 관리자님 환영합니다.
+					<span style="text-decoration: underline;">${adminVo.admin_name}</span> 관리자님 환영합니다.
 				</div>
 			</div>
 		</div>
