@@ -26,9 +26,9 @@ public class ReportDaoImpl implements ReportDao {
 	}
 
 	@Override
-	public List<ReportVo> getReportList(String reportType) throws Exception {
+	public List<ReportVo> getReportList(String report_type) throws Exception {
 		Map<String, String> map = new HashMap<>();
-		map.put("reportType", reportType);
+		map.put("report_type", report_type);
 		List<ReportVo> reportList = sqlSession.selectList(NAMESPACE + "getReportList", map);
 		return reportList;
 	}
