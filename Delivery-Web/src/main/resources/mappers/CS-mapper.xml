@@ -4,22 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.CS">
 
-<!-- FQA 페이지 이동 시 FQA 목록 가져오기 -->
-	<select id="getFAQList" resultType="FAQVo">
-		select ROWNUM r, s.* from(select * from tbl_faq f
-		inner join tbl_code c
-		on f.faq_state = c.code_no)s
-		order by r asc
-	</select>
-
 <!-- FAQ 페이지에서 검색 -->
-	
 	<select id="getSearchList" resultType="FAQVo">
-	select ROWNUM r, f.*, c.code_detail 
-	from tbl_faq f Left Join tbl_code c on f.faq_state = c.code_no
-	where c.code_detail like #{category} and (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
+	select rownum r, f.*, c.code_detail 
+	from tbl_faq f 
+	left join tbl_code c 
+	on f.faq_state = c.code_no
+	<if test='category != "all"'>
+		where c.code_no like #{category}
+		and (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
+	</if>
+	where f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%'
 	order by r asc
-
-		
 	</select>
 </mapper>

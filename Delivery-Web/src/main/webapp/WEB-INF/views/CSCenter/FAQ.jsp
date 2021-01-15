@@ -120,17 +120,18 @@
 					<div style="margin-bottom: 30px;">
 						<h3><strong>자주하는 질문</strong></h3>
 						<select class="category" name="category">
-							<option selected="selected">주문문의</option>
-							<option>배달문의</option>
-							<option>웹이용문의</option>
-							<option>앱이용문의</option>
-							<option>기타문의</option>
+							<option value="4-006" selected="selected">전체</option>
+							<option value="4-001">주문문의</option>
+							<option value="4-002">배달문의</option>
+							<option value="4-003">웹이용문의</option>
+							<option value="4-004">앱이용문의</option>
+							<option value="4-005">기타문의</option>
 						</select>
 						<input type="text" class="form keyword" name="search">
 						<button type="button" class="btnSearch">검색</button>
 					</div>
 					
-					<table class="table">
+					<table class="table orgTable">
 						<thead>
 							<tr>
 								<th class="" style="text-align: center">번호</th>
@@ -139,16 +140,23 @@
 							</tr>
 						</thead>
 						<tbody class="orgTbody">
-						<c:forEach var="FAQVo" items="${FAQList }">
-							<tr class="trTitle">
-								<td style="text-align: center">${FAQVo.r }</td>
-								<td style="text-align: center">${FAQVo.code_detail }</td>
-								<td style="text-align: left; "><a class="faqTitle" href="#" style="margin-left: 30px;">${FAQVo.faq_title }</a></td>
+						
+						</tbody>
+					</table>
+					
+					<table id="cloneTable" style="display:none;">
+						<tbody id="cloneTbody">
+							<tr>
+								<td style="text-align: center"></td>
+								<td style="text-align: center"></td>
+								<td style="text-align: left;"><a class="faqTitle" href="#"
+									style="margin-left: 30px;"></a></td>
 							</tr>
-							<tr style="display:none;" class="trAnswer">
-								<td colspan="3" class="FAQcontentTd" style="background-color: whitesmoke; align-content: center; "><span style="margin-left: 342px">${FAQVo.faq_content }</span></td>
+							<tr style="display: none;" class="trAnswer">
+								<td colspan="3" class="FAQcontentTd"
+									style="background-color: whitesmoke; align-content: center;"><span style="margin-left: 342px"></span>
+								</td>
 							</tr>
-						</c:forEach>
 						</tbody>
 					</table>
 				</section>
@@ -167,36 +175,46 @@
 		</div>
 	</div>
 <script>
-$(function(){
-	// FAQ 내용 보여주기
-	$(".faqTitle").each(function(index){
-		$(this).click(function(){
-			$(".trAnswer").eq(index).slideToggle("slow");
-		});
-	});
+
+$(function() {
 	
+	getFAQ("4-006", "");
+	
+	function getFAQ(category, keyword) {
+		var url = "/CSCenter/search"
+		var sendData = {	"category"	: category,		"keyword"	: keyword }
+		
+		$.get(url, sendData, function(data){
+			console.log(data);
+			$(".orgTbody").empty();	
+			$.each(data, function(){
+				var trTitleClone = $("#cloneTbody").children().eq(0).clone();
+				var trAnswerClone = $("#cloneTbody").children().eq(1).clone();
+				trTitleClone.find("td").eq(0).text(this.r);
+				trTitleClone.find("td").eq(1).text(this.code_detail);
+				trTitleClone.find("td").eq(2).find("a").text(this.faq_title);
+				trTitleClone.find("td").eq(2).find("a").attr("data-r", this.r);
+				trAnswerClone.find("td").find("span").text(this.faq_content);
+				
+				$(".orgTbody").append(trTitleClone);
+				$(".orgTbody").append(trAnswerClone);
+			});
+		});
+	}
 	
 	// 검색하기
 	$(".btnSearch").click(function(){
 		var category = $(".category").val();
 		var keyword = $(".keyword").val();
-		var url = "/CSCenter/search"
-		var sendData = {	"category"	: category,		"keyword"	: keyword }
-			
-		$.get(url, sendData, function(data){
-			console.log(data);
-			$("tbody > tr").empty();	
-			$.each(data, function(){
-				$("tbody > tr > td").eq(0).text("this.faq_no");
-				$("tbody > tr > td").eq(1).text("this.code_detail");
-				$("tbody > tr > td").eq(2).text("this.faq_title");
-				$("tbody > tr").eq(1).find("td").find("a").text("this.faq_title");
-				console.log(this.faq_no);
-				console.log(this.code_detail);
-				console.log(this.faq_title);
-				console.log(this.faq_content);
-			});
-		});
+		console.log(category);
+		getFAQ(category, keyword);
+	});
+
+	// FAQ 내용 보여주기
+	$(document).on("click", ".faqTitle", function() {
+		console.log($(this).attr("data-r"));
+		var r = parseInt($(this).attr("data-r"));
+		$(".trAnswer").eq(r-1).slideToggle("slow");
 	});
 	
 }); // 핸들러
