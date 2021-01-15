@@ -73,7 +73,6 @@ getTimelineList(true);
 function getTimelineList(first) {
 	var url = "/timeline/getTimelineList";
 	$.post(url, function(data) {
-		console.log(data);
 		$.each(data, function(index) {
 			if(index == 0) {
 				lastTimeNo = this.time_no;
@@ -90,18 +89,16 @@ function getCurrentTimeline() {
 			"time_no"	:	lastTimeNo
 	}
 	$.post(url, sendData, function(data) {
-		console.log(data);
 		$.each(data, function(index) {
 			if(index == 0) {
 				lastTimeNo = this.time_no;
 			}
-			setTimeline(this, false);
+			setTimeline(this, true);
 		});
 	});
 }
 
-function setTimeline(data, first) {
-	console.log(data);
+function setTimeline(data, insert) {
 	// 클론
 	var clone1 = $("#forclone").clone();
 	
@@ -116,7 +113,6 @@ function setTimeline(data, first) {
 	/*별 클론*/
 
 	if(data.time_star == 5){
-		console.log("작동");
 	}else if(data.time_star == 4){
 		clone1.find(".pclass").children("span").eq(0).text("4");
 		clone1.find(".pclass").children("span").eq(5).removeClass("star-active");
@@ -161,16 +157,24 @@ function setTimeline(data, first) {
 	clone1.find("h3").text("${userVo.user_name}");
 	clone1.find(".content-clone").text(data.time_content);
 	clone1.find(".date-clone").text(data.time_date);
-	clone1.find(".location-clone").text(data.time_location);
+	console.log(data);
+	if(data.time_location != null && data.time_location != "") {
+		clone1.find(".location-clone").prev().show();
+		clone1.find(".location-clone").text(data.time_location);
+		clone1.find(".location-clone").next().show();
+	} else{
+		clone1.find(".location-clone").prev().hide();
+		clone1.find(".location-clone").text("");
+		clone1.find(".location-clone").next().hide();
+	}
 	clone1.find(".showComment").attr("data-no", data.time_no);
+	clone1.find(".insertCommentBtn").attr("data-no", data.time_no);
 	
 	clone1.show();
-	$("#house").prepend(clone1).hide().fadeIn(1000);
-	
-	if(!first) {
-		$("#time_content").val("");
-		$("#time_img").val("");
-		$("#imgPreview").hide();
+	if(!insert) {
+		$("#house").prepend(clone1).hide().fadeIn(1000);
+	} else {
+		$("#house").prepend(clone1);
 	}
 }
 
@@ -208,6 +212,9 @@ $("#btnInsert").click(function(e){
 			console.log(data);
 			if(data.result == "insertArticle_success"){
 				getCurrentTimeline();
+				$("#time_content").val("");
+				$("#time_img").val("");
+				$("#imgPreview").hide();
 			} else if(data.fail == "fail"){
 				alert("글쓰기 실패");
 			}
@@ -289,13 +296,11 @@ $("#deleteImg").click(function(){
 function getCommentList(time_no, commentList) {
 	var url = "/comment/getCommentList/" + time_no;
 	$.post(url, function(data) {
-		console.log(data);
 		commentList.empty();
 		$.each(data, function() {
 			console.log(commentList);
 			setComment(this, commentList);
 		});
-		console.log(commentList);
 		commentList.show();
 	});
 }
@@ -308,46 +313,50 @@ function setComment(comment, commentList) {
 	commentClone.find(".comment-date").text(comment.c_date);
 	commentClone.find(".comment-content").text(comment.c_content);
 	commentClone.show();
-	console.log(commentClone);
 	commentList.append(commentClone);
 }
 
 // 글 마다 있는 댓글보기버튼
-$(document).on("click", ".showComment", function(index) {
+$(document).on("click", ".showComment", function() {
 	var btnName = $(this).text();
  	var time_no = $(this).attr("data-no");
 	var commentList = $(this).parent().next().next().next();
-	console.log(time_no);
-	console.log(commentList);
 	if(btnName == "글 상세보기") {
 		$(this).text("글 닫기");
 		getCommentList(time_no, commentList);
 	} else if(btnName == "글 닫기") {
-		$(this).text()
+		$(this).text("글 상세보기");
 		commentList.hide();
 	}
 });
 
-/*댓글보기*/
-// $(".showComment").each(function(){
-// 	$(this).click(function(e){
-// 		e.preventDefault();
-// 		var time_no = $(this).attr("data-no");
-// 		var user_id = $(this).attr("data-id");
-// 		console.log(time_no);
-// 		console.log(user_id);
-// 		$("#frm > input[name=time_no]").val(time_no);
-// 		$("#frm > input[name=user_id]").val(user_id);
-// 		$("#frm").submit();
-// 	});	
-// });
-
-// $(".closeComment").click(function(){
-// 	$(".commentList").hide();
-// 	$(".showComment").show();
-// 	$(".closeComment").hide();
-// });
-
+// 댓글 작성
+$(document).on("click", ".insertCommentBtn", function() {
+	var btn = $(this);
+	var input = $(this).parent().prev().find("input");
+	var time_no = $(this).attr("data-no");
+	var comment = input.val();
+	var writer_no;
+	if("${userVo.user_no}" != "") {
+		writer_no = parseInt("${userVo.user_no}");
+	} else if("${deliverVo.dlvr_no}" != "") {
+		wrtier_no = parseInt("${deliverVo.dlvr_no}");
+	}
+	var url = "/comment/insertComment";
+	var sendData = {
+			"c_content"	:	comment, 
+			"writer_no"	:	writer_no, 
+			"time_no"	:	time_no
+	};
+	$.post(url, sendData, function(data) {
+		console.log(data);
+		if(data == "insertComment_success") {
+			var commentList = btn.parent().parent().next();
+			getCommentList(time_no, commentList);
+			input.val("");
+		}
+	});
+});
 
 
 });
