@@ -141,7 +141,7 @@
 						<tbody class="orgTbody">
 						<c:forEach var="FAQVo" items="${FAQList }">
 							<tr class="trTitle">
-								<td style="text-align: center"><span>${FAQVo.r }</span></td>
+								<td style="text-align: center">${FAQVo.r }</td>
 								<td style="text-align: center">${FAQVo.code_detail }</td>
 								<td style="text-align: left; "><a class="faqTitle" href="#" style="margin-left: 30px;">${FAQVo.faq_title }</a></td>
 							</tr>
@@ -182,11 +182,20 @@ $(function(){
 		var keyword = $(".keyword").val();
 		var url = "/CSCenter/search"
 		var sendData = {	"category"	: category,		"keyword"	: keyword }
-		$.get(url, sendData, function(serchList){
-			console.log("serchList : " + serchList);
-			$.each(serchList, function(){
+		$.get(url, sendData, function(data){
+			console.log(data);
+			$.each(data, function(){
+				var trTitle = $(".trTitle").clone();
+				var trAnswer = $(".trAnswer").clone();
+
+				$("tbody").empty();
 				
+				trTitle.find("td").eq(0).text(this.faq_no);
+				trTitle.find("td").eq(1).text(this.code_detail);
+				trTitle.find("td").eq(2).find("a").text(this.faq_title);
+				trAnswer.find("td").find("span").text(this.faq_content);
 				
+				$("tbody").append(trTitle);
 			});
 		});
 	});
