@@ -5,14 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="../include/link.jsp" %>
-<script src="jquery.fadethis.min.js"></script>
 <meta charset="UTF-8">
 <title>Main.jsp</title>
 </head>
@@ -320,100 +314,65 @@
 	</div>
 </div>
 <!-- End of Third Content -->
+
+<!--Last Content(get app on playstore and appstore)-->
+<div class="container-fluid content_box">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!--Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!--Center -->
+				<div class="col-md-4">
+					<img src="/resources/images/phoneLogo.png" style="margin-top:220px;">
+				</div>
+				<div class="col-md-4">
+					<ul style="list-style: none; padding-left:0px; margin-top:315px;">
+						
+						<li>
+							<div>
+								<p class="font_Naum" style="font-size: 45px;">지금, <span style="color:green; text-decoration: underline;">뚜벅뚜벅COMPANY</span>를 <br><span style="text-decoration: underline;">다운로드</span> 해보세요!</p>
+							</div>
+						</li>
+						
+						<li>
+							<div>
+								<p class="font_Naum" style="font-size: 25px;">세상의 모든 발자국, 가장 쉬운 배달 플랫폼 <span style="color:green; text-decoration: underline;">뚜벅뚜벅COMPANY</span></p>
+							</div>
+						</li>
+						
+						<li>
+							<div>
+								<p class="font_Naum" style="font-size: 20px;">*아이폰 추후 사용 가능*</p>
+							</div>
+							<div>
+								<img src="/resources/images/androidandapple.png" style="width:500px;">
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!--End of Center -->
+				
+				<!--Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!--Enf of Right Space -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Last Content(get app on playstore and appstore) -->
+
+
 	
 </body>
 
 <!-- Footer -->
-<section id="footer">
-	<div class="container">
-		<div class="row text-center text-xs-center text-sm-left text-md-left">
-			<div class="col-xs-12 col-sm-4 col-md-4">
-				<h5>Quick links</h5>
-				<ul class="list-unstyled quick-links">
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Home</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>About</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Get Started</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Videos</a></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-4 col-md-4">
-				<h5>Quick links</h5>
-				<ul class="list-unstyled quick-links">
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Home</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>About</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Get Started</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Videos</a></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-4 col-md-4">
-				<h5>Quick links</h5>
-				<ul class="list-unstyled quick-links">
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Home</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>About</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Get Started</a></li>
-					<li><a href="https://wwwe.sunlimetech.com"
-						title="Design and developed by"><i
-							class="fa fa-angle-double-right"></i>Imprint</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-				<ul class="list-unstyled list-inline social text-center">
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-facebook"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-twitter"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-instagram"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-google-plus"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02" target="_blank"><i
-							class="fa fa-envelope"></i></a></li>
-				</ul>
-			</div>
-			<hr>
-		</div>
-		<div class="row">
-			<div
-				class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-				<p>
-					<u><a href="https://www.nationaltransaction.com/">National
-							Transaction Corporation</a></u> is a Registered MSP/ISO of Elavon, Inc.
-					Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis,
-					MN]
-				</p>
-				<p class="h6">
-					© All right Reversed.<a class="text-green ml-2"
-						href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a>
-				</p>
-			</div>
-			<hr>
-		</div>
-	</div>
-</section>
+<%@include file="../include/footer.jsp" %>
 <div class="row">
 <div class="col-md-12">
 <a style="display:none;" id="modal-172661" href="#modal-container-172661" role="button" class="btn" data-toggle="modal">지도 모달</a>
