@@ -21,6 +21,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminVo;
 	}
 
+	@Override
+	public int getMemberList() {
+		int count = adminDao.getMemberList();
+		return count;
+	}
+
 	
 
 }

@@ -30,6 +30,13 @@ public class AdminDaoImpl implements AdminDao {
 		return adminVo;
 	}
 
+	@Override
+	public int getMemberList() {
+		int count = sqlSession.selectOne(NAMESPACE + "getMemberList");
+		System.out.println("count:"+ count);
+		return count;
+	}
+
 
 
 }

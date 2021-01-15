@@ -160,7 +160,7 @@ ${sessionScope.adminVo}
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
 										<h6>게시물</h6>
-										<p class="text-black-50 content mb-2">새로운 일반글: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
+										<p class="text-black-50 content mb-2">새로운 일반글: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="nomalPost"></span></p>
 										<p class="text-black-50 content mb-2">새로운 리뷰글: <span style="font-weight: 600px; text-decoration: underline; color:black;">40</span></p>
 										<p class="text-black-50 content mb-4">새로운 공지사항: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
 										<!-- 합계 -->
@@ -242,8 +242,9 @@ ${sessionScope.adminVo}
 
 function getMemberList(){
 	var url = "/admin/getMemberList"
-	$.post(url, function(){
-		
+	$.post(url, function(data){
+		var count = data;
+		$("#nomalPost").text(count);
 	});
 }
 
@@ -256,7 +257,8 @@ function getDeliveryList(){
 
 function getTimelineList(){
 	var url = "/admin/getTimelineList"
-	$.post(url, function(){
+	$.post(url, function(data){
+		
 				
 	});
 }
