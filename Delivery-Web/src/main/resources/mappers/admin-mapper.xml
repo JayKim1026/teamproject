@@ -8,4 +8,14 @@
 		where admin_id = #{admin_id}
 		and admin_pw = #{admin_pw}
 	</select>
+	
+	<select id="getMemberList" resultType="int">
+		select count(*) from tbl_timeline
+		where time_date &gt;= (
+			select to_char(sysdate -1, 'YYYY-MM-DD')
+	    	from dual) 
+		and time_date &lt;= sysdate
+	</select>
+	
+
 </mapper>

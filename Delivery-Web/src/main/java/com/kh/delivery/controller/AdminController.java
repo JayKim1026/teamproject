@@ -4,8 +4,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.service.AdminService;
@@ -42,21 +44,28 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/getMemberList", method=RequestMethod.POST)
-	public void getMemberList() throws Exception {
+	@ResponseBody
+	public int getMemberList(Model model) throws Exception {
 		System.out.println("멤버리스트 작동");
+		int count = adminService.getMemberList();
+		System.out.println("count:" + count);
+		return count;
 	}
 	
 	@RequestMapping(value="getDeliveryList", method=RequestMethod.POST)
+	@ResponseBody
 	public void getDeliveryList() throws Exception{
 		System.out.println("딜리버리리스트 작동");
 	}
 	
 	@RequestMapping(value="getTimelineList", method=RequestMethod.POST)
+	@ResponseBody
 	public void getTimelineList() throws Exception{
 		System.out.println("타임라인리스트 작동");
 	}
 	
 	@RequestMapping(value="getReportList", method=RequestMethod.POST)
+	@ResponseBody
 	public void getRepotList() throws Exception{
 		System.out.println("리포트리스트 작동");
 	}
