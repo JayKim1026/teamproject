@@ -22,8 +22,8 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<ReportVo> getReportList(String reportType) throws Exception {
-		List<ReportVo> reportList = reportDao.getReportList(reportType);
+	public List<ReportVo> getReportList(String report_type) throws Exception {
+		List<ReportVo> reportList = reportDao.getReportList(report_type);
 		return reportList;
 	}
 
