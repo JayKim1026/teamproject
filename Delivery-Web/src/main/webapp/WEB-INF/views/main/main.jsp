@@ -35,6 +35,8 @@
 								test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
 								<a class="menu__font" href="/account/logout">Logout</a>
 								<a class="menu__font" href="/timeline/showTimeline">TimeLine</a>
+								<!-- 관리자 임시로 여기뒀음 -->
+								<a class="menu__font" href="/admin/main">관리자페이지</a>
 							</c:if>
 							<!-- 일반 회원  -->
 							<c:if test="${sessionScope.userVo != null }">
