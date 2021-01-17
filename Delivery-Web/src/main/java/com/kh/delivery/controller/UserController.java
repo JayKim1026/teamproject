@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
+import com.kh.delivery.service.OrderService;
 import com.kh.delivery.service.UserService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
@@ -29,6 +30,8 @@ public class UserController implements Codes {
 
 	@Inject
 	private UserService userService;
+	@Inject
+	private OrderService orderService;
 
 	// 웹
 	// 로그인
@@ -52,7 +55,7 @@ public class UserController implements Codes {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
 		Date user_birth = new Date(df.parse(str_user_birth).getTime());
 		userVo.setUser_birth(user_birth);
-		
+				
 		String org_user_img = f_user_img.getOriginalFilename();
 		boolean isImage_img = FileUploadUtil.isImage(org_user_img);
 		
@@ -79,22 +82,14 @@ public class UserController implements Codes {
 		}
 	}
 
-	// userPage로 이동 + user 기본 정보
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String userInfo(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
-		UserVo userVo = (UserVo) session.getAttribute("userVo");
-		String user_img = userVo.getUser_img();
-		model.addAttribute("image_url", BUCKET_URL + user_img);
-		return "user/info";
-	}
 	
-	// newInfo 이동 + user 기본 정보
-	@RequestMapping(value = "/newInfo")
+	// userInfo 이동 + user 기본 정보
+	@RequestMapping(value = "/info")
 	public String userInfo2(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		String user_img = userVo.getUser_img();
 		model.addAttribute("image_url", BUCKET_URL + user_img);
-		return "user/newInfo";
+		return "user/info";
 	}
 
 	// 프로필 사진 변경
@@ -133,7 +128,7 @@ public class UserController implements Codes {
 				System.out.println("이미지 저장 실패");
 			}
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// 현재 비밀번호 확인 ajax
@@ -165,7 +160,7 @@ public class UserController implements Codes {
 		} else {
 			rttr.addFlashAttribute("pwChangeResult", "fail");
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// 이메일 변경
@@ -182,7 +177,7 @@ public class UserController implements Codes {
 		} else {
 			rttr.addFlashAttribute("emailChangeResult", "fail");
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// 사용자 휴대전화 변경
@@ -220,7 +215,7 @@ public class UserController implements Codes {
 		} else {
 			rttr.addFlashAttribute("addrChangeResult", "fail");
 		}
-		return "redirect:/user/newInfo";
+		return "redirect:/user/info";
 	}
 
 	// userPage 주문 내역 조회 페이지로 이동 + 주문 내역 조회
@@ -263,6 +258,18 @@ public class UserController implements Codes {
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address() throws Exception {
 		return "util/address";
+	}
+	
+	// 메시지 페이지
+	@RequestMapping(value="/messageForm", method=RequestMethod.GET)
+	public String messageForm(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		OrderVo orderVo = orderService.getMyOrder(userVo.getUser_no());
+		System.out.println("orderVo : " + orderVo);
+		System.out.println("userVo : " + userVo);
+		model.addAttribute("orderVo", orderVo);
+		model.addAttribute("image_url", BUCKET_URL);
+		return "user/message";
 	}
 	
 	// 안드로이드

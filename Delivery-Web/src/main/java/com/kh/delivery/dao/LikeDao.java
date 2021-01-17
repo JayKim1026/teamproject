@@ -7,8 +7,15 @@ import com.kh.delivery.domain.LikeVo;
 public interface LikeDao {
 	
 	/* Insert Like*/
-	public void insertLike(int time_no, String user_id); 
+	public String insertLike(int time_no, int account_no) throws Exception; 
 	
 	/* Delete Like */
-	public void deleteLike(int time_no, String user_id);
+	public String deleteLike(int time_no, int account_no) throws Exception;
+	
+	/* isLike */
+	public boolean isLike(int time_no, int account_no) throws Exception;
+	
+	/* getLikeCount */
+	public int getLikeCount(int time_no) throws Exception;
+	
 }

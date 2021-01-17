@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.message">
+
+	<select id="getMessageList" resultType="MessageVo">
+		select m.*, a.sender_name, a.sender_img 
+		from tbl_message m
+		inner join (
+		    select user_no sender_no, user_name sender_name, user_img sender_img from tbl_user
+		    union
+		    select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
+		on m.sender_no = a.sender_no
+		where m.order_no = #{order_no}
+		order by m.msg_no
+	</select>
+	
+	<select id="getCurrentMessage" resultType="MessageVo">
+		select m.*, a.sender_name, a.sender_img 
+		from tbl_message m
+		inner join (
+		    select user_no sender_no, user_name sender_name, user_img sender_img from tbl_user
+		    union
+		    select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
+		on m.sender_no = a.sender_no
+		where m.order_no = #{order_no}
+		and m.msg_no > #{msg_no}
+		order by m.msg_no
+	</select>
+	
+	<insert id="sendMsgContent">
+		insert into tbl_message(msg_no, order_no, sender_no, receiver_no, msg_content)
+		values(seq_message_no.nextval, #{order_no}, #{sender_no}, #{receiver_no}, #{msg_content})
+	</insert>
+	
+	<insert id="sendMsgImg">
+		insert into tbl_message(msg_no, order_no, sender_no, receiver_no, msg_img)
+		values(seq_message_no.nextval, #{order_no}, #{sender_no}, #{receiver_no}, #{msg_img})
+	</insert>
+	
+</mapper>

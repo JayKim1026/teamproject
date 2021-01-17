@@ -32,11 +32,7 @@
 	
     <!-- Remind Passowrd -->
     <div id="formFooter">
-     <ul class="underline">
-     	<li><a class="underlineHover" href="/account/registerForm">회원가입</a></li>
-     	<li><a class="underlineHover" href="/account/findAccountForm">아이디 찾기</a></li>
-     	<li><a class="underlineHover" href="#">비밀번호 찾기</a></li>
-     </ul> 
+ 
     </div>
   </div>
 </div>

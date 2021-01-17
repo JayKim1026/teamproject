@@ -61,4 +61,21 @@ public class TimelineDaoImpl implements TimelineDao {
 		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "getLastTimeline");
 		return timelineVo;
 	}
+
+	@Override
+	public void updateLikeCount(int time_no, int likeCount) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		map.put("likeCount", likeCount);
+		sqlSession.update(NAMESPACE + "updateLikeCount", map);
+		
+	}
+
+	@Override
+	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "getCurrentTimeline", map);
+		return timelineList;
+	}
 }

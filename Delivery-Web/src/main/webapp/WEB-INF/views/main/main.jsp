@@ -11,182 +11,370 @@
 <title>Main.jsp</title>
 </head>
 <body>
-	<header>
-		<nav class="navbar">
-			<div class="nav__logo">
-				<a class="logo__font" href="">뚜벅뚜벅Company</a> <i
-					class="fab fa-accusoft"></i>
+	<header class="header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" style="margin-top:15px;">
+					<div class="row">
+						<div class="col-md-2">
+							<div class="nav__logo">
+								<a class="logo__font" href="">뚜벅뚜벅Company</a>
+								 <i class="fab fa-accusoft"></i>
+							</div>
+						</div>
+						
+						<div align="right" class="col-md-10">
+							<c:if
+								test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
+								<a class="menu__font" href="/account/loginForm" style="padding-right:20px; font-size:35px;">Login</a>
+								<a class="menu__font" href="/account/registerForm">Join us</a>
+								<a class="menu__font" href="/account/dlvr_RegisterForm">Deliver Join</a>
+							</c:if>
+							
+							<c:if
+								test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
+								<a class="menu__font" href="/account/logout">Logout</a>
+								<a class="menu__font" href="/timeline/showTimeline">TimeLine</a>
+								<!-- 관리자 임시로 여기뒀음 -->
+								<a class="menu__font" href="/admin/main">관리자페이지</a>
+							</c:if>
+							<!-- 일반 회원  -->
+							<c:if test="${sessionScope.userVo != null }">
+								<a class="menu__font" href="/order/orderForm" >주문하기</a>
+								<a class="menu__font" href="/order/newOrderForm">새로운 주문하기</a>
+							</c:if>
+							<c:if test="${sessionScope.userVo != null }">
+								<a class="menu__font" href="/user/info">마이페이지</a>
+							</c:if>
+							<!-- 배달원 -->
+							<c:if test="${sessionScope.deliverVo != null }">
+								<a class="menu__font" href="/deliver/info">마이페이지</a>
+							</c:if>
+							<a class="menu__font" href="/CSCenter/FAQ">고객센터</a>
+							
+						</div>
+					</div>
+				</div>
 			</div>
-			<ul class="nav__main">
-				<c:if test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
-				<li><a class="menu__stuff" href="/account/loginForm">Login</a></li>
-				<li><a class="menu__stuff" href="/account/registerForm">Join us</a></li>
-				<li><a class="menu__stuff" href="/account/dlvr_RegisterForm">Deliver Join</a></li>
-				<li><a class="menu__stuff" href="/serviceCenter/FAQ">고객센터</a></li>
-				</c:if>
-				
-				<c:if test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
-				<li><a class="menu__stuff" href="/account/logout">Logout</a></li>
-				<li><a class="menu__stuff" href="/timeline/showTimeline">TimeLine</a></li>
-				</c:if>
-			</ul>
-			<ul class="nav__link">
-				<!-- 일반 회원  -->
-				<c:if test="${sessionScope.userVo != null }">
-					<li><a class="menu__stuff2" href="/order/orderForm" style="padding-right: 20;">주문하기</a></li>
-				</c:if>
-
-				<c:if test="${sessionScope.userVo != null }">
-					<li><a class="menu__stuff2" href="/user/info" style="padding-right: 20;">마이페이지</a></li>
-					<li><a class="menu__stuff2" href="/user/newInfo" style="padding-right: 20;">새로운마이페이지</a></li>
-				</c:if>
-				
-				<!-- 배달원 -->
-				<c:if test="${sessionScope.deliverVo != null }">
-					<li><a class="menu__stuff2" href="/deliver/info" style="padding-right: 20;">마이페이지</a></li>
-				</c:if>
-
-			</ul>
-			<div class="nav__textArea">
-				<%@include file="../util/adressMain.jsp" %>
-				<button id="btnSearch">지도보기</button>
+		</div>
+		<div class="col-md-12" style="margin-top: 300px;">
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-8" style="text-align: center;">
+					<h1 class="animate__animated animate__fadeInDown animate__delay-1s" style="color:white; font-family : 'Nanum Pen Script', cursive;">
+						배달 그 이상의 가치,
+					</h1>
+					<h1 class="animate__animated animate__fadeInDown animate__delay-2s" style="color:white; font-family : 'Nanum Pen Script', cursive;">
+						행복을 배달합니다.
+					</h1>
+				</div>
+				<div class="col-md-2">
+				</div>
 			</div>
-		</nav>
-
+		</div>
 	</header>
 	
 <body>
-	<div class="introduce__first">
-		userVo:${sessionScope.userVo}
-		<br/>
-		<br/>
-		dlvrVo:${sessionScope.deliverVo}
-		<p class="introduce__first_p">초록색 행복을 배달합니다.</p>
-		<p class="introduce__first_p">We are Green Delivery</p>
+
+<!-- First Content -->
+<div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<!-- Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!-- Center -->
+				<div class="col-md-8" style="margin-top:150px; justify-content: ceter;">
+					<div style="display:flex; justify-content: center;">
+						<p class="introduce__first_p">걸어서 지구 한바퀴, 초록색 행복을 배달하는 우리 
+						<span style="color:green; text-decoration: underline; font-weight: 600;">"뚜벅뚜벅COMPANY"</span> 를 소개합니다!</p>
+					</div>
+					
+					<div style="display:flex; justify-content: center;">
+						<p class="font_Naum" style="font-size:28px;">익숙한 우리동네 안에서 간단한 장보기, 사무용품, 음식 등을 배달하는 친환경 배달 전용 플랫폼 입니다.<br>
+						뚜벅뚜벅COMPANY와 함께하는 성인이라면, 별도의 면허, 장비없이 오직 튼튼한 두다리로만 배달에 참여할수있습니다.</p>
+					</div>
+					
+					<div style="display:flex; justify-content:center;">
+						<img src="/resources/images/walkman.png"
+						style="width:350px; height:350px; border-radius:10px;">
+					</div>
+					
+					<div style="display:flex; justify-content: center;">
+						<p class="font_Naum introduce__first_p">초록색 행복을 배달하는 우리, 지금 당신에게 배달갑니다!</p>
+					</div>
+					
+				</div>
+				<!-- End of Center -->
+				
+				<!-- Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- Enf of Right Space -->
+			</div>
+		</div>
 	</div>
+</div>
+<!-- End of First Content -->
+
+<!-- Second Content -->
+<div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!-- Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!-- Center -->
+				<div class="col-md-8">
+				
+					<div style="text-align: left;">
+						<p class="font_Naum" style="font-size:40px;"><span style="color:green; text-decoration: underline;">우리는</span>, 이렇게 배달해요!</p>
+					</div>
+				
+					<div class="flex_box" style="margin-top:60px;">
+						<img src="/resources/images/Grandparents.png" class="introduce__second_pic" id="introduce__second_pic_left">
+						<img src="/resources/images/chill.jpg" class="introduce__second_pic">
+						<img src="/resources/images/delivery_cu.jpg" class="introduce__second_pic" id="introduce__second_pic_right">
+					</div>
+					<div class="flex_box" style="margin-top:30px;">
+						
+						<div>
+						<p class="font_Naum title"><span style="color:green;">누구나, 쉽게</span> 그리고 안전하게 배달해요.</p>
+						<p class="font_Naum second_title">청년부터 어르신까지 쉽고 안전한 배달</p>
+						<p class="font_Naum describe_content"><span style="text-decoration: underline; font-weight: 600;">저용량</span> 위주의 가벼운 물품들을 누구든 쉽게 배달할수있어요!</p>
+						</div>
+						
+						<div>
+						<p class="font_Naum title"><span style="color:green;">소중한 당신의 시간,</span> 휴식은 선택이아닌 필수!</p>
+						<p class="font_Naum second_title">유연한 근무시간, 배달은 내가 원할때만해요.</p>
+						<p class="font_Naum describe_content">동네를 산책하듯 혹은 쇼핑을 가듯 자유로운 근무제도</p>
+						</div>
+						<div style="text-align: right;">
+						<p class="font_Naum title"><span style="color:green;">튼튼한 두다리로</span> 사고 걱정없이 자유로운 배달</p>
+						<p class="font_Naum second_title" ><span style="color:green;">걸어서</span> Ok, <span style="color:green;">뛰어서</span> Ok, <span style="color:green;">자전거</span> Ok</p>
+						<p class="font_Naum describe_content">우리는 두다리를 이용해 배달하는 뚜벅이 입니다!</p>
+						</div>
+					</div>
+					
+				</div>
+				<!-- End of Center -->
+				
+				<!-- Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- Enf of Right Space -->
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Second Content -->
+
+<!-- Third Content -->
+<div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!--Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!--Center -->
+				<div class="col-md-8">
+				
+					<!-- Hire Icon -->
+					<div style="margin-top:60px; text-align: left;">
+						<p class="font_Naum" style="font-size:40px;"><span style="color:green; text-decoration: underline;">뚜벅뚜벅</span>, 뚜벅이!<br></p>
+						<p class="font_Naum" style="font-size:40px;"><span style="color:green; text-decoration: underline;">누구나</span> 쉽게, 뚜벅이가 될 수있어요!</p>
+					</div>
+					<!-- end of Hire Icon -->
+					
+					<!-- pictures -->
+					<div class="flex_box" style="margin-top: 80px;">
+						<img src="/resources/images/hire1.png" class="introduce__hire_img"> 
+						<i class="fas fa-arrow-right" id="introduce__hire_icon_left"></i> 
+						<img src="/resources/images/hire2.png" class="introduce__hire_img"> 
+						<i class="fas fa-arrow-right" id="introduce__hire_icon_right"></i> 
+						<img src="/resources/images/hire3.png" class="introduce__hire_img">
+					</div>
+					<!-- end of pictures -->
+					
+					<!-- text -->
+					<div class="flex_box">
+						<p class="introduce__five_font">이력서는 필요없어요!쉬운 가입만하면 누구나!</p>
+						<p class="introduce__five_font">원하는 주문만 쏙쏙!</p>
+						<p class="introduce__five_font" id="introduce__five_font_right">매주 금요일, 배달 완료건에 대한 금액 지급!</p>
+					</div>
+					
+					<div style="float:right; margin-top:100px;">
+						<img src="/resources/images/delivery_logo2.png"  style="width:70px; height:70px; margin-left:40px;">
+						<div>
+							<a href="/account/dlvr_RegisterForm"><span class="font_Naum" style="font-size:29px;">라이더 등록하러가기</span></a>
+						</div>
+					</div>
+				
+					<!-- end of text -->
+				</div>
+				<!--End of Center -->
+				
+				<!--Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!--Enf of Right Space -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Third Content -->
+
+<!-- Third Content -->
+<div class="container-fluid content_box" style="background-color:black;"> <!-- data-aos="fade-up" data-aos-duration="2000"-->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!--Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!--Center -->
+				<div class="col-md-4">
+				
+					<!-- Hire Icon -->
+					<div style="margin-top:60px; text-align: left;">
+						<p class="font_Naum" style="font-size:40px;"><span style="color:white; text-decoration: underline;">FAQ</span></p>
+						<p class="font_Naum" style="font-size:40px;"><span style="color:white; text-decoration: underline;">자주하는 질문</span></p>
+					</div>
+					<!-- end of Hire Icon -->
+					
+					
+					<!-- end of pictures -->
+					
+					<!-- text -->
+					<ul style="list-style: none; padding-left:0px;">
+					
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 뚜벅이가 되고싶어요! 자격조건이 따로있나요?<br></p>	
+								<p class="faq_font">A 만 18세이상, 남녀노소 누구나 뚜벅이가 될수있습니다.<br>
+												단, 배달받으시는 고객분들을 위해 깔끔한 복장 아시죠?</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 자전거도 없고 자동차도 없어요 ㅠ_ㅠ 어떻게 배달하나요?<br></p>	
+								<p class="faq_font">A 자동차도 없는, 자전거도 없는 당신! 우리는 걸어서 배달해요!</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 회원가입시 필요한 서류는 어떻게되나요?<br></p>	
+								<p class="faq_font">A 본인 명의 계좌, 그리고 신분확인을 위한 신분증사진을 필요로합니다.</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font"><span style="color:green">Q</span> 배달 중 상품을 분실/파손 했어요ㅠㅠ 어떻게하죠?<br></p>	
+								<p class="faq_font">A 당황하지마시고 먼저 고객님에게 알린 후, 고객센터로 전화주세요!</p>
+							</div>
+						</li>
+						
+						<li style="margin-top:40px;">
+							<div>
+								<p class="faq_font">더 많은것들이 궁금하다면?<br></p>
+								<a href="/CSCenter/FAQ"><span class="faq_font" style="text-decoration: underline;">고객센터<br></span></a>	
+								<i class="far fa-hand-point-up" style="color:white;"></i>
+							</div>
+						</li>
+						
+					</ul>
+				
+					<!-- end of text -->
+				</div>
+				<!--End of Center -->
+				
+				<!--Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!--Enf of Right Space -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Third Content -->
+
+<!--Last Content(get app on playstore and appstore)-->
+<div class="container-fluid content_box">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			
+				<!--Left Space -->
+				<div class="col-md-2">
+				</div>
+				<!-- end of Left Space -->
+				
+				<!--Center -->
+				<div class="col-md-4">
+					<img src="/resources/images/phoneLogo.png" style="margin-top:220px;">
+				</div>
+				<div class="col-md-4">
+					<ul style="list-style: none; padding-left:0px; margin-top:315px;">
+						
+						<li>
+							<div>
+								<p class="font_Naum" style="font-size: 45px;">지금, <span style="color:green; text-decoration: underline;">뚜벅뚜벅COMPANY</span>를 <br><span style="text-decoration: underline;">다운로드</span> 해보세요!</p>
+							</div>
+						</li>
+						
+						<li>
+							<div>
+								<p class="font_Naum" style="font-size: 25px;">세상의 모든 발자국, 가장 쉬운 배달 플랫폼 <span style="color:green; text-decoration: underline;">뚜벅뚜벅COMPANY</span></p>
+							</div>
+						</li>
+						
+						<li>
+							<div>
+								<p class="font_Naum" style="font-size: 20px;">*아이폰 추후 사용 가능*</p>
+							</div>
+							<div>
+								<img src="/resources/images/androidandapple.png" style="width:500px;">
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!--End of Center -->
+				
+				<!--Right Space -->
+				<div class="col-md-2">
+				</div>
+				<!--Enf of Right Space -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Last Content(get app on playstore and appstore) -->
+
+
 	
-	<div class="introduce__second">
-		<img src="/resources/images/ubereats.jpg" class="introduce__second_pic" id="introduce__second_pic_left">
-		<img src="/resources/images/green.jpg" class="introduce__second_pic">
-		<img src="/resources/images/walk.jpg" class="introduce__second_pic" id="introduce__second_pic_right">
-	</div>
-	
-	<div class="introduce__third">
-		<p class="introduce__third_p" id="introduce__third_p_left">누구나, 가볍게 그리고 안전하게 배달해요.</p>
-		<p class="introduce__third_p">누구나 쉽게, 초록색 행복을 지킬수있어요.</p>
-		<p class="introduce__third_p" id="introduce__third_p_right">튼튼한 두다리로 사고 걱정없이 자유롭게!</p>
-	</div>
-	
-	<div class="introduce__icon">
-		<img src="/resources/images/hiring.png" class="hiring_icon">
-	</div>
-	
-	<div class="introduce__four">
-		<img src="/resources/images/hire1.png" class="introduce__hire_img" id="introduce__hire_img_left"> 
-		<i class="fas fa-arrow-right" id="introduce__hire_icon_left"></i> 
-		<img src="/resources/images/hire2.png" class="introduce__hire_img" id="introduce__hire_img"> 
-		<i class="fas fa-arrow-right" id="introduce__hire_icon_right"></i> 
-		<img src="/resources/images/hire3.png" class="introduce__hire_img" id="introduce__hire_img_right">
-	</div>
-	
-	<div class="introduce__five">
-		<p class="introduce__five_font" id="introduce__five_font_left">누구나, 가볍게 그리고 안전하게 배달해요.</p>
-		<p class="introduce__five_font">누구나 쉽게, 초록색 행복을 지킬수있어요.</p>
-		<p class="introduce__five_font" id="introduce__five_font_right">튼튼한 두다리로 사고 걱정없이 자유롭게!</p>
-	</div>
 </body>
 
 <!-- Footer -->
-<section id="footer">
-	<div class="container">
-		<div class="row text-center text-xs-center text-sm-left text-md-left">
-			<div class="col-xs-12 col-sm-4 col-md-4">
-				<h5>Quick links</h5>
-				<ul class="list-unstyled quick-links">
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Home</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>About</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Get Started</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Videos</a></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-4 col-md-4">
-				<h5>Quick links</h5>
-				<ul class="list-unstyled quick-links">
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Home</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>About</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Get Started</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Videos</a></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-4 col-md-4">
-				<h5>Quick links</h5>
-				<ul class="list-unstyled quick-links">
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Home</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>About</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>FAQ</a></li>
-					<li><a href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-angle-double-right"></i>Get Started</a></li>
-					<li><a href="https://wwwe.sunlimetech.com"
-						title="Design and developed by"><i
-							class="fa fa-angle-double-right"></i>Imprint</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-				<ul class="list-unstyled list-inline social text-center">
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-facebook"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-twitter"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-instagram"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02"><i
-							class="fa fa-google-plus"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.fiverr.com/share/qb8D02" target="_blank"><i
-							class="fa fa-envelope"></i></a></li>
-				</ul>
-			</div>
-			<hr>
-		</div>
-		<div class="row">
-			<div
-				class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-				<p>
-					<u><a href="https://www.nationaltransaction.com/">National
-							Transaction Corporation</a></u> is a Registered MSP/ISO of Elavon, Inc.
-					Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis,
-					MN]
-				</p>
-				<p class="h6">
-					© All right Reversed.<a class="text-green ml-2"
-						href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a>
-				</p>
-			</div>
-			<hr>
-		</div>
-	</div>
-</section>
+<%@include file="../include/footer.jsp" %>
 <div class="row">
 <div class="col-md-12">
 <a style="display:none;" id="modal-172661" href="#modal-container-172661" role="button" class="btn" data-toggle="modal">지도 모달</a>
@@ -268,5 +456,9 @@ $(function(){
 	});
 });	
 </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>

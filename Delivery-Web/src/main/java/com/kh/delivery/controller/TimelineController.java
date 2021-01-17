@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.LikeVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
+import com.kh.delivery.service.LikeService;
 import com.kh.delivery.service.TimelineService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
@@ -31,6 +33,9 @@ public class TimelineController implements Codes {
 
 	@Inject
 	private TimelineService timelineService;
+	
+	@Inject
+	private LikeService likeService;
 	
 	// 웹
 	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
@@ -105,28 +110,45 @@ public class TimelineController implements Codes {
 	
 	
 	@RequestMapping(value="/content", method = RequestMethod.POST)
-	public String content(int time_no, String user_id, HttpSession session,Model model) throws Exception {
+	public String content(int time_no, HttpSession session, Model model) throws Exception {
+		int account_no;
+		UserVo userVo = (UserVo) session.getAttribute("userVo");
+		DeliverVo deliverVo;
+		if(userVo != null) {
+			account_no = userVo.getUser_no();
+		} else {
+			deliverVo = (DeliverVo) session.getAttribute("deliverVo");
+			account_no = deliverVo.getDlvr_no();
+		}
 		System.out.println("content...");
 		String image_url = BUCKET_URL;
-		String user_img = USER_IMG;
 		System.out.println("TimelineController, content, time_no:" + time_no);
-		System.out.println("TimelineController, content, user_id:" + user_id);
 		TimelineVo timelineVo = timelineService.selectByNo(time_no);
+		boolean isLike = likeService.isLike(time_no, account_no);
 		System.out.println("TimelineController, content, timelineVo:" + timelineVo);
 		model.addAttribute("timelineVo", timelineVo);
 		model.addAttribute("image_url", image_url);
+		model.addAttribute("isLike", isLike);
 		return "timeline/content";	
 	}
 	
-	
-	// 안드로이드
-	@RequestMapping(value="/android/getTimelineList", method=RequestMethod.POST)
+	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
 		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
 		return timelineList;
 	}
 	
+	
+	@RequestMapping(value="/getCurrentTimeline", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
+		List<TimelineVo> timelineList = timelineService.getCurrentTimeline(time_no);
+		return timelineList;
+	}
+
+	
+	// 안드로이드
 	@RequestMapping(value="/android/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
@@ -139,6 +161,13 @@ public class TimelineController implements Codes {
 	@ResponseBody
 	public TimelineVo getLastTimeline() throws Exception {
 		TimelineVo timelineVo = timelineService.getLastTimeline();
+		return timelineVo;
+	}
+	
+	@RequestMapping(value="/android/getTimelineInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public TimelineVo getTimelineInfo(int time_no) throws Exception {
+		TimelineVo timelineVo = timelineService.selectByNo(time_no);
 		return timelineVo;
 	}
 }

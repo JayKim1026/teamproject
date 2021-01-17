@@ -29,6 +29,11 @@ public class OrderController {
 		return "user/orderForm";
 	}
 	
+	@RequestMapping(value="/newOrderForm", method=RequestMethod.GET)
+	public String newOrderForm() throws Exception{
+		return "user/newOrderForm";
+	}
+	
 	@RequestMapping(value="/insertOrder", method=RequestMethod.POST)
 	public String insertOrder(OrderVo orderVo, HttpSession session, RedirectAttributes rttr) throws Exception {
 		System.out.println("orderVo = " + orderVo);

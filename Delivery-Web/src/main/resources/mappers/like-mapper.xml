@@ -5,18 +5,25 @@
 <mapper namespace="com.kh.delivery.like">
 	
 	<insert id="insertLike">
-		insert into tbl_like(time_no, user_id)
-		values(#{time_no}, #{user_id})
+		insert into tbl_like(time_no, account_no)
+		values(#{time_no}, #{account_no})
 	</insert>
+	
+	<delete id="deleteLike">
+		delete from tbl_like
+		where time_no = #{time_no}
+		and account_no = #{account_no}
+	</delete>
 	
 	<select id="isLike" resultType="int">
 		select count(*) from tbl_like
-		where user_id = #{user_id}
-		and time_no = #{time_no}
+		where time_no = #{time_no}
+		and account_no = #{account_no}
 	</select>
 	
-	<select id="likeList" resultType="LikeVo">
-		select * from tbl_like
+	<select id="getLikeCount" resultType="int">
+		select count(*) from tbl_like
+		where time_no = #{time_no}
 	</select>
 	
 </mapper>

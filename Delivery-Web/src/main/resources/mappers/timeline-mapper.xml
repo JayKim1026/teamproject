@@ -20,7 +20,7 @@
 		<if test="searchType != null">
 			where time_state = #{searchType}
 		</if>
-		order by t.time_no desc
+		order by t.time_no asc
 	</select>
 	
 	<insert id="insertArticle">
@@ -44,9 +44,9 @@
 		where time_no = #{time_no}
 	</delete>
 	
-	<update id="insertLike">
+	<update id="updateLikeCount">
 		update tbl_timeline set
-		time_like = time_like + #{time_like}
+		time_like = time_like + #{likeCount}
 		where time_no = #{time_no}
 	</update>
 	
@@ -67,10 +67,34 @@
 	</select>
 	
 	<select id="getLastTimeline" resultType="TimelineVo">
-		select * from (
-		    select * from tbl_timeline
-		    order by time_no desc)
+		select * 
+		from (
+		    select * from tbl_timeline t 
+		    inner join (
+		        select user_no writer_no, user_name writer_name from tbl_user
+		        union
+		        select dlvr_no, dlvr_name from tbl_deliver
+		        order by writer_no desc) a
+		    on t.writer_no = a.writer_no
+		    order by t.time_no desc)
 		where rownum = 1
+	</select>
+
+	<select id="getCurrentTimeline" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.writer_name, a.writer_img
+		from tbl_timeline t 
+		    left outer join tbl_deliver d
+		    on t.dlvr_no = d.dlvr_no
+		    left outer join (
+		        select admin_no account_no, admin_name writer_name, admin_img writer_img from tbl_admin
+		        union
+		        select user_no, user_name, user_img from tbl_user
+		        union
+		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
+		    ) a
+		    on t.writer_no = a.account_no
+		where t.time_no > #{time_no}
+		order by t.time_no asc
 	</select>
 	
 </mapper>

@@ -29,7 +29,10 @@
 	</update>
 
 	<select id="getPickedOrder" resultType="OrderVo">
-		select * from tbl_order
+		select o.*, u.user_name
+		from tbl_order o
+		inner join tbl_user u
+		on o.user_no = u.user_no
 		where dlvr_no = #{dlvr_no}
 			and order_state = '3-002'
 	</select>
@@ -50,9 +53,20 @@
 	</update>
 
 	<select id="getCompletedOrder" resultType="OrderVo">
+	 	select o.*,c.code_detail ,t.time_star 
+		from tbl_order o
+			left outer join tbl_timeline t
+				on o.order_no = t.order_no
+			inner join tbl_code c 
+				on c.code_no = o.order_state
+		where o.dlvr_no = #{dlvr_no}
+		order by o.order_no desc
+	</select>
+	
+	<select id="getMyOrder" resultType="OrderVo">
 		select * from tbl_order
-		where dlvr_no = #{dlvr_no}
-			and order_state = '3-003'
+		where user_no = #{user_no}
+			and order_state = '3-002'
 	</select>
 
 </mapper>

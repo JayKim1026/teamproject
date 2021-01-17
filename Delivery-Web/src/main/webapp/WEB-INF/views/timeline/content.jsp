@@ -18,13 +18,21 @@
 <script>
 
 $(function(){
+	var time_no = "${timelineVo.time_no}";
+	var account_no;
+	if("${userVo.user_no}" != "") {
+		account_no = "${userVo.user_no}";
+	} else if("${deliverVo.dlvr_no}" != ""){
+		account_no = "${deliverVo.dlvr_no}";
+	}
+	
 	/* Show CommentList */
 	$("#showComment").click(function(){
 		$(this).hide();
 		$("#closeComment").show();
 		var time_no = ${timelineVo.time_no};
 		var url = "/comment/getCommentList/" + time_no;
-		$.get(url, function(data){
+		$.post(url, function(data){
 			$("#newCommentList").empty();
 			$.each(data, function(index, comment){
 				var div = $(".commentListNew").eq(0).clone();
@@ -63,14 +71,12 @@ $(function(){
 		var c_content = $("#c_content").val();
 		var writer_no = "${userVo.user_no}";
 		console.log(time_no);
-		console.log(user_id);
 		console.log(c_content);
 		console.log(writer_no);
 		
 		var url = "/comment/insertComment";
 		var sendData = {
 				"time_no"	:	time_no,
-				"user_id"	:	user_id,
 				"c_content" :	c_content,
 				"writer_no"	:	writer_no
 		};
@@ -85,11 +91,10 @@ $(function(){
 			"data" 		:	JSON.stringify(sendData),
 			"success"	:	function(data){
 				console.log(data);
-				if(data == "success"){
+				if(data == "insertComment_success"){
 					console.log("댓글 입력성공");
 					$("#showComment").trigger("click");
-					
-					
+					$("#c_content").val("");
 				}
 			}
 		});
@@ -128,7 +133,7 @@ $(function(){
 			"method"	:	"post",
 			"success"	:	function(data){
 				console.log(data);
-				if(data =="success"){
+				if(data =="updateComment_success"){
 					$("#commentModalCancel").trigger("click");
 					console.log("댓글 수정 성공");
 					$("#showComment").trigger("click");
@@ -144,9 +149,9 @@ $(function(){
 		console.log(c_no);
 		console.log("클릭클릭삭제클릭");
 		var url = "/comment/deleteComment/" + c_no;
-		$.get(url, function(data){
+		$.post(url, function(data){
 			console.log(data);
-			if(data == "success"){
+			if(data == "deleteComment_success"){
 				console.log("삭제성공");
 				$("#showComment").trigger("click");
 			}
@@ -155,7 +160,7 @@ $(function(){
 	});
 	/*// End of Delete Comment //*/
 	
-	/* Insert Like */
+	/* Insert Like, Delete Like */
 	$("#like").click(function(){
 		console.log("라이크클릭");
 		var that = $(this);
@@ -163,21 +168,29 @@ $(function(){
 		var url = "";
 		
 		if(has){
-			url = "/like/deleteLike/${timelineVo.time_no}/${userVo.user_id}"
+			url = "/like/deleteLike/";
 		}else{
-			url = "/like/insertLike/${timelineVo.time_no}/${userVo.user_id}"
+			url = "/like/insertLike/";
 		}
-		
+		url += time_no + "/" + account_no;
+		/*far 빈하트 fas 꽉 찬 하트*/
 		console.log(url);
-		$.get(url, function(data){
+		$.post(url, function(data){
 			console.log(data);
-			if(data == "success"){
-				if(has){
-					that.removeClass("red-color");
-				}else{
-					that.addClass("red-color");
-				}
+			var likeCount = parseInt($("#likeCount").text());
+			if(data == "insertLike_success"){
+				that.removeClass("far");
+				that.addClass("fas");
+				that.addClass("red-color");
+				likeCount++;
+			} else if(data == "deleteLike_success") {
+				that.removeClass("fas");
+				that.addClass("far");
+				that.removeClass("red-color");
+				likeCount--;
 			}
+			console.log(likeCount);
+			$("#likeCount").text(likeCount);
 		});
 		
 	});		
@@ -298,22 +311,35 @@ $(function(){
 										</c:if>
 									</div>
 									
+									<!-- 좋아요.. -->
 									<div class="row text-left mt-4">
-										<i class="far fa-heart" style="font-size:30px;" id="like"></i>
-										<span>1000000</span>
+										<i
+										<c:choose>
+											<c:when test="${isLike == true}">
+												class="fas fa-heart red-color"
+											</c:when>
+											<c:otherwise>
+												class="far fa-heart"
+											</c:otherwise>
+										</c:choose>
+										  style="font-size:30px;" id="like"></i>
+										(<span id="likeCount">${timelineVo.time_like}</span>)
 									</div>
+									<!-- 좋아요 끝 -->
 									
 									<!-- 댓글보기 버튼 -->
 									<div class="row mt-4" style="padding-bottom: 15px;">
 										<a class="ml-auto showComment" id="showComment" data-no="${timelineVo.time_no}" data-id="${userVo.user_id}">댓글보기</a> 
 										<a class="ml-auto closeComment" id="closeComment" style="display: none;" data-no="${timelineVo.time_no}">댓글접기</a>
 									</div>
-
+									<!-- 댓글보기 버튼 끝 -->
+									
 									<!-- 경계선 -->
 									<div class="row"
 										style="border-width: 1px; border-color: gray; border-style: solid; opacity: 0.5;">
 									</div>
-
+									<!-- 경계선 끝 -->
+									
 									<!-- 댓글작성-->
 									<div class="row">
 										<div class="col-md-10">
@@ -326,8 +352,9 @@ $(function(){
 												style="background: #BFFBBE;" id="insertCommentBtn">작성</button>
 										</div>
 									</div>
-
-									<!-- 댓글보기 -->
+									<!-- 댓글작성 끝-->
+									
+									<!-- 댓글보기 클론 참고용 -->
 									<div class="row commentList"
 										style="padding-top: 10px; display: none;" id="commentList">
 										<div class="row commentListNew"
@@ -363,10 +390,13 @@ $(function(){
 											</div>
 										</div>
 									</div>
+									<!-- 댓글보기 클론 참고용 끝 -->
 									
+									<!-- 댓글 보기 -->
 									<div id="newCommentList">
 									
 									</div>
+									<!-- 댓글 보기 끝 -->
 									
 								</div>
 							</div>

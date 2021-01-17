@@ -11,15 +11,15 @@ public class TimelineVo {
 	private String writer_state;
 	private String time_content;
 	private String time_img;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp time_date;
 	private String time_state;
 	private int time_star;
 	private int dlvr_no;
 	private String time_location;
-	private int time_like;
 
 	// 조인 컬럼
+	private int time_like;
 	private String writer_name;
 	private String dlvr_name;
 	private String writer_img;

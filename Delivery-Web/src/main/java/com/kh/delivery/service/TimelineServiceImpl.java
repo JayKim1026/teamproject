@@ -47,8 +47,11 @@ public class TimelineServiceImpl implements TimelineService {
 	}
 
 	@Override
+	@Transactional
 	public TimelineVo selectByNo(int time_no) throws Exception {
 		TimelineVo timelineVo = timelineDao.selectByNo(time_no);
+		int likeCount = likeDao.getLikeCount(time_no);
+		timelineVo.setTime_like(likeCount);
 		return timelineVo;
 	}
 
@@ -56,6 +59,12 @@ public class TimelineServiceImpl implements TimelineService {
 	public TimelineVo getLastTimeline() throws Exception {
 		TimelineVo timelineVo = timelineDao.getLastTimeline();
 		return timelineVo;
+	}
+
+	@Override
+	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
+		List<TimelineVo> timelineList = timelineDao.getCurrentTimeline(time_no);
+		return timelineList;
 	}
 
 }

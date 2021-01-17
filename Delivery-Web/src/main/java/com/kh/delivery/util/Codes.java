@@ -10,4 +10,5 @@ public interface Codes {
 	String DLVR_IDCARD = "Dlvr_IDCard/";
 	String USER_IMG = "User_Img/";
 	String TIMELINE_IMG = "Timeline_Img/";
+    String MESSAGE_IMG = "Message_Img/";
 }
