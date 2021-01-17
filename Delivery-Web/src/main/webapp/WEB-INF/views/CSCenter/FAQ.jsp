@@ -60,35 +60,28 @@
 }
 
 .sidebar_ul {
-	margin-top: 101px; padding : 0px;
+	margin-top: 101px;
+	padding: 0px;
 	border: 1px solid whitesmoke;
 	background-color: white;
 	list-style: none;
-	padding: 0px;
 }
 
 .sidebar_li {
-	display:list-item;
-	padding: 0px;
-	margin:0px;
 	cursor: pointer;
-	border-bottom: 1px solid, whitesmoke;
-	text-align: center;
-	justify-content: center;
 	height: 80px;
+	justify-content: center;
+	text-align: center;
+    padding-block: 30px;
 }
 
 .sidebar_li:hover {
 	background-color: whitesmoke;
-	outline: 0;
 }
 
 .sidebar_a {
-	display:block;
-	padding: 15px;
 	text-decoration: none;
 	color: black;
-	vertical-align: middle;
 	font-size: 20px;
 }
 </style>
