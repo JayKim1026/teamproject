@@ -3,21 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.admin">
+	<!-- Login -->
 	<select id="login" resultType="AdminVo">
 		select * from tbl_admin
 		where admin_id = #{admin_id}
 		and admin_pw = #{admin_pw}
 	</select>
+	<!-- Login 끝 -->
 	
-	<select id="getMemberList" resultType="int">
-		select count(*) from tbl_timeline
-		where time_date &gt;= (
+	<!-- 회원 관련 카운트 -->
+	<select id="getNewMemberCount" resultType="int">
+		select count(*) from tbl_user
+		where user_date &gt;= (
 			select to_char(sysdate -1, 'YYYY-MM-DD')
 	    	from dual) 
-		and time_date &lt;= sysdate
+		and user_date &lt;= sysdate
 	</select>
 	
-	<select id="getWaitingDeliveryList" resultType="int">
+	<select id="getWaitingDeliveryCount" resultType="int">
 		select count(*) from tbl_deliver
 		where dlvr_state = '1-001'
 		and dlvr_date &gt;= (
@@ -26,7 +29,7 @@
 		and dlvr_date &lt;= sysdate
 	</select>
 	
-	<select id="getDeliveryList" resultType="int">
+	<select id="getNewDeliveryCount" resultType="int">
 		select count(*) from tbl_deliver
 		where dlvr_state = '1-002'
 		and dlvr_date &gt;= (
@@ -34,5 +37,147 @@
 	    from dual) 
 		and dlvr_date &lt;= sysdate
 	</select>
+	
+	<select id="getTotalMemberCount" resultType="int">
+		select count(*) from tbl_user
+	</select>
+	
+	<select id="getTotalDeliveryCount" resultType="int">
+		select count(*) from tbl_deliver
+	</select>
+	<!-- 회원 관련 카운트 끝-->
+	
+	<!-- 주문관련 카운트 -->
+	<select id="getRequestedOrderCount" resultType="int">
+		select count(*) from tbl_order
+		where order_state = '3-001'
+		and order_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and order_date &lt;= sysdate
+	</select>
+	
+	<select id="getOrderInProgressCount" resultType="int">
+		select count(*) from tbl_order
+		where order_state = '3-002'
+		and order_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and order_date &lt;= sysdate
+	</select>
+	
+	<select id="getFinishedOrderCount" resultType="int">
+		select count(*) from tbl_order
+		where order_state = '3-003'
+		and order_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and order_date &lt;= sysdate
+	</select>
 
+	<select id="getTotalFinishedOrderCount" resultType="int">
+		select count(*) from tbl_order
+		where order_state = '3-003'
+	</select>
+
+	<select id="getTotalCanceledOrderCount" resultType="int">
+		select count(*) from tbl_order
+		where order_state = '3-004'
+	</select>
+	
+	<select id="getTotalCanceledDeliverCount" resultType="int">
+		select count(*) from tbl_order
+		where order_state = '3-005'
+	</select>
+	<!-- 주문관련 카운트 끝-->
+	
+	<!-- 게시물 관련 카운트 -->
+	<select id="getNewPostCount" resultType="int">
+		select count(*) from tbl_timeline
+		where time_state = '2-003'
+		and time_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and time_date &lt;= sysdate
+	</select>
+	
+	<select id="getNewReviewCount" resultType="int">
+		select count(*) from tbl_timeline
+		where time_state = '2-002'
+		and time_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and time_date &lt;= sysdate
+	</select>
+	
+	<select id="getNewNoticeCount" resultType="int">
+		select count(*) from tbl_timeline
+		where time_state = '2-001'
+		and time_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and time_date &lt;= sysdate
+	</select>
+	
+	<select id="getTotalPostCount" resultType="int">
+		select count(*) from tbl_timeline
+		where time_state = '2-003'
+	</select>	
+	
+	<select id="getTotalReviewCount" resultType="int">
+		select count(*) from tbl_timeline
+		where time_state = '2-002'
+	</select>
+	<!-- 게시물 관련 카운트 끝-->
+	
+	<!-- 신고 관련 카운트 -->
+	
+	<select id="getNewRequestedReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_state = '6-001'
+		and report_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and report_date &lt;= sysdate
+	</select>
+	
+	<select id="getNewPostReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-012'
+		and report_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and report_date &lt;= sysdate
+	</select>
+	
+	<select id="getNewCommentReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-013'
+		and report_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and report_date &lt;= sysdate
+	</select>
+	
+	<select id="getTotalPostReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-012'
+	</select>
+	
+	<select id="getTotalCommentReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-013'
+	</select>
+	
+	<select id="getFinishedReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_state = '6-002'	
+	</select>
+	<!-- 신고 관련 카운트 끝-->
+	
+	<!-- 일반회원 리스트 -->
+	<select id="getMemberList" resultType="UserVo">
+		select * from tbl_user
+	</select>
+	
 </mapper>

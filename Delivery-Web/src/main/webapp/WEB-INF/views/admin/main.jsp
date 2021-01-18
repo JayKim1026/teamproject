@@ -47,9 +47,9 @@ ${sessionScope.adminVo}
 								
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
-											<img src="https://i.imgur.com/V4d3OFR.png" width="45">
+											<img src="https://i.imgur.com/F7vcS4O.png" width="50">
 											<div class="ml-2">
-												<span class="d-block font-weight-bold">241</span> 
+												<span class="d-block font-weight-bold" id="mainMemberCount"></span> 
 												<span>일반 가입자</span>
 											</div>
 										</div>
@@ -57,9 +57,9 @@ ${sessionScope.adminVo}
 									
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
-											<img src="https://i.imgur.com/F7vcS4O.png" width="50">
+											<img src="https://i.imgur.com/V4d3OFR.png" width="45">
 											<div class="ml-2">
-												<span class="d-block font-weight-bold">3790</span> 
+												<span class="d-block font-weight-bold" id="mainDeliverCount"></span> 
 												<span>배달원</span>
 											</div>
 										</div>
@@ -69,7 +69,7 @@ ${sessionScope.adminVo}
 										<div class="d-flex flex-row">
 											<img src="https://i.imgur.com/fExp9fE.png" width="50">
 											<div class="ml-2">
-												<span class="d-block font-weight-bold">93</span> 
+												<span class="d-block font-weight-bold" id="mainOrderCount"></span> 
 												<span>배달건수</span>
 											</div>
 										</div>
@@ -77,12 +77,14 @@ ${sessionScope.adminVo}
 									
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
-											<div class="ml-5">
-												<span class="d-block text-black-50">283 overdue</span> <span
-													class="text-black-50">3748 completed</span>
+											<img src="https://i.imgur.com/fExp9fE.png" width="50">
+											<div class="ml-2">
+												<span class="d-block font-weight-bold" id="mainPostCount"></span> 
+												<span>게시물</span>
 											</div>
 										</div>
 									</div>
+									
 									
 								</div>
 								
@@ -94,11 +96,11 @@ ${sessionScope.adminVo}
 								<!-- 왼쪽 첫번째 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>회원</h6>
+										<div><span style="margin-left:63px;">회원</span> <a href="/admin/editMember"style="float:right;">회원관리</a></div>
 										<!-- 신규 -->
-										<p class="text-black-50 content mb-2">신규 일반회원: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="newMemberList">80</span></p>
-										<p class="text-black-50 content mb-2">신규 배달원: <span style="font-weight: 600px; text-decoration: underline; color:black;">50</span></p>
-										<p class="text-black-50 content mb-4">가입 대기중: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
+										<p class="text-black-50 content mb-2">신규 일반회원: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="member_Count"></span></p>
+										<p class="text-black-50 content mb-2">신규 배달원: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="dlvr_Count_waiting"></span></p>
+										<p class="text-black-50 content mb-4">가입 대기중: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="dlvr_Count"></span></p>
 										<!-- 신규 -->
 										
 										<!-- 합계 -->
@@ -106,22 +108,22 @@ ${sessionScope.adminVo}
 											
 											<div class="mr-4">
 												<span>전체 일반 가입자</span>
-												<div class="mt-1">
-													<span class="alpha alpha-red">3000</span>
+												<div class="mt-2">
+													<span class="text-black-50" id="total_Member_Count"></span>
 												</div>
 											</div>
 											
 											<div class="mr-4">
 												<span>전체 배달원</span>
 												<div class="mt-2">
-													<span class="text-black-50">2500</span>
+													<span class="text-black-50" id="total_Deliver_Count"></span>
 												</div>
 											</div>
 											
 											<div class="mr-4">
 												<span>전체 회원</span>
 												<div class="mt-2">
-													<span class="text-black-50">5500</span>
+													<span class="text-black-50" id="total_All_Member_Count"></span>
 												</div>
 											</div>
 										</div>
@@ -133,32 +135,32 @@ ${sessionScope.adminVo}
 								<!-- 오른쪽 첫번째 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>배달</h6>
-										<p class="text-black-50 content mb-2">요청 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;">80</span></p>
-										<p class="text-black-50 content mb-2">진행중 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;">50</span></p>
-										<p class="text-black-50 content mb-4">배달 완료건수: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
+										<div><span style="margin-left:63px;">주문</span> <a href="#"style="float:right;">주문관리</a></div>
+										<p class="text-black-50 content mb-2">요청 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="requested_Order_Count"></span></p>
+										<p class="text-black-50 content mb-2">진행중 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="inProgress_Order_Count"></span></p>
+										<p class="text-black-50 content mb-4">배달 완료건수: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="finished_Order_Count"></span></p>
 										
 										<!-- 합계 -->
 										<div class="d-flex flex-row justify-content-between">
 											
 											<div class="mr-4">
-												<span>전체 배달건</span>
+												<span>취소된 주문</span>
 												<div class="mt-1">
-													<span class="alpha alpha-red">50</span>
-												</div>
-											</div>
-											
-											<div class="mr-4">
-												<span>완료된 배달</span>
-												<div class="mt-2">
-													<span class="text-black-50">80</span>
+													<span class="alpha alpha-red" id="canceled_Order_Count"></span>
 												</div>
 											</div>
 											
 											<div class="mr-4">
 												<span>취소된 배달</span>
 												<div class="mt-2">
-													<span class="text-black-50">20</span>
+													<span class="text-black-50" id="canceled_Deliver_Count"></span>
+												</div>
+											</div>
+											
+											<div class="mr-4">
+												<span>전체 배달건</span>
+												<div class="mt-2">
+													<span class="text-black-50" id="total_Finished_Count"></span>
 												</div>
 											</div>
 										</div>
@@ -171,31 +173,31 @@ ${sessionScope.adminVo}
 								<!-- 왼쪽 두번쨰(밑에칸) 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>게시물</h6>
-										<p class="text-black-50 content mb-2">새로운 일반글: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="nomalPost"></span></p>
-										<p class="text-black-50 content mb-2">새로운 리뷰글: <span style="font-weight: 600px; text-decoration: underline; color:black;">40</span></p>
-										<p class="text-black-50 content mb-4">새로운 공지사항: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
+										<div><span style="margin-left:63px;">게시물</span> <a href="#"style="float:right;">게시글관리</a></div>
+										<p class="text-black-50 content mb-2">새로운 일반글: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="post_Count"></span></p>
+										<p class="text-black-50 content mb-2">새로운 리뷰글: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="review_Count"></span></p>
+								 		<p class="text-black-50 content mb-4">새로운 공지사항: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="notice_Count"></span></p>
 										<!-- 합계 -->
 										<div class="d-flex flex-row justify-content-between">
 										
 											<div class="mr-4">
 												<span>전체 일반글</span>
 												<div class="mt-1">
-													<span class="alpha alpha-red">500</span> 
+													<span class="alpha alpha-red" id="total_Post_Count"></span> 
 												</div>
 											</div>
 											
 											<div class="mr-4">
 												<span>전체 리뷰글</span>
 												<div class="mt-2">
-													<span class="text-black-50">350</span>
+													<span class="text-black-50" id="total_Review_Count"></span>
 												</div>
 											</div>
 											
 											<div class="mr-4">
 												<span>전체 게시글</span>
 												<div class="mt-2">
-													<span class="text-black-50">850</span>
+													<span class="text-black-50" id="total_count"></span>
 												</div>
 											</div>
 										</div>
@@ -207,30 +209,31 @@ ${sessionScope.adminVo}
 								<!-- 오른쪽 투번째(밑에칸) 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<h6>신고접수</h6>
-										<p class="text-black-50 content mb-2">새로운 신고접수: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
-										<p class="text-black-50 content mb-2">새로운 댓글 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
-										<p class="text-black-50 content mb-4">새로운 게시물 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
+										<div><span style="margin-left:63px;">신고</span> <a href="#"style="float:right;">신고관리</a></div>
+										<p class="text-black-50 content mb-2">새로운 신고접수: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="requested_Report_Count"></span></p>
+										<p class="text-black-50 content mb-2">새로운 댓글 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="report_Comment_Count"></span></p>
+										<p class="text-black-50 content mb-4">새로운 게시물 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="report_Post_Count"></span></p>
 										<!-- 합계 -->
 										<div class="d-flex flex-row justify-content-between">
-											<div class="mr-4">
-												<span>완료된 신고접수</span>
-												<div class="mt-1">
-													<span class="alpha alpha-red">30</span> 
-												</div>
-											</div>
-											
+										
 											<div class="mr-4">
 												<span>게시물 신고</span>
-												<div class="mt-2">
-													<span class="text-black-50">60</span>
+												<div class="mt-1">
+													<span class="text-black-50" id="total_Report_Post_Count"></span>
 												</div>
 											</div>
 											
 											<div class="mr-4">
 												<span>댓글 신고</span>
 												<div class="mt-2">
-													<span class="text-black-50">40</span>
+													<span class="text-black-50" id="total_Report_Comment_Count"></span>
+												</div>
+											</div>
+											
+											<div class="mr-4">
+												<span>완료된 신고접수</span>
+												<div class="mt-2">
+													<span class="alpha alpha-red" id="finished_Report_Count"></span> 
 												</div>
 											</div>
 										</div>
@@ -257,32 +260,61 @@ ${sessionScope.adminVo}
 <script>
 
 function getMemberList(){
-	var url = "/admin/getMemberList"
+	var url = "/admin/getMemberCount"
 	$.post(url, function(data){
-		var count = data;
-		$("#newMemberList").text(count);
+		console.log("dlvr_Count_waiting:" + data.dlvr_Count_waiting);
+		console.log(data);
+		$("#member_Count").text(data.member_Count);
+		$("#dlvr_Count_waiting").text(data.dlvr_Count_waiting);
+		$("#dlvr_Count").text(data.dlvr_Count);
+		$("#total_Member_Count").text(data.total_Member_Count);
+		$("#total_Deliver_Count").text(data.total_Deliver_Count);
+		$("#total_All_Member_Count").text(data.total_All_Member_Count);
+		$("#mainMemberCount").text(data.total_Member_Count);
+		$("#mainDeliverCount").text(data.total_Deliver_Count);
 	});
 }
 
 function getDeliveryList(){
-	var url = "/admin/getDeliveryList"
-	$.post(url, function(){
-			
+	var url = "/admin/getDeliveryCount"
+	$.post(url, function(data){
+		console.log(data);
+		$("#requested_Order_Count").text(data.requested_Order_Count);
+		$("#inProgress_Order_Count").text(data.inProgress_Order_Count);
+		$("#finished_Order_Count").text(data.finished_Order_Count);
+		$("#total_Finished_Count").text(data.total_Finished_Count);
+		$("#canceled_Order_Count").text(data.canceled_Order_Count);
+		$("#canceled_Deliver_Count").text(data.canceled_Deliver_Count);
+		$("#mainOrderCount").text(data.total_Finished_Count);
+		
 	});
 }
 
 function getTimelineList(){
-	var url = "/admin/getTimelineList"
+	var url = "/admin/getTimelineCount"
 	$.post(url, function(data){
-		
+		console.log(data);
+		$("#post_Count").text(data.post_Count);
+		$("#review_Count").text(data.review_Count);
+		$("#notice_Count").text(data.notice_Count);
+		$("#total_Post_Count").text(data.total_Post_Count);
+		$("#total_Review_Count").text(data.total_Review_Count);
+		$("#total_count").text(data.total_count);
+		$("#mainPostCount").text(data.total_count);
 				
 	});
 }
 
 function getRepotList(){
-	var url = "/admin/getReportList"
-	$.post(url, function(){
-			
+	var url = "/admin/getReportCount"
+	$.post(url, function(data){
+		console.log(data);
+		$("#requested_Report_Count").text(data.requested_Report_Count);			
+		$("#report_Post_Count").text(data.report_Post_Count);			
+		$("#report_Comment_Count").text(data.report_Comment_Count);			
+		$("#total_Report_Post_Count").text(data.total_Report_Post_Count);			
+		$("#total_Report_Comment_Count").text(data.total_Report_Comment_Count);			
+		$("#finished_Report_Count").text(data.finished_Report_Count);			
 	});
 }
 
