@@ -151,8 +151,9 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void updatePoint(PointVo pointVo) throws Exception {
-		sqlSession.update(NAMESPACE + "updatePoint", pointVo);
+	public List<UserVo> getUserRank() throws Exception {
+		List<UserVo> userRank = sqlSession.selectList(NAMESPACE + "getUserRank");
+		return userRank;
 	}
 	
 }

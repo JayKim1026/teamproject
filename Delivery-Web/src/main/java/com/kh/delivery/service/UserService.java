@@ -40,6 +40,8 @@ public interface UserService {
 	// 사용자 주문 내역 조회
 	public List<OrderVo> getOrderList(int user_no) throws Exception; 
 	
+	public List<UserVo> getUserRank() throws Exception;
+	
 	// 안드로이드
 	// 유저 정보 찾기
 	public UserVo getUserInfo(int user_no) throws Exception;

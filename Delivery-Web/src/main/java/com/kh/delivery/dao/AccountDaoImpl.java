@@ -1,6 +1,7 @@
 package com.kh.delivery.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -46,6 +47,12 @@ public class AccountDaoImpl implements AccountDao {
 	@Override
 	public void updatePoint(PointVo pointVo) throws Exception {
 		sqlSession.update(NAMESPACE + "updatePoint", pointVo);
+	}
+
+	@Override
+	public List<AccountDto> getPointRank() throws Exception {
+		List<AccountDto> pointRank = sqlSession.selectList(NAMESPACE + "getPointRank");
+		return pointRank;
 	}
 
 }

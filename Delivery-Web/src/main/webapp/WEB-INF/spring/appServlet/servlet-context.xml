@@ -61,6 +61,7 @@
 			<mapping path="/deliver/**/*"/>
 			<exclude-mapping path="/deliver/dlvr_RegisterRun"/>
 			<exclude-mapping path="/deliver/loginRun"/>
+			<exclude-mapping path="/deliver/getDlvrRank"/>
 			<exclude-mapping path="/deliver/android/*"/>
 			<beans:ref bean="deliverInterceptor"/>
 		</interceptor>

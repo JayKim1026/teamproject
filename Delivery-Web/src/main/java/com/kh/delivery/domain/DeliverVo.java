@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DeliverVo {
 	// 테이블 컬럼
-	private String code_no;
 	private int dlvr_no;
 	private String dlvr_id;
 	private String dlvr_pw;
@@ -25,10 +24,23 @@ public class DeliverVo {
 	private Timestamp dlvr_date;
 	private String dlvr_state;
 	private int dlvr_point;
+	private String account_state;
 
 	// 조인 컬럼
 	private int order_count;
 	private int dlvr_rank;
+
+	public String getAccount_state() {
+		return account_state;
+	}
+
+	public void setAccount_state(String account_state) {
+		this.account_state = account_state;
+	}
+
+	public int getDlvr_rank() {
+		return dlvr_rank;
+	}
 
 	public int getOrder_count() {
 		return order_count;
@@ -40,14 +52,6 @@ public class DeliverVo {
 
 	public void setDlvr_rank(int dlvr_rank) {
 		this.dlvr_rank = dlvr_rank;
-	}
-
-	public String getCode_no() {
-		return code_no;
-	}
-
-	public void setCode_no(String code_no) {
-		this.code_no = code_no;
 	}
 
 	public int getDlvr_no() {
@@ -156,11 +160,12 @@ public class DeliverVo {
 
 	@Override
 	public String toString() {
-		return "DeliverVo [code_no=" + code_no + ", dlvr_no=" + dlvr_no + ", dlvr_id=" + dlvr_id + ", dlvr_pw="
-				+ dlvr_pw + ", dlvr_name=" + dlvr_name + ", dlvr_phone=" + dlvr_phone + ", dlvr_email=" + dlvr_email
-				+ ", dlvr_addr=" + dlvr_addr + ", dlvr_img=" + dlvr_img + ", dlvr_idcard=" + dlvr_idcard
-				+ ", dlvr_birth=" + dlvr_birth + ", dlvr_date=" + dlvr_date + ", dlvr_state=" + dlvr_state
-				+ ", dlvr_point=" + dlvr_point + ", order_count=" + order_count + ", dlvr_rank=" + dlvr_rank + "]";
+		return "DeliverVo [dlvr_no=" + dlvr_no + ", dlvr_id=" + dlvr_id + ", dlvr_pw=" + dlvr_pw + ", dlvr_name="
+				+ dlvr_name + ", dlvr_phone=" + dlvr_phone + ", dlvr_email=" + dlvr_email + ", dlvr_addr=" + dlvr_addr
+				+ ", dlvr_img=" + dlvr_img + ", dlvr_idcard=" + dlvr_idcard + ", dlvr_birth=" + dlvr_birth
+				+ ", dlvr_date=" + dlvr_date + ", dlvr_state=" + dlvr_state + ", dlvr_point=" + dlvr_point
+				+ ", account_state=" + account_state + ", order_count=" + order_count + ", dlvr_rank=" + dlvr_rank
+				+ "]";
 	}
 
 }

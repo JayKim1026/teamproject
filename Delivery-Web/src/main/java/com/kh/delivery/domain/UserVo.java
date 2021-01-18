@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UserVo {
 	// 테이블 컬럼
-	private String account_state;
 	private int user_no;
 	private String user_id;
 	private String user_pw;
@@ -22,6 +21,7 @@ public class UserVo {
 	private Timestamp user_date;
 	private String user_state;
 	private int user_point;
+	private String account_state;
 
 	// 조인 컬럼
 	private int order_count;

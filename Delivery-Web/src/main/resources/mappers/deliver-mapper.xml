@@ -85,7 +85,7 @@
 		where dlvr_no = #{account_no}
 	</update>
 	 
-	<select id="getDeliverRank" resultType="DeliverVo">
+	<select id="getDlvrRank" resultType="DeliverVo">
 		select * from (
 		    select d.*, o.order_count, rank() over(order by o.order_count desc) dlvr_rank
 		    from tbl_deliver d
