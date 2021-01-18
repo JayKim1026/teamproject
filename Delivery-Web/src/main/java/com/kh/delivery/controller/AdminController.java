@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.delivery.domain.AdminVo;
+import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.AdminService;
 
@@ -203,21 +204,31 @@ public class AdminController {
 		return "admin/editMember";
 	}
 	
-	/*일반 회원 리스트*/
+	/* 일반 회원 리스트*/
 	@RequestMapping(value="/getMemberList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<UserVo> getMemberList() throws Exception{
-		System.out.println("클릭클릭...");
 		List<UserVo> list = adminService.getMemberList();
 		System.out.println("getMemberList, list:" + list);
 		return list;
 	}
 	
+	/* 배달원 리스트*/
 	@RequestMapping(value="/getDeliverList", method = RequestMethod.POST)
-	public String getDeliverList() throws Exception{
-		return null;
+	@ResponseBody
+	public List<DeliverVo> getDeliverList() throws Exception{
+		List<DeliverVo> list = adminService.getDeliverList();
+		System.out.println("getDeliverList, list:" + list);
+		return list;
 	}
 	
+//	@RequestMapping(value="/getWaitingDeliverList", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<DeliverVo> getWaitingDeliverList() throws Exception{
+//		List<DeliverVo> list = adminService.getWaitingDeliverList();
+//		return list;
+//	}
+//	
 	@RequestMapping(value="/reportPage", method=RequestMethod.GET)
 	public String reportPage() throws Exception {
 		return "admin/report";

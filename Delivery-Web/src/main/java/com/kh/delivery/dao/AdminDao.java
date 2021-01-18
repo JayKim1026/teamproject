@@ -3,6 +3,7 @@ package com.kh.delivery.dao;
 import java.util.List;
 
 import com.kh.delivery.domain.AdminVo;
+import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.UserVo;
 
 public interface AdminDao {
@@ -70,4 +71,13 @@ public interface AdminDao {
 	
 	/*----- 일반회원 리스트 -----*/
 	public List<UserVo> getMemberList();
+	/*----- 일반회원 리스트 끝 -----*/
+	
+	/*----- 배달원 리스트 -----*/
+	public List<DeliverVo> getDeliverList();
+	/*----- 배달원 리스트 끝 -----*/
+	
+	/*----- 가입 대기중 배달원 리스트 -----*/
+//	public List<DeliverVo> getWaitingDeliverList();
+	/*----- 가입 대기중 배달원 리스트 끝 -----*/
 }

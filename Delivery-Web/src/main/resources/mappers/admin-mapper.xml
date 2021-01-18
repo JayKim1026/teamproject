@@ -179,5 +179,15 @@
 	<select id="getMemberList" resultType="UserVo">
 		select * from tbl_user
 	</select>
+	<!-- 일반 회원리스트 끝 -->
 	
+	<!-- 배달원 리스트 -->
+	<select id="getDeliverList" resultType="DeliverVo">
+		select * from tbl_deliver
+	</select>
+	<!-- 배달원 리스트 끝 -->
+	
+	<!-- 가입 대기중 배달원 리스트 -->
+<!-- 	<select id="getWaitingDeliverList" ></select> -->
+	<!-- 가입 대기중 배달원 리스트 끝-->
 </mapper>
