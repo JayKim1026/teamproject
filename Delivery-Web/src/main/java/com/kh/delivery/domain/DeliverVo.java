@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DeliverVo {
+	// 테이블 컬럼
 	private String code_no;
 	private int dlvr_no;
 	private String dlvr_id;
@@ -24,9 +25,23 @@ public class DeliverVo {
 	private Timestamp dlvr_date;
 	private String dlvr_state;
 	private int dlvr_point;
-	private String dlvr_rank;
 
-	
+	// 조인 컬럼
+	private int order_count;
+	private int dlvr_rank;
+
+	public int getOrder_count() {
+		return order_count;
+	}
+
+	public void setOrder_count(int order_count) {
+		this.order_count = order_count;
+	}
+
+	public void setDlvr_rank(int dlvr_rank) {
+		this.dlvr_rank = dlvr_rank;
+	}
+
 	public String getCode_no() {
 		return code_no;
 	}
@@ -139,21 +154,13 @@ public class DeliverVo {
 		this.dlvr_point = dlvr_point;
 	}
 
-	public String getDlvr_rank() {
-		return dlvr_rank;
-	}
-
-	public void setDlvr_rank(String dlvr_rank) {
-		this.dlvr_rank = dlvr_rank;
-	}
-
 	@Override
 	public String toString() {
 		return "DeliverVo [code_no=" + code_no + ", dlvr_no=" + dlvr_no + ", dlvr_id=" + dlvr_id + ", dlvr_pw="
 				+ dlvr_pw + ", dlvr_name=" + dlvr_name + ", dlvr_phone=" + dlvr_phone + ", dlvr_email=" + dlvr_email
 				+ ", dlvr_addr=" + dlvr_addr + ", dlvr_img=" + dlvr_img + ", dlvr_idcard=" + dlvr_idcard
 				+ ", dlvr_birth=" + dlvr_birth + ", dlvr_date=" + dlvr_date + ", dlvr_state=" + dlvr_state
-				+ ", dlvr_point=" + dlvr_point + ", dlvr_rank=" + dlvr_rank + "]";
+				+ ", dlvr_point=" + dlvr_point + ", order_count=" + order_count + ", dlvr_rank=" + dlvr_rank + "]";
 	}
 
 }

@@ -20,7 +20,7 @@
 		<if test="searchType != null">
 			where time_state = #{searchType}
 		</if>
-		order by t.time_no asc
+		order by t.time_no desc
 	</select>
 	
 	<insert id="insertArticle">
