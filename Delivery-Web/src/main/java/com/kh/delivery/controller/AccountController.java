@@ -1,5 +1,7 @@
 package com.kh.delivery.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -92,5 +94,13 @@ public class AccountController {
 		};
 		mailSender.send(preparator);
 		return "sendAccountPw_success";
+	}
+	
+	@RequestMapping(value="/getPointRank", method=RequestMethod.POST)
+	@ResponseBody
+	public List<AccountDto> getPointRank() throws Exception {
+		List<AccountDto> pointRank = accountService.getPointRank();
+		System.out.println("pointRank = " + pointRank);
+		return pointRank;
 	}
 }

@@ -39,6 +39,8 @@ public interface DeliverService {
 	// 배달원 배달내역 조회
 	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception;
 	
+	public List<DeliverVo> getDlvrRank() throws Exception;
+	
 	//안드로이드
 	// 배달원 정보 수정
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception;

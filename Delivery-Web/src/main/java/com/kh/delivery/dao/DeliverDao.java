@@ -39,8 +39,7 @@ public interface DeliverDao {
 	// 배달원 배달내역 조회
 	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception;
 	
-	// 포인트 수정
-	public void updatePoint(PointVo pointVo) throws Exception;
+	public List<DeliverVo> getDlvrRank() throws Exception;
 	
 	
 	// 안드로이드

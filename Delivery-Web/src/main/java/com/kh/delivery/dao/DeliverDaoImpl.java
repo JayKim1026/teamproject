@@ -138,8 +138,9 @@ public class DeliverDaoImpl implements DeliverDao {
 	}
 
 	@Override
-	public void updatePoint(PointVo pointVo) throws Exception {
-		sqlSession.update(NAMESPACE + "updatePoint", pointVo);
+	public List<DeliverVo> getDlvrRank() throws Exception {
+		List<DeliverVo> dlvrRank = sqlSession.selectList(NAMESPACE + "getDlvrRank");
+		return dlvrRank;
 	}
 
 }

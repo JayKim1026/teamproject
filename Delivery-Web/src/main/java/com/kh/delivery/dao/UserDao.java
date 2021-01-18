@@ -41,8 +41,7 @@ public interface UserDao {
 	// 사용자 주문내역 조회
 	public List<OrderVo> getOrderList(int user_no) throws Exception;
 	
-	// 포인트 수정
-	public void updatePoint(PointVo pointVo) throws Exception;
+	public List<UserVo> getUserRank() throws Exception;
 
 	// 안드로이드
 	// 유저 정보 찾기

@@ -1,5 +1,7 @@
 package com.kh.delivery.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +31,12 @@ public class AccountServiceImpl implements AccountService {
 	public String findAccountPw(AccountDto accountDto) throws Exception {
 		String acc_pw = accountDao.findAccountPw(accountDto);
 		return acc_pw;
+	}
+
+	@Override
+	public List<AccountDto> getPointRank() throws Exception {
+		List<AccountDto> pointRank = accountDao.getPointRank();
+		return pointRank;
 	}
 
 }

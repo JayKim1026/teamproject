@@ -69,22 +69,35 @@
 	</update>
 
 	<!-- 배달 내역 조회 -->
-	 <select id="getDeliveryList" resultType="OrderVo">
-	 	select o.*,c.code_detail ,t.time_star 
-		from tbl_order o
-		left outer join tbl_timeline t
-		on o.order_no = t.order_no
-		inner join tbl_code c on c.code_no = o.order_state
-		where o.dlvr_no = #{dlvr_no}
-	 </select>
+	<select id="getDeliveryList" resultType="OrderVo">
+		select o.*,c.code_detail ,t.time_star 
+	from tbl_order o
+	left outer join tbl_timeline t
+	on o.order_no = t.order_no
+	inner join tbl_code c on c.code_no = o.order_state
+	where o.dlvr_no = #{dlvr_no}
+	</select>
+	
+	<!-- 포인트 업데이트 -->
+	<update id="updatePoint">
+		update tbl_deliver set
+		dlvr_point = dlvr_point + #{point_score}
+		where dlvr_no = #{account_no}
+	</update>
 	 
-	 <!-- 포인트 업데이트 -->
-	 <update id="updatePoint">
-	 	update tbl_deliver set
-	 	dlvr_point = dlvr_point + #{point_score}
-	 	where dlvr_no = #{account_no}
-	 </update>
-
+	<select id="getDlvrRank" resultType="DeliverVo">
+		select * from (
+		    select d.*, o.order_count, rank() over(order by o.order_count desc) dlvr_rank
+		    from tbl_deliver d
+		    inner join (
+		        select dlvr_no, count(*) order_count
+		        from tbl_order
+		        where order_state = '3-003'
+		        group by dlvr_no) o
+		    on d.dlvr_no = o.dlvr_no)
+		where dlvr_rank &lt;= 3
+	</select>
+	
 	<!-- // 웹  -->
 	
 	<!-- 안드로이드 -->
