@@ -18,6 +18,7 @@ local.properties
 Keys.java
 config.properties
 pom.properties
+target/
 
 # External tool builders
 .externalToolBuilders/
