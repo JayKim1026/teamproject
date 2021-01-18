@@ -27,6 +27,18 @@ public class AdminServiceImpl implements AdminService {
 		return count;
 	}
 
+	@Override
+	public int getWaitingDeliveryList() {
+		int count = adminDao.getWaitingDeliveryList();
+		return count;
+	}
+
+	@Override
+	public int getDeliveryList() {
+		int count = adminDao.getDeliveryList();
+		return count;
+	}
+
 	
 
 }

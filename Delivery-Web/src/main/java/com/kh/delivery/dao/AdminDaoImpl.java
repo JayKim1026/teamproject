@@ -37,6 +37,18 @@ public class AdminDaoImpl implements AdminDao {
 		return count;
 	}
 
+	@Override
+	public int getWaitingDeliveryList() {
+		int count = sqlSession.selectOne(NAMESPACE + "getWaitingDeliveryList");
+		return count;
+	}
+
+	@Override
+	public int getDeliveryList() {
+		int count = sqlSession.selectOne(NAMESPACE + "getDeliveryList");
+		return count;
+	}
+
 
 
 }

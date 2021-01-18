@@ -17,5 +17,22 @@
 		and time_date &lt;= sysdate
 	</select>
 	
+	<select id="getWaitingDeliveryList" resultType="int">
+		select count(*) from tbl_deliver
+		where dlvr_state = '1-001'
+		and dlvr_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and dlvr_date &lt;= sysdate
+	</select>
+	
+	<select id="getDeliveryList" resultType="int">
+		select count(*) from tbl_deliver
+		where dlvr_state = '1-002'
+		and dlvr_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and dlvr_date &lt;= sysdate
+	</select>
 
 </mapper>

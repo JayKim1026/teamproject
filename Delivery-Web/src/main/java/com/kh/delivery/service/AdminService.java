@@ -6,4 +6,6 @@ public interface AdminService {
 
 	public AdminVo login(String admin_id, String admin_pw);
 	public int getMemberList();
+	public int getWaitingDeliveryList();
+	public int getDeliveryList();
 }

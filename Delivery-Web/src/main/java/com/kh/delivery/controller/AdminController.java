@@ -43,13 +43,27 @@ public class AdminController {
 		
 	}
 	
+	
+	/*신규 멤버수(배달원,일반회원), 신규의 기준은 하루*/
 	@RequestMapping(value="/getMemberList", method=RequestMethod.POST)
 	@ResponseBody
 	public int getMemberList(Model model) throws Exception {
 		System.out.println("멤버리스트 작동");
-		int count = adminService.getMemberList();
-		System.out.println("count:" + count);
-		return count;
+		/*일반회원*/
+		int member_Count = adminService.getMemberList();
+		System.out.println("member_Count:" + member_Count);
+		
+		/*대기중인 배달원*/
+		int dlvr_Count_waiting = adminService.getWaitingDeliveryList();
+		System.out.println("dlvr_Count_waiting:" + dlvr_Count_waiting);
+		
+		/*가입승인된 배달원*/
+		int dlvr_Count = adminService.getDeliveryList();
+		System.out.println("dlvr_Count:" + dlvr_Count);
+		
+		return member_Count;
+		
+		
 	}
 	
 	@RequestMapping(value="getDeliveryList", method=RequestMethod.POST)

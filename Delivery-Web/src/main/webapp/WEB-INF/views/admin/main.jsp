@@ -33,6 +33,7 @@ ${sessionScope.adminVo}
 							
 							<!-- 첫번째 컨테이너 내용물 -->
 							<div class="bg-white border rounded mt-2">
+							
 								<div class=" px-3 mt-3 d-flex flex-row justify-content-between">
 									<span>전체현황</span>
 									<div class="d-flex align-items-center">
@@ -41,7 +42,9 @@ ${sessionScope.adminVo}
 									</div>
 								</div>
 								<hr>
+								
 								<div class="row px-5 mb-3">
+								
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
 											<img src="https://i.imgur.com/V4d3OFR.png" width="45">
@@ -51,6 +54,7 @@ ${sessionScope.adminVo}
 											</div>
 										</div>
 									</div>
+									
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
 											<img src="https://i.imgur.com/F7vcS4O.png" width="50">
@@ -60,6 +64,7 @@ ${sessionScope.adminVo}
 											</div>
 										</div>
 									</div>
+									
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
 											<img src="https://i.imgur.com/fExp9fE.png" width="50">
@@ -69,6 +74,7 @@ ${sessionScope.adminVo}
 											</div>
 										</div>
 									</div>
+									
 									<div class="col-md-3 mt-1">
 										<div class="d-flex flex-row">
 											<div class="ml-5">
@@ -77,7 +83,9 @@ ${sessionScope.adminVo}
 											</div>
 										</div>
 									</div>
+									
 								</div>
+								
 							</div>
 							<!-- 첫번째 컨테이너 내용물  끝-->
 							
@@ -88,25 +96,28 @@ ${sessionScope.adminVo}
 									<div class="bg-white p-3 rounded border">
 										<h6>회원</h6>
 										<!-- 신규 -->
-										<p class="text-black-50 content mb-2">신규 가입자: <span style="font-weight: 600px; text-decoration: underline; color:black;">80</span></p>
+										<p class="text-black-50 content mb-2">신규 일반회원: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="newMemberList">80</span></p>
 										<p class="text-black-50 content mb-2">신규 배달원: <span style="font-weight: 600px; text-decoration: underline; color:black;">50</span></p>
 										<p class="text-black-50 content mb-4">가입 대기중: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
 										<!-- 신규 -->
 										
 										<!-- 합계 -->
-										<div class="d-flex flex-row">
+										<div class="d-flex flex-row justify-content-between">
+											
 											<div class="mr-4">
 												<span>전체 일반 가입자</span>
 												<div class="mt-1">
 													<span class="alpha alpha-red">3000</span>
 												</div>
 											</div>
+											
 											<div class="mr-4">
 												<span>전체 배달원</span>
 												<div class="mt-2">
 													<span class="text-black-50">2500</span>
 												</div>
 											</div>
+											
 											<div class="mr-4">
 												<span>전체 회원</span>
 												<div class="mt-2">
@@ -128,27 +139,28 @@ ${sessionScope.adminVo}
 										<p class="text-black-50 content mb-4">배달 완료건수: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
 										
 										<!-- 합계 -->
-										<div class="d-flex flex-row">
+										<div class="d-flex flex-row justify-content-between">
+											
 											<div class="mr-4">
-												<span>완료된 배달</span>
+												<span>전체 배달건</span>
 												<div class="mt-1">
 													<span class="alpha alpha-red">50</span>
 												</div>
 											</div>
 											
 											<div class="mr-4">
-												<span>취소된 배달</span>
+												<span>완료된 배달</span>
 												<div class="mt-2">
 													<span class="text-black-50">80</span>
 												</div>
 											</div>
 											
-<!-- 											<div class="mr-4"> -->
-<!-- 												<span>Budget</span> -->
-<!-- 												<div class="mt-2"> -->
-<!-- 													<span class="text-black-50">$12,000</span> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
+											<div class="mr-4">
+												<span>취소된 배달</span>
+												<div class="mt-2">
+													<span class="text-black-50">20</span>
+												</div>
+											</div>
 										</div>
 										<!-- 합계 -->
 										
@@ -164,7 +176,7 @@ ${sessionScope.adminVo}
 										<p class="text-black-50 content mb-2">새로운 리뷰글: <span style="font-weight: 600px; text-decoration: underline; color:black;">40</span></p>
 										<p class="text-black-50 content mb-4">새로운 공지사항: <span style="font-weight: 600px; text-decoration: underline; color:black;">5</span></p>
 										<!-- 합계 -->
-										<div class="d-flex flex-row">
+										<div class="d-flex flex-row justify-content-between">
 										
 											<div class="mr-4">
 												<span>전체 일반글</span>
@@ -197,7 +209,10 @@ ${sessionScope.adminVo}
 									<div class="bg-white p-3 rounded border">
 										<h6>신고접수</h6>
 										<p class="text-black-50 content mb-2">새로운 신고접수: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
-										<div class="d-flex flex-row">
+										<p class="text-black-50 content mb-2">새로운 댓글 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
+										<p class="text-black-50 content mb-4">새로운 게시물 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;">30</span></p>
+										<!-- 합계 -->
+										<div class="d-flex flex-row justify-content-between">
 											<div class="mr-4">
 												<span>완료된 신고접수</span>
 												<div class="mt-1">
@@ -205,18 +220,19 @@ ${sessionScope.adminVo}
 												</div>
 											</div>
 											
-<!-- 											<div class="mr-4"> -->
-<!-- 												<span>Deadline</span> -->
-<!-- 												<div class="mt-2"> -->
-<!-- 													<span class="text-black-50">30 Dec 2020</span> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 											<div class="mr-4"> -->
-<!-- 												<span>Budget</span> -->
-<!-- 												<div class="mt-2"> -->
-<!-- 													<span class="text-black-50">$17,000</span> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
+											<div class="mr-4">
+												<span>게시물 신고</span>
+												<div class="mt-2">
+													<span class="text-black-50">60</span>
+												</div>
+											</div>
+											
+											<div class="mr-4">
+												<span>댓글 신고</span>
+												<div class="mt-2">
+													<span class="text-black-50">40</span>
+												</div>
+											</div>
 										</div>
 										<!-- 합계 -->
 									</div>
@@ -244,7 +260,7 @@ function getMemberList(){
 	var url = "/admin/getMemberList"
 	$.post(url, function(data){
 		var count = data;
-		$("#nomalPost").text(count);
+		$("#newMemberList").text(count);
 	});
 }
 
