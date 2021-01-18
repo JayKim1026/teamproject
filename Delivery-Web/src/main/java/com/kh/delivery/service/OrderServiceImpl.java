@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.delivery.dao.AccountDao;
 import com.kh.delivery.dao.OrderDao;
 import com.kh.delivery.dao.PointDao;
 import com.kh.delivery.domain.OrderVo;
@@ -20,6 +21,8 @@ public class OrderServiceImpl implements OrderService, Codes {
 	OrderDao orderDao;
 	@Inject
 	PointDao pointDao;
+	@Inject
+	AccountDao accountDao;
 	
 
 	// 웹
@@ -65,10 +68,12 @@ public class OrderServiceImpl implements OrderService, Codes {
 	@Transactional
 	public String deliveryCompleted(OrderVo orderVo) throws Exception {
 		String result = orderDao.deliveryCompleted(orderVo);
-		PointVo dlvrpointVo = new PointVo(DELIVERY_SUCCESS, orderVo.getDlvr_no(), DELIVER_SUCCESS_POINT);
-		pointDao.insertPoint(dlvrpointVo);
+		PointVo dlvrPointVo = new PointVo(DELIVERY_SUCCESS, orderVo.getDlvr_no(), DELIVER_SUCCESS_POINT);
+		pointDao.insertPoint(dlvrPointVo);
+		accountDao.updatePoint(dlvrPointVo);
 		PointVo userPointVo = new PointVo(ORDER_SUCCESS, orderVo.getUser_no(), ORDER_SUCCESS_POINT);
 		pointDao.insertPoint(userPointVo);
+		accountDao.updatePoint(userPointVo);
 		return result;
 	}
 

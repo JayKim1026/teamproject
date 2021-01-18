@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.PointVo;
 import com.kh.delivery.domain.TimelineVo;
 
 public interface DeliverDao {
@@ -37,6 +38,9 @@ public interface DeliverDao {
 	
 	// 배달원 배달내역 조회
 	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception;
+	
+	// 포인트 수정
+	public void updatePoint(PointVo pointVo) throws Exception;
 	
 	
 	// 안드로이드

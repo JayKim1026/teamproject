@@ -37,4 +37,23 @@
 		and acc_phone = #{acc_phone}
 	</select>
 	
+	<update id="updatePoint">
+		declare
+			usercount number :=0;
+			dlvrcount number :=0;
+		begin
+			select count(*) into usercount from tbl_user where user_no = #{account_no};
+			select count(*) into dlvrcount from tbl_deliver where dlvr_no = #{account_no};
+			if (usercount > 0)
+			then update tbl_user 
+			set user_point = user_point + #{point_score} 
+			where user_no = #{account_no};
+			elsif (dlvrcount > 0)
+			then update tbl_deliver 
+			set dlvr_point = dlvr_point + #{point_score} 
+			where dlvr_no = #{account_no};
+			end if;
+		end;
+	</update>
+	
 </mapper>
