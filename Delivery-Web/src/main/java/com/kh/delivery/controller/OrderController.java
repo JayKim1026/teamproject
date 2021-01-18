@@ -81,8 +81,8 @@ public class OrderController {
 	// 배달 완료
 	@RequestMapping(value="/android/deliveryCompleted", method=RequestMethod.POST)
 	@ResponseBody
-	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception {
-		String result = orderService.deliveryCompleted(order_no, dlvr_no);
+	public String deliveryCompleted(OrderVo orderVo) throws Exception {
+		String result = orderService.deliveryCompleted(orderVo);
 		return result;
 	}
 	

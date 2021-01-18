@@ -14,6 +14,6 @@ public interface OrderService {
 	public String pickOrder(int order_no, int dlvr_no) throws Exception;
 	public OrderVo getPickedOrder(int dlvr_no) throws Exception;
 	public String cancelDelivery(int order_no, int dlvr_no) throws Exception;
-	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception;
+	public String deliveryCompleted(OrderVo orderVo) throws Exception;
 	public List<OrderVo> getCompletedOrder(int dlvr_no) throws Exception;
 }
