@@ -169,7 +169,6 @@
 							<div class="sidebarWrapper">
 								<ul class="sidebar_ul">
 									<li class="sidebar_li faq"><a class="sidebar_a" href="/CSCenter/FAQ">자주하는 질문</a></li>
-									<li class="sidebar_li question"><a class="sidebar_a" href="/CSCenter/Question">1:1 질문</a></li>
 								</ul>
 							</div>
 						</div>

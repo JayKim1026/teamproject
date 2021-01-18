@@ -43,6 +43,8 @@ public class CSController {
 		return searchList;
 	}
 	
+	
+/*	보류
 	// 1:1 Question 페이지 이동
 	
 	@RequestMapping(value="/Question", method=RequestMethod.GET)
@@ -59,4 +61,13 @@ public class CSController {
 		model.addAttribute("userVo", userVo);
 		return "CSCenter/QuestionForm";
 	}
+	
+	// cs 주문조회
+	@RequestMapping(value="/orderList", method=RequestMethod.POST)
+	public String QuestionOrderList(HttpSession session)throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		int user_no = userVo.getUser_no();
+		
+		return null;
+	}*/
 }

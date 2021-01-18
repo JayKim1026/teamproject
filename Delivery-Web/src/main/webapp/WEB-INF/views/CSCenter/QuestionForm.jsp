@@ -208,6 +208,9 @@
 											<td>
 												<input type="text" name="q_order_no" required readonly style="cursor: initial">
 												<button type="button" class="btn btn-secondary btnShowOrderList">주문조회</button>
+												<div>
+													
+												</div>
 											</td>
 										</tr>
 										<tr>
