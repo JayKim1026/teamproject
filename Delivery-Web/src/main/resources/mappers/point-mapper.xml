@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.delivery.point">
+
+	<insert id="insertPoint">
+		insert into tbl_point(point_no, point_code, account_no, point_score)
+		values(seq_point_no.nextval, #{point_code}, #{account_no}, #{point_score})
+	</insert>
+	
+	<select id="getMyPoint" resultType="PointVo">
+		select p.*, c.code_detail point_detail 
+		from tbl_point p
+		inner join tbl_code c
+		on p.point_code = c.code_no
+		where account_no = #{account_no}
+		order by point_date desc
+	</select>
+
+	<select id="getUserPointList" resultType="PointVo">
+		select p.*, u.user_name account_name
+		from tbl_user u
+		inner join (
+		    select p.account_no, sum(p.point_score) total_score
+		    from tbl_point p
+		    inner join tbl_user u
+		    on p.account_no = u.user_no
+		    group by p.account_no) p
+		on u.user_no = p.account_no
+		order by p.total_score asc
+	</select>
+	
+	<select id="getDlvrPointList" resultType="PointVo">
+		select p.*, d.dlvr_name account_name
+		from tbl_deliver d
+		inner join (
+			select account_no, sum(point_score) total_score 
+			from tbl_point p
+			inner join tbl_deliver d
+			on p.account_no = d.dlvr_no
+			group by account_no) p
+		on d.dlvr_no = p.account_no
+		order by p.total_score asc
+	</select>
+	
+</mapper>
