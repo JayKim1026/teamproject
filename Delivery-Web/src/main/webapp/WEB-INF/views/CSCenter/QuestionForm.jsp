@@ -17,9 +17,10 @@
 	color: black;
 }
 
-.page_title{
-	margin-bottom : 10px;
+.page_title {
+	margin-bottom: 10px;
 }
+
 .topMenu_ul, .content_ul {
 	list-style: none;
 	display: flex;
@@ -51,8 +52,9 @@
 }
 
 .content_title {
-	margin-bottom : 20px;	
+	margin-bottom: 20px;
 }
+
 .content_a {
 	text-decoration: none;
 	font-size: 25px;
@@ -74,10 +76,10 @@
 }
 
 .sidebar_li {
-    padding-block: 30px;
-    margin: 0;
-    border: 1px solid whitesmoke;
-    width: 220px;
+	padding-block: 30px;
+	margin: 0;
+	border: 1px solid whitesmoke;
+	width: 220px;
 	justify-content: center;
 	text-align: center;
 	cursor: pointer;
@@ -95,7 +97,7 @@
 }
 
 .this_page {
-	background-color : whitesmoke;
+	background-color: whitesmoke;
 }
 </style>
 </head>
@@ -167,8 +169,10 @@
 						<div class="col-md-3">
 							<div class="sidebarWrapper">
 								<ul class="sidebar_ul">
-									<li class="sidebar_li faq"><a class="sidebar_a" href="/CSCenter/FAQ">자주하는 질문</a></li>
-									<li class="sidebar_li question"><a class="sidebar_a" href="/CSCenter/Question">1:1 질문</a></li>
+									<li class="sidebar_li faq"><a class="sidebar_a"
+										href="/CSCenter/FAQ">자주하는 질문</a></li>
+									<li class="sidebar_li question"><a class="sidebar_a"
+										href="/CSCenter/Question">1:1 질문</a></li>
 								</ul>
 							</div>
 						</div>
@@ -178,39 +182,45 @@
 									<strong>1:1 질문</strong>
 								</h3>
 							</div>
-
-							<table class="table orgTable">
-								<thead>
-									<tr>
-										<th class="" style="text-align: center">번호</th>
-										<th style="text-align: center">카테고리</th>
-										<th style="text-align: center;">제목</th>
-										<th style="text-align: center;">작성자</th>
-										<th style="text-align: center;">작성일</th>
-									</tr>
-								</thead>
-								<tbody class="orgTbody">
-
-								</tbody>
-							</table>
-
-							<table id="cloneTable" style="display: none;">
-								<tbody id="cloneTbody">
-									<tr>
-										<td style="text-align: center"></td>
-										<td style="text-align: center"></td>
-										<td style="text-align: left;"><a class="faqTitle"
-											href="#" style="margin-left: 30px;"></a></td>
-									</tr>
-									<tr style="display: none;" class="trAnswer">
-										<td style="background-color: whitesmoke;"></td>
-										<td style="background-color: whitesmoke;"></td>
-										<td class="FAQcontentTd"
-											style="background-color: whitesmoke; align-content: left;"><span></span></td>
-									</tr>
-								</tbody>
-							</table>
-							<button type="button" class="btn btn-secondary btnQuestionFormLord">글쓰기</button>
+							<form action="" method="POST" enctype="multipart/form-data">
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<td class="td_title">제목</td>
+											<td>
+												<select>
+													<option></option>
+													<option></option>
+													<option></option>
+													<option></option>
+												</select>
+												<input type="text">
+											</td>
+										</tr>
+										<tr>
+											<td class="td_title">주문번호</td>
+											<td>TB - Monthly</td>
+										</tr>
+										<tr>
+											<td class="td_title">이메일</td>
+											<td>TB - Monthly</td>
+										</tr>
+										<tr >
+											<td class="td_title">전화</td>
+											<td>TB - Monthly</td>
+										</tr>
+										
+										<tr>
+											<td class="td_title">내용</td>
+											<td>TB - Monthly</td>
+										</tr>
+										<tr>
+											<td class="td_title">이미지</td>
+											<td>TB - Monthly</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
 						</div>
 					</div>
 				</section>
@@ -228,18 +238,11 @@
 	</div>
 	<script>
 		var pageData = "${pageData}";
-		if(pageData = "qusetionPage") {
+		if (pageData = "qusetionPage") {
 			$(".question").addClass("this_page");
 		} else {
 			$(".question").removeClass("this_page");
 		}
-		
-		$(function(){
-			// 1:1 문의 글쓰기 버튼 클릭 Form load
-			$(".btnQuestionFormLord").click(function(){
-				location.href="/CSCenter/QuestionForm";
-			});
-		}); //핸들러
 	</script>
 </body>
 </html>
