@@ -5,15 +5,25 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.delivery.dao.AccountDao;
 import com.kh.delivery.dao.OrderDao;
+import com.kh.delivery.dao.PointDao;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.PointVo;
+import com.kh.delivery.util.Codes;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService, Codes {
 
 	@Inject
 	OrderDao orderDao;
+	@Inject
+	PointDao pointDao;
+	@Inject
+	AccountDao accountDao;
+	
 
 	// 웹
 	@Override
@@ -55,8 +65,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception {
-		String result = orderDao.deliveryCompleted(order_no, dlvr_no);
+	@Transactional
+	public String deliveryCompleted(OrderVo orderVo) throws Exception {
+		String result = orderDao.deliveryCompleted(orderVo);
+		PointVo dlvrPointVo = new PointVo(DELIVERY_SUCCESS, orderVo.getDlvr_no(), DELIVER_SUCCESS_POINT);
+		pointDao.insertPoint(dlvrPointVo);
+		accountDao.updatePoint(dlvrPointVo);
+		PointVo userPointVo = new PointVo(ORDER_SUCCESS, orderVo.getUser_no(), ORDER_SUCCESS_POINT);
+		pointDao.insertPoint(userPointVo);
+		accountDao.updatePoint(userPointVo);
 		return result;
 	}
 

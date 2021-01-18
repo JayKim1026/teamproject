@@ -95,4 +95,10 @@
 		where o.user_no = #{user_no}
 		order by o.order_date desc
 	</select>
+	
+	<update id="updatePoint">
+		update tbl_user set
+		user_point = user_point + #{point_score}
+		where user_no = #{account_no}
+	</update>
 </mapper>

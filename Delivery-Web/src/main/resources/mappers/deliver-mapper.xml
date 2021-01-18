@@ -77,6 +77,13 @@
 		inner join tbl_code c on c.code_no = o.order_state
 		where o.dlvr_no = #{dlvr_no}
 	 </select>
+	 
+	 <!-- 포인트 업데이트 -->
+	 <update id="updatePoint">
+	 	update tbl_deliver set
+	 	dlvr_point = dlvr_point + #{point_score}
+	 	where dlvr_no = #{account_no}
+	 </update>
 
 	<!-- // 웹  -->
 	

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.AccountDto;
+import com.kh.delivery.domain.PointVo;
 
 @Repository
 public class AccountDaoImpl implements AccountDao {
@@ -40,6 +41,11 @@ public class AccountDaoImpl implements AccountDao {
 	public String findAccountPw(AccountDto accountDto) throws Exception {
 		String acc_pw = sqlSession.selectOne(NAMESPACE + "findAccountPw", accountDto);
 		return acc_pw;
+	}
+
+	@Override
+	public void updatePoint(PointVo pointVo) throws Exception {
+		sqlSession.update(NAMESPACE + "updatePoint", pointVo);
 	}
 
 }

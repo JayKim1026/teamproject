@@ -33,6 +33,7 @@ public class DeliverTest {
 //		map.put("dlvr_pw", "1234");
 //		DeliverVo deliverVo = sqlSession.selectOne(NAMESPACE + "login", map);
 //		System.out.println(deliverVo);
+		sqlSession.update("com.kh.delivery.account.updatePoint");
 	}
 	
 	@Test

@@ -5,20 +5,35 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.delivery.dao.AccountDao;
 import com.kh.delivery.dao.CommentDao;
+import com.kh.delivery.dao.PointDao;
 import com.kh.delivery.domain.CommentVo;
+import com.kh.delivery.domain.PointVo;
+import com.kh.delivery.util.Codes;
 
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl implements CommentService, Codes {
 
 	@Inject
 	private CommentDao commentDao;
 	
+	@Inject
+	private PointDao pointDao;
+	
+	@Inject
+	private AccountDao accountDao;
+	
 	@Override
+	@Transactional
 	public String insertComment(CommentVo commentVo) throws Exception {
 		String result = commentDao.insertComment(commentVo);
+		PointVo pointVo = new PointVo(WRITE_COMMENT, commentVo.getWriter_no(), WRITE_COMMENT_POINT);
+		pointDao.insertPoint(pointVo);
+		accountDao.updatePoint(pointVo);
 		return result;
 	}
 

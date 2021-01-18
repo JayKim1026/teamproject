@@ -71,11 +71,8 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public String deliveryCompleted(int order_no, int dlvr_no) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("order_no", order_no);
-		map.put("dlvr_no", dlvr_no);
-		sqlSession.update(NAMESPACE + "deliveryCompleted", map);
+	public String deliveryCompleted(OrderVo orderVo) throws Exception {
+		sqlSession.update(NAMESPACE + "deliveryCompleted", orderVo);
 		return "delivery_completed";
 	}
 
