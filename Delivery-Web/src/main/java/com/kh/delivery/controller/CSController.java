@@ -3,6 +3,7 @@ package com.kh.delivery.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import javax.sound.midi.Sequence;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.delivery.domain.FAQVo;
 import com.kh.delivery.domain.QuestionVo;
+import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.CSService;
 
 @Controller
@@ -52,7 +54,9 @@ public class CSController {
 	
 	// 1:1 Form
 	@RequestMapping(value="/QuestionForm", method=RequestMethod.GET)
-	public String questionForm() throws Exception {
+	public String questionForm(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo", userVo);
 		return "CSCenter/QuestionForm";
 	}
 }

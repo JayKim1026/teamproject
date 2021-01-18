@@ -69,7 +69,7 @@
 }
 
 .sidebar_ul {
-	margin-top: 101px;
+	margin-top: 63px;
 	padding: 0px;
 	background-color: white;
 	list-style: none;
@@ -188,38 +188,51 @@
 										<tr>
 											<td class="td_title">제목</td>
 											<td>
-												<select>
-													<option></option>
-													<option></option>
-													<option></option>
-													<option></option>
-												</select>
-												<input type="text">
+												<div>
+													<select class="category" name="q_category">
+														<option value="4-000" selected="selected">전체</option>
+														<option value="4-001">주문문의</option>
+														<option value="4-002">배달문의</option>
+														<option value="4-003">웹이용문의</option>
+														<option value="4-004">앱이용문의</option>
+														<option value="4-005">기타문의</option>
+													</select> 
+												</div>
+												<div>
+													<input type="text" name="q_title" required>
+												</div>
 											</td>
 										</tr>
 										<tr>
 											<td class="td_title">주문번호</td>
-											<td>TB - Monthly</td>
+											<td>
+												<input type="text" name="q_order_no" required readonly style="cursor: initial">
+												<button type="button" class="btn btn-secondary btnShowOrderList">주문조회</button>
+											</td>
 										</tr>
 										<tr>
 											<td class="td_title">이메일</td>
-											<td>TB - Monthly</td>
+											<td><input type="email" name="q_email" required readonly style="cursor: initial" value="${userVo.user_email }"></td>
 										</tr>
-										<tr >
+										<tr>
 											<td class="td_title">전화</td>
-											<td>TB - Monthly</td>
+											<td><input type="tel" name="q_title" required readonly style="cursor: initial"  value="${userVo.user_phone }"></td>
 										</tr>
-										
+
 										<tr>
 											<td class="td_title">내용</td>
-											<td>TB - Monthly</td>
+											<td>
+												<div>주의 사항</div>
+												<textarea style="width:100%; height: 400px"></textarea>
+											</td>
 										</tr>
 										<tr>
 											<td class="td_title">이미지</td>
-											<td>TB - Monthly</td>
+											<td><input type="file" accept=".png, .jpg" /></td>
 										</tr>
 									</tbody>
 								</table>
+								<button style="float: right;" type="submit" class="btn btn-secondary btnQuestionWriteRun">작성완료</button>
 							</form>
 						</div>
 					</div>
@@ -243,6 +256,21 @@
 		} else {
 			$(".question").removeClass("this_page");
 		}
+		
+		$(function(){
+			$(".btnShowOrderList").click(function(e){
+				e.preventDefault();
+				var url ="/CSCenter/ShowOrderList";
+				var user_no = "${userVo.user_no}";
+				console.log(user_no);
+				var sendData = {
+						"user_no" : user_no
+				};
+				$.post(url, sendData, function(){
+					
+				});
+			});
+		});
 	</script>
 </body>
 </html>

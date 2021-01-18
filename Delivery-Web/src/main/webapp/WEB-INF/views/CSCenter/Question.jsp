@@ -210,7 +210,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<button type="button" class="btn btn-secondary btnQuestionFormLord">글쓰기</button>
+							<button style="float: right;" type="button" class="btn btn-secondary btnQuestionFormLord">글쓰기</button>
 						</div>
 					</div>
 				</section>
