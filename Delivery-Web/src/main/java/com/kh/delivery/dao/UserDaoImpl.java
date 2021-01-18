@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.PointVo;
 import com.kh.delivery.domain.UserVo;
 
 @Repository
@@ -147,6 +148,12 @@ public class UserDaoImpl implements UserDao {
 		List<OrderVo> orderList	= sqlSession.selectList(NAMESPACE + "getOrderList", user_no);
 		System.out.println("userDaoImpl getOrderList : " + orderList);
 		return orderList;
+	}
+
+	@Override
+	public List<UserVo> getUserRank() throws Exception {
+		List<UserVo> userRank = sqlSession.selectList(NAMESPACE + "getUserRank");
+		return userRank;
 	}
 	
 }

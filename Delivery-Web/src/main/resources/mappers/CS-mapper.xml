@@ -6,14 +6,14 @@
 
 <!-- FAQ 페이지에서 검색 -->
 	<select id="getSearchList" resultType="FAQVo">
-	select rownum r, f.*, c.code_detail 
-	from tbl_faq f 
-	left join tbl_code c 
-	on f.faq_state = c.code_no
-	where (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
-	<if test='category != "4-000"'>
-		and c.code_no like #{category}
-	</if>
-	order by r asc
+		select rownum r, f.*, c.code_detail 
+		from tbl_faq f 
+		left join tbl_code c 
+		on f.faq_state = c.code_no
+		where (f.faq_content like '%'|| #{keyword} || '%' or f.faq_title like '%'|| #{keyword} ||'%')
+		<if test='category != "4-000"'>
+			and c.code_no like #{category}
+		</if>
+		order by r asc
 	</select>
 </mapper>

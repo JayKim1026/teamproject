@@ -263,6 +263,14 @@ public class DeliverController implements Codes {
 		DeliverVo deliverVo = (DeliverVo) session.getAttribute("deliverVo");
 		return "deliver/question";
 	}
+	
+	@RequestMapping(value="/getDlvrRank", method=RequestMethod.POST)
+	@ResponseBody
+	public List<DeliverVo> getDlvrRank() throws Exception {
+		List<DeliverVo> dlvrRank = deliverService.getDlvrRank();
+		System.out.println("dlvrRank = " + dlvrRank);
+		return dlvrRank;
+	}
 
 	
 	// 안드로이드
@@ -271,6 +279,7 @@ public class DeliverController implements Codes {
 	@ResponseBody
 	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
+		System.out.println("android/login = " + deliverVo);
 		return deliverVo;
 	}
 

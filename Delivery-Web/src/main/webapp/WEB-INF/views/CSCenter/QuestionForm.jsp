@@ -17,9 +17,10 @@
 	color: black;
 }
 
-.page_title{
-	margin-bottom : 10px;
+.page_title {
+	margin-bottom: 10px;
 }
+
 .topMenu_ul, .content_ul {
 	list-style: none;
 	display: flex;
@@ -51,8 +52,9 @@
 }
 
 .content_title {
-	margin-bottom : 20px;	
+	margin-bottom: 20px;
 }
+
 .content_a {
 	text-decoration: none;
 	font-size: 25px;
@@ -67,17 +69,17 @@
 }
 
 .sidebar_ul {
-	margin-top: 101px;
+	margin-top: 63px;
 	padding: 0px;
 	background-color: white;
 	list-style: none;
 }
 
 .sidebar_li {
-    padding-block: 30px;
-    margin: 0;
-    border: 1px solid whitesmoke;
-    width: 220px;
+	padding-block: 30px;
+	margin: 0;
+	border: 1px solid whitesmoke;
+	width: 220px;
 	justify-content: center;
 	text-align: center;
 	cursor: pointer;
@@ -95,7 +97,7 @@
 }
 
 .this_page {
-	background-color : whitesmoke;
+	background-color: whitesmoke;
 }
 </style>
 </head>
@@ -167,8 +169,10 @@
 						<div class="col-md-3">
 							<div class="sidebarWrapper">
 								<ul class="sidebar_ul">
-									<li class="sidebar_li faq"><a class="sidebar_a" href="/CSCenter/FAQ">자주하는 질문</a></li>
-									<li class="sidebar_li question"><a class="sidebar_a" href="/CSCenter/Question">1:1 질문</a></li>
+									<li class="sidebar_li faq"><a class="sidebar_a"
+										href="/CSCenter/FAQ">자주하는 질문</a></li>
+									<li class="sidebar_li question"><a class="sidebar_a"
+										href="/CSCenter/Question">1:1 질문</a></li>
 								</ul>
 							</div>
 						</div>
@@ -178,39 +182,61 @@
 									<strong>1:1 질문</strong>
 								</h3>
 							</div>
+							<form action="" method="POST" enctype="multipart/form-data">
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<td class="td_title">제목</td>
+											<td>
+												<div>
+													<select class="category" name="q_category">
+														<option value="4-000" selected="selected">전체</option>
+														<option value="4-001">주문문의</option>
+														<option value="4-002">배달문의</option>
+														<option value="4-003">웹이용문의</option>
+														<option value="4-004">앱이용문의</option>
+														<option value="4-005">기타문의</option>
+													</select> 
+												</div>
+												<div>
+													<input type="text" name="q_title" required>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td class="td_title">주문번호</td>
+											<td>
+												<input type="text" name="q_order_no" required readonly style="cursor: initial">
+												<button type="button" class="btn btn-secondary btnShowOrderList">주문조회</button>
+												<div>
+													
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td class="td_title">이메일</td>
+											<td><input type="email" name="q_email" required readonly style="cursor: initial" value="${userVo.user_email }"></td>
+										</tr>
+										<tr>
+											<td class="td_title">전화</td>
+											<td><input type="tel" name="q_title" required readonly style="cursor: initial"  value="${userVo.user_phone }"></td>
+										</tr>
 
-							<table class="table orgTable">
-								<thead>
-									<tr>
-										<th class="" style="text-align: center">번호</th>
-										<th style="text-align: center">카테고리</th>
-										<th style="text-align: center;">제목</th>
-										<th style="text-align: center;">작성자</th>
-										<th style="text-align: center;">작성일</th>
-									</tr>
-								</thead>
-								<tbody class="orgTbody">
-
-								</tbody>
-							</table>
-
-							<table id="cloneTable" style="display: none;">
-								<tbody id="cloneTbody">
-									<tr>
-										<td style="text-align: center"></td>
-										<td style="text-align: center"></td>
-										<td style="text-align: left;"><a class="faqTitle"
-											href="#" style="margin-left: 30px;"></a></td>
-									</tr>
-									<tr style="display: none;" class="trAnswer">
-										<td style="background-color: whitesmoke;"></td>
-										<td style="background-color: whitesmoke;"></td>
-										<td class="FAQcontentTd"
-											style="background-color: whitesmoke; align-content: left;"><span></span></td>
-									</tr>
-								</tbody>
-							</table>
-							<button style="float: right;" type="button" class="btn btn-secondary btnQuestionFormLord">글쓰기</button>
+										<tr>
+											<td class="td_title">내용</td>
+											<td>
+												<div>주의 사항</div>
+												<textarea style="width:100%; height: 400px"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="td_title">이미지</td>
+											<td><input type="file" accept=".png, .jpg" /></td>
+										</tr>
+									</tbody>
+								</table>
+								<button style="float: right;" type="submit" class="btn btn-secondary btnQuestionWriteRun">작성완료</button>
+							</form>
 						</div>
 					</div>
 				</section>
@@ -228,18 +254,26 @@
 	</div>
 	<script>
 		var pageData = "${pageData}";
-		if(pageData = "qusetionPage") {
+		if (pageData = "qusetionPage") {
 			$(".question").addClass("this_page");
 		} else {
 			$(".question").removeClass("this_page");
 		}
 		
 		$(function(){
-			// 1:1 문의 글쓰기 버튼 클릭 Form load
-			$(".btnQuestionFormLord").click(function(){
-				location.href="/CSCenter/QuestionForm";
+			$(".btnShowOrderList").click(function(e){
+				e.preventDefault();
+				var url ="/CSCenter/ShowOrderList";
+				var user_no = "${userVo.user_no}";
+				console.log(user_no);
+				var sendData = {
+						"user_no" : user_no
+				};
+				$.post(url, sendData, function(){
+					
+				});
 			});
-		}); //핸들러
+		});
 	</script>
 </body>
 </html>

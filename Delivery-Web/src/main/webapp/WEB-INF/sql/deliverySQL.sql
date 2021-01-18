@@ -109,6 +109,20 @@ create table tbl_timeline(
     dlvr_no         number          REFERENCES  tbl_deliver(dlvr_no)
 );
 
+-- 1:1 문의
+create table tbl_question(
+q_no number primary key,
+q_category varchar2(20) REFERENCES tbl_code(code_no) not null,
+q_order_no number REFERENCES tbl_order(order_no),
+q_phone varchar2(13) not null,
+q_email varchar2(50) not null,
+q_title varchar2(300) not null,
+q_content varchar2(3000) not null,
+q_writer varchar2(20) not null,
+q_img varchar2(600),
+q_date TIMESTAMP(6) DEFAULT sysdate not null
+);
+
 drop table tbl_user;
 
 create SEQUENCE seq_account_no;

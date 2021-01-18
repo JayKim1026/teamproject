@@ -40,14 +40,8 @@ public class TimelineController implements Codes {
 	// 웹
 	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
 	public String showTimeline2(String searchType, Model model) throws Exception {
-		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
 		String image_url = BUCKET_URL;
-		String user_img = USER_IMG;
-		
-		System.out.println("showTimeline2, timelineList:" + timelineList);
-		model.addAttribute("timelineList", timelineList);
 		model.addAttribute("image_url", image_url);
-		model.addAttribute("user_img", user_img);
 		return "timeline/timeline";
 	}
 	
@@ -136,6 +130,7 @@ public class TimelineController implements Codes {
 	@ResponseBody
 	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
 		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
+		System.out.println("getTimelineList = " + timelineList);
 		return timelineList;
 	}
 	
@@ -161,6 +156,7 @@ public class TimelineController implements Codes {
 	@ResponseBody
 	public TimelineVo getLastTimeline() throws Exception {
 		TimelineVo timelineVo = timelineService.getLastTimeline();
+		System.out.println("getLastTimeline = " + timelineVo);
 		return timelineVo;
 	}
 	

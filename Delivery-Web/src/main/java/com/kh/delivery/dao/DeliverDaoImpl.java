@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.PointVo;
 import com.kh.delivery.domain.TimelineVo;
 
 @Repository
@@ -134,6 +135,12 @@ public class DeliverDaoImpl implements DeliverDao {
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
 		sqlSession.update(NAMESPACE + "modifyDeliver", deliverVo);
 		return "modify_deliver_success";
+	}
+
+	@Override
+	public List<DeliverVo> getDlvrRank() throws Exception {
+		List<DeliverVo> dlvrRank = sqlSession.selectList(NAMESPACE + "getDlvrRank");
+		return dlvrRank;
 	}
 
 }

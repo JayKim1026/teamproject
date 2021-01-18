@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.delivery.dao.AccountDao;
 import com.kh.delivery.dao.LikeDao;
 import com.kh.delivery.dao.PointDao;
 import com.kh.delivery.dao.TimelineDao;
@@ -26,6 +27,9 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 	
 	@Inject
 	private PointDao pointDao;
+	
+	@Inject
+	private AccountDao accountDao;
 
 	@Override
 	public List<TimelineVo> timelineList(String searchType) throws Exception {
@@ -40,6 +44,7 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 		System.out.println("TimelineService, insertArticle, timelineVo:" + timelineVo);
 		PointVo pointVo = new PointVo(WRITE_TIMELINE, timelineVo.getWriter_no(), WRITE_COMMENT_POINT);
 		pointDao.insertPoint(pointVo);
+		accountDao.updatePoint(pointVo);
 		return result;
 	}
 

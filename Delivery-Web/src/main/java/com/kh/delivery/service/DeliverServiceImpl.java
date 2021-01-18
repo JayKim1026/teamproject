@@ -100,5 +100,11 @@ public class DeliverServiceImpl implements DeliverService {
 		return result;
 	}
 
+	@Override
+	public List<DeliverVo> getDlvrRank() throws Exception {
+		List<DeliverVo> dlvrRank = deliverDao.getDlvrRank();
+		return dlvrRank;
+	}
+
 	
 }

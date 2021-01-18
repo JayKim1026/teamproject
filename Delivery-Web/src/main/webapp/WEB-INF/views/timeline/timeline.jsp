@@ -172,7 +172,7 @@ function setTimeline(data, insert) {
 	
 	clone1.show();
 	if(!insert) {
-		$("#house").prepend(clone1).hide().fadeIn(1000);
+		$("#house").append(clone1).hide().fadeIn(1000);
 	} else {
 		$("#house").prepend(clone1);
 	}

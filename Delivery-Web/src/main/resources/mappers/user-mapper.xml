@@ -95,4 +95,25 @@
 		where o.user_no = #{user_no}
 		order by o.order_date desc
 	</select>
+	
+	<update id="updatePoint">
+		update tbl_user set
+		user_point = user_point + #{point_score}
+		where user_no = #{account_no}
+	</update>
+	 
+	<select id="getUserRank" resultType="UserVo">
+		select * from (
+		   select u.*, o.order_count, rank() over(order by order_count desc) user_rank
+		   from tbl_user u
+		   inner join (
+		       select user_no, count(*) order_count
+		       from tbl_order
+		       where order_state = '3-003'
+		       group by user_no) o
+		   on u.user_no = o.user_no)
+		where user_rank &lt;= 3
+	</select>
+	
+	
 </mapper>

@@ -272,6 +272,13 @@ public class UserController implements Codes {
 		return "user/message";
 	}
 	
+	@RequestMapping(value="/getUserRank", method=RequestMethod.POST)
+	@ResponseBody
+	public List<UserVo> getUserRank() throws Exception {
+		List<UserVo> userRank = userService.getUserRank();
+		return userRank;
+	}
+	
 	// 안드로이드
 	// 유저 정보 가져오기
 	@RequestMapping(value = "/android/getUserInfo", method = RequestMethod.POST)

@@ -102,4 +102,10 @@ public class UserServiceImpl implements UserService {
 		return orderList;
 	}
 
+	@Override
+	public List<UserVo> getUserRank() throws Exception {
+		List<UserVo> userRank = userDao.getUserRank();
+		return userRank;
+	}
+
 }

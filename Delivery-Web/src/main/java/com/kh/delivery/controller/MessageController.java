@@ -60,6 +60,7 @@ public class MessageController implements Codes {
 
 	
 	// 웹
+	
 	@RequestMapping(value="/sendMsgImg", method=RequestMethod.POST)
 	@ResponseBody
 	public String sendMsgImg(MessageVo messageVo, MultipartFile f_msg_img, HttpSession session) throws Exception {

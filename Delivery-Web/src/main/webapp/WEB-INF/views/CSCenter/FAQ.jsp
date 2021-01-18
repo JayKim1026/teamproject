@@ -17,6 +17,9 @@
 	color: black;
 }
 
+.page_title{
+	margin-bottom : 10px;
+}
 .topMenu_ul, .content_ul {
 	list-style: none;
 	display: flex;
@@ -39,6 +42,7 @@
 	margin-top: 30px;
 	font-size: 60px;
 	margin-bottom: 30px;
+	text-align: center;
 }
 
 .content_section {
@@ -46,6 +50,9 @@
 	height: 40px;
 }
 
+.content_title {
+	margin-bottom : 20px;	
+}
 .content_a {
 	text-decoration: none;
 	font-size: 25px;
@@ -62,17 +69,18 @@
 .sidebar_ul {
 	margin-top: 101px;
 	padding: 0px;
-	border: 1px solid whitesmoke;
 	background-color: white;
 	list-style: none;
 }
 
 .sidebar_li {
-	cursor: pointer;
-	height: 80px;
+    padding-block: 30px;
+    margin: 0;
+    border: 1px solid whitesmoke;
+    width: 220px;
 	justify-content: center;
 	text-align: center;
-    padding-block: 30px;
+	cursor: pointer;
 }
 
 .sidebar_li:hover {
@@ -80,9 +88,15 @@
 }
 
 .sidebar_a {
+	display: block;
 	text-decoration: none;
 	color: black;
 	font-size: 20px;
+}
+
+.this_page {
+	background-color : whitesmoke;
+	color: black;
 }
 </style>
 </head>
@@ -124,7 +138,7 @@
 			<!-- content main -->
 			<div class="col-md-8 contentMainWrapper">
 				<div class="page_title">
-					<h1 style="text-align: center;">
+					<h1>
 						<strong>고객센터</strong>
 					</h1>
 				</div>
@@ -150,17 +164,17 @@
 				</div>
 				<section class="content_view">
 					<div class="row">
+						<!-- 사이드 바 -->
 						<div class="col-md-3">
 							<div class="sidebarWrapper">
 								<ul class="sidebar_ul">
-									<li class="sidebar_li"><a class="sidebar_a">자주하는 질문</a></li>
-									<li class="sidebar_li"><a class="sidebar_a">1:1 질문</a></li>
+									<li class="sidebar_li faq"><a class="sidebar_a" href="/CSCenter/FAQ">자주하는 질문</a></li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-md-9">
 							<div style="margin-bottom: 30px;">
-								<h3>
+								<h3 class="content_title">
 									<strong>자주하는 질문</strong>
 								</h3>
 								<select class="category" name="category">
@@ -178,9 +192,9 @@
 								<thead>
 									<tr>
 										<th class="" style="text-align: center">번호</th>
-										<th style="text-align: center">분류</th>
+										<th style="text-align: center">카테고리</th>
 										<th style="text-align: left; margin-left: 30px;"><span
-											style="margin-left: 30px;">내용</span></th>
+											style="margin-left: 30px;">제목</span></th>
 									</tr>
 								</thead>
 								<tbody class="orgTbody">
@@ -220,6 +234,13 @@
 		</div>
 	</div>
 	<script>
+		var pageData = "${pageData}";
+		if(pageData = "faqPage") {
+			$(".faq").addClass("this_page");
+		} else {
+			$(".faq").removeClass("this_page");
+		}
+		
 		$(function() {
 			var category = $(".category").val();
 			var keyword = $(".keyword").val();
@@ -266,7 +287,6 @@
 				var r = parseInt($(this).attr("data-r"));
 				$(".trAnswer").eq(r - 1).slideToggle("slow");
 			});
-
 		}); // 핸들러
 	</script>
 </body>

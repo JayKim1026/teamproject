@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주문목록</title>
 <%@ include file="../include/link.jsp"%>
 <style>
 table {
@@ -29,7 +29,7 @@ table {
 						<table class="table">
 							<thead>
 								<tr>
-									<th style="border-style: none;">&#91; 주문 대기 &#93;</th>
+									<th style="border-style: none;">&#91; 주문대기 &#93;</th>
 								</tr>
 							</thead>
 							<thead>
@@ -90,8 +90,11 @@ table {
 											<td>${orderVo.order_date }</td>
 											<c:choose>
 												<c:when test="${orderVo.dlvr_name != null}">
-													<td><a href="#" title="배달원과 채팅하기">
-															${orderVo.dlvr_name} </a></td>
+													<td>
+														<a href="/user/messageForm" target="_blank" title="배달원과 채팅하기">
+															${orderVo.dlvr_name}
+														</a>
+													</td>
 												</c:when>
 												<c:otherwise>
 													<td>미지정</td>
@@ -150,7 +153,6 @@ table {
 			<div class="col-md-2"></div>
 		</div>
 	</div>
-
 </body>
 <script>
 	var orderResult = "${orderResult}";
