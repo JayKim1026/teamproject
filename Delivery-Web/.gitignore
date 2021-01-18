@@ -20,6 +20,7 @@ config.properties
 pom.properties
 target/
 
+
 # External tool builders
 .externalToolBuilders/
 
