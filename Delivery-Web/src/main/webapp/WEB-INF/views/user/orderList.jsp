@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문목록</title>
+<title>주문 내역 조회</title>
 <%@ include file="../include/link.jsp"%>
 <style>
 table {
@@ -12,8 +12,8 @@ table {
 	word-break: break-all;
 }
 
-.content {
-	
+.content_table {
+	margin: auto;
 }
 </style>
 </head>
@@ -25,8 +25,8 @@ table {
 			</div>
 			<div class="col-md-8">
 				<section class="content">
-					<div>
-						<table class="table">
+					<div class="contente_table">
+						<table class="table tableWaiteOrder">
 							<thead>
 								<tr>
 									<th style="border-style: none;">&#91; 주문대기 &#93;</th>
@@ -39,13 +39,14 @@ table {
 									<th>주문일자</th>
 									<th>배달원</th>
 									<th>주문 상태</th>
+									<th>주문 변경</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="orderVo" items="${orderList }">
 									<c:if test="${orderVo.code_detail == '주문대기'}">
 										<tr>
-											<td>${orderVo.order_no }</td>
+											<td class="tdOrder_no">${orderVo.order_no }</td>
 											<td>${orderVo.order_req }</td>
 											<td>${orderVo.order_date }</td>
 											<c:choose>
@@ -56,7 +57,12 @@ table {
 													<td>미지정</td>
 												</c:otherwise>
 											</c:choose>
-											<td>${orderVo.code_detail }</td>
+											<td>
+												<span>${orderVo.code_detail }</span>
+											</td>
+											<td>
+												<button type="button" class="btnOrderCancel btn btn-danger btn-sm" data-orderno="${orderVo.order_no}">주문취소</button>
+											</td>
 										</tr>
 									</c:if>
 								</c:forEach>
@@ -64,8 +70,8 @@ table {
 						</table>
 					</div>
 					<br />
-					<div>
 						<!-- 배달 중  -->
+					<div class="contente_table">
 						<table class="table">
 							<thead>
 								<tr>
@@ -108,8 +114,8 @@ table {
 						</table>
 					</div>
 					<br />
-					<div>
 						<!-- 배달 완료 -->
+					<div class="contente_table">
 						<table class="table">
 							<thead>
 								<tr>
@@ -123,6 +129,7 @@ table {
 									<th>주문일자</th>
 									<th>배달원</th>
 									<th>주문 상태</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -159,5 +166,26 @@ table {
 	if (orderResult == "insertOrder_success") {
 		alert("주문이 접수 되었습니다.");
 	}
+	$(function(){
+		$(".btnOrderCancel").each(function() {
+			$(this).click(function() {
+				var confirmResult = confirm("주문을 취소하시겠습니까?");
+				console.log(confirmResult);
+				if(confirmResult) {
+					var url = "/order/cancelOrder";
+					var order_no = $(this).attr("data-orderno");
+					console.log(order_no);
+					var sendData = {
+							"order_no" : order_no
+					};
+					$.post(url, sendData, function(){
+						
+					});
+				} else {
+					
+				}
+			});
+		});
+	});
 </script>
 </html>

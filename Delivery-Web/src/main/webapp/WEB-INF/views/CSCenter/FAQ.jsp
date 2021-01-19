@@ -184,7 +184,9 @@
 									<option value="4-003">웹이용문의</option>
 									<option value="4-004">앱이용문의</option>
 									<option value="4-005">기타문의</option>
-								</select> <input type="text" class="form keyword" name="search">
+								</select> 
+								
+								<input type="text" class="form keyword" name="search">
 								<button type="button" class="btnSearch">검색</button>
 							</div>
 

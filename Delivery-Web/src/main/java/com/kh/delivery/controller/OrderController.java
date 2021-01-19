@@ -44,6 +44,12 @@ public class OrderController {
 		return "redirect:/user/orderList";
 	}
 	
+	@RequestMapping(value="/cancelOrder", method=RequestMethod.POST)
+	public String cancelOrder(int order_no) throws Exception {
+		System.out.println("order_no : " +order_no);
+		return null;
+	}
+	
 	// 안드로이드
 	// 주문 리스트 찾기
 	@RequestMapping(value="/android/getOrderList", method=RequestMethod.POST)
