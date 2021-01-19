@@ -10,6 +10,7 @@ import com.kh.delivery.dao.AccountDao;
 import com.kh.delivery.dao.AdminDao;
 import com.kh.delivery.domain.AccountDto;
 import com.kh.delivery.domain.AdminVo;
+import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.UserVo;
 
 @Service
@@ -143,7 +144,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	/*----- 게시글 관련 카운트 끝 -----*/
 	
-	/*----- 신고 관련 카운트 끝 -----*/
+	/*----- 신고 관련 카운트  -----*/
 	/*신규 신고대기*/
 	@Override
 	public int getNewRequestedReportCount() {
@@ -187,13 +188,36 @@ public class AdminServiceImpl implements AdminService {
 	}
 	/*----- 신고 관련 카운트 끝 -----*/
 	
-	/* 일반멤버 리스트 */
+	/*----- 일반회원 리스트 -----*/
 	@Override
 	public List<UserVo> getMemberList() {
 		List<UserVo> list = adminDao.getMemberList();
 		return list;
 	}
+	/*----- 일반회원 리스트 끝 -----*/
 	
+	/*----- 배달원원 리스트 -----*/
+	@Override
+	public List<DeliverVo> getDeliverList() {
+		List<DeliverVo> list = adminDao.getDeliverList();
+		return list;
+	}
+	/*----- 배달원원 리스트 끝 -----*/
 	
+	/*----- 가입 대기 배달원원 리스트 -----*/
+	@Override
+	public List<DeliverVo> getWaitingDeliverList() {
+		List<DeliverVo> list = adminDao.getWaitingDeliverList();
+		return list;
+	}
+	/*----- 가입 대기 배달원원 리스트 끝-----*/
+	
+	/*----- 회원정보 가져오기-----*/
+	@Override
+	public UserVo getMemberInfo(int user_no) {
+		UserVo userVo = adminDao.getMemberInfo(user_no);
+		return userVo;
+	}
+	/*----- 회원정보 가져오기 끝-----*/
 	
 }
