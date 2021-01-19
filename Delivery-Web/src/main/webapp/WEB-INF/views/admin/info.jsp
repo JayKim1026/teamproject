@@ -7,28 +7,17 @@
 <%@include file="../css/newInfoCSS.css"%>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 <style>
-.divChgPw {
+.divChgName, .divChgBirth, .divChgPw, .divChgEmail, .divChgPhone, .divChgAddr {
 	display: none;
 }
 
-.divChgEmail {
-	display: none;
-}
-
-.divChgPhone {
-	display: none;
-}
-
-.divChgAddr {
-	display: none;	
-}
 
 </style>
 <meta charset="UTF-8">
 <title>AdminInfo.jsp</title>
 </head>
 <body>
-	<%@include file="../include/Infoheader.jsp"%>
+<%@include file="../include/adminHeader.jsp" %>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -39,13 +28,14 @@
 							<div class="container mt-7">
 								<!-- Table -->
 								${userVo}
+								<h1 style="text-align: center;">관리자 모드 : 일반회원 정보 수정</h1>
 								<div class="row">
 									<div class="col-xl-8 m-auto order-xl-1">
 										<div class="card bg-secondary shadow">
 											<div class="card-header bg-white border-0">
 												<div class="row align-items-center">
 													<div class="col-8">
-														<h3 class="mb-0">회원정보</h3>
+														<h3 class="mb-0">일반 회원정보</h3>
 													</div>
 													<div class="col-4 text-right">
 													</div>
@@ -54,21 +44,6 @@
 											<div class="card-body">
 													<h6 class="heading-small text-muted mb-4">기본정보</h6>
 													<div class="pl-lg-4">
-														<div class="row">
-															<div class="col-md-12">
-																<div class="row">
-																	<div class="col-md-10">
-																		<div class="focused">
-																			<label class="form-control-label">이름</label> 
-																			<input type="text" class="form-control form-control-alternative" style="background-color: white;" readonly value="${userVo.user_name }">
-																		</div>
-																	</div>
-																	<div class="col-md-2">
-																		<p class="form-control form-control-alternative" style="margin-top: 23px; color: red;">변경불가</p>
-																	</div>
-																</div>
-															</div>
-														</div>
 														
 														<div class="row" style="margin-top: 10px;">
 															<div class="col-md-12">
@@ -83,11 +58,38 @@
 																		<p class="form-control form-control-alternative" 
 																		style="margin-top: 23px; color: red;">변경불가</p>
 																	</div>
-																	
-																	
 																</div>
 															</div>
 														</div>
+														
+														
+														<div class="row">
+															<div class="col-md-12">
+																<div class="row">
+																	<div class="col-md-10">
+																		<div class="focused">
+																		<label class="form-control-label">이름</label> 
+																		<div class="divOrgName">
+																			<input type="text" class="form-control form-control-alternative" value="${userVo.user_name }" readonly style="background-color: white;">
+																		</div>
+																		<div class="divChgName">
+																			<form action="" method="POST">
+																				<input type="text" class="form-control form-control-alternative">
+																					<div style="display: flex;">
+																						<button type="button" class="form-control btnCancelName" style="width: 60px; margin-top: 23px;">취소</button> 
+																						<button type="submit" class="form-control btnChgNameRun" style="width: 60px; margin-left: 10px; margin-top: 23px;">완료</button>
+																					</div>
+																			</form>
+																		</div>
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<button class="form-control form-control-alternative btnChgName" style="margin-top: 23px;">변경하기</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
 														
 														<div class="row" style="margin-top: 10px;">
 															<div class="col-md-12">
@@ -95,12 +97,20 @@
 																	<div class="col-md-10">
 																		<div class="focused">
 																			<label class="form-control-label" >생일</label> 
-																			<input type="text" class="form-control form-control-alternative" value="${userVo.user_birth }">
+																			<div class="divOrgBirth">
+																				<input type="date" class="form-control form-control-alternative" value="${userVo.user_birth }" readonly style="background-color: white;">
+																			</div>
+																			<div class="divChgBirth">
+																				<input type="date" class="form-control" max="2100-12-31" required/>
+																				<div style="display: flex;">
+																					<button type="button" class="form-control btnCancelBirth" style="width: 60px; margin-top: 23px;">취소</button> 
+																					<button type="submit" class="form-control btnChgBirth" style="width: 60px; margin-left: 10px; margin-top: 23px;">완료</button>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<p class="form-control form-control-alternative" 
-																		style="margin-top: 23px;">변경하기</p>
+																		<button class="form-control form-control-alternative btnChgBirth" style="margin-top: 23px;">변경하기</button>
 																	</div>
 																</div>
 															</div>
@@ -309,6 +319,34 @@ $(function(){
 		alert("주소가 변경 되었습니다.")
 	}
 	
+	
+	//이름 변경 버튼
+	$(".btnChgName").click(function(){
+		$(".divOrgName").hide();
+		$(this).hide();
+		$(".divChgName").show();
+	});
+	
+	//이름 변경 취소 버튼
+	$(".btnCancelName").click(function(){
+		$(".btnChgName").show();
+		$(".divOrgName").show();
+		$(".divChgName").hide();
+	});
+	
+	//생년월일 변경 버튼
+	$(".btnChgBirth").click(function(){
+		$(".divOrgBirth").hide();
+		$(this).hide();
+		$(".divChgBirth").show();
+	});
+	
+	//생년월일 변경 취소 버튼
+	$(".btnCancelBirth").click(function(){
+		$(".btnChgBirth").show();
+		$(".divOrgBirth").show();
+		$(".divChgBirth").hide();
+	});
 	
 	//비밀번호 변경 버튼
 	$(".btnChgPw").click(function(){
