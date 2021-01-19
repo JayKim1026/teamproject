@@ -23,7 +23,48 @@
 	background-color: #E0E0E0
 }
 
-.message_image {
+.format {
+	display: none;
+}
+
+.chat {
+	padding-bottom: 80px;
+}
+
+.chat > ul {
+	width: 100%; list-style: none;
+}
+
+.chat > ul > li {
+	width: 100%;
+}
+
+.chat > ul > li.left {
+	text-align: left;
+}
+
+.chat > ul > li.right {
+	text-align: right;
+}
+
+.chat > ul > li > div.sender { 
+	margin: 10px 20px 0 20px; 
+	font-weight: bold; 
+}
+
+.chat > ul > li > div.message {
+	margin-top: 10px;
+}
+
+.chat > ul > li > div.message > div { 
+	display: inline-block; word-break:break-all; 
+	margin: 5px 20px; max-width: 75%; 
+	border: 1px solid #888; padding: 10px; 
+	border-radius: 5px; background-color: #FCFCFC; 
+	color: #555; text-align: left; 
+}
+
+.chat > ul > li > div.message > img {
 	width: 300px;
 }
 
@@ -76,39 +117,36 @@
 
 		function appendMessage(data) {
 			$.each(data, function(index) {
-				console.log(this);
 				var sender_no = this.sender_no;
-				console.log(sender_no);
-				var clone;
-				if (user_no == sender_no) {
-					if (this.msg_content != null && this.msg_content != "") {
-						clone = $(".senderForm").eq(0).clone();
-						clone.children().eq(1).text(this.msg_content);
+				var user_no = parseInt("${userVo.user_no}");
+				var li;
+				if(this.msg_content != null) {
+					if(sender_no == user_no) {
+						li = $(".format > ul > li.msgRight").clone();
+						li.addClass("right");
 					} else {
-						clone = $(".senderImgForm").eq(0).clone();
-						clone.children().eq(1).attr("src", "${image_url}" + this.msg_img);
+						li = $(".format > ul > li.msgLeft").clone();
+						li.addClass("left");
 					}
-					clone.children().eq(0).text(this.msg_date);
-					clone.children().eq(2).text(this.sender_name);
-					clone.children().eq(3).attr("src", "${image_url}" + this.sender_img);
 				} else {
-					if (this.msg_content != null && this.msg_content != "") {
-						clone = $(".receiverForm").eq(0).clone();
-						clone.children().eq(2).text(this.msg_content);
+					if(sender_no == user_no) {
+						li = $(".format > ul > li.imgRight").clone();
+						li.addClass("right");
 					} else {
-						clone = $(".receiverImgForm").eq(0).clone();
-						clone.children().eq(2).attr("src", "${image_url}" + this.msg_img);
+						li = $(".format > ul > li.imgLeft").clone();
+						li.addClass("left");
 					}
-					clone.children().eq(0).attr("src", "${image_url}" + this.sender_img);
-					clone.children().eq(1).text(this.sender_name);
-					clone.children().eq(3).text(this.msg_date);
 				}
-
-				$("#chatForm").append(clone);
-				clone.show(500);
-
-				if (index == data.length - 1) {
-					lastMsgNo = this.msg_no;
+				li.find(".sender > span").text(this.sender_name);
+				li.find(".sender > img").attr("src", "${image_url}" + this.sender_img);
+				li.find(".message > div").text(this.msg_content);
+				li.find(".message > span").text(getTime(this.msg_date));
+				li.find(".message > img").attr("src", "${image_url}" + this.msg_img);
+				
+				$(".chat").not(".format").find("ul").append(li);
+				
+				if(index == data.length-1) {
+					li[0].scrollIntoView();
 				}
 			});
 		}
@@ -154,6 +192,23 @@
 			});
 
 		});
+		
+		function getTime(msg_date) {
+			var hour = parseInt(msg_date.split(" ")[1].split(":")[0]);
+			var minute = parseInt(msg_date.split(" ")[1].split(":")[1]);
+			var time = "";
+			if(hour > 9) {
+				time += hour + ":";
+			} else {
+				time += "0" + hour + ":";
+			}
+			if(minute > 9) {
+				time += minute;
+			} else {
+				time += "0" + minute;
+			}
+			return time;
+		}
 	});
 </script>
 </head>
@@ -163,6 +218,7 @@
 	</header>
 	
 	<!-- 채팅 클론하는 div -->
+<<<<<<< HEAD
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3"></div>
@@ -174,40 +230,62 @@
 					<span></span>
 					<img alt="senderImg" src="" class="profile-pic">
 					<hr />
+=======
+	<div class="chat format">
+		<ul>
+			<li class="msgLeft">
+				<div class="sender">
+					<img class="profile-pic">
+					<span></span>
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 				</div>
-				
-				<div class="receiverForm" style="display: none;">
-					<img alt="receiverImg" src="" class="profile-pic"> 
+				<div class="message">
+					<div></div>
 					<span></span>
-					<span></span>
-					<span></span>
-					<hr />
 				</div>
-				
-				<div class="senderImgForm" style="display: none;">
+			</li>
+			<li class="msgRight">
+				<div class="sender">
 					<span></span>
-					<img alt="msgImg" src="" class="message_image">
-					<span></span>
-					<img alt="senderImg" src="" class="profile-pic">
-					<hr />
+					<img class="profile-pic">
 				</div>
-				
-				<div class="receiverImgForm" style="display: none">
-					<img alt="receiverImg" src="" class="profile-pic"> 
+				<div class="message">
 					<span></span>
-					<img alt="msgImg" src="" class="message_image"> 
-					<span></span>
-					<hr />
+					<div></div>
 				</div>
-			</div>
-			<div class="col-md-3"></div>
-		</div>
+			</li>
+			<li class="imgLeft">
+				<div class="sender">
+					<img class="profile-pic">
+					<span></span>
+				</div>
+				<div class="message">
+					<img>
+					<span></span>
+				</div>
+			</li>
+			<li class="imgRight">
+				<div class="sender">
+					<span></span>
+					<img class="profile-pic">
+				</div>
+				<div class="message">
+					<span></span>
+					<img>
+				</div>
+			</li>
+		</ul>
+	</div>
 		
 	<!-- 클론한 걸 띄우는 div -->
 	<section style="margin-top:200px">
 		<div class="row" >
 			<div class="col-md-3"></div>
-			<div class="col-md-6" id="chatForm" style="overflow: auto; width:auto; height: 500px; background-color: whitesmoke;"></div>
+			<div class="col-md-6 chat" id="chatForm" style="overflow: auto; width:auto; height: 500px; background-color: whitesmoke;">
+				<ul>
+					
+				</ul>
+			</div>
 			<div class="col-md-3"></div>
 		</div>
 	</section>
