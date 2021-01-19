@@ -20,7 +20,9 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper">
 				<div class="register_title">라이더 회원 가입</div>
-
+				<div style="margin-top:20px; margin-bottom: 20px;">
+					<p style="text-align: center;"><strong><span style="color:red;">&#91;주의&#93;</span> 라이더 회원은 <u>만18세 이상</u>만 가입이 가능합니다.</strong></p>
+				</div>
 				<form role="form" id="frmRegist" action="/deliver/dlvr_RegisterRun" method="post"
 					enctype="multipart/form-data">
 					<div class="form-group">
@@ -57,7 +59,10 @@
 
 					<div class="form-group imgFile">
 						<div>
-							<label for="dlvr_img"> 증명사진 </label> 
+							<p style="text-align: center;"><strong>※ 증명사진과 주민등록증 사진은 <u>신원확인</u> 목적 외에는 이용되지 않고 있습니다 ※</strong></p>
+						</div>
+						<div>
+							<label for="dlvr_img"> 프로필 사진 </label> 
 							<input type="file" class="form-control-file" id="dlvr_img" name="f_dlvr_img" accept="image/,.jpg,.png"/> 
 							<span class="imgPreview"></span>
 						</div>
@@ -96,12 +101,7 @@
 						<label for="dlvr_email"> 이메일 </label> 
 						<input type="email" class="form-control" id="dlvr_email" name="dlvr_email" required />
 					</div>
-
-					<!-- <div class="form-group">
-						<label for="dlvr_acc_num"> 계좌번호 </label>
-						<input type="text" class="form-control" id="dlvr_acc_num" />
-					</div> -->
-
+					
 					<button type="submit" class="btn btn-primary" id="btnRegister">가입완료</button>
 				</form>
 			</div>
@@ -112,6 +112,10 @@
 </body>
 <script>
 $(function() {
+	
+	//header 가리기
+	$("#main_DlvrJoinus").hide();
+	
 	//메세지
 	var isImage_msg = "${isImage_msg}";
 	if(isImage_msg == "notImage") {
@@ -283,8 +287,8 @@ $(function() {
 					} else {
 						for (var i = 0; i < dlvr_name.length; i++) {
 							char_dlvr_name = dlvr_name.charCodeAt(i);
-							if (char_dlvr_name < 45032 || 55203 < char_dlvr_name) {
-								$(".name_state").text("특수기호, 숫자 , 영어 입력 불가능합니다").css(												"color", "red");
+							if (char_dlvr_name < 44032 || 55203 < char_dlvr_name) {
+								$(".name_state").text("이름을 바르게 입력해주세요 (특수기호, 숫자 , 영어는 입력 불가능합니다)").css("color", "red");
 								break;
 							} else {
 								$(".name_state").text("");
@@ -302,7 +306,7 @@ $(function() {
 			var ageCheck = (nowYear - dlvr_year);
 			if(ageCheck < 19) {
 				alert("만 18세 이하는 가입하실 수 없습니다.");
-				history.go(-1);
+				location.href="/main/main"
 			} 
 		});
 		
@@ -314,12 +318,16 @@ $(function() {
 				$(".phone_state").text("");
 			} else {
 				for(var i = 0; i < dlvr_phone.length; i++) {
-					char_dlvr_phone = dlvr_phone.charCodeAt(i);
-					if( 47< char_dlvr_phone && char_dlvr_phone < 58) {
-						$(".phone_state").text("");
+					if(9 < dlvr_phone.length && dlvr_phone.length< 17 ) {
+						char_dlvr_phone = dlvr_phone.charCodeAt(i);
+						if( 47< char_dlvr_phone && char_dlvr_phone < 58) {
+							$(".phone_state").text("");
+						} else {
+							$(".phone_state").text("전화번호를 바르게 입력해주세요.(10자에서 16자의 숫자만 입력 가능합니다) ").css("color", "red");
+							break;
+						} 
 					} else {
-						$(".phone_state").text("숫자만 입력해주세요").css("color", "red");
-						break;
+						$(".phone_state").text("전화번호를 바르게 입력해주세요.(10자에서 16자의 숫자만 입력 가능합니다) ").css("color", "red");
 					}
 				}
 			}

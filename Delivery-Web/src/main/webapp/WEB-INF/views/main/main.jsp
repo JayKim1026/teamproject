@@ -26,9 +26,9 @@
 						<div align="right" class="col-md-10">
 							<c:if
 								test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
-								<a class="menu__font" href="/account/loginForm" style="padding-right:20px; font-size:35px;">Login</a>
-								<a class="menu__font" href="/account/registerForm">Join us</a>
-								<a class="menu__font" href="/account/dlvr_RegisterForm">Deliver Join</a>
+								<a class="menu__font" href="/account/loginForm" style="padding-right:20px; font-size:35px;">로그인</a>
+								<a class="menu__font" href="/account/registerForm">일반회원 가입</a>
+								<a class="menu__font" href="/account/dlvr_RegisterForm">라이더 가입</a>
 							</c:if>
 							
 							<c:if

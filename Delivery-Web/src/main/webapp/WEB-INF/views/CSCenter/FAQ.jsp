@@ -213,8 +213,7 @@
 									<tr style="display: none;" class="trAnswer">
 										<td style="background-color: whitesmoke;"></td>
 										<td style="background-color: whitesmoke;"></td>
-										<td class="FAQcontentTd"
-											style="background-color: whitesmoke; align-content: left;"><span></span></td>
+										<td class="FAQcontentTd"style="height: auto; background-color: whitesmoke; align-content: left;"><span></span></td>
 									</tr>
 								</tbody>
 							</table>

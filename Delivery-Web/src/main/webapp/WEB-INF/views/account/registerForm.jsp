@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4 register_wrapper" >
-				<div class="register_title">사용자 가입</div>
+				<div class="register_title">일반회원 가입</div>
 				<form role="form" id="frmRegist" action="/user/registerRun" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 					 	<label for="user_id"> 아이디 </label>
@@ -91,6 +91,8 @@
 </body>
 <script>
 $(function(){
+	//header 가리기
+	$("#main_Joinus").hide();
 	// 메세지
 	var isImage_msg = "${isImage_msg}";
 	if(isImage_msg == "notImage") {
@@ -246,8 +248,8 @@ $(function(){
 		} else {
 			for(var i = 0; i < user_name.length; i++){
 				char_user_name = user_name.charCodeAt(i);
-				if(char_user_name < 45032 || 55203 < char_user_name ){
-					$(".name_state").text("이름을 정확히 입력해 주세요.").css("color", "red");
+				if(char_user_name < 44032 || 55203 < char_user_name ){
+					$(".name_state").text("이름을 바르게 입력해주세요 (특수기호, 숫자 , 영어는 입력 불가능합니다)").css("color", "red");
 				} else {
 					$(".name_state").text("");
 				} 
@@ -267,11 +269,11 @@ $(function(){
 					if( 47< char_user_phone && char_user_phone < 58) {
 						$(".phone_state").text("");
 					} else {
-						$(".phone_state").text("10~16자로 숫자만 입력해주세요").css("color", "red");
+						$(".phone_state").text("전화번호를 바르게 입력해주세요.(10자에서 16자의 숫자만 입력 가능합니다) ").css("color", "red");
 						break;
 					}
 				} else {
-					$(".phone_state").text("10~16자로 숫자만 입력해주세요").css("color", "red");
+					$(".phone_state").text("전화번호를 바르게 입력해주세요.(10자에서 16자의 숫자만 입력 가능합니다) ").css("color", "red");
 					break;
 				}
 			}
