@@ -68,5 +68,11 @@
 		where user_no = #{user_no}
 			and order_state = '3-002'
 	</select>
+	
+	<update id="orderCancel">
+		update tbl_order set 
+		order_state='3-004'
+		where order_no =  #{order_no}
+	</update>
 
 </mapper>

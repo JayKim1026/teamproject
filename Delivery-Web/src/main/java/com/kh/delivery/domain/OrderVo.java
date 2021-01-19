@@ -19,7 +19,16 @@ public class OrderVo {
 
 	// 조인으로 가져오는 값
 	private String user_name;
+	public String getCode_no() {
+		return code_no;
+	}
+
+	public void setCode_no(String code_no) {
+		this.code_no = code_no;
+	}
+
 	private String code_detail;
+	private String code_no;
 	private String dlvr_name;
 	private int time_star;
 
@@ -135,7 +144,8 @@ public class OrderVo {
 		return "OrderVo [order_no=" + order_no + ", order_ca=" + order_ca + ", order_req=" + order_req + ", order_lat="
 				+ order_lat + ", order_lng=" + order_lng + ", user_no=" + user_no + ", dlvr_no=" + dlvr_no
 				+ ", order_state=" + order_state + ", order_date=" + order_date + ", user_name=" + user_name
-				+ ", code_detail=" + code_detail + ", dlvr_name=" + dlvr_name + ", time_star=" + time_star + "]";
+				+ ", code_detail=" + code_detail + ", code_no=" + code_no + ", dlvr_name=" + dlvr_name + ", time_star="
+				+ time_star + "]";
 	}
 
 }

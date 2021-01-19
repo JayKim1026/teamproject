@@ -184,7 +184,9 @@
 									<option value="4-003">웹이용문의</option>
 									<option value="4-004">앱이용문의</option>
 									<option value="4-005">기타문의</option>
-								</select> <input type="text" class="form keyword" name="search">
+								</select> 
+								
+								<input type="text" class="form keyword" name="search">
 								<button type="button" class="btnSearch">검색</button>
 							</div>
 
@@ -213,8 +215,7 @@
 									<tr style="display: none;" class="trAnswer">
 										<td style="background-color: whitesmoke;"></td>
 										<td style="background-color: whitesmoke;"></td>
-										<td class="FAQcontentTd"
-											style="background-color: whitesmoke; align-content: left;"><span></span></td>
+										<td class="FAQcontentTd"style="height: auto; background-color: whitesmoke; align-content: left;"><span></span></td>
 									</tr>
 								</tbody>
 							</table>

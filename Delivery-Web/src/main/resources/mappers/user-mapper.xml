@@ -86,7 +86,7 @@
 	
 	<!-- 일반회원 주문내역 조회  -->
 	<select id="getOrderList" resultType="OrderVo">
-		select o.*, c.code_detail, d.dlvr_name 
+		select o.*, c.code_detail, c.code_no, d.dlvr_name 
 		from tbl_order o 
 		inner join tbl_code c 
 		on o.order_state = c.code_no 
