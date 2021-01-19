@@ -88,7 +88,7 @@
 				console.log(data);
 				if (data != null) {
 					appendMessage(data);
-// 					start();
+					start();
 				}
 			});
 		}
@@ -145,6 +145,9 @@
 				
 				$(".chat").not(".format").find("ul").append(li);
 				
+				if(index == data.length-1) {
+					li[0].scrollIntoView();
+				}
 			});
 		}
 		;
