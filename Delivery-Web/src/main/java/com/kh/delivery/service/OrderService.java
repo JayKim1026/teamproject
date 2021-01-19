@@ -7,6 +7,7 @@ import com.kh.delivery.domain.OrderVo;
 public interface OrderService {
 	// 웹
 	public OrderVo getMyOrder(int user_no) throws Exception;
+	public String orderCancel (int order_no) throws Exception;
 	
 	// 안드로이드 
 	public List<OrderVo> getOrderList(double order_lat, double order_lng, int range) throws Exception;

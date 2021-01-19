@@ -29,11 +29,13 @@ public class OrderController {
 		return "user/orderForm";
 	}
 	
+
 	@RequestMapping(value="/newOrderForm", method=RequestMethod.GET)
 	public String newOrderForm() throws Exception{
 		return "user/newOrderForm";
 	}
 	
+	// 주문하기
 	@RequestMapping(value="/insertOrder", method=RequestMethod.POST)
 	public String insertOrder(OrderVo orderVo, HttpSession session, RedirectAttributes rttr) throws Exception {
 		System.out.println("orderVo = " + orderVo);
@@ -44,10 +46,13 @@ public class OrderController {
 		return "redirect:/user/orderList";
 	}
 	
+	// 주문취소(배달취소 아님)
 	@RequestMapping(value="/cancelOrder", method=RequestMethod.POST)
+	@ResponseBody
 	public String cancelOrder(int order_no) throws Exception {
 		System.out.println("order_no : " +order_no);
-		return null;
+		 String result = orderService.orderCancel(order_no);
+		return result;
 	}
 	
 	// 안드로이드

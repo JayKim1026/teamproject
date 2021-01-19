@@ -32,6 +32,11 @@ public class OrderServiceImpl implements OrderService, Codes {
 		return orderVo;
 	}
 
+	@Override
+	public String orderCancel(int order_no) throws Exception {
+		orderDao.orderCancel(order_no);
+		return "cancel_success";
+	}
 	
 	// 안드로이드
 	@Override
@@ -82,4 +87,5 @@ public class OrderServiceImpl implements OrderService, Codes {
 		List<OrderVo> orderList = orderDao.getCompletedOrder(dlvr_no);
 		return orderList;
 	}
+	
 }

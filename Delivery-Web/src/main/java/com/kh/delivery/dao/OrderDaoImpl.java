@@ -28,6 +28,13 @@ public class OrderDaoImpl implements OrderDao {
 		return orderVo;
 	}
 	
+	@Override
+	public String orderCancel(int order_no) throws Exception {
+		int result = sqlSession.update(NAMESPACE + "orderCancel", order_no);
+		System.out.println("orderDao : " + result);
+		return "cancel_success";
+	}
+	
 	
 	// 안드로이드
 	@Override
@@ -81,4 +88,7 @@ public class OrderDaoImpl implements OrderDao {
 		List<OrderVo> orderList = sqlSession.selectList(NAMESPACE + "getCompletedOrder", dlvr_no);
 		return orderList;
 	}
+
+
+	
 }
