@@ -218,26 +218,12 @@
 	</header>
 	
 	<!-- 채팅 클론하는 div -->
-<<<<<<< HEAD
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
-				
-				<div class="senderForm" style="display: none;">
-					<span style="font-size:8px;"></span>
-					<span></span>
-					<span></span>
-					<img alt="senderImg" src="" class="profile-pic">
-					<hr />
-=======
 	<div class="chat format">
 		<ul>
 			<li class="msgLeft">
 				<div class="sender">
 					<img class="profile-pic">
 					<span></span>
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 				</div>
 				<div class="message">
 					<div></div>

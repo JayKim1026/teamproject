@@ -247,4 +247,18 @@ public class AdminDaoImpl implements AdminDao {
 		return list;
 	}
 
+	/*주문자 취소 목록*/
+	@Override
+	public List<OrderVo> getCancelOrderList() {
+		List<OrderVo> list = sqlSession.selectList(NAMESPACE + "getCancelOrderList");
+		return list;
+	}
+
+	/*배달원 취소 목록*/
+	@Override
+	public List<OrderVo> getCancelOrderListByDeliver() {
+		List<OrderVo> list = sqlSession.selectList(NAMESPACE + "getCancelOrderListByDeliver");
+		return list;
+	}
+
 }

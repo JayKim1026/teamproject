@@ -242,4 +242,18 @@ public class AdminServiceImpl implements AdminService {
 		return list;
 	}
 	
+	/*주문자 취소 목록*/
+	@Override
+	public List<OrderVo> getCancelOrderList() {
+		List<OrderVo> list = adminDao.getCancelOrderList();
+		return list;
+	}
+	
+	/*배달원 취소 목록*/
+	@Override
+	public List<OrderVo> getCancelOrderListByDeliver() {
+		List<OrderVo> list = adminDao.getCancelOrderListByDeliver();
+		return list;
+	}
+	
 }

@@ -280,6 +280,24 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
+	/*주문자 취소 목록*/
+	@RequestMapping(value="/getCancelOrderList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<OrderVo> getCancelOrderList() throws Exception{
+		List<OrderVo> list = adminService.getCancelOrderList();
+		System.out.println("주문자 취소 목록, list:" + list);
+		return list;
+	}
+	
+	/*배달원 취소 목록*/
+	@RequestMapping(value="getCancelOrderListByDeliver", method = RequestMethod.POST)
+	@ResponseBody
+	public List<OrderVo> getCancelOrderListByDeliver() throws Exception{
+		List<OrderVo> list = adminService.getCancelOrderListByDeliver();
+		System.out.println("배달원 취소 목록, list:" + list);
+		return list;
+	}
+	
 	@RequestMapping(value="/reportPage", method=RequestMethod.GET)
 	public String reportPage() throws Exception {
 		return "admin/report";

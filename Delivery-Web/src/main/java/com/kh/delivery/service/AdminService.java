@@ -90,6 +90,10 @@ public interface AdminService {
 	public List<OrderVo> getAcceptOrderList();
 	/*완료된 주문목록*/
 	public List<OrderVo> getFinishOrderList();
+	/*주문자 취소 목록*/
+	public List<OrderVo> getCancelOrderList();
+	/*배달원 취소 목록*/
+	public List<OrderVo> getCancelOrderListByDeliver();
 	/*----- 주문 목록 관련 끝 -----*/
 	
 }
