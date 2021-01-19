@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,10 +18,11 @@ import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.AdminService;
+import com.kh.delivery.util.Codes;
 
 @Controller
 @RequestMapping(value="/admin")
-public class AdminController {
+public class AdminController implements Codes {
 	
 	@Inject
 	private AdminService adminService;
@@ -221,14 +223,30 @@ public class AdminController {
 		System.out.println("getDeliverList, list:" + list);
 		return list;
 	}
+	/* 가입 대기중 배달원 */
+	@RequestMapping(value="/getWaitingDeliverList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<DeliverVo> getWaitingDeliverList() throws Exception{
+		List<DeliverVo> list = adminService.getWaitingDeliverList();
+		System.out.println("getWaitingDeliverList, list:" + list);
+		return list;
+	}
 	
-//	@RequestMapping(value="/getWaitingDeliverList", method = RequestMethod.POST)
-//	@ResponseBody
-//	public List<DeliverVo> getWaitingDeliverList() throws Exception{
-//		List<DeliverVo> list = adminService.getWaitingDeliverList();
-//		return list;
-//	}
-//	
+	/* 회원정보 수정*/
+	@RequestMapping(value="/memberInfoForm", method = RequestMethod.GET)
+	public String memberInfoForm(int user_no, Model model) {
+		System.out.println("memberInfoForm ,user_no:" + user_no);
+		UserVo userVo = adminService.getMemberInfo(user_no);
+		System.out.println("memberInfoForm ,userVo:" + userVo);
+		String user_img = userVo.getUser_img();
+		model.addAttribute("image_url", BUCKET_URL + user_img);
+		model.addAttribute("userVo", userVo);
+		return "admin/info";
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/reportPage", method=RequestMethod.GET)
 	public String reportPage() throws Exception {
 		return "admin/report";

@@ -78,6 +78,10 @@ public interface AdminDao {
 	/*----- 배달원 리스트 끝 -----*/
 	
 	/*----- 가입 대기중 배달원 리스트 -----*/
-//	public List<DeliverVo> getWaitingDeliverList();
+	public List<DeliverVo> getWaitingDeliverList();
 	/*----- 가입 대기중 배달원 리스트 끝 -----*/
+	
+	/*----- 회원정보 수정정보 받아오기-----*/
+	public UserVo getMemberInfo(int user_no);
+	/*----- 회원정보 수정정보 받아오기 끝 -----*/
 }

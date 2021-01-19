@@ -205,12 +205,19 @@ public class AdminServiceImpl implements AdminService {
 	/*----- 배달원원 리스트 끝 -----*/
 	
 	/*----- 가입 대기 배달원원 리스트 -----*/
-//	@Override
-//	public List<DeliverVo> getWaitingDeliverList() {
-//		List<DeliverVo> list = adminDao.getWaitingDeliverList();
-//		return list;
-//	}
-	/*----- 가입 대기 배달원원 리스트 -----*/
+	@Override
+	public List<DeliverVo> getWaitingDeliverList() {
+		List<DeliverVo> list = adminDao.getWaitingDeliverList();
+		return list;
+	}
+	/*----- 가입 대기 배달원원 리스트 끝-----*/
 	
+	/*----- 회원정보 가져오기-----*/
+	@Override
+	public UserVo getMemberInfo(int user_no) {
+		UserVo userVo = adminDao.getMemberInfo(user_no);
+		return userVo;
+	}
+	/*----- 회원정보 가져오기 끝-----*/
 	
 }

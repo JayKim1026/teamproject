@@ -61,7 +61,7 @@
 		                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 			                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">일반회원</a>
 			                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">배달원</a>
-<!-- 			                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a> -->
+			                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">가입대기중</a>
 		                    </div>
 	                    </nav>
 						<div class="tab-content" id="nav-tabContent">
@@ -75,9 +75,9 @@
 										<td></td>
 										<td></td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnCommentModify">수정</button></td>
+												class="btn btn-xs btn-warning btnMemberModify">수정</button></td>
 										<td><button type="button"
-												class="btn btn-xs btn-danger btnCommentDelete">삭제</button></td>
+												class="btn btn-xs btn-danger btnMemberDelete">삭제</button></td>
 									</tr>
 								</table>
 		
@@ -110,9 +110,9 @@
 										<td></td>
 										<td></td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnCommentModify">수정</button></td>
+												class="btn btn-xs btn-warning btnDeliverModify">수정</button></td>
 										<td><button type="button"
-												class="btn btn-xs btn-danger btnCommentDelete">삭제</button></td>
+												class="btn btn-xs btn-danger btnDeliverDelete">삭제</button></td>
 									</tr>
 								</table>
 		
@@ -134,39 +134,39 @@
 								</table>
 							</div>
 							
-<!-- 							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"> -->
-<!-- 								<table style="display: none;" id="trTableWaitingDeliver"> -->
-<!-- 									<tr> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td></td> -->
-<!-- 										<td><button type="button" -->
-<!-- 												class="btn btn-xs btn-warning btnCommentModify">수정</button></td> -->
-<!-- 										<td><button type="button" -->
-<!-- 												class="btn btn-xs btn-danger btnCommentDelete">삭제</button></td> -->
-<!-- 									</tr> -->
-<!-- 								</table> -->
+							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+								<table style="display: none;" id="trTableWaitingDeliver">
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><button type="button"
+												class="btn btn-xs btn-warning btnWaitingDeliverModify">수정</button></td>
+										<td><button type="button"
+												class="btn btn-xs btn-danger btnWaitingDeliverDelete">삭제</button></td>
+									</tr>
+								</table>
 		
-<!-- 								<table class="table" id="watingDeliverTable"> -->
-<!-- 									<thead> -->
-<!-- 										<tr> -->
-<!-- 											<th>배달원번호</th> -->
-<!-- 											<th>ID</th> -->
-<!-- 											<th>이름</th> -->
-<!-- 											<th>휴대전화</th> -->
-<!-- 											<th>EMAIL</th> -->
-<!-- 											<th>계정상태</th> -->
-<!-- 											<th>#</th> -->
-<!-- 										</tr> -->
-<!-- 									</thead> -->
-<!-- 									<tbody id="waitingDeliverTableTbody"> -->
+								<table class="table" id="watingDeliverTable">
+									<thead>
+										<tr>
+											<th>배달원번호</th>
+											<th>ID</th>
+											<th>이름</th>
+											<th>휴대전화</th>
+											<th>EMAIL</th>
+											<th>계정상태</th>
+											<th>#</th>
+										</tr>
+									</thead>
+									<tbody id="waitingDeliverTableTbody">
 									
-<!-- 									</tbody> -->
-<!-- 								</table> -->
-<!-- 							</div> -->
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-2"></div>
@@ -179,12 +179,10 @@
 function getMemberList() {
 	var url = "/admin/getMemberList"
 	$.post(url, function(data) {
-		console.log(data);
 		$("#memberTable > #memberTableTbody").empty();
 		$.each(data, function() {
 				
 			var tr = $("#trTable").find("tr").clone();
-			console.log(tr);
 			tr.find("td").eq(0).text(this.user_no);
 			tr.find("td").eq(1).text(this.user_id);
 			tr.find("td").eq(2).text(this.user_name);
@@ -194,7 +192,6 @@ function getMemberList() {
 			tr.find("td").eq(6).find("button").attr("user_no", this.user_no);
 			tr.find("td").eq(7).find("button").attr("user_no", this.user_no);
 				
-				
 			$("#memberTable > #memberTableTbody").prepend(tr);
 		});
 	});
@@ -202,12 +199,10 @@ function getMemberList() {
 function getDeliverList(){
 	var url = "/admin/getDeliverList"
 	$.post(url, function(data){
-		console.log(data);
 		$("#deliverTable > #deliverTableTbody").empty();
 		$.each(data, function() {
 				
 			var tr = $("#trTableDeliver").find("tr").clone();
-			console.log(tr);
 			tr.find("td").eq(0).text(this.dlvr_no);
 			tr.find("td").eq(1).text(this.dlvr_id);
 			tr.find("td").eq(2).text(this.dlvr_name);
@@ -217,39 +212,41 @@ function getDeliverList(){
 			tr.find("td").eq(6).find("button").attr("dlvr_no", this.dlvr_no);
 			tr.find("td").eq(7).find("button").attr("dlvr_no", this.dlvr_no);
 				
-				
 			$("#deliverTable > #deliverTableTbody").prepend(tr);
 		});
 	});
 }
 
-// function getWaitingDeliverList(){
-// 	var url = "/admin/getWaitingDeliverList"
-// 	$.post(url, function(data){
-// 		console.log(data);
-// 		$("#deliverTable > #deliverTableTbody").empty();
-// 		$.each(data, function() {
+function getWaitingDeliverList(){
+	var url = "/admin/getWaitingDeliverList"
+	$.post(url, function(data){
+		$("#watingDeliverTable > #waitingDeliverTableTbody").empty();
+		$.each(data, function() {
+			var tr = $("#trTableWaitingDeliver").find("tr").clone();
+			tr.find("td").eq(0).text(this.dlvr_no);
+			tr.find("td").eq(1).text(this.dlvr_id);
+			tr.find("td").eq(2).text(this.dlvr_name);
+			tr.find("td").eq(3).text(this.dlvr_phone);
+			tr.find("td").eq(4).text(this.dlvr_email);
+			tr.find("td").eq(5).text(this.dlvr_state);
+			tr.find("td").eq(6).find("button").attr("dlvr_no", this.dlvr_no);
+			tr.find("td").eq(7).find("button").attr("dlvr_no", this.dlvr_no);
 				
-// 			var tr = $("#trTableDeliver").find("tr").clone();
-// 			console.log(tr);
-// 			tr.find("td").eq(0).text(this.dlvr_no);
-// 			tr.find("td").eq(1).text(this.dlvr_id);
-// 			tr.find("td").eq(2).text(this.dlvr_name);
-// 			tr.find("td").eq(3).text(this.dlvr_phone);
-// 			tr.find("td").eq(4).text(this.dlvr_email);
-// 			tr.find("td").eq(5).text(this.dlvr_state);
-// 			tr.find("td").eq(6).find("button").attr("dlvr_no", this.dlvr_no);
-// 			tr.find("td").eq(7).find("button").attr("dlvr_no", this.dlvr_no);
-				
-				
-// 			$("#deliverTable > #deliverTableTbody").prepend(tr);
-// 		});	
-// 	});
-// }
+			$("#watingDeliverTable > #waitingDeliverTableTbody").prepend(tr);
+		});	
+	});
+}
 $(function() {
 	getMemberList()
 	getDeliverList()
-// 	getWaitingDeliverList()
+	getWaitingDeliverList()
+	
+	$("#memberTableTbody").on("click", ".btnMemberModify", function(){
+		var user_no = parseInt($(this).attr("user_no"));
+		console.log(user_no);
+		location.href = "/admin/memberInfoForm?user_no=" + user_no
+		
+	});
 });
 </script>
 </html>

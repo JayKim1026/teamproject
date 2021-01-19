@@ -212,10 +212,17 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	/* 가입대기중 배달원 리스트 */
-//	@Override
-//	public List<DeliverVo> getWaitingDeliverList() {
-//		List<DeliverVo> list = sqlSession.selectList(NAMESPACE + "getWaitingDeliverList");
-//		return list;
-//	}
+	@Override
+	public List<DeliverVo> getWaitingDeliverList() {
+		List<DeliverVo> list = sqlSession.selectList(NAMESPACE + "getWaitingDeliverList");
+		return list;
+	}
+	
+	/* 회원정보 가져오기 */
+	@Override
+	public UserVo getMemberInfo(int user_no) {
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getMemberInfo", user_no);
+		return userVo;
+	}
 
 }

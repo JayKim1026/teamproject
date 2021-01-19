@@ -187,7 +187,18 @@
 	</select>
 	<!-- 배달원 리스트 끝 -->
 	
-	<!-- 가입 대기중 배달원 리스트 -->
-<!-- 	<select id="getWaitingDeliverList" ></select> -->
-	<!-- 가입 대기중 배달원 리스트 끝-->
+	<!-- 	가입 대기중 배달원 리스트 -->
+	<select id="getWaitingDeliverList" resultType="DeliverVo" >
+		select * from tbl_deliver
+		where dlvr_state = '1-001'
+	</select>
+	<!-- 	가입 대기중 배달원 리스트 끝 -->
+
+	<!-- 회원 정보 가져오기 -->
+	<select id="getMemberInfo" resultType="UserVo">
+		select * from tbl_user
+		where user_no = #{user_no}
+	</select>
+	<!-- 회원 정보 가져오기 끝 -->
+
 </mapper>
