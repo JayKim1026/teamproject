@@ -175,30 +175,68 @@
 	</select>
 	<!-- 신고 관련 카운트 끝-->
 	
+	<!-- 회원 리스트 가지고오기 -->
 	<!-- 일반회원 리스트 -->
 	<select id="getMemberList" resultType="UserVo">
 		select * from tbl_user
 	</select>
-	<!-- 일반 회원리스트 끝 -->
 	
 	<!-- 배달원 리스트 -->
 	<select id="getDeliverList" resultType="DeliverVo">
 		select * from tbl_deliver
 	</select>
-	<!-- 배달원 리스트 끝 -->
 	
 	<!-- 	가입 대기중 배달원 리스트 -->
 	<select id="getWaitingDeliverList" resultType="DeliverVo" >
 		select * from tbl_deliver
 		where dlvr_state = '1-001'
 	</select>
-	<!-- 	가입 대기중 배달원 리스트 끝 -->
-
+	<!-- 회원 리스트 가지고오기 끝-->
+	
 	<!-- 회원 정보 가져오기 -->
 	<select id="getMemberInfo" resultType="UserVo">
 		select * from tbl_user
 		where user_no = #{user_no}
 	</select>
 	<!-- 회원 정보 가져오기 끝 -->
-
+	
+	
+	<!-- 대기중인 주문 목록 -->
+	<select id="getWaitingOrderList" resultType="OrderVo">
+		select o.*, u.user_name from tbl_order o
+		inner join tbl_user u
+		on o.user_no = u.user_no     
+		inner join tbl_code c
+		on o.order_state = c.code_no
+		where o.order_state = '3-001'
+		order by o.order_date desc
+	</select>
+	
+	<!-- 접수된 주문 목록 -->
+	<select id="getAcceptOrderList" resultType="OrderVo">
+		select o.*, u.user_name, d.dlvr_name 
+        from tbl_order o
+        inner join tbl_user u
+        on o.user_no = u.user_no
+        left outer join tbl_deliver d
+        on o.dlvr_no = d.dlvr_no
+        inner join tbl_code c
+        on o.order_state = c.code_no
+        where o.order_state = '3-002'
+        order by o.order_date desc
+	</select>
+	<!-- 완료된 주문 목록 -->
+	<select id="getFinishOrderList" resultType="OrderVo">
+		select o.*, u.user_name, d.dlvr_name 
+        from tbl_order o
+        inner join tbl_user u
+        on o.user_no = u.user_no
+        left outer join tbl_deliver d
+        on o.dlvr_no = d.dlvr_no
+        inner join tbl_code c
+        on o.order_state = c.code_no
+        where o.order_state = '3-003'
+        order by o.order_date desc
+	</select>
+	
 </mapper>

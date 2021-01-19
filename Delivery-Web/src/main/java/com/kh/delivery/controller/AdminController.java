@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.AdminService;
 import com.kh.delivery.util.Codes;
@@ -234,7 +235,7 @@ public class AdminController implements Codes {
 	
 	/* 회원정보 수정*/
 	@RequestMapping(value="/memberInfoForm", method = RequestMethod.GET)
-	public String memberInfoForm(int user_no, Model model) {
+	public String memberInfoForm(int user_no, Model model)throws Exception {
 		System.out.println("memberInfoForm ,user_no:" + user_no);
 		UserVo userVo = adminService.getMemberInfo(user_no);
 		System.out.println("memberInfoForm ,userVo:" + userVo);
@@ -245,7 +246,39 @@ public class AdminController implements Codes {
 	}
 	
 	
+	/* 주문 목록 폼*/
+	@RequestMapping(value="/orderList")
+	public String orderList()throws Exception {
+		
+		return "admin/adminOrderList";
+	}
 	
+	/*대기중인 주문 목록*/
+	@RequestMapping(value="/getWaitingOrderList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<OrderVo> getWaitingOrderList()throws Exception {
+		List<OrderVo> list = adminService.getWaitingOrderList();
+		System.out.println("주문대기목록, list:" + list);
+		return list;
+	}
+	
+	/*접수된 주문 목록*/
+	@RequestMapping(value="/getAcceptOrderList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<OrderVo> getAcceptOrderList() throws Exception{
+		List<OrderVo> list = adminService.getAcceptOrderList();
+		System.out.println("주문접수목록, list:" + list);
+		return list;
+	}
+	
+	/*완료된 주문목록*/
+	@RequestMapping(value="/getFinishOrderList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<OrderVo> getFinishOrderList() throws Exception{
+		List<OrderVo> list = adminService.getFinishOrderList();
+		System.out.println("주문완료목록, list:" + list);
+		return list;
+	}
 	
 	@RequestMapping(value="/reportPage", method=RequestMethod.GET)
 	public String reportPage() throws Exception {

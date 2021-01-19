@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 
 
@@ -223,6 +224,27 @@ public class AdminDaoImpl implements AdminDao {
 	public UserVo getMemberInfo(int user_no) {
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getMemberInfo", user_no);
 		return userVo;
+	}
+	
+	/*대기중인 주문 목록*/
+	@Override
+	public List<OrderVo> getWaitingOrderList() {
+		List<OrderVo> list = sqlSession.selectList(NAMESPACE + "getWaitingOrderList");
+		return list;
+	}
+	
+	/*접수된 주문 목록*/
+	@Override
+	public List<OrderVo> getAcceptOrderList() {
+		List<OrderVo> list = sqlSession.selectList(NAMESPACE + "getAcceptOrderList");
+		return list;
+	}
+	
+	/*완료된 주문목록*/
+	@Override
+	public List<OrderVo> getFinishOrderList() {
+		List<OrderVo> list = sqlSession.selectList(NAMESPACE + "getFinishOrderList");
+		return list;
 	}
 
 }

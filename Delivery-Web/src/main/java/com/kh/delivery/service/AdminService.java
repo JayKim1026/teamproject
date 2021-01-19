@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 
 public interface AdminService {
@@ -69,20 +70,26 @@ public interface AdminService {
 	public int getFinishedReportCount();
 	/*----- 신고 관련 카운트 끝-----*/
 	
-	/* 일반멤버 리스트*/
+	/*----- 회원(배달원+일반원 리스트) -----*/
+	/*일반회원 리스트  */
 	public List<UserVo> getMemberList();
-	/*----- 일반회원 리스트 끝 -----*/
-	
-	/*----- 배달원 리스트 -----*/
+	/*배달원 리스트*/
 	public List<DeliverVo> getDeliverList();
-	/*----- 배달원 리스트 끝 -----*/
-	
-	/*----- 가입 대기중 배달원 리스트 -----*/
+	/*가입 대기중 배달원 리스트*/
 	public List<DeliverVo> getWaitingDeliverList();
-	/*----- 가입 대기중 배달원 리스트 끝 -----*/
+	/*----- 회원(배달원+일반원 리스트)끝 -----*/
 	
 	/*----- 회원정보 수정정보 받아오기-----*/
 	public UserVo getMemberInfo(int user_no);
 	/*----- 회원정보 수정정보 받아오기 끝 -----*/
+	
+	/*----- 주문 목록 관련 -----*/
+	/*대기중인 주문 목록*/
+	public List<OrderVo> getWaitingOrderList();
+	/*접수된 주문 목록*/
+	public List<OrderVo> getAcceptOrderList();
+	/*완료된 주문목록*/
+	public List<OrderVo> getFinishOrderList();
+	/*----- 주문 목록 관련 끝 -----*/
 	
 }

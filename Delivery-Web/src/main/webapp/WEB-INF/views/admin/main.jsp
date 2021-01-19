@@ -135,7 +135,7 @@ ${sessionScope.adminVo}
 								<!-- 오른쪽 첫번째 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<div><span style="margin-left:63px;">주문</span> <a href="#"style="float:right;">주문관리</a></div>
+										<div><span style="margin-left:63px;">주문</span> <a href="/admin/orderList"style="float:right;">주문관리</a></div>
 										<p class="text-black-50 content mb-2">요청 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="requested_Order_Count"></span></p>
 										<p class="text-black-50 content mb-2">진행중 배달: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="inProgress_Order_Count"></span></p>
 										<p class="text-black-50 content mb-4">배달 완료건수: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="finished_Order_Count"></span></p>

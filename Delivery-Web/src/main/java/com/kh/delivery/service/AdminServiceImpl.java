@@ -11,6 +11,7 @@ import com.kh.delivery.dao.AdminDao;
 import com.kh.delivery.domain.AccountDto;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
+import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 
 @Service
@@ -219,5 +220,26 @@ public class AdminServiceImpl implements AdminService {
 		return userVo;
 	}
 	/*----- 회원정보 가져오기 끝-----*/
+	
+	/*대기중인 주문 목록*/
+	@Override
+	public List<OrderVo> getWaitingOrderList() {
+		List<OrderVo> list = adminDao.getWaitingOrderList();
+		return list;
+	}
+	
+	/*접수된 주문 목록*/
+	@Override
+	public List<OrderVo> getAcceptOrderList() {
+		List<OrderVo> list = adminDao.getAcceptOrderList();
+		return list;
+	}
+	
+	/*완료된 주문목록*/
+	@Override
+	public List<OrderVo> getFinishOrderList() {
+		List<OrderVo> list = adminDao.getFinishOrderList();
+		return list;
+	}
 	
 }
