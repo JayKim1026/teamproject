@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.delivery.domain.AdminVo;
+import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.UserVo;
 
 
@@ -201,6 +202,27 @@ public class AdminDaoImpl implements AdminDao {
 	public List<UserVo> getMemberList() {
 		List<UserVo> list = sqlSession.selectList(NAMESPACE + "getMemberList");
 		return list;
+	}
+	
+	/* 배달원 리스트 */
+	@Override
+	public List<DeliverVo> getDeliverList() {
+		List<DeliverVo> list = sqlSession.selectList(NAMESPACE + "getDeliverList");
+		return list;
+	}
+	
+	/* 가입대기중 배달원 리스트 */
+	@Override
+	public List<DeliverVo> getWaitingDeliverList() {
+		List<DeliverVo> list = sqlSession.selectList(NAMESPACE + "getWaitingDeliverList");
+		return list;
+	}
+	
+	/* 회원정보 가져오기 */
+	@Override
+	public UserVo getMemberInfo(int user_no) {
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getMemberInfo", user_no);
+		return userVo;
 	}
 
 }
