@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -256,6 +255,28 @@ ${likeList}
 		</div>
 	</div>
 	<!-- -----------------------// 댓글 클론 -->
+	
+	<!-- -----------------------신고 모달 -->
+
+
+	<div class="timelineModal_report">
+		<div class="timelineModal_content">
+			<form action="/report/report" method="post">
+				<label><strong>Timeline</strong> 신고</label>
+				<input type="hidden" name="report_type" value="6-012" />
+				<ul class="timelineModal_ul">
+					<li><input type="radio" name="timelineReportType" value="6-111" /><span class="Modal_span">원치 않는 상업성 콘텐츠 또는 허위사실유포</span></li>
+					<li><input type="radio" name="timelineReportType" value="6-112" /><span class="Modal_span">포르노 또는 음란물</span></li>
+					<li><input type="radio" name="timelineReportType" value="6-113" /><span class="Modal_span">노골적인 희롱 또는 폭력</span></li>
+					<li><div class="timelineModal_btns">
+							<button type="submit" class="btn btn-danger btnTimelineReportRun" >확인</button>
+							<button type="button" class="btn btn-info btnTimelineReportCancel">취소</button>
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
 	
 					
 	<%@include file="../include/footer.jsp" %>

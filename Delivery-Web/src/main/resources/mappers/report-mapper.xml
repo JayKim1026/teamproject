@@ -6,7 +6,7 @@
 
 	<insert id="report">
 		insert into tbl_report(report_no, plt_no, def_no, report_code, report_type)
-		values(seq_report_no.nextval, #{plt_no}, #{def_no}, #{report_content}, #{report_type})
+		values(seq_report_no.nextval, #{plt_no}, #{def_no}, #{report_code}, #{report_type})
 	</insert>
 	
 	<select id="getReportList" resultType="ReportVo">

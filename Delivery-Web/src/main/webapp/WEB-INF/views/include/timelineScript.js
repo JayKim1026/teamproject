@@ -154,6 +154,9 @@ $(function() {
 		
 		clone1.find(".showComment").attr("data-no", data.time_no);
 		clone1.find(".insertCommentBtn").attr("data-no", data.time_no);
+		clone1.find(".btnUpdate").attr("data-no", data.time_no);
+		clone1.find(".btnDelete").attr("data-no", data.time_no);
+		clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no);
 		
 		clone1.show();
 		if(!insert) {
@@ -255,9 +258,38 @@ $(function() {
 		});
 	});
 	
-//	$(".btnReport").click(function() {
-//		var time_no = $(this).
-//	});
+	/* 타임라인 신고*/
+	$(document).on("click", ".btnReport", function() {
+		$(".timelineModal_report").fadeIn();
+		var writer_no = $(this).attr("data-writerno");
+		$(".btnTimelineReportRun").attr("data-defno", writer_no);
+	});
+	
+	// 타임라인 report type 
+	$("input[name=timelineReportType]").change(function(){
+		var timelineReportType = $(this).val();
+		$(".btnTimelineReportRun").attr("data-reportType", timelineReportType);
+	});
+	
+	/* 타임라인 신고 모달 확인 버튼*/
+	$(".btnTimelineReportRun").click(function(e){
+		e.preventDefault();
+			var url = "/report/report";
+			var def_no = $(this).attr("data-defno");
+			var plf_no = "${sessionScope.userVo.user_no}"
+			var resultType= $(this).attr("data-reportType");
+			console.log(resultType);
+			console.log("plf_no : " + plf_no);
+			$.post(url, sendData, function(reportResult){
+				console.log(reportResult);
+			});
+	});
+	
+	/* 타임라인 신고 모달 취소 버튼*/
+	$(".btnTimelineReportCancel").click(function(){
+		$(".timelineModal_report").fadeOut();
+	});
+	
 	
 	/*사진 미리보기*/
 	$("#time_img").on("change", function(){
