@@ -5,15 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../include/link.jsp" %>
+<meta charset="UTF-8">
+<%@ include file="../include/link.jsp" %>
+<style type="text/css">
 <%@include file="../css/timeline.css" %>
+</style>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d"></script>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<meta charset="UTF-8">
 <title>timeLine.jsp</title>
 </head>
 <script>
@@ -21,7 +23,7 @@
 </script>
 <body>
 <%@ include file="../include/frm.jsp"%>
-<%@include file="../include/timelineHeader.jsp" %>
+<%@ include file="../include/timelineHeader.jsp" %>
 ${likeList}
 	<!-------------------------- 글 입력  --------------------------> 
 	<div class="container-fluid" style="background-color: #f0f2f5;">

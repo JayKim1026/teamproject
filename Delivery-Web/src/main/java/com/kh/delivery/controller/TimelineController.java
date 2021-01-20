@@ -153,9 +153,9 @@ public class TimelineController implements Codes {
 	}
 
 	// 게시물 삭제
-	@RequestMapping(value = "/android/deleteArticle/{time_no}", method = RequestMethod.POST)
+	@RequestMapping(value = "/android/deleteArticle", method = RequestMethod.POST)
 	@ResponseBody
-	public String aDeleteArticle(@PathVariable("time_no") int time_no) throws Exception {
+	public String aDeleteArticle(int time_no) throws Exception {
 		System.out.println("deleteArticle, time_no:" + time_no);
 		String result = timelineService.deleteArticle(time_no);
 		return result;
