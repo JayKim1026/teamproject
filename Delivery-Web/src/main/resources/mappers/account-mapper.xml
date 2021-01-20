@@ -58,13 +58,19 @@
 	
 	<select id="getPointRank" resultType="AccountDto">
 		select * from (
-		    select acc_no, acc_id, acc_name, acc_point, c.code_detail acc_state, rank() over(order by a.acc_point desc) point_rank 
+		    select acc_no, acc_id, acc_name, p.point_score acc_point, c.code_detail acc_state, rank() over(order by p.point_score desc) point_rank 
 		    from (
 		        select user_no acc_no, user_id acc_id, user_name acc_name, user_point acc_point, account_state from tbl_user
 		        union
 		        select dlvr_no, dlvr_id, dlvr_name, dlvr_point, account_state from tbl_deliver) a
 		    inner join tbl_code c
-		    on a.account_state = c.code_no)
+		    on a.account_state = c.code_no
+		    inner join (
+		        select account_no, sum(point_score) point_score 
+		        from tbl_point
+		        where point_date > trunc(sysdate, 'MM')
+		        group by account_no) p
+		    on a.acc_no = p.account_no)
 		where point_rank &lt;= 3
 	</select>
 	

@@ -26,8 +26,9 @@
 			    from tbl_like
 			    where account_no = #{account_no}) l2
 			on t.time_no = l2.time_no
+		where time_state != '2-000'
 		<if test="searchType != null">
-		where time_state = #{searchType}
+		and time_state = #{searchType}
 		</if>
 		order by t.time_no desc
 	</select>
@@ -76,7 +77,8 @@
 			    from tbl_like
 			    where account_no = #{account_no}) l2
 			on t.time_no = l2.time_no
-	    where time_no = #{time_no}
+		where time_state != '2-000'
+	    and t.time_no = #{time_no}
 	</select>
 	 
 	<select id="getLastTimeline" resultType="TimelineVo">
@@ -89,6 +91,7 @@
 		        select dlvr_no, dlvr_name from tbl_deliver
 		        order by writer_no desc) a
 		    on t.writer_no = a.writer_no
+			where time_state != '2-000'
 		    order by t.time_no desc)
 		where rownum = 1
 	</select>
@@ -115,7 +118,8 @@
 			    from tbl_like
 			    where account_no = #{account_no}) l2
 			on t.time_no = l2.time_no
-		where t.time_no &gt; #{time_no}
+		where time_state != '2-000'
+		and t.time_no &gt; #{time_no}
 		order by t.time_no asc
 	</select>
 	
