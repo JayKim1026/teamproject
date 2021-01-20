@@ -23,7 +23,16 @@ public class TimelineVo {
 	private String writer_name;
 	private String dlvr_name;
 	private String writer_img;
-	
+	private int liked_no;
+
+	public int getLiked_no() {
+		return liked_no;
+	}
+
+	public void setLiked_no(int liked_no) {
+		this.liked_no = liked_no;
+	}
+
 	public int getTime_like() {
 		return time_like;
 	}
@@ -142,11 +151,7 @@ public class TimelineVo {
 				+ ", time_content=" + time_content + ", time_img=" + time_img + ", time_date=" + time_date
 				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no
 				+ ", time_location=" + time_location + ", time_like=" + time_like + ", writer_name=" + writer_name
-				+ ", dlvr_name=" + dlvr_name + ", writer_img=" + writer_img + "]";
+				+ ", dlvr_name=" + dlvr_name + ", writer_img=" + writer_img + ", liked_no=" + liked_no + "]";
 	}
-
-	
-
-	
 
 }
