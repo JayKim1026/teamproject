@@ -233,17 +233,30 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/* 회원정보 수정*/
-	@RequestMapping(value="/memberInfoForm", method = RequestMethod.GET)
-	public String memberInfoForm(int user_no, Model model)throws Exception {
-		System.out.println("memberInfoForm ,user_no:" + user_no);
-		UserVo userVo = adminService.getMemberInfo(user_no);
-		System.out.println("memberInfoForm ,userVo:" + userVo);
-		String user_img = userVo.getUser_img();
-		model.addAttribute("image_url", BUCKET_URL + user_img);
-		model.addAttribute("userVo", userVo);
-		return "admin/info";
+	/* 계정상태 수정*/
+	//일반
+	@RequestMapping(value="/userStateUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String userStateUpdate(int user_no, String user_state)throws Exception {
+		System.out.println("userStateUpdate ,user_no:" + user_no);
+		System.out.println("userStateUpdate ,user_state:" + user_state);
+		String updateResult = adminService.userStateUpdate(user_no, user_state);
+		System.out.println("userStateUpdate ,updateResult:" + updateResult);
+		return updateResult;
 	}
+	
+	//라이더 & 가입 대기 중 라이더
+	@RequestMapping(value="/deliverStateUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String deliverStateUpdate(int dlvr_no, String dlvr_state)throws Exception {
+		System.out.println("deliverStateUpdate ,dlvr_no:" + dlvr_no);
+		System.out.println("deliverStateUpdate ,dlvr_state:" + dlvr_state);
+		String updateResult = adminService.deliverStateUpdate(dlvr_no, dlvr_state);
+		System.out.println("memberInfoForm ,updateResult:" + updateResult);
+		return updateResult;
+	}
+	
+	/* 일반 회원 계정상태 수정 끝*/
 	
 	
 	/* 주문 목록 폼*/

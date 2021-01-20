@@ -66,6 +66,7 @@
 	                    </nav>
 						<div class="tab-content" id="nav-tabContent">
                         	<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        	<!-- 일반회원 clone table -->
 								<table style="display: none;" id="trTable">
 									<tr>
 										<td></td>
@@ -73,14 +74,19 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
-										<td><button type="button"
-												class="btn btn-xs btn-warning btnMemberModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnMemberDelete">삭제</button></td>
+										<td>
+											<select>
+												<option value="1-001">가입대기</option>
+												<option value="1-002">가입완료</option>
+												<option value="1-003">계정탈퇴</option>
+												<option value="1-004">계정정지</option>
+											</select>
+										</td>
+										<td><button type="button" class="btn btn-xs btn-danger btnMemberUpdate">변경</button></td>
 									</tr>
 								</table>
 		
+							<!-- 일반회원  table -->
 								<table class="table" id="memberTable">
 									<thead>
 										<tr>
@@ -90,7 +96,7 @@
 											<th>휴대전화</th>
 											<th>EMAIL</th>
 											<th>계정상태</th>
-											<th>#</th>
+											<th>상태변경</th>
 										</tr>
 									</thead>
 									<tbody id="memberTableTbody">
@@ -100,6 +106,7 @@
 								
 							</div>
 							
+							<!-- 라이더회원 clone table -->
 							<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 								<table style="display: none;" id="trTableDeliver">
 									<tr>
@@ -108,14 +115,19 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
-										<td><button type="button"
-												class="btn btn-xs btn-warning btnDeliverModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnDeliverDelete">삭제</button></td>
+										<td>
+											<select>
+												<option value="1-001">가입대기</option>
+												<option value="1-002">가입완료</option>
+												<option value="1-003">계정탈퇴</option>
+												<option value="1-004">계정정지</option>
+											</select>
+										</td>
+										<td><button type="button" class="btn btn-xs btn-danger btnDeliverUpdate">변경</button></td>
 									</tr>
 								</table>
 		
+							<!-- 라이더 회원 table  -->
 								<table class="table" id="deliverTable">
 									<thead>
 										<tr>
@@ -125,7 +137,7 @@
 											<th>휴대전화</th>
 											<th>EMAIL</th>
 											<th>계정상태</th>
-											<th>#</th>
+											<th>상태변경</th>
 										</tr>
 									</thead>
 									<tbody id="deliverTableTbody">
@@ -134,6 +146,7 @@
 								</table>
 							</div>
 							
+							<!-- 가입 대기중 라이더 회원 clone table  -->
 							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 								<table style="display: none;" id="trTableWaitingDeliver">
 									<tr>
@@ -142,15 +155,20 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
-										<td><button type="button"
-												class="btn btn-xs btn-warning btnWaitingDeliverModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnWaitingDeliverDelete">삭제</button></td>
+										<td>
+											<select>
+												<option value="1-001">가입대기</option>
+												<option value="1-002">가입완료</option>
+												<option value="1-003">계정탈퇴</option>
+												<option value="1-004">계정정지</option>
+											</select>
+										</td>
+										<td><button type="button" class="btn btn-xs btn-danger btnWaitingDeliverUpdate">변경</button></td>
 									</tr>
 								</table>
 		
-								<table class="table" id="watingDeliverTable">
+								<!-- 가입 대기중 라이더 회원 table -->
+								<table class="table" id="waitingDeliverTable">
 									<thead>
 										<tr>
 											<th>배달원번호</th>
@@ -159,7 +177,7 @@
 											<th>휴대전화</th>
 											<th>EMAIL</th>
 											<th>계정상태</th>
-											<th>#</th>
+											<th>상태변경</th>
 										</tr>
 									</thead>
 									<tbody id="waitingDeliverTableTbody">
@@ -181,17 +199,26 @@ function getMemberList() {
 	$.post(url, function(data) {
 		$("#memberTable > #memberTableTbody").empty();
 		$.each(data, function() {
-				
 			var tr = $("#trTable").find("tr").clone();
 			tr.find("td").eq(0).text(this.user_no);
 			tr.find("td").eq(1).text(this.user_id);
 			tr.find("td").eq(2).text(this.user_name);
 			tr.find("td").eq(3).text(this.user_phone);
 			tr.find("td").eq(4).text(this.user_email);
-			tr.find("td").eq(5).text(this.account_state);
+			if(this.user_state == "1-001") {
+				tr.find("td").eq(5).find("option").eq(0).attr("selected" , "selected");
+			} else if( this.user_state == "1-002") {
+				tr.find("td").eq(5).find("option").eq(1).attr("selected" , "selected");
+			} else if ( this.user_state == "1-003") {
+				tr.find("td").eq(5).find("option").eq(2).attr("selected" , "selected");
+			} else if ( this.user_state == "1-004") {
+				tr.find("td").eq(5).find("option").eq(3).attr("selected" , "selected");
+			}
 			tr.find("td").eq(6).find("button").attr("user_no", this.user_no);
-			tr.find("td").eq(7).find("button").attr("user_no", this.user_no);
-				
+			tr.find("td").eq(6).find("button").attr("data-userState", this.user_state);
+			
+			
+			
 			$("#memberTable > #memberTableTbody").prepend(tr);
 		});
 	});
@@ -208,10 +235,17 @@ function getDeliverList(){
 			tr.find("td").eq(2).text(this.dlvr_name);
 			tr.find("td").eq(3).text(this.dlvr_phone);
 			tr.find("td").eq(4).text(this.dlvr_email);
-			tr.find("td").eq(5).text(this.dlvr_state);
+			if(this.dlvr_state == "1-001") {
+				tr.find("td").eq(5).find("option").eq(0).attr("selected" , "selected");
+			} else if( this.dlvr_state == "1-002") {
+				tr.find("td").eq(5).find("option").eq(1).attr("selected" , "selected");
+			} else if ( this.dlvr_state == "1-003") {
+				tr.find("td").eq(5).find("option").eq(2).attr("selected" , "selected");
+			} else if ( this.dlvr_state == "1-004") {
+				tr.find("td").eq(5).find("option").eq(3).attr("selected" , "selected");
+			}
 			tr.find("td").eq(6).find("button").attr("dlvr_no", this.dlvr_no);
-			tr.find("td").eq(7).find("button").attr("dlvr_no", this.dlvr_no);
-				
+			tr.find("td").eq(6).find("button").attr("data-dlvrState", this.dlvr_state);
 			$("#deliverTable > #deliverTableTbody").prepend(tr);
 		});
 	});
@@ -228,11 +262,19 @@ function getWaitingDeliverList(){
 			tr.find("td").eq(2).text(this.dlvr_name);
 			tr.find("td").eq(3).text(this.dlvr_phone);
 			tr.find("td").eq(4).text(this.dlvr_email);
-			tr.find("td").eq(5).text(this.dlvr_state);
+			if(this.dlvr_state == "1-001") {
+				tr.find("td").eq(5).find("option").eq(0).attr("selected" , "selected");
+			} else if( this.dlvr_state == "1-002") {
+				tr.find("td").eq(5).find("option").eq(1).attr("selected" , "selected");
+			} else if ( this.dlvr_state == "1-003") {
+				tr.find("td").eq(5).find("option").eq(2).attr("selected" , "selected");
+			} else if ( this.dlvr_state == "1-004") {
+				tr.find("td").eq(5).find("option").eq(3).attr("selected" , "selected");
+			}
 			tr.find("td").eq(6).find("button").attr("dlvr_no", this.dlvr_no);
-			tr.find("td").eq(7).find("button").attr("dlvr_no", this.dlvr_no);
+			tr.find("td").eq(6).find("button").attr("data-dlvrState", this.dlvr_state);
 				
-			$("#watingDeliverTable > #waitingDeliverTableTbody").prepend(tr);
+			$("#waitingDeliverTable > #waitingDeliverTableTbody").prepend(tr);
 		});	
 	});
 }
@@ -241,12 +283,72 @@ $(function() {
 	getDeliverList()
 	getWaitingDeliverList()
 	
-	$("#memberTableTbody").on("click", ".btnMemberModify", function(){
-		var user_no = parseInt($(this).attr("user_no"));
-		console.log(user_no);
-		location.href = "/admin/memberInfoForm?user_no=" + user_no
-		
+	// 일반 회원 계정 상태 변경
+	$("#memberTableTbody").on("click", ".btnMemberUpdate", function(){
+		var check = confirm("계정상태를 변경하시겠습니까?");
+		if(check == true) { 
+			var user_no = parseInt($(this).attr("user_no"));
+			var selectValue = $(this).parent().prev().find("select").val();
+				console.log(user_no);
+				console.log(selectValue);
+			var url = "/admin/userStateUpdate"
+			var sendData = {
+				"user_no" : user_no ,
+				"user_state" : selectValue
+			};
+			$.post(url, sendData, function(updateResult){
+				if(updateResult == "update_success") {
+					console.log(updateResult);
+					alert("변경 완료");
+				}
+			});
+		}
 	});
+	
+	// 라이더 회원 계정 상태 변경
+	$("#deliverTableTbody").on("click", ".btnDeliverUpdate", function(){
+		var check = confirm("계정상태를 변경하시겠습니까?");
+		if(check == true) { 
+			var dlvr_no = parseInt($(this).attr("dlvr_no"));
+			var selectValue = $(this).parent().prev().find("select").val();
+				console.log(dlvr_no);
+				console.log(selectValue);
+			var url = "/admin/deliverStateUpdate"
+			var sendData = {
+				"dlvr_no" : dlvr_no ,
+				"dlvr_state" : selectValue
+			};
+			$.post(url, sendData, function(updateResult){
+				if(updateResult == "update_success") {
+					console.log(updateResult);
+					alert("변경 완료");
+				}
+			});
+		}
+	});
+	
+	// 가입 대기중 라이더 회원 계정 상태 변경
+	$("#waitingDeliverTable").on("click", ".btnWaitingDeliverUpdate", function(){
+		var check = confirm("계정상태를 변경하시겠습니까?");
+		if(check == true) { 
+			var dlvr_no = parseInt($(this).attr("dlvr_no"));
+			var selectValue = $(this).parent().prev().find("select").val();
+				console.log(dlvr_no);
+				console.log(selectValue);
+			var url = "/admin/deliverStateUpdate"
+			var sendData = {
+				"dlvr_no" : dlvr_no ,
+				"dlvr_state" : selectValue
+			};
+			$.post(url, sendData, function(updateResult){
+				if(updateResult == "update_success") {
+					console.log(updateResult);
+					alert("변경 완료");
+				}
+			});
+		}
+	});
+	
 });
 </script>
 </html>

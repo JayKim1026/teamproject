@@ -219,12 +219,27 @@ public class AdminDaoImpl implements AdminDao {
 		return list;
 	}
 	
-	/* 회원정보 가져오기 */
+	/* 계정 상태 수정 */
 	@Override
-	public UserVo getMemberInfo(int user_no) {
-		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getMemberInfo", user_no);
-		return userVo;
+	public String userStateUpdate(int user_no, String user_state) {
+		Map<String, Object > map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("user_state", user_state);
+		sqlSession.update(NAMESPACE + "userStateUpdate", map);
+		
+		return "update_success";
 	}
+
+	@Override
+	public String deliverStateUpdate(int dlvr_no, String dlvr_state) {
+		Map<String, Object > map = new HashMap<>();
+		map.put("dlvr_no", dlvr_no);
+		map.put("dlvr_state", dlvr_state);
+		sqlSession.update(NAMESPACE + "deliverStateUpdate", map);
+		return "update_success";
+	}
+	/* 계정 상태 수정  끝*/
+	
 	
 	/*대기중인 주문 목록*/
 	@Override

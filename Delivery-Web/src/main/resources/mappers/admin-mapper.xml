@@ -193,12 +193,19 @@
 	</select>
 	<!-- 회원 리스트 가지고오기 끝-->
 	
-	<!-- 회원 정보 가져오기 -->
-	<select id="getMemberInfo" resultType="UserVo">
-		select * from tbl_user
+	<!-- 계정 상태 수정-->
+	<update id="userStateUpdate">
+		update tbl_user set
+		user_state = #{user_state}
 		where user_no = #{user_no}
-	</select>
-	<!-- 회원 정보 가져오기 끝 -->
+	</update>
+
+	<update id="deliverStateUpdate">
+		update tbl_deliver set
+		dlvr_state = #{dlvr_state}
+		where dlvr_no = #{dlvr_no}
+	</update>
+	<!-- 계정 상태 수정 -->
 	
 	
 	<!-- 대기중인 주문 목록 -->
