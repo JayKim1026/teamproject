@@ -173,7 +173,7 @@ ${sessionScope.adminVo}
 								<!-- 왼쪽 두번쨰(밑에칸) 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<div><span style="margin-left:63px;">게시물</span> <a href="#"style="float:right;">게시글관리</a></div>
+										<div><span style="margin-left:63px;">게시물</span> <a href="/admin/editTimeline" style="float:right;">게시글관리</a></div>
 										<p class="text-black-50 content mb-2">새로운 일반글: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="post_Count"></span></p>
 										<p class="text-black-50 content mb-2">새로운 리뷰글: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="review_Count"></span></p>
 								 		<p class="text-black-50 content mb-4">새로운 공지사항: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="notice_Count"></span></p>

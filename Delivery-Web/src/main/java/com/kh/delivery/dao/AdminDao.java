@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 
 public interface AdminDao {
@@ -83,7 +84,7 @@ public interface AdminDao {
 	public UserVo getMemberInfo(int user_no);
 	/*----- 회원정보 수정정보 받아오기 끝 -----*/
 	
-	/*----- 주문 목록 관련 -----*/
+	/*----- 주문 목록 + 현황 수정 -----*/
 	/*대기중인 주문 목록*/
 	public List<OrderVo> getWaitingOrderList();
 	/*접수된 주문 목록*/
@@ -94,5 +95,19 @@ public interface AdminDao {
 	public List<OrderVo> getCancelOrderList();
 	/*배달원 취소 목록*/
 	public List<OrderVo> getCancelOrderListByDeliver();
-	/*----- 주문 목록 관련 끝 -----*/
+	/*배달현황 수정*/
+	public void updateOrderState(int order_no, String order_state);
+	/*----- 주문 목록 + 현황 수정 끝 -----*/
+	
+	/*----- 게시판(일반글 + 리뷰 + 공지) 목록 + 글 삭제-----*/
+	/*일반글 목록*/
+	public List<TimelineVo> getPostList();
+	/*리뷰 목록*/
+	public List<TimelineVo> getReviewList();
+	/*공지 목록*/
+	public List<TimelineVo> getNoticeList();
+	/*글 삭제*/
+	public void deleteArticle(int time_no);
+	/*----- 게시판(일반글 + 리뷰 + 공지) 목록 + 글 삭제 끝 -----*/
+	
 }

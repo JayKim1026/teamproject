@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 
 
@@ -259,6 +260,42 @@ public class AdminDaoImpl implements AdminDao {
 	public List<OrderVo> getCancelOrderListByDeliver() {
 		List<OrderVo> list = sqlSession.selectList(NAMESPACE + "getCancelOrderListByDeliver");
 		return list;
+	}
+	
+	/*배달현황 수정*/
+	@Override
+	public void updateOrderState(int order_no, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("order_no", order_no);
+		map.put("order_state", order_state);
+		sqlSession.update(NAMESPACE + "updateOrderState", map);
+	}
+	
+	/*일반글 목록*/
+	@Override
+	public List<TimelineVo> getPostList() {
+		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "getPostList");
+		return list;
+	}
+	
+	/*리뷰 목록*/
+	@Override
+	public List<TimelineVo> getReviewList() {
+		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "getReviewList");
+		return list;
+	}
+	
+	/*공지 목록*/
+	@Override
+	public List<TimelineVo> getNoticeList() {
+		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "getNoticeList");
+		return list;
+	}
+	
+	/*글 삭제*/
+	@Override
+	public void deleteArticle(int time_no) {
+		sqlSession.delete(NAMESPACE + "deleteArticle", time_no);
 	}
 
 }

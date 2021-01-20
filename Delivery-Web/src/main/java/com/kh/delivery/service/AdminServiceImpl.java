@@ -12,6 +12,7 @@ import com.kh.delivery.domain.AccountDto;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 
 @Service
@@ -254,6 +255,39 @@ public class AdminServiceImpl implements AdminService {
 	public List<OrderVo> getCancelOrderListByDeliver() {
 		List<OrderVo> list = adminDao.getCancelOrderListByDeliver();
 		return list;
+	}
+	
+	/*배달현황 수정*/
+	@Override
+	public void updateOrderState(int order_no, String order_state) {
+		adminDao.updateOrderState(order_no, order_state);
+	}
+	
+	/*일반글 목록*/
+	@Override
+	public List<TimelineVo> getPostList() {
+		List<TimelineVo> list = adminDao.getPostList();
+		return list;
+	}
+	
+	/*리뷰 목록*/
+	@Override
+	public List<TimelineVo> getReviewList() {
+		List<TimelineVo> list = adminDao.getReviewList();
+		return list;
+	}
+	
+	/*공지 목록*/
+	@Override
+	public List<TimelineVo> getNoticeList() {
+		List<TimelineVo> list = adminDao.getNoticeList();
+		return list;
+	}
+	
+	/*글 삭제*/
+	@Override
+	public void deleteArticle(int time_no) {
+		adminDao.deleteArticle(time_no);
 	}
 	
 }

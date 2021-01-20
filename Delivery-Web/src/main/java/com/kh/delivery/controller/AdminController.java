@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.AdminService;
 import com.kh.delivery.util.Codes;
@@ -296,6 +297,57 @@ public class AdminController implements Codes {
 		List<OrderVo> list = adminService.getCancelOrderListByDeliver();
 		System.out.println("배달원 취소 목록, list:" + list);
 		return list;
+	}
+	
+	/* 배달현황 수정*/
+	@RequestMapping(value="updateOrderState", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateOrderState(int order_no, String order_state) throws Exception{
+		System.out.println("updateOrderState, order_no:" + order_no);
+		System.out.println("updateOrderState, order_state:" + order_state);
+		adminService.updateOrderState(order_no, order_state);
+		return "success";
+	}
+	
+	/*게시판 수정 폼*/
+	@RequestMapping(value="/editTimeline")
+	public String editTimeline() {
+		return "admin/adminEditTimeline";
+	}
+	
+	/*일반글 목록*/
+	@RequestMapping(value="/getPostList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getPostList() throws Exception{
+		List<TimelineVo> list = adminService.getPostList();
+		System.out.println("getPostList, list:" + list);
+		return list;
+	}
+	
+	/*리뷰 목록*/
+	@RequestMapping(value="/getReviewList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getReviewList() throws Exception{
+		List<TimelineVo> list = adminService.getReviewList();
+		System.out.println("getReviewList, list:" + list);
+		return list;
+	}
+	
+	/*공지 목록*/
+	@RequestMapping(value="/getNoticeList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TimelineVo> getNoticeList() throws Exception{
+		List<TimelineVo> list = adminService.getNoticeList();
+		System.out.println("getNotice, list:" + list);
+		return list;
+	}
+	
+	@RequestMapping(value="/deleteArticle", method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteArticle(int time_no) throws Exception{
+		System.out.println("deleteArticle, time_no:" + time_no);
+		adminService.deleteArticle(time_no);
+		return "success";
 	}
 	
 	@RequestMapping(value="/reportPage", method=RequestMethod.GET)

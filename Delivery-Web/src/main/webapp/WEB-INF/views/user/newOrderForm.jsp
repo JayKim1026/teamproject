@@ -11,6 +11,17 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <title>newOrderForm.jsp</title>
+<style>
+.food_color{
+	background-color: yellow;
+}
+.grocery_color{
+	background-color: green;
+}
+.genral_color{
+	background-color: blue;
+}
+</style>
 </head>
 <body>
 <!-------------------------------------------------  Header  ------------------------------------------------->
@@ -65,10 +76,11 @@
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="tab-content">
+						
 							<!-------------------------------- 첫번째 탭-------------------------------->
 							<div role="tabpanel" class="tab-pane active" id="discover">
 								<!-- 음식주문 -->
-								<div class="category-list-card">
+								<div class="category-list-card" data-ca="3-012" id="ca_Food">
 									<div class="category-image">
 									</div>
 									<div class="category-name">
@@ -81,7 +93,7 @@
 								</div>
 								
 								<!-- 장보기 -->
-								<div class="category-list-card">
+								<div class="category-list-card" data-ca="3-013" id="ca_General">
 									<div class="category-image">
 									</div>
 									<div class="category-name">
@@ -94,7 +106,7 @@
 								</div>
 								
 								<!-- 사무용품 -->
-								<div class="category-list-card">
+								<div class="category-list-card" data-ca="3-011" id="ca_Office">
 									<div class="category-image">
 									</div>
 									<div class="category-name">
@@ -105,7 +117,6 @@
 										<i class="fa fa-angle-right"></i>
 									</div>
 								</div>
-								
 							</div>
 							<!-------------------------------- //첫번째 탭 끝 -------------------------------->
 							
@@ -292,12 +303,65 @@
 			</div>
 		</div>
 	</div>
-
+<form>
+<input type="hidden" id="order_ca">
+</form>
 <!-------------------------------------------------  // end of Content  ------------------------------------------------->
 
 <!-------------------------------------------------  footer  ------------------------------------------------->
 <%@include file="../include/footer.jsp" %>
 <!-------------------------------------------------end of footer ------------------------------------------------->
+
+<!--MyScript -->
+<script>
+$("#ca_Food").click(function(){
+	console.log("음식 클릭이여라~");
+	var has = $(this).hasClass("food_color");
+	if(has){
+		$(this).removeClass("food_color");
+		$("#order_ca").removeAttr("data-ca");
+	}else{
+		$(this).addClass("food_color");
+		var ca = $(this).attr("data-ca");
+		$("#order_ca").attr("data-ca", ca);
+		
+	}
+	var ca = $("#order_ca").attr("data-ca");
+	console.log("인풋데이타:" + ca);
+});
+
+$("#ca_General").click(function(){
+	console.log("사무용품 클릭이여라~");
+	var has = $(this).hasClass("general_color");
+	if(has){
+		$(this).removeClass("general_color");
+		$("#order_ca").removeAttr("data-ca");
+	}else{
+		$(this).addClass("general_color");
+		var ca = $(this).attr("data-ca");
+		$("#order_ca").attr("data-ca", ca);
+		
+	}
+	var ca = $("#order_ca").attr("data-ca");
+	console.log("인풋데이타:" + ca);
+});
+
+$("#ca_Office").click(function(){
+	console.log("음식 클릭이여라~");
+	var has = $(this).hasClass("genral_color");
+	if(has){
+		$(this).removeClass("genral_color");
+		$("#order_ca").removeAttr("data-ca");
+	}else{
+		$(this).addClass("genral_color");
+		var ca = $(this).attr("data-ca");
+		$("#order_ca").attr("data-ca", ca);
+		
+	}
+	var ca = $("#order_ca").attr("data-ca");
+	console.log("인풋데이타:" + ca);
+});
+</script>
 
 <!------------------------------------------------- mapScript ------------------------------------------------->
 <script>

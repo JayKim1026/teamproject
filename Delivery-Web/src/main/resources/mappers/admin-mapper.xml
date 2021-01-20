@@ -200,7 +200,7 @@
 	</select>
 	<!-- 회원 정보 가져오기 끝 -->
 	
-	
+	<!-- 주문(현황:대기중, 접수, 사용자취소, 배달원취소, 완료)목록 + 현황수정 -->
 	<!-- 대기중인 주문 목록 -->
 	<select id="getWaitingOrderList" resultType="OrderVo">
 		select o.*, u.user_name from tbl_order o
@@ -264,4 +264,65 @@
         order by o.order_date desc
 	</select>
 	
+	<!-- 배달현황 수정 -->
+	<update id="updateOrderState">
+		update tbl_order set
+		order_state = #{order_state}
+		where order_no = #{order_no}
+	</update>
+	<!-- 주문(현황:대기중, 접수, 사용자취소, 배달원취소, 완료)목록 + 현황수정 끝 -->
+	
+	<!-- 게시물(일반, 리뷰, 공지) 목록  + 삭제 -->
+	<!-- 일반글 목록 -->
+	<select id="getPostList" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.writer_name
+		from tbl_timeline t 
+		    left outer join tbl_deliver d
+		    on t.dlvr_no = d.dlvr_no
+		    left outer join (
+		        select user_no account_no, user_name writer_name, user_img from tbl_user
+		        union
+		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
+		    ) a
+		    on t.writer_no = a.account_no
+            where time_state = '2-003'
+            order by t.time_date desc
+	</select>
+	<!-- 리뷰 목록 -->
+	<select id="getReviewList" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.writer_name
+		from tbl_timeline t 
+		    left outer join tbl_deliver d
+		    on t.dlvr_no = d.dlvr_no
+		    left outer join (
+		        select user_no account_no, user_name writer_name, user_img from tbl_user
+		        union
+		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
+		    ) a
+		    on t.writer_no = a.account_no
+            where time_state = '2-002'
+            order by t.time_date desc	
+	</select>
+	<!-- 공지사항 목록 -->
+	<select id="getNoticeList" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.writer_name
+			from tbl_timeline t 
+			    left outer join tbl_deliver d
+			    on t.dlvr_no = d.dlvr_no
+			    left outer join (
+			        select user_no account_no, user_name writer_name, user_img from tbl_user
+			        union
+			        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
+			    ) a
+			    on t.writer_no = a.account_no
+	            where time_state = '2-001'
+	            order by t.time_date desc	
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deleteArticle">
+		delete from tbl_timeline
+		where time_no = #{time_no}
+	</delete>
+	<!-- 게시물(일반, 리뷰, 공지) 목록  + 삭제 끝 -->
 </mapper>
