@@ -2,11 +2,11 @@
 <style>
 
 .red-color{
-	color:red;
+	color: red;
 }
 
-.blue-color{
-	color:blue;
+.black-color{
+	color: black;
 }
 
 #write-map-marker{
@@ -583,10 +583,6 @@ td {
     color: #CFD8DC;
     margin-top: 10px;
     margin-bottom: 10px
-}
-
-.blue-text {
-    color: #0091EA
 }
 
 .content {
