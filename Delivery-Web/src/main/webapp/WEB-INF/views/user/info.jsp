@@ -38,7 +38,7 @@
 						<div class="main-content">
 							<div class="container mt-7">
 								<!-- Table -->
-								<div>${userVo }</div>
+								
 								<h2 class="mb-5" style="text-align: center;">반갑습니다, ${userVo.user_name }님 어떤 정보를 변경하고 싶으신가요?</h2>
 								<div class="row">
 									<div class="col-xl-8 m-auto order-xl-1">

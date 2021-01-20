@@ -80,9 +80,10 @@ public interface AdminService {
 	public List<DeliverVo> getWaitingDeliverList();
 	/*----- 회원(배달원+일반원 리스트)끝 -----*/
 	
-	/*----- 회원정보 수정정보 받아오기-----*/
-	public UserVo getMemberInfo(int user_no);
-	/*----- 회원정보 수정정보 받아오기 끝 -----*/
+	/*----- 회원 계정 상태 수정-----*/
+	public String userStateUpdate(int user_no, String user_state);
+	public String deliverStateUpdate(int dlvr_no, String dlvr_state);
+	/*----- 회원 계정 상태 수정 끝 -----*/
 	
 	/*----- 주문 목록 + 현황 수정 -----*/
 	/*대기중인 주문 목록*/

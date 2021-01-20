@@ -5,7 +5,7 @@
 <mapper namespace="com.kh.delivery.timeline">
 
 	<select id="timelineList" resultType="TimelineVo">
-		select t.*, d.dlvr_name, a.writer_name, a.writer_img
+		select t.*, d.dlvr_name, a.writer_name, a.writer_img, nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
 		from tbl_timeline t 
 		    left outer join tbl_deliver d
 		    on t.dlvr_no = d.dlvr_no
@@ -14,11 +14,21 @@
 		        union
 		        select user_no, user_name, user_img from tbl_user
 		        union
-		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
-		    ) a
+		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
 		    on t.writer_no = a.account_no
+		    left outer join (
+		        select time_no, count(*) time_like
+		        from tbl_like
+		        group by time_no) l
+		    on t.time_no = l.time_no
+			left outer join (
+			    select *
+			    from tbl_like
+			    where account_no = #{account_no}) l2
+			on t.time_no = l2.time_no
+		where time_state != '2-000'
 		<if test="searchType != null">
-			where time_state = #{searchType}
+		and time_state = #{searchType}
 		</if>
 		order by t.time_no desc
 	</select>
@@ -39,19 +49,14 @@
 		where time_no = #{time_no}
 	</update>
 	
-	<delete id="deleteArticle">
-		delete from tbl_timeline
-		where time_no = #{time_no}
-	</delete>
-	
-	<update id="updateLikeCount">
+	<update id="deleteArticle">
 		update tbl_timeline set
-		time_like = time_like + #{likeCount}
+		time_state = '2-000'
 		where time_no = #{time_no}
 	</update>
 	
 	<select id="selectByNo" resultType="TimelineVo">
-		select t.*, d.dlvr_name, a.writer_name, a.writer_img
+		select t.*, d.dlvr_name, a.writer_name, a.writer_img, nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
 		from tbl_timeline t 
 		    left outer join tbl_deliver d
 		    on t.dlvr_no = d.dlvr_no
@@ -60,12 +65,22 @@
 		        union
 		        select user_no, user_name, user_img from tbl_user
 		        union
-		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
-		    ) a
+		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
 		    on t.writer_no = a.account_no
-		    where time_no = #{time_no}
+		    left outer join (
+		        select time_no, count(*) time_like
+		        from tbl_like
+		        group by time_no) l
+		    on t.time_no = l.time_no
+			left outer join (
+			    select *
+			    from tbl_like
+			    where account_no = #{account_no}) l2
+			on t.time_no = l2.time_no
+		where time_state != '2-000'
+	    and t.time_no = #{time_no}
 	</select>
-	
+	 
 	<select id="getLastTimeline" resultType="TimelineVo">
 		select * 
 		from (
@@ -76,12 +91,13 @@
 		        select dlvr_no, dlvr_name from tbl_deliver
 		        order by writer_no desc) a
 		    on t.writer_no = a.writer_no
+			where time_state != '2-000'
 		    order by t.time_no desc)
 		where rownum = 1
 	</select>
 
 	<select id="getCurrentTimeline" resultType="TimelineVo">
-		select t.*, d.dlvr_name, a.writer_name, a.writer_img
+		select t.*, d.dlvr_name, a.writer_name, a.writer_img, nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
 		from tbl_timeline t 
 		    left outer join tbl_deliver d
 		    on t.dlvr_no = d.dlvr_no
@@ -90,10 +106,20 @@
 		        union
 		        select user_no, user_name, user_img from tbl_user
 		        union
-		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver
-		    ) a
+		        select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
 		    on t.writer_no = a.account_no
-		where t.time_no > #{time_no}
+		    left outer join (
+		        select time_no, count(*) time_like
+		        from tbl_like
+		        group by time_no) l
+		    on t.time_no = l.time_no
+			left outer join (
+			    select *
+			    from tbl_like
+			    where account_no = #{account_no}) l2
+			on t.time_no = l2.time_no
+		where time_state != '2-000'
+		and t.time_no &gt; #{time_no}
 		order by t.time_no asc
 	</select>
 	

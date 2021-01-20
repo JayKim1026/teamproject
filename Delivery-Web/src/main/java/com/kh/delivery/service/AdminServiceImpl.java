@@ -214,13 +214,19 @@ public class AdminServiceImpl implements AdminService {
 	}
 	/*----- 가입 대기 배달원원 리스트 끝-----*/
 	
-	/*----- 회원정보 가져오기-----*/
+	/*----- 계정상태 수정 -----*/
 	@Override
-	public UserVo getMemberInfo(int user_no) {
-		UserVo userVo = adminDao.getMemberInfo(user_no);
-		return userVo;
+	public String userStateUpdate(int user_no, String user_state) {
+		String updateResult = adminDao.userStateUpdate(user_no, user_state);
+		return updateResult;
 	}
-	/*----- 회원정보 가져오기 끝-----*/
+	
+	@Override
+	public String deliverStateUpdate(int dlvr_no, String dlvr_state) {
+		String updateResult = adminDao.deliverStateUpdate(dlvr_no, dlvr_state);
+		return updateResult;
+	}
+	/*----- 계정상태 수정  끝-----*/
 	
 	/*대기중인 주문 목록*/
 	@Override

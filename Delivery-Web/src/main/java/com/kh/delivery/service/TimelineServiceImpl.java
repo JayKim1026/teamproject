@@ -22,9 +22,6 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 	@Inject
 	private TimelineDao timelineDao;
 	
-	@Inject 
-	private LikeDao likeDao;
-	
 	@Inject
 	private PointDao pointDao;
 	
@@ -32,8 +29,8 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 	private AccountDao accountDao;
 
 	@Override
-	public List<TimelineVo> timelineList(String searchType) throws Exception {
-		List<TimelineVo> list = timelineDao.timelineList(searchType);
+	public List<TimelineVo> timelineList(int account_no, String searchType) throws Exception {
+		List<TimelineVo> list = timelineDao.timelineList(account_no, searchType);
 		return list;
 	}
 
@@ -61,11 +58,8 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 	}
 
 	@Override
-	@Transactional
-	public TimelineVo selectByNo(int time_no) throws Exception {
-		TimelineVo timelineVo = timelineDao.selectByNo(time_no);
-		int likeCount = likeDao.getLikeCount(time_no);
-		timelineVo.setTime_like(likeCount);
+	public TimelineVo selectByNo(int account_no, int time_no) throws Exception {
+		TimelineVo timelineVo = timelineDao.selectByNo(account_no, time_no);
 		return timelineVo;
 	}
 
@@ -76,8 +70,8 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 	}
 
 	@Override
-	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
-		List<TimelineVo> timelineList = timelineDao.getCurrentTimeline(time_no);
+	public List<TimelineVo> getCurrentTimeline(int account_no, int time_no) throws Exception {
+		List<TimelineVo> timelineList = timelineDao.getCurrentTimeline(account_no, time_no);
 		return timelineList;
 	}
 

@@ -20,9 +20,10 @@ public class TimelineDaoImpl implements TimelineDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<TimelineVo> timelineList(String searchType) throws Exception {
-		Map<String, String> map = new HashMap<>();
+	public List<TimelineVo> timelineList(int account_no, String searchType) throws Exception {
+		Map<String, Object> map = new HashMap<>();
 		map.put("searchType", searchType);
+		map.put("account_no", account_no);
 		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "timelineList", map);
 		return timelineList;
 	}
@@ -33,7 +34,6 @@ public class TimelineDaoImpl implements TimelineDao {
 			sqlSession.insert(NAMESPACE + "insertArticle", timelineVo);
 		} else {
 			sqlSession.insert(NAMESPACE + "insertArticleNoPic", timelineVo);
-			System.out.println("TimelineDao, insertArticle, timelineVo:" + timelineVo);
 		}
 		return "insertArticle_success";
 	}
@@ -51,8 +51,11 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public TimelineVo selectByNo(int time_no) throws Exception {
-		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "selectByNo", time_no);
+	public TimelineVo selectByNo(int account_no, int time_no) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("time_no", time_no);
+		map.put("account_no", account_no);
+		TimelineVo timelineVo = sqlSession.selectOne(NAMESPACE + "selectByNo", map);
 		return timelineVo;
 	}
 
@@ -63,18 +66,10 @@ public class TimelineDaoImpl implements TimelineDao {
 	}
 
 	@Override
-	public void updateLikeCount(int time_no, int likeCount) throws Exception {
+	public List<TimelineVo> getCurrentTimeline(int account_no, int time_no) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("time_no", time_no);
-		map.put("likeCount", likeCount);
-		sqlSession.update(NAMESPACE + "updateLikeCount", map);
-		
-	}
-
-	@Override
-	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("time_no", time_no);
+		map.put("account_no", account_no);
 		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "getCurrentTimeline", map);
 		return timelineList;
 	}

@@ -34,75 +34,61 @@ public class TimelineController implements Codes {
 	@Inject
 	private TimelineService timelineService;
 	
-	@Inject
-	private LikeService likeService;
-	
 	// 웹
+	// 타임라인 페이지 이동
 	@RequestMapping(value="/showTimeline", method=RequestMethod.GET)
-	public String showTimeline2(String searchType, Model model) throws Exception {
+	public String showTimeline(String searchType, Model model) throws Exception {
 		String image_url = BUCKET_URL;
 		model.addAttribute("image_url", image_url);
 		return "timeline/timeline";
 	}
 	
+	// 게시물 작성
 	@RequestMapping(value="/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> insertArticle2(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
+	public String insertArticle(TimelineVo timelineVo, HttpSession session, MultipartFile f_timeline_img,
 			Model model) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		System.out.println("insertArticle2, timelineVo = " + timelineVo);
+		System.out.println("insertArticle, timelineVo = " + timelineVo);
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		if (f_timeline_img != null) {
 			String org_timeline_img = f_timeline_img.getOriginalFilename();
-			System.out.println("insertArticle2, org_timeline_img = " + org_timeline_img);
+			System.out.println("insertArticle, org_time_img = " + org_timeline_img);
 			if (!FileUploadUtil.isImage(org_timeline_img)) {
-				map.put("fail", "fail");
-				return map;
+				return "not_image";
 			}
-			String timeline_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_timeline_img;
-			timelineVo.setTime_img(timeline_img);
-			System.out.println("insertArticle2, review_img = " + timeline_img);
+			String time_img = TIMELINE_IMG + userVo.getUser_id() + "_" + org_timeline_img;
+			timelineVo.setTime_img(time_img);
+			System.out.println("insertArticle, time_img = " + time_img);
 			
 			File file = new File(org_timeline_img);
 			f_timeline_img.transferTo(file);
-			FileUploadUtil.upload(file, timeline_img);
+			FileUploadUtil.upload(file, time_img);
 		}
-		
-		String time_img = timelineVo.getTime_img();
-		String time_content = timelineVo.getTime_content();
-		String time_state = timelineVo.getTime_state();
-		int time_star = timelineVo.getTime_star();
-		System.out.println("insertArticle2, timeline_img:" + time_img);
-		System.out.println("insertArticle2, time_content:" + time_content);
-		
 		String result = timelineService.insertArticle(timelineVo);
 		System.out.println("result" + result);
-		
-		map.put("time_img", time_img);
-		map.put("time_content", time_content);
-		map.put("result", result);
-		map.put("time_state", time_state);
-		map.put("time_star", time_star);
-		return map;
+		return result;
 	}
 
+	// 게시물 수정
 	@RequestMapping(value = "/updateArticle", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateArticle(TimelineVo timelineVo) throws Exception {
-		System.out.println("TimelineController, updateArticle, timelineVo" + timelineVo);
+		System.out.println("updateArticle, timelineVo" + timelineVo);
 		String result = timelineService.updateArticle(timelineVo);
 		return result;
 	}
 
-	@RequestMapping(value = "/deleteArticle/{review_no}", method = RequestMethod.GET)
+	// 게시물 삭제
+	@RequestMapping(value = "/deleteArticle/{time_no}", method = RequestMethod.POST)
 	@ResponseBody
-	public String deleteArticle(@PathVariable("review_no") int review_no) throws Exception {
-		System.out.println("TimelineController, deleteArticle, review_no:" + review_no);
-		String result = timelineService.deleteArticle(review_no);
+	public String deleteArticle(@PathVariable("time_no") int time_no) throws Exception {
+		System.out.println("deleteArticle, time_no:" + time_no);
+		String result = timelineService.deleteArticle(time_no);
 		return result;
 	}
 	
-	
+	// 게시물 조회 - 안씀
+	/*
 	@RequestMapping(value="/content", method = RequestMethod.POST)
 	public String content(int time_no, HttpSession session, Model model) throws Exception {
 		int account_no;
@@ -125,45 +111,72 @@ public class TimelineController implements Codes {
 		model.addAttribute("isLike", isLike);
 		return "timeline/content";	
 	}
+	*/
 	
+	// 글 목록 조회
 	@RequestMapping(value="/getTimelineList", method=RequestMethod.POST)
 	@ResponseBody
-	public List<TimelineVo> getTimelineList(String searchType) throws Exception {
-		List<TimelineVo> timelineList = timelineService.timelineList(searchType);
-		System.out.println("getTimelineList = " + timelineList);
+	public List<TimelineVo> getTimelineList(int account_no, String searchType) throws Exception {
+		System.out.println("getTimelineList, account_no:" + account_no + ", searchType:" + searchType);
+		List<TimelineVo> timelineList = timelineService.timelineList(account_no, searchType);
+		System.out.println("getTimelineList, timelineList:" + timelineList);
 		return timelineList;
 	}
 	
-	
+	// 현재 타임라인 이후에 작성된 글 목록 조회
 	@RequestMapping(value="/getCurrentTimeline", method=RequestMethod.POST)
 	@ResponseBody
-	public List<TimelineVo> getCurrentTimeline(int time_no) throws Exception {
-		List<TimelineVo> timelineList = timelineService.getCurrentTimeline(time_no);
+	public List<TimelineVo> getCurrentTimeline(int account_no, int time_no) throws Exception {
+		List<TimelineVo> timelineList = timelineService.getCurrentTimeline(account_no, time_no);
+		System.out.println("getCurrentTimeline, timelineList:" + timelineList);
 		return timelineList;
 	}
 
 	
 	// 안드로이드
+	// 게시물 작성
 	@RequestMapping(value="/android/insertArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
-		System.out.println("atimelineVo = " + timelineVo);
 		String result = timelineService.insertArticle(timelineVo);
+		System.out.println("aInsertArticle, result:" + result);
+		return result;
+	}
+
+	// 게시물 수정
+	@RequestMapping(value = "/android/updateArticle", method = RequestMethod.POST)
+	@ResponseBody
+	public String aUpdateArticle(TimelineVo timelineVo) throws Exception {
+		System.out.println("updateArticle, timelineVo" + timelineVo);
+		String result = timelineService.updateArticle(timelineVo);
+		return result;
+	}
+
+	// 게시물 삭제
+	@RequestMapping(value = "/android/deleteArticle", method = RequestMethod.POST)
+	@ResponseBody
+	public String aDeleteArticle(int time_no) throws Exception {
+		System.out.println("deleteArticle, time_no:" + time_no);
+		String result = timelineService.deleteArticle(time_no);
 		return result;
 	}
 	
+	// 최근 타임라인 1개 조회
 	@RequestMapping(value="/android/getLastTimeline")
 	@ResponseBody
 	public TimelineVo getLastTimeline() throws Exception {
 		TimelineVo timelineVo = timelineService.getLastTimeline();
-		System.out.println("getLastTimeline = " + timelineVo);
+		System.out.println("getLastTimeline, timelineVo:" + timelineVo);
 		return timelineVo;
 	}
 	
+	// 선택한 타임라인 조회
 	@RequestMapping(value="/android/getTimelineInfo", method=RequestMethod.POST)
 	@ResponseBody
-	public TimelineVo getTimelineInfo(int time_no) throws Exception {
-		TimelineVo timelineVo = timelineService.selectByNo(time_no);
+	public TimelineVo getTimelineInfo(int account_no, int time_no) throws Exception {
+		TimelineVo timelineVo = timelineService.selectByNo(account_no, time_no);
+		System.out.println("getTimelineInfo, timelineVo:" + timelineVo);
 		return timelineVo;
 	}
+	
 }
