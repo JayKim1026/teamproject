@@ -24,7 +24,7 @@ public class TimelineVo {
 	private String writer_name;
 	private String dlvr_name;
 	private String writer_img;
-
+<<<<<<< HEAD
 	
 	
 	
@@ -34,7 +34,7 @@ public class TimelineVo {
 
 	public void setOrder_no(int order_no) {
 		this.order_no = order_no;
-
+=======
 	private int liked_no;
 
 	public int getLiked_no() {
@@ -43,7 +43,7 @@ public class TimelineVo {
 
 	public void setLiked_no(int liked_no) {
 		this.liked_no = liked_no;
-
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 	}
 
 	public int getTime_like() {
@@ -162,22 +162,23 @@ public class TimelineVo {
 	public String toString() {
 		return "TimelineVo [time_no=" + time_no + ", writer_no=" + writer_no + ", writer_state=" + writer_state
 				+ ", time_content=" + time_content + ", time_img=" + time_img + ", time_date=" + time_date
-
+<<<<<<< HEAD
 				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no + ", order_no="
 				+ order_no + ", time_location=" + time_location + ", time_like=" + time_like + ", writer_name="
 				+ writer_name + ", dlvr_name=" + dlvr_name + ", writer_img=" + writer_img + "]";
-
+=======
 				+ ", time_state=" + time_state + ", time_star=" + time_star + ", dlvr_no=" + dlvr_no
 				+ ", time_location=" + time_location + ", time_like=" + time_like + ", writer_name=" + writer_name
 				+ ", dlvr_name=" + dlvr_name + ", writer_img=" + writer_img + ", liked_no=" + liked_no + "]";
-
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 	}
 
-
+<<<<<<< HEAD
 	
 	
 
 	
 
-
+=======
+>>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git
 }
