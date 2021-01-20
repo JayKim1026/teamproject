@@ -79,11 +79,11 @@ public class TimelineController implements Codes {
 	}
 
 	// 게시물 삭제
-	@RequestMapping(value = "/deleteArticle/{review_no}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteArticle/{time_no}", method = RequestMethod.POST)
 	@ResponseBody
-	public String deleteArticle(@PathVariable("review_no") int review_no) throws Exception {
-		System.out.println("deleteArticle, review_no:" + review_no);
-		String result = timelineService.deleteArticle(review_no);
+	public String deleteArticle(@PathVariable("time_no") int time_no) throws Exception {
+		System.out.println("deleteArticle, time_no:" + time_no);
+		String result = timelineService.deleteArticle(time_no);
 		return result;
 	}
 	
@@ -140,6 +140,24 @@ public class TimelineController implements Codes {
 	public String aInsertArticle(TimelineVo timelineVo) throws Exception {
 		String result = timelineService.insertArticle(timelineVo);
 		System.out.println("aInsertArticle, result:" + result);
+		return result;
+	}
+
+	// 게시물 수정
+	@RequestMapping(value = "/android/updateArticle", method = RequestMethod.POST)
+	@ResponseBody
+	public String aUpdateArticle(TimelineVo timelineVo) throws Exception {
+		System.out.println("updateArticle, timelineVo" + timelineVo);
+		String result = timelineService.updateArticle(timelineVo);
+		return result;
+	}
+
+	// 게시물 삭제
+	@RequestMapping(value = "/android/deleteArticle/{time_no}", method = RequestMethod.POST)
+	@ResponseBody
+	public String aDeleteArticle(@PathVariable("time_no") int time_no) throws Exception {
+		System.out.println("deleteArticle, time_no:" + time_no);
+		String result = timelineService.deleteArticle(time_no);
 		return result;
 	}
 	
