@@ -296,8 +296,9 @@ $(function() {
 			$.post(url, sendData, function(reportResult){
 				console.log(reportResult);
 				if(reportResult == "report_success") {
+					$(".timelineModal_report").hide();
 					alert("신고가 접수되었습니다");
-					location.reload();
+					
 					
 				}
 			});
