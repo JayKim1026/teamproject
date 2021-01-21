@@ -59,7 +59,7 @@
 					<div class="col-md-8">
 						<nav>
 		                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-			                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">주문대기</a>
+			                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">주문대기</a>
 			                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">주문접수</a>
 			                    <a class="nav-item nav-link" id="nav-contact-tab2" data-toggle="tab" href="#nav-contact2" role="tab" aria-controls="nav-contact2" aria-selected="false">주문취소</a>
 			                    <a class="nav-item nav-link" id="nav-contact-tab3" data-toggle="tab" href="#nav-contact3" role="tab" aria-controls="nav-contact3" aria-selected="false">배달취소</a>
@@ -77,11 +77,17 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
+										<td>
+											<select>
+												<option value="3-001">주문대기</option>
+												<option value="3-004">사용자취소</option>
+												<option value="3-005">배달원취소</option>
+												<option value="3-002">배달중</option>
+												<option value="3-003">배달완료</option>
+											</select>
+										</td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnMemberModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnMemberDelete">삭제</button></td>
+												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
 		
@@ -116,11 +122,17 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
+										<td>
+											<select>
+												<option value="3-001">주문대기</option>
+												<option value="3-004">사용자취소</option>
+												<option value="3-005">배달원취소</option>
+												<option value="3-002">배달중</option>
+												<option value="3-003">배달완료</option>
+											</select>
+										</td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnDeliverModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnDeliverDelete">삭제</button></td>
+												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
 		
@@ -155,15 +167,16 @@
 										<td></td>
 										<td></td>
 										<td>
-										<select>
-										<option>주문취소</option>
-										<option>주문대기</option>
-										</select>
+											<select>
+												<option value="3-001">주문대기</option>
+												<option value="3-004">사용자취소</option>
+												<option value="3-005">배달원취소</option>
+												<option value="3-002">배달중</option>
+												<option value="3-003">배달완료</option>
+											</select>
 										</td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnDelete">삭제</button></td>
+												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
 		
@@ -197,11 +210,17 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
+										<td>
+											<select>
+												<option value="3-001">주문대기</option>
+												<option value="3-004">사용자취소</option>
+												<option value="3-005">배달원취소</option>
+												<option value="3-002">배달중</option>
+												<option value="3-003">배달완료</option>
+											</select>
+										</td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnWaitingDeliverModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnWaitingDeliverDelete">삭제</button></td>
+												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
 		
@@ -235,11 +254,17 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td></td>
+										<td>
+											<select>
+												<option value="3-001">주문대기</option>
+												<option value="3-004">사용자취소</option>
+												<option value="3-005">배달원취소</option>
+												<option value="3-002">배달중</option>
+												<option value="3-003">배달완료</option>
+											</select>
+										</td>
 										<td><button type="button"
-												class="btn btn-xs btn-warning btnWaitingDeliverModify">수정</button></td>
-										<td><button type="button"
-												class="btn btn-xs btn-danger btnWaitingDeliverDelete">삭제</button></td>
+												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
 		
@@ -269,51 +294,6 @@
 			</div>
 		</div>
 	</div>
-<!------------------------------------------------- 수정 모달 ------------------------------------------------->
-<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-8">
-					 <a id="modal-881374" href="#modal-container-881374" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
-					
-					<div class="modal fade" id="modal-container-881374" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="myModalLabel">
-										Modal title
-									</h5> 
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									...
-								</div>
-								<div class="modal-footer">
-									 
-									<button type="button" class="btn btn-primary">
-										Save changes
-									</button> 
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">
-										Close
-									</button>
-								</div>
-							</div>
-							
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="col-md-2">
-				</div>
-			</div>
-		</div>
-	</div>
-<!------------------------------------------------- 수정 모달 끝------------------------------------------------->
 </body>
 <script>
 function getWaitingOrderList() {
@@ -339,9 +319,7 @@ function getWaitingOrderList() {
 			}
 			tr.find("td").eq(5).text(order_ca);
 			
-			if(this.order_state = "3-001"){
-				tr.find("td").eq(6).text("대기");
-			}
+			tr.find("td").eq(6).find("option:eq(0)").attr("selected", "selected");
 			
 			tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
 			tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
@@ -373,9 +351,7 @@ function getAcceptOrderList(){
 			}
 			tr.find("td").eq(5).text(order_ca);
 			
-			if(this.order_state = "3-002"){
-				tr.find("td").eq(6).text("배송중");
-			}
+			tr.find("td").eq(6).find("option:eq(3)").attr("selected", "selected");
 			tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
 			tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
 				
@@ -404,13 +380,10 @@ function getFinishOrderList(){
 			}else if(this.order_ca == "3-013"){
 				order_ca = "기타";
 			}
-			tr.find("td").eq(5).text(order_ca);
 			
-// 			if(this.order_state = "3-003"){
-// 				tr.find("td").eq(6).text("완료");
-// 			}
+			tr.find("td").eq(5).text(order_ca);
+			tr.find("td").eq(6).find("option:eq(4)").attr("selected", "selected");
 			tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-			tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
 				
 			$("#finishOrderTable > #finishOrderTableTbody").prepend(tr);
 		});	
@@ -439,11 +412,8 @@ function getCancelOrderList(){
 				}
 				tr.find("td").eq(5).text(order_ca);
 				
-				if(this.order_state = "3-004"){
-					tr.find("td").eq(6).text("주문취소");
-				}
+				tr.find("td").eq(6).find("option:eq(1)").attr("selected", "selected");
 				tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-				tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
 					
 				$("#cancelOrderTable > #cancelOrderTableTbody").prepend(tr);
 			});	
@@ -472,11 +442,8 @@ function  getCancelOrderListByDeliver(){
 				}
 				tr.find("td").eq(5).text(order_ca);
 				
-				if(this.order_state = "3-005"){
-					tr.find("td").eq(6).text("배달취소");
-				}
+				tr.find("td").eq(6).find("option:eq(2)").attr("selected", "selected");
 				tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-				tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
 					
 				$("#cancelOrderTableByDeliver > #cancelOrderTableTbodyByDeliver").prepend(tr);
 			});	
@@ -490,13 +457,37 @@ $(function() {
 	getCancelOrderList()
 	getCancelOrderListByDeliver()
 	
-	$("#finishOrderTableTbody").on("click", ".btnModify", function(){
-		console.log("클릭클릭");
-		console.log($(this).attr("order_no"));
+	
+	
+	
+	$("#finishOrderTableTbody, #waitingOrderTableTbody, #acceptOrderTableTbody, #cancelOrderTableTbody, #cancelOrderTableTbodyByDeliver").on("click", ".btnModify", function(){
 		
+		var order_no = parseInt($(this).attr("order_no"));
+		var order_state = $(this).parent().prev().find(":selected").val();
+		console.log(order_no);
+		console.log("order_state:" + order_state);
+		var sendData = {
+			"order_no"	:	order_no,
+			"order_state":	order_state
+		};
+		var url = "/admin/updateOrderState"
+		$.post(url, sendData, function(data){
+			if(data =="success"){
+				location.reload();
+// 				if(order_state == "3-001"){
+// 					$("#nav-home-tab").trigger("click");
+// 				}else if(order_state == "3-002"){
+// 					$("#nav-profile-tab").trigger("click");
+// 				}else if(order_state == "3-003"){
+// 					$("#nav-contact-tab").trigger("click");
+// 				}else if(order_state == "3-004"){
+// 					$("#nav-contact-tab2").trigger("click");
+// 				}else if(order_state = "3-005"){
+// 					$("#nav-contact-tab3").trigger("click");
+// 				}
+			}
+		});
 		
-		
-		$("#modal-881374").trigger("click");
 		
 		
 	});
