@@ -253,7 +253,6 @@
 																			<input type="hidden" value="${sessionScope.userVo.user_img }" name="orgImg"><!-- 기존 프사  -->
 																			<div style="display: flex">
 																				<button type="button" class="form-control btnPicImg" style="display:none; width: 100px; margin-top: 23px;"> 사진 선택</button>
-																				<button type="button" class="form-control btnPicDefaultImg" style="display:none; width: 150px; margin-left: 10px; margin-top: 23px;"> 기본 이미지로 변경 </button>
 																			</div>
 																		</form>
 																</div>
@@ -499,13 +498,11 @@ $(function(){
 		$("#chgImgPreview").show();
 	});
 	
-	//TODO 사진 변경 완료 버튼
+	//사진 변경 완료 버튼
 	$(".btnChgImgRun").click(function(e){
 		e.preventDefault();
 		$(".frmChgImg").submit();
 	});
-
-
 
 }); // 핸들러
 

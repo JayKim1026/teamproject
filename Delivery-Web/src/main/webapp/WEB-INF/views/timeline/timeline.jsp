@@ -18,7 +18,7 @@
 <title>timeLine.jsp</title>
 </head>
 <script>
-<%@include file="../include/timelineScript.js"%>
+<%@include file="../include/timelineScript.js" %>
 </script>
 <body>
 <%@ include file="../include/frm.jsp"%>
@@ -263,7 +263,6 @@ ${likeList}
 		<div class="timelineModal_content">
 			<form action="/report/report" method="post">
 				<label><strong>Timeline</strong> 신고</label>
-				<input type="hidden" name="report_code" value="6-012" />
 				<ul class="timelineModal_ul">
 					<li><input type="radio" name="timelineReportType" value="6-111" /><span class="Modal_span">원치 않는 상업성 콘텐츠 또는 허위사실유포</span></li>
 					<li><input type="radio" name="timelineReportType" value="6-112" /><span class="Modal_span">포르노 또는 음란물</span></li>

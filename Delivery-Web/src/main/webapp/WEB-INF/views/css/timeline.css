@@ -619,9 +619,6 @@ td {
   border-radius:10px;
 }
 
-<<<<<<< HEAD
-=======
-
 /* 타임라인 신고 모달 */
 .timelineModal_report {
  	display: none; 
@@ -655,4 +652,3 @@ td {
 }
 /* 타임라인 신고 모달  끝*/
 </style>
->>>>>>> branch 'master' of https://github.com/JayKim1026/teamproject.git

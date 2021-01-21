@@ -38,7 +38,6 @@
 						<div class="main-content">
 							<div class="container mt-7">
 								<!-- Table -->
-								<div>${deliverVo }</div>
 								<h2 class="mb-5" style="text-align: center;">반갑습니다, ${deliverVo.dlvr_name }님 어떤 정보를 변경하고 싶으신가요?</h2>
 								<div class="row">
 									<div class="col-xl-8 m-auto order-xl-1">
@@ -46,7 +45,7 @@
 											<div class="card-header bg-white border-0">
 												<div class="row align-items-center">
 													<div class="col-8">
-														<h3 class="mb-0">회원정보</h3>
+														<h3 class="mb-0">라이더 회원정보</h3>
 													</div>
 													<div class="col-4 text-right">
 													</div>
@@ -250,7 +249,6 @@
 																			<input type="hidden" value="${sessionScope.deliverVo.dlvr_img }" name="orgImg"><!-- 기존 프사  -->
 																			<div style="display: flex">
 																				<button type="button" class="form-control btnPicImg" style="display:none; width: 100px; margin-top: 23px;"> 사진 선택</button>
-																				<button type="button" class="form-control btnPicDefaultImg" style="display:none; width: 150px; margin-left: 10px; margin-top: 23px;"> 기본 이미지로 변경 </button>
 																			</div>
 																		</form>
 																</div>
