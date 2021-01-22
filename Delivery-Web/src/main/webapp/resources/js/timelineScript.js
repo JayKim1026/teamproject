@@ -141,10 +141,10 @@ $(function() {
 		clone1.find(".showComment").attr("data-no", data.time_no);
 		clone1.find(".insertCommentBtn").attr("data-no", data.time_no);
 		
+		clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no);
 		if(account_no == data.writer_no) {
 			clone1.find(".btnUpdate").attr("data-no", data.time_no).css("display", "inline");
 			clone1.find(".btnDelete").attr("data-no", data.time_no).css("display", "inline");
-			clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no).attr("data-reportCode", "6-012");
 		} else {
 			clone1.find(".btnUpdate").css("display", "none");
 			clone1.find(".btnDelete").css("display", "none");
@@ -245,21 +245,20 @@ $(function() {
 		$(".timelineModal_report").fadeIn();
 		var writer_no = $(this).attr("data-writerno");
 		$(".btnTimelineReportRun").attr("data-defno", writer_no);
-		var reportCode = $(this).attr("data-reportCode");
-		$(".btnTimelineReportRun").attr("data-reportCode", reportCode);
+		$(".btnTimelineReportRun").attr("data-reportType", '6-012');
 	});
 	
 	// 타임라인 report type 
-	$("input[name=timelineReportType]").change(function(){
-		var timelineReportType = $(this).val();
-		$(".btnTimelineReportRun").attr("data-reportType", timelineReportType);
+	$("input[name=timelineReportCode]").change(function(){
+		console.log($(this).val());
+		$(".btnTimelineReportRun").attr("data-reportCode", $(this).val());
 	});
 	
 	/* 타임라인 신고 모달 확인 버튼*/
 	$(".btnTimelineReportRun").click(function(e){
 		e.preventDefault();
 			var url = "/report/report";
-			var def_no = $(this).attr("data-defno");
+			var def_no = parseInt($(this).attr("data-defno"));
 			var reportType = $(this).attr("data-reportType");
 			var reportCode = $(this).attr("data-reportCode");
 			var sendData = {
@@ -268,7 +267,7 @@ $(function() {
 					"reportType" : reportType,
 					"reportCode" : reportCode
 				};
-
+			console.log(sendData);
 			$.post(url, sendData, function(data){
 				console.log(data);
 				if(data == "report_success") {
@@ -432,7 +431,6 @@ $(function() {
 		$(".timelineModal_report").fadeIn();
 		var writer_no = $(this).attr("data-writerno");
 		$(".btnTimelineReportRun").attr("data-defno", writer_no);
-		var reportCode = $(this).attr("data-reportCode");
 		$(".btnTimelineReportRun").attr("data-reportCode", '6-013');
 	});
 	

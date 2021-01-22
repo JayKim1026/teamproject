@@ -146,6 +146,7 @@
 				$(".chat").not(".format").find("ul").append(li);
 				
 				if(index == data.length-1) {
+					lastMsgNo = this.msg_no;
 					li[0].scrollIntoView();
 				}
 			});
@@ -162,7 +163,7 @@
 				"msg_content" : msg_content
 			};
 			$.post(url, sendData, function(data) {
-				getCurrentMessage();
+				$("#msgContent").val("");
 			});
 		});
 
@@ -187,10 +188,16 @@
 				"url" : url,
 				"data" : formData,
 				"success" : function(data) {
-					getCurrentMessage();
+					
 				}
 			});
 
+		});
+		
+		$("#msgContent").keyup(function() {
+			if(window.event.keyCode == 13) {
+				$("#btnSendMsg").trigger("click");
+			}
 		});
 		
 		function getTime(msg_date) {

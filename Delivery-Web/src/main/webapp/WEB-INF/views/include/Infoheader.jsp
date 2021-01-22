@@ -20,7 +20,7 @@
 									<li class="sidebar-brand"><a href="#"> 메뉴 </a></li>
 									<c:if test="${sessionScope.userVo != null }">
 									<li><a href="/user/info">회원정보</a></li>
-									<li><a href="/order/orderForm">주문하기</a></li>
+									<li><a href="/order/newOrderForm">주문하기</a></li>
 									<li><a href="/user/orderList">주문 내역 조회</a></li>
 									<li><a href="/CSCenter/FAQ">자주하는 질문</a></li>
 									</c:if>

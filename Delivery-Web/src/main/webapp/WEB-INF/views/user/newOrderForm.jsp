@@ -279,96 +279,91 @@
 <!--MyScript -->
 <script>
 $(function(){
-$("#ca_Food").click(function(){
-	console.log("음식 클릭이여라~");
-	var has = $(this).hasClass("food_color");
-	if(has){
-		$(this).removeClass("food_color");
+	function resetCategory() {
+		$("#ca_Food").removeClass("food_color");
+		$("#ca_General").removeClass("grocery_color");
+		$("#ca_Office").removeClass("genral_color");
 		$("#order_ca").removeAttr("data-ca");
-	}else{
+	};
+	
+	$("#ca_Food").click(function(){
+		console.log("음식 클릭이여라~");
+		resetCategory();
+		
 		$(this).addClass("food_color");
 		var ca = $(this).attr("data-ca");
 		$("#order_ca").attr("data-ca", ca);
-		
-	}
-	var ca = $("#order_ca").attr("data-ca");
-	console.log("인풋데이타:" + ca);
-});
 
-$("#ca_General").click(function(){
-	console.log("사무용품 클릭이여라~");
-	var has = $(this).hasClass("grocery_color");
-	if(has){
-		$(this).removeClass("grocery_color");
-		$("#order_ca").removeAttr("data-ca");
-	}else{
+		var ca = $("#order_ca").attr("data-ca");
+		console.log("인풋데이타:" + ca);
+	});
+	
+	$("#ca_General").click(function(){
+		console.log("사무용품 클릭이여라~");
+		resetCategory();
+		
 		$(this).addClass("grocery_color");
 		var ca = $(this).attr("data-ca");
 		$("#order_ca").attr("data-ca", ca);
+			
+		var ca = $("#order_ca").attr("data-ca");
+		console.log("인풋데이타:" + ca);
+	});
+	
+	$("#ca_Office").click(function(){
+		console.log("음식 클릭이여라~");
+		resetCategory();
 		
-	}
-	var ca = $("#order_ca").attr("data-ca");
-	console.log("인풋데이타:" + ca);
-});
-
-$("#ca_Office").click(function(){
-	console.log("음식 클릭이여라~");
-	var has = $(this).hasClass("genral_color");
-	if(has){
-		$(this).removeClass("genral_color");
-		$("#order_ca").removeAttr("data-ca");
-	}else{
 		$(this).addClass("genral_color");
 		var ca = $(this).attr("data-ca");
 		$("#order_ca").attr("data-ca", ca);
+			
+		var ca = $("#order_ca").attr("data-ca");
+		console.log("인풋데이타:" + ca);
+	});
+	
+	$("#btnAdressSave").click(function(){
+		console.log("lat:" + $("#order_lat").val());
+		console.log("lng:" + $("#order_lng").val());
+		var roadAddr = $("#roadAddr").val();
+		var jibunAddr = $("#jibunAddr").val();
+		console.log(roadAddr);
+		console.log(jibunAddr);
+		if(roadAddr != null){
+			$("#lastAddr").val(roadAddr);
+		}
 		
-	}
-	var ca = $("#order_ca").attr("data-ca");
-	console.log("인풋데이타:" + ca);
-});
-
-$("#btnAdressSave").click(function(){
-	console.log("lat:" + $("#order_lat").val());
-	console.log("lng:" + $("#order_lng").val());
-	var roadAddr = $("#roadAddr").val();
-	var jibunAddr = $("#jibunAddr").val();
-	console.log(roadAddr);
-	console.log(jibunAddr);
-	if(roadAddr != null){
-		$("#lastAddr").val(roadAddr);
-	}
+		
+	});
 	
-	
-});
-
-$("#btnInsertOrder").click(function(){
-	console.log("클릭");
-	var order_req_ta = $("#order_req_ta").val();
-	$("#order_req").val(order_req_ta);
-	var order_ca = $("#order_ca").attr("data-ca");
-	var order_lat = $("#order_lat").val();
-	var order_lng = $("#order_lng").val();
-	var order_req = $("#order_req").val();
-	var user_no = parseInt("${userVo.user_no}");
-	$("#user_no").val(user_no);
-	
-	if(order_ca == null){
-		alert("카테고리를 선택해주세요.");
-	}else if(order_lat == null){
-		alert("주소를 입력해주세요.");
-	}else if(order_req == null){
-		alert("요청 사항을 입력해주세요.")
-	}
-	console.log("order_ca:" + order_ca);
-	console.log("order_lat:" + order_lat);
-	console.log("order_lng:" + order_lng);
-	console.log("order_req:" + order_req);
-	console.log("user_no:" + user_no);
-	
-	insertOrderFrm.submit();
-	
-	
-});
+	$("#btnInsertOrder").click(function(){
+		console.log("클릭");
+		var order_req_ta = $("#order_req_ta").val();
+		$("#order_req").val(order_req_ta);
+		var order_ca = $("#order_ca").attr("data-ca");
+		var order_lat = $("#order_lat").val();
+		var order_lng = $("#order_lng").val();
+		var order_req = $("#order_req").val();
+		var user_no = parseInt("${userVo.user_no}");
+		$("#user_no").val(user_no);
+		
+		if(order_ca == null){
+			alert("카테고리를 선택해주세요.");
+		}else if(order_lat == null){
+			alert("주소를 입력해주세요.");
+		}else if(order_req == null){
+			alert("요청 사항을 입력해주세요.")
+		}
+		console.log("order_ca:" + order_ca);
+		console.log("order_lat:" + order_lat);
+		console.log("order_lng:" + order_lng);
+		console.log("order_req:" + order_req);
+		console.log("user_no:" + user_no);
+		
+		insertOrderFrm.submit();
+		
+		
+	});
 });
 </script>
 <!------------------------------------------------- Step bar ------------------------------------------------->
