@@ -6,9 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../include/link.jsp" %>
-<style type="text/css">
-<%@include file="../css/timeline.css" %>
-</style>
+<link rel="stylesheet" href="/resources/css/timeline.css">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script
@@ -215,14 +213,14 @@ ${likeList}
 				</div>
 				<div class="row text-left mt-4">
 					<div class="like mr-3 vote">
-						<span class="isLike" style="font-size: 30px">♥</span>
+						<i class="fas fa-heart isLike" style="font-size: 25px"></i>
 						<span class="pl-2 time_like"></span>
 					</div>
 				</div>
 				
 				<!-- 댓글보기 버튼 -->
 				<div class="row mt-4" style= "padding-bottom:15px;">
-					<a class="ml-auto showComment" data-toggle="hide">댓글</a>
+					<a class="ml-auto showComment">댓글 보기</a>
 				</div>
 				
 				<!-- 경계선 -->
@@ -252,17 +250,31 @@ ${likeList}
 	<div id="commentClone" style="display: none">
 		<div class="row commentInfo" style="padding-top:10px;">
 			<img src="https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147_960_720.jpg"  class="commenter-image" alt="commenter_image">			
-			<div class="comment-content col-md-11">
+			<div class="comment col-md-8">
 				<div class="commenter-head">
-					<span class="commenter-name"><a class="writer-name" href="#">김범준</a></span> 
+					<span class="commenter-name"><a class="writer-name">김범준</a></span> 
 					<span class="comment-date"><i class="far fa-clock"></i>댓글날짜</span>
 				</div>
 				<div class="comment-body">
 					<span class="comment comment-content">댓글내용</span>
+					<input type="text" class="comment comment-update" style="display: none"/>
 				</div>
-				<div class="comment-footer">		
+				<div class="comment-footer">
 					<a class="comment-action"></a>
 				</div>
+			</div>
+			<div class="comment-button">
+				<button class="btn btn-primary btnUpdateCommentOk" style="display: none">완료</button>
+				<button class="btn btn-primary btnCancelUpdateComment" style="display: none">취소</button>
+				<ul class="nav navbar-nav" style="float: right;">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a class="btnUpdateComment">수정</a></li>
+							<li><a class="btnDeleteComment">삭제</a></li>
+							<li><a class="btnReportComment">신고</a></li>
+						</ul>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -274,12 +286,13 @@ ${likeList}
 	<div class="timelineModal_report">
 		<div class="timelineModal_content">
 			<form action="/report/report" method="post">
-				<label><strong>Timeline</strong> 신고</label>
+				<label><strong>신고하기</strong></label>
 				<ul class="timelineModal_ul">
 					<li><input type="radio" name="timelineReportType" value="6-111" /><span class="Modal_span">원치 않는 상업성 콘텐츠 또는 허위사실유포</span></li>
 					<li><input type="radio" name="timelineReportType" value="6-112" /><span class="Modal_span">포르노 또는 음란물</span></li>
 					<li><input type="radio" name="timelineReportType" value="6-113" /><span class="Modal_span">노골적인 희롱 또는 폭력</span></li>
-					<li><div class="timelineModal_btns">
+					<li>
+						<div class="timelineModal_btns">
 							<button type="submit" class="btn btn-danger btnTimelineReportRun" >확인</button>
 							<button type="button" class="btn btn-info btnTimelineReportCancel">취소</button>
 						</div>

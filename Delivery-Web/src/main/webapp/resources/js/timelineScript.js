@@ -180,7 +180,7 @@ $(function() {
 			"url"			:	url,
 			"data"			:	formData, 
 			"success"		:	function(data) {
-				if(data.result == "insertArticle_success"){
+				if(data == "insertArticle_success"){
  					getCurrentTimeline();
 					$("#time_content").val("");
 					$("#time_img").val("");
@@ -193,12 +193,6 @@ $(function() {
 	});
 	
 	/*모달 트리거*/
-	$(".btnUpdate").click(function(e){
-		console.log("??")
-		$("#squarespaceModal > input[name=time_no]").val($(this).attr("data-no"));
-		$("#btnUpdateModal").trigger("click");
-	});
-	
 	$(document).on("click", ".btnUpdate", function() {
 		console.log("??")
 		$("#squarespaceModal > input[name=time_no]").val($(this).attr("data-no"));
@@ -216,32 +210,27 @@ $(function() {
 				"time_content" : time_content
 		};
 		
-		$.ajax({
-			"url"		:	url,
-			"dataType"	:	"text",
-			"data"		:	JSON.stringify(sendData),
-			"method"	:	"post",
-			"headers"	:	{
-		"Content-Type"	:	"application/json"
-							},
-			"success"	:	function(data){
-				console.log(data);
-				if(data == 'updateArticle_success') {
-					console.log("수정완료");
-				}
-			}	
+		$.post(url, sendData, function(data) {
+			console.log(data);
+			if(data == 'updateArticle_success') {
+				alert("타임라인 수정 완료");
+				javascript:history.go(0);
+			} else {
+				alert("타임라인 수정 실패");
+				$("#btnUpdateClose").trigger("click");	
+			}
 		});
-//		javascript:history.go(0);
-//		$("#btnUpdateClose").trigger("click");	
 	});
 	
 	/*삭제*/
-	$(".btnDelete").click(function(){
+	$(document).on("click", ".btnDelete", function() {
 		var time_no = $(this).attr("data-no");
 		var url = "/timeline/deleteArticle/" + time_no;
-		$.get(url,function(data){
-			console.log(data);
-			javascript:history.go(0);
+		$.post(url,function(data){
+			if(data == 'deleteArticle_success') {
+				alert("타임라인 삭제 완료");
+				javascript:history.go(0);
+			}
 		});
 	});
 	
@@ -265,12 +254,11 @@ $(function() {
 		e.preventDefault();
 			var url = "/report/report";
 			var def_no = $(this).attr("data-defno");
-			var plt_no = account_no;
 			var reportType = $(this).attr("data-reportType");
 			var reportCode = $(this).attr("data-reportCode");
 			var sendData = {
 					"def_no" : def_no,
-					"plt_no" : plt_no,
+					"plt_no" : account_no,
 					"reportType" : reportType,
 					"reportCode" : reportCode
 				};
@@ -307,6 +295,19 @@ $(function() {
 		
 	});
 	
+	// 글 마다 있는 댓글보기버튼
+	$(document).on("click", ".showComment", function() {
+	 	var time_no = $(this).attr("data-no");
+		var commentList = $(this).parent().next().next().next();
+		if($(this).text() == '댓글 보기') {
+			$(this).text('댓글 닫기');
+			getCommentList(time_no, commentList);
+		} else if($(this).text() == '댓글 닫기') {
+			$(this).text('댓글 보기');
+			commentList.hide();
+		}
+	});
+	
 	// 댓글 가져오기
 	function getCommentList(time_no, commentList) {
 		var url = "/comment/getCommentList/" + time_no;
@@ -326,23 +327,20 @@ $(function() {
 		commentClone.find(".writer-name").text(comment.writer_name);
 		commentClone.find(".comment-date").text(comment.c_date);
 		commentClone.find(".comment-content").text(comment.c_content);
+		console.log(account_no);
+		console.log(comment.writer_no);
+		if(account_no == comment.writer_no) {
+			commentClone.find(".btnUpdateCommentOk").attr("data-cno", comment.c_no);
+			commentClone.find(".btnUpdateComment").css("display", "inline");
+			commentClone.find(".btnDeleteComment").attr("data-cno", comment.c_no).css("display", "inline");
+			commentClone.find(".btnReportComment").attr("data-writerno", comment.writer_no);
+		} else {
+			commentClone.find(".btnUpdateComment").css("display", "none");
+			commentClone.find(".btnDeleteComment").css("display", "none");
+		}
 		commentClone.show();
 		commentList.append(commentClone);
 	}
-	
-	// 글 마다 있는 댓글보기버튼
-	$(document).on("click", ".showComment", function() {
-		var toggle = $(this).attr("data-toggle");
-	 	var time_no = $(this).attr("data-no");
-		var commentList = $(this).parent().next().next().next();
-		if(toggle == "hide") {
-			$(this).attr("data-toggle", "show");
-			getCommentList(time_no, commentList);
-		} else if(toggle == "show") {
-			$(this).attr("data-toggle", "hide");
-			commentList.hide();
-		}
-	});
 	
 	// 댓글 작성
 	$(document).on("click", ".insertCommentBtn", function() {
@@ -364,6 +362,72 @@ $(function() {
 				input.val("");
 			}
 		});
+	});
+	
+	// 댓글 수정
+	$(document).on("click", ".btnUpdateComment", function() {
+		var content = $(this).parents(".comment-button").prev().find(".comment-content");
+		var input = $(this).parents(".comment-button").prev().find(".comment-update");
+		var update = $(this).parents(".comment-button").find(".btnUpdateCommentOk");
+		var cancel = $(this).parents(".comment-button").find(".btnCancelUpdateComment");
+		var c_content = content.css("display", "none").text();
+		input.css("display", "inline").val(c_content);
+		update.css("display", "inline");
+		cancel.css("display", "inline");
+	});
+	
+	// 댓글 수정 완료
+	$(document).on("click", ".btnUpdateCommentOk", function() {
+		var content = $(this).parents(".comment-button").prev().find(".comment-content");
+		var input = $(this).parents(".comment-button").prev().find(".comment-update");
+		var update = $(this).parents(".comment-button").find(".btnUpdateCommentOk");
+		var cancel = $(this).parents(".comment-button").find(".btnCancelUpdateComment");
+		if(input.val() != "" && input.val() != null) {
+			var url = "/comment/updateComment";
+			var sendData = {
+					"c_no"		:	$(this).attr("data-cno"), 
+					"c_content"	:	input.val()
+			};
+			$.post(url, sendData, function(data) {
+				console.log(data);
+				if(data == 'updateComment_success') {
+					content.css("display", "inline").text(input.val());
+					input.css("display", "none").val("");
+					update.css("display", "none");
+					cancel.css("display", "none");
+				}
+			});
+		} else {
+			alert("내용을 작성해주세요");
+		}
+	});
+	
+	// 댓글 수정 취소
+	$(document).on("click", ".btnCancelUpdateComment", function() {
+		$(this).parents(".comment-button").prev().find(".comment-content").css("display", "inline");
+		$(this).parents(".comment-button").prev().find(".comment-update").css("display", "none").val("");
+		$(this).parents(".comment-button").find(".btnUpdateCommentOk").css("display", "none");
+		$(this).parents(".comment-button").find(".btnCancelUpdateComment").css("display", "none");
+	});
+	
+	// 댓글 삭제
+	$(document).on("click", ".btnDeleteComment", function() {
+		var button = $(this);
+		var url = "/comment/deleteComment/" + $(this).attr("data-cno");
+		$.post(url, function(data) {
+			if(data == 'deleteComment_success') {
+				button.parents("#commentClone").remove();
+			}
+		});
+	});
+	
+	// 댓글 신고 모달출력
+	$(document).on("click", ".btnReportComment", function() {
+		$(".timelineModal_report").fadeIn();
+		var writer_no = $(this).attr("data-writerno");
+		$(".btnTimelineReportRun").attr("data-defno", writer_no);
+		var reportCode = $(this).attr("data-reportCode");
+		$(".btnTimelineReportRun").attr("data-reportCode", '6-013');
 	});
 	
 	// 좋아요
