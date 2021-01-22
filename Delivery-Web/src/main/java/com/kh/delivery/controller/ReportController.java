@@ -21,7 +21,15 @@ public class ReportController {
 	// 유저
 	// 신고하기 - 배달, 타임라인, 댓글 등등 타입 지정해줘야 함
 	@RequestMapping(value="/report", method=RequestMethod.POST)
-	public String report(ReportVo reportVo) throws Exception {
+	public String report(int def_no, int plt_no, String reportType, String reportCode, ReportVo reportVo) throws Exception {
+		//System.out.println("def_no : " + def_no);
+		//System.out.println("plt_no : " + plt_no);
+		//System.out.println("reportType : " + reportType);
+		//System.out.println("reportCode : " + reportCode);
+		reportVo.setDef_no(def_no);
+		reportVo.setPlt_no(plt_no);
+		reportVo.setReport_type(reportType);
+		reportVo.setReport_code(reportCode);
 		String result = reportService.report(reportVo);
 		return result;
 	}

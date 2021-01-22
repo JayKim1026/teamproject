@@ -156,7 +156,7 @@ $(function() {
 		clone1.find(".insertCommentBtn").attr("data-no", data.time_no);
 		clone1.find(".btnUpdate").attr("data-no", data.time_no);
 		clone1.find(".btnDelete").attr("data-no", data.time_no);
-		clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no);
+		clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no).attr("data-reportCode", "6-012");
 		
 		clone1.show();
 		if(!insert) {
@@ -263,6 +263,8 @@ $(function() {
 		$(".timelineModal_report").fadeIn();
 		var writer_no = $(this).attr("data-writerno");
 		$(".btnTimelineReportRun").attr("data-defno", writer_no);
+		var reportCode = $(this).attr("data-reportCode");
+		$(".btnTimelineReportRun").attr("data-reportCode", reportCode);
 	});
 	
 	// 타임라인 report type 
@@ -276,12 +278,29 @@ $(function() {
 		e.preventDefault();
 			var url = "/report/report";
 			var def_no = $(this).attr("data-defno");
-			var plf_no = "${sessionScope.userVo.user_no}"
-			var resultType= $(this).attr("data-reportType");
-			console.log(resultType);
-			console.log("plf_no : " + plf_no);
+			var plt_no = "${sessionScope.userVo.user_no}"
+			var reportType = $(this).attr("data-reportType");
+			var reportCode = $(this).attr("data-reportCode");
+			var sendData = {
+					"def_no" : def_no,
+					"plt_no" : plt_no,
+					"reportType" : reportType,
+					"reportCode" : reportCode
+				};
+			
+			console.log("def_no : " + def_no);
+			console.log("reportType :" + reportType);
+			console.log("plt_no : " + plt_no);
+			console.log("reportCode : " + reportCode);
+
 			$.post(url, sendData, function(reportResult){
 				console.log(reportResult);
+				if(reportResult == "report_success") {
+					$(".timelineModal_report").hide();
+					alert("신고가 접수되었습니다");
+					
+					
+				}
 			});
 	});
 	
