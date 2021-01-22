@@ -36,7 +36,7 @@ public class DeliverDaoImpl implements DeliverDao {
 	@Override
 	public String registDeliver(DeliverVo deliverVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "registDeliver", deliverVo );
-		return "registSuccess";
+		return "regist_success";
 	}
 	
 	// 배달원 아이디 중복 체크

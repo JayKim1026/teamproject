@@ -69,7 +69,6 @@
 	<!-- 기타 인터셉터 -->
 		<interceptor>
 			<mapping path="/timeline/**/*"/>
-			<exclude-mapping path="/timeline/showTimeline"/>
 			<exclude-mapping path="/timeline/getTimelineList"/>
 			<exclude-mapping path="/timeline/android/*"/>
 			<beans:ref bean="otherInterceptor"/>

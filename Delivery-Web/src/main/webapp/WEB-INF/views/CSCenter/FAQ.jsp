@@ -209,8 +209,7 @@
 									<tr>
 										<td style="text-align: center"></td>
 										<td style="text-align: center"></td>
-										<td style="text-align: left;"><a class="faqTitle"
-											href="#" style="margin-left: 30px;"></a></td>
+										<td style="text-align: left;"><a class="faqTitle" style="margin-left: 30px;"></a></td>
 									</tr>
 									<tr style="display: none;" class="trAnswer">
 										<td style="background-color: whitesmoke;"></td>
@@ -286,7 +285,12 @@
 			$(document).on("click", ".faqTitle", function() {
 				console.log($(this).attr("data-r"));
 				var r = parseInt($(this).attr("data-r"));
-				$(".trAnswer").eq(r - 1).slideToggle("slow");
+				if($(".trAnswer").eq(r - 1).css("display") != "none") {
+					$(".trAnswer").eq(r - 1).hide();
+				} else {
+					$(".trAnswer").hide();
+					$(".trAnswer").eq(r - 1).slideToggle("slow");
+				}
 			});
 		}); // 핸들러
 	</script>
