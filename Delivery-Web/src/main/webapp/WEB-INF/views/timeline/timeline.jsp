@@ -17,9 +17,21 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>timeLine.jsp</title>
 </head>
-<script>
-<%@include file="../include/timelineScript.js" %>
+<script type="text/javascript">
+// 세션, 모델 변수 가져오기
+var image_url = "${image_url}";
+var account_no;
+var account_state;
+if("${userVo.user_no}" != "") {
+	account_no = parseInt("${userVo.user_no}");
+	account_state = "${userVo.account_state}";
+} else if("${deliverVo.dlvr_no}" != "") {
+	account_no = parseInt("${deliverVo.dlvr_no}");
+	account_state = "${deliverVo.dlvr_no}";
+}
+console.log("account_no : " + account_no);
 </script>
+<script src="/resources/js/timelineScript.js" charset="UTF-8"></script>
 <body>
 <%@ include file="../include/frm.jsp"%>
 <%@ include file="../include/timelineHeader.jsp" %>
