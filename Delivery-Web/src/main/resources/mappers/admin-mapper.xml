@@ -325,11 +325,65 @@
 	            where time_state = '2-001'
 	            order by t.time_date desc	
 	</select>
-	
 	<!-- 게시물 삭제 -->
 	<delete id="deleteArticle">
 		delete from tbl_timeline
 		where time_no = #{time_no}
 	</delete>
 	<!-- 게시물(일반, 리뷰, 공지) 목록  + 삭제 끝 -->
+	
+	<!-- 신고 목록 + 처리 -->
+	<select id="getReportList" resultType="ReportVo">
+		select r.*, p.plt_name, d.def_name 
+		from tbl_report r
+		inner join (
+		    select user_no plt_no, user_name plt_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) p
+		on r.plt_no = p.plt_no
+		inner join (
+		    select user_no def_no, user_name def_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) d
+		on r.def_no = d.def_no
+		where report_state = '6-001'
+	</select>
+	
+	<select id="getAcceptReportList" resultType="ReportVo">
+		select r.*, p.plt_name, d.def_name 
+		from tbl_report r
+		inner join (
+		    select user_no plt_no, user_name plt_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) p
+		on r.plt_no = p.plt_no
+		inner join (
+		    select user_no def_no, user_name def_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) d
+		on r.def_no = d.def_no
+		where report_state = '6-002'
+	</select>
+	
+	<select id="getCancelReportList" resultType="ReportVo">
+		select r.*, p.plt_name, d.def_name 
+		from tbl_report r
+		inner join (
+		    select user_no plt_no, user_name plt_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) p
+		on r.plt_no = p.plt_no
+		inner join (
+		    select user_no def_no, user_name def_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) d
+		on r.def_no = d.def_no
+		where report_state = '6-003'
+	</select>
+	
+	<update id="updateReportState">
+		update tbl_report set
+		report_state = #{report_state}
+		where report_no = #{report_no}
+	</update>
 </mapper>

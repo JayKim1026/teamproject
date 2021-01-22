@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.ReportVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.AdminService;
@@ -355,6 +356,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
+	/* 게시글 삭제*/
 	@RequestMapping(value="/deleteArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String deleteArticle(int time_no) throws Exception{
@@ -363,8 +365,44 @@ public class AdminController implements Codes {
 		return "success";
 	}
 	
-	@RequestMapping(value="/reportPage", method=RequestMethod.GET)
-	public String reportPage() throws Exception {
-		return "admin/report";
+	/* 신고 페이지 */
+	@RequestMapping(value="/report")
+	public String report() throws Exception {
+		return "admin/newReport";
+	}
+	
+	/* 신고대기 목록*/
+	@RequestMapping(value="/getReportList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReportVo> reportList() throws Exception{
+			List<ReportVo> list = adminService.getReportList();
+			System.out.println("getReportList, list:" + list);
+		return list;
+	}
+	
+	/* 신고접수 목록*/
+	@RequestMapping(value="/getAcceptReportList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReportVo> getAcceptReportList() throws Exception{
+			List<ReportVo> list = adminService.getAcceptReportList();
+			System.out.println("getAcceptReportList, list:" + list);
+		return list;
+	}
+	
+	/* 신고취소 목록*/
+	@RequestMapping(value="/getCancelReportList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReportVo> getCancelReportList() throws Exception{
+			List<ReportVo> list = adminService.getCancelReportList();
+			System.out.println("getCancelReportList, list:" + list);
+		return list;
+	}
+	
+	/* 신고상태 변경*/
+	@RequestMapping(value="/updateReportState", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateReportState(int report_no, String report_state) throws Exception{
+		adminService.updateReportState(report_no, report_state);
+		return "success";
 	}
 }

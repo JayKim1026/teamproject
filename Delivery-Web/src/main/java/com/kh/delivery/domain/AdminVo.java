@@ -14,6 +14,10 @@ public class AdminVo {
 	private String account_state;
 	private String admin_img;
 	
+	// Join
+	private String plt_name;
+	private String def_name;
+	
 	public int getAdmin_no() {
 		return admin_no;
 	}
@@ -74,12 +78,26 @@ public class AdminVo {
 	public void setAdmin_img(String admin_img) {
 		this.admin_img = admin_img;
 	}
+	public String getPlt_name() {
+		return plt_name;
+	}
+	public void setPlt_name(String plt_name) {
+		this.plt_name = plt_name;
+	}
+	public String getDef_name() {
+		return def_name;
+	}
+	public void setDef_name(String def_name) {
+		this.def_name = def_name;
+	}
 	
 	@Override
 	public String toString() {
 		return "AdminVo [admin_no=" + admin_no + ", admin_id=" + admin_id + ", admin_pw=" + admin_pw + ", admin_name="
 				+ admin_name + ", admin_phone=" + admin_phone + ", admin_email=" + admin_email + ", admin_date="
 				+ admin_date + ", admin_state=" + admin_state + ", account_state=" + account_state + ", admin_img="
-				+ admin_img + "]";
+				+ admin_img + ", plt_name=" + plt_name + ", def_name=" + def_name + "]";
 	}
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.ReportVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 
@@ -111,4 +112,14 @@ public interface AdminDao {
 	public void deleteArticle(int time_no);
 	/*----- 게시판(일반글 + 리뷰 + 공지) 목록 + 글 삭제 끝 -----*/
 	
+	/*----- 신고 목록 + 처리-----*/
+	/*신고대기 목록*/
+	public List<ReportVo> getReportList();
+	/* 신고접수 목록*/
+	public List<ReportVo> getAcceptReportList();
+	/* 신고취소 목록*/
+	public List<ReportVo> getCancelReportList();
+	/* 신고상태 변경*/
+	public void updateReportState(int report_no, String report_state);
+	/*----- 신고 목록 + 처리 끝-----*/
 }

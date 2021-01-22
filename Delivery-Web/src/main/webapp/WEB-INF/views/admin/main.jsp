@@ -209,7 +209,7 @@ ${sessionScope.adminVo}
 								<!-- 오른쪽 투번째(밑에칸) 컨테이너 -->
 								<div class="col-md-6 mt-3">
 									<div class="bg-white p-3 rounded border">
-										<div><span style="margin-left:63px;">신고</span> <a href="#"style="float:right;">신고관리</a></div>
+										<div><span style="margin-left:63px;">신고</span> <a href="/admin/report" style="float:right;">신고관리</a></div>
 										<p class="text-black-50 content mb-2">새로운 신고접수: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="requested_Report_Count"></span></p>
 										<p class="text-black-50 content mb-2">새로운 댓글 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="report_Comment_Count"></span></p>
 										<p class="text-black-50 content mb-4">새로운 게시물 신고: <span style="font-weight: 600px; text-decoration: underline; color:black;" id="report_Post_Count"></span></p>

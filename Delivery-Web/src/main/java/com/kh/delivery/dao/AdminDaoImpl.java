@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.delivery.domain.AdminVo;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.OrderVo;
+import com.kh.delivery.domain.ReportVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 
@@ -317,5 +318,37 @@ public class AdminDaoImpl implements AdminDao {
 	public void deleteArticle(int time_no) {
 		sqlSession.delete(NAMESPACE + "deleteArticle", time_no);
 	}
+	
+	/*신고대기 목록*/
+	@Override
+	public List<ReportVo> getReportList() {
+		List<ReportVo> list = sqlSession.selectList(NAMESPACE + "getReportList");
+		return list;
+	}
+	/* 신고접수 목록*/
+	@Override
+	public List<ReportVo> getAcceptReportList() {
+		List<ReportVo> list = sqlSession.selectList(NAMESPACE + "getAcceptReportList");
+		return list;
+	}
+	
+	/* 신고취소 목록*/
+	@Override
+	public List<ReportVo> getCancelReportList() {
+		List<ReportVo> list = sqlSession.selectList(NAMESPACE + "getCancelReportList");
+		return list;
+	}
+	
+	/* 신고상태 변경*/
+	@Override
+	public void updateReportState(int report_no, String report_state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("report_no", report_no);
+		map.put("report_state", report_state);
+		sqlSession.selectList(NAMESPACE + "updateReportState", map);
+		
+	}
+	
+
 
 }
