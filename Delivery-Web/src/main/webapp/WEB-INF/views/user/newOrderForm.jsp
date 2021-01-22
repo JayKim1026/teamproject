@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../css/timelineHeader.css" %>
+<%@include file="../css/newOrderFormHeader.css" %>
 <%@include file="../css/newOrderForm.css" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d"></script>
@@ -25,40 +25,36 @@
 </head>
 <body>
 <!-------------------------------------------------  Header  ------------------------------------------------->
-<%@include file="../include/timelineHeader.jsp" %>
+<%@include file="../include/newOrderFormHeader.jsp" %>
 <!-------------------------------------------------end of Header  ------------------------------------------------->
-
+${sessionScope.userVo}
 <!-------------------------------------------------  Progress Bar  ------------------------------------------------->
-<div class="container-fluid" style="margin-top:30px;">
+<div class="container-fluid" style="margin-top:160px;">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-2">
 				</div>
-					<div class="col-md-8">
-						<ul class="nav nav-tabs process-model more-icon-preocess"
-							role="tablist">
-							<li role="presentation" class="active"><a href="#discover"
-								aria-controls="discover" role="tab" data-toggle="tab"><i
-									class="fa fa-search" aria-hidden="true"></i>
-									<p>배달 종류 선택</p> </a></li>
-							<li role="presentation"><a href="#strategy"
-								aria-controls="strategy" role="tab" data-toggle="tab"><i
-									class="fa fa-send-o" aria-hidden="true"></i>
-									<p>주소 선택</p> </a></li>
-							<li role="presentation"><a href="#optimization"
-								aria-controls="optimization" role="tab" data-toggle="tab"><i
-									class="fa fa-qrcode" aria-hidden="true"></i>
-									<p>품목 선택</p> </a></li>
-							<li role="presentation"><a href="#content"
-								aria-controls="content" role="tab" data-toggle="tab"><i
-									class="fa fa-newspaper-o" aria-hidden="true"></i>
-									<p>추가사항</p> </a></li>
-							<li role="presentation"><a href="#reporting"
-								aria-controls="reporting" role="tab" data-toggle="tab"><i
-									class="fa fa-clipboard" aria-hidden="true"></i>
-									<p>배달중..</p> </a></li>
-						</ul>
+					<div class="col-md-8" style="display: flex; justify-content: center;">
+						<div class="stepwizard col-md-offset-3">
+							<div class="stepwizard-row setup-panel">
+								<div class="stepwizard-step">
+									<a href="#step-1" type="button"
+										class="btn btn-primary btn-circle">1</a>
+									<p>Step 1</p>
+								</div>
+								<div class="stepwizard-step">
+									<a href="#step-2" type="button"
+										class="btn btn-default btn-circle" disabled="disabled">2</a>
+									<p>Step 2</p>
+								</div>
+								<div class="stepwizard-step">
+									<a href="#step-3" type="button"
+										class="btn btn-default btn-circle" disabled="disabled">3</a>
+									<p>Step 3</p>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-2">
 				</div>
@@ -75,10 +71,9 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div class="tab-content">
 						
 							<!-------------------------------- 첫번째 탭-------------------------------->
-							<div role="tabpanel" class="tab-pane active" id="discover">
+							 <div class="setup-content" id="step-1">
 								<!-- 음식주문 -->
 								<div class="category-list-card" data-ca="3-012" id="ca_Food">
 									<div class="category-image">
@@ -117,11 +112,12 @@
 										<i class="fa fa-angle-right"></i>
 									</div>
 								</div>
+									<button class="btn btn-primary nextBtn btn-lg float-right" type="button" >Next</button>
 							</div>
 							<!-------------------------------- //첫번째 탭 끝 -------------------------------->
 							
 							<!-------------------------------- 두번째 탭 -------------------------------->
-							<div role="tabpanel" class="tab-pane" id="strategy">
+							 <div class="setup-content" id="step-2">
 								<div class="design-process-content">
 									<div id="map" style="width: 500px; height: 500px; margin:0 auto;"></div>
 									<div>
@@ -129,16 +125,16 @@
 											<span class="title">지도중심기준 행정동 주소정보</span>
 										</div>
 										<input type="button" onclick="seacrhAddress()" value="우편번호 찾기">
-										<br> 도로명 주소 <input type="text" class="form-control"
-											id="roadAddr" readonly /> 지번 <input type="text"
-											class="form-control" id="jibunAddr" readonly />
+										<br> 도로명 주소 <input type="text" class="form-control" id="roadAddr" readonly />  
+											<input type="hidden" class="form-control" id="jibunAddr" readonly />
 									</div>
 								</div>
+								<button class="btn btn-primary nextBtn btn-lg float-right" type="button" id="btnAdressSave">Next</button>
 							</div>
 							<!-------------------------------- // 두번째 탭 끝-------------------------------->
 							
 							<!-------------------------------- 세번째 탭 -------------------------------->
-							<div role="tabpanel" class="tab-pane" id="optimization">
+							 <div class="setup-content" id="step-3">
 									<div class="main-content">
 										<div class="container mt-7">
 											<div class="row">
@@ -179,12 +175,12 @@
 																		<div class="row">
 																			<div class="col-md-10">
 																				<div class="focused">
-																					<label class="form-control-label">주소</label> <input
+																					<label class="form-control-label">주소</label> 
+																					<input
 																						type="text"
 																						class="form-control form-control-alternative"
-																						value="${userVo.user_id }"
 																						style="background-color: white;"
-																						readonly="readonly">
+																						readonly="readonly" id="lastAddr">
 																				</div>
 																			</div>
 																			<div class="col-md-2">
@@ -202,10 +198,10 @@
 																					<div class="divOrgPw">
 																						<label class="form-control-label">연락처</label> <span
 																							class="orgPwCheckResult"></span> <input
-																							type="password"
+																							type="text"
 																							class="form-control form-control-alternative"
 																							style="background-color: white;" readonly
-																							value="${userVo.user_pw }">
+																							value="${userVo.user_phone}">
 																					</div>
 																					
 																				</div>
@@ -233,7 +229,7 @@
 																					<div class="divOrgPhone">
 																						<textarea
 																							class="form-control form-control-alternative"
-																							style="background-color: white;"></textarea>
+																							style="background-color: white;" id="order_req_ta"></textarea>
 																					</div>
 																								
 																					</div>
@@ -248,7 +244,14 @@
 														<div class="col-md-12">
 															<div class="row">
 																<div class="col-md-12">
-																	<button class="btn btn-success" style="float:right;">주문</button>
+																<form action="/order/insertOrder" method="post" id="insertOrder">
+																	<input type="hidden" id="order_ca"> 
+																	<input type="hidden" id="order_lat"> 
+																	<input type="hidden" id="order_lng">
+																	<input type="hidden" id="order_req">
+																	<input type="hidden" id="user_no">
+																</form>
+																<button class="btn btn-primary nextBtn btn-lg float-right" type="button" id="btnInsertOrder">Next</button>
 																</div>
 															</div>
 														</div>
@@ -260,42 +263,6 @@
 									</div>
 							</div>
 							<!-------------------------------- //세번째 탭 끝 -------------------------------->
-							
-							<!-------------------------------- 네번째 탭 -------------------------------->
-							<div role="tabpanel" class="tab-pane" id="content" style="padding-top: 300px;">
-								
-									<div class="container">
-										<div class="row">
-											<div id="loader">
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="dot"></div>
-												<div class="lading"></div>
-											</div>
-										</div>
-									</div>
-									
-									<div>
-										<h3 style="text-align: center;">뚜벅맨 배정중...</h3>
-									</div>
-								
-							</div>
-							<!-------------------------------- //네번째 탭  끝 -------------------------------->
-							
-							<!-------------------------------- 다섯번째 탭 -------------------------------->
-							<div role="tabpanel" class="tab-pane" id="reporting">
-								<div class="design-process-content">
-									<h3>가는중..</h3>
-								</div>
-							</div>
-							<!-------------------------------- //다섯번째 탭 끝 -------------------------------->
-							
-						</div>
 					</div>
 				</div>
 				<div class="col-md-2">
@@ -303,9 +270,7 @@
 			</div>
 		</div>
 	</div>
-<form>
-<input type="hidden" id="order_ca">
-</form>
+
 <!-------------------------------------------------  // end of Content  ------------------------------------------------->
 
 <!-------------------------------------------------  footer  ------------------------------------------------->
@@ -314,6 +279,7 @@
 
 <!--MyScript -->
 <script>
+$(function(){
 $("#ca_Food").click(function(){
 	console.log("음식 클릭이여라~");
 	var has = $(this).hasClass("food_color");
@@ -332,12 +298,12 @@ $("#ca_Food").click(function(){
 
 $("#ca_General").click(function(){
 	console.log("사무용품 클릭이여라~");
-	var has = $(this).hasClass("general_color");
+	var has = $(this).hasClass("grocery_color");
 	if(has){
-		$(this).removeClass("general_color");
+		$(this).removeClass("grocery_color");
 		$("#order_ca").removeAttr("data-ca");
 	}else{
-		$(this).addClass("general_color");
+		$(this).addClass("grocery_color");
 		var ca = $(this).attr("data-ca");
 		$("#order_ca").attr("data-ca", ca);
 		
@@ -361,8 +327,92 @@ $("#ca_Office").click(function(){
 	var ca = $("#order_ca").attr("data-ca");
 	console.log("인풋데이타:" + ca);
 });
-</script>
 
+$("#btnAdressSave").click(function(){
+	console.log("lat:" + $("#order_lat").val());
+	console.log("lng:" + $("#order_lng").val());
+	var roadAddr = $("#roadAddr").val();
+	var jibunAddr = $("#jibunAddr").val();
+	console.log(roadAddr);
+	console.log(jibunAddr);
+	if(roadAddr != null){
+		$("#lastAddr").val(roadAddr);
+	}
+	
+	
+});
+
+$("#btnInsertOrder").click(function(){
+	console.log("마지막클릭");
+	var order_req_ta = $("#order_req_ta").val();
+	$("#order_req").val(order_req_ta);
+	var order_ca = $("#order_ca").attr("data-ca");
+	var order_lat = $("#order_lat").val();
+	var order_lng = $("#order_lng").val();
+	var order_req = $("#order_req").val();
+	var user_no = parseInt("${userVo.user_no}");
+	$("#user_no").val(user_no);
+	
+	if(order_ca == null){
+		alert("카테고리를 선택해주세요.");
+	}else if(order_lat == null){
+		alert("주소를 입력해주세요.");
+	}else if(order_req == null){
+		alert("요청 사항을 입력해주세요.")
+	}else{
+		
+	}
+	
+});
+
+});
+</script>
+<!------------------------------------------------- Step bar ------------------------------------------------->
+<script>
+$(document).ready(function () {
+	  var navListItems = $('div.setup-panel div a'),
+	          allWells = $('.setup-content'),
+	          allNextBtn = $('.nextBtn');
+
+	  allWells.hide();
+
+	  navListItems.click(function (e) {
+	      e.preventDefault();
+	      var $target = $($(this).attr('href')),
+	              $item = $(this);
+
+	      if (!$item.hasClass('disabled')) {
+	          navListItems.removeClass('btn-primary').addClass('btn-default');
+	          $item.addClass('btn-primary');
+	          allWells.hide();
+	          $target.show();
+	          $target.find('input:eq(0)').focus();
+	      }
+	  });
+
+	  allNextBtn.click(function(){
+	      var curStep = $(this).closest(".setup-content"),
+	          curStepBtn = curStep.attr("id"),
+	          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+	          curInputs = curStep.find("input[type='text'],input[type='url']"),
+	          isValid = true;
+
+	      $(".form-group").removeClass("has-error");
+	      for(var i=0; i<curInputs.length; i++){
+	          if (!curInputs[i].validity.valid){
+	              isValid = false;
+	              $(curInputs[i]).closest(".form-group").addClass("has-error");
+	          }
+	      }
+
+	      if (isValid)
+	          nextStepWizard.removeAttr('disabled').trigger('click');
+	  });
+
+	  $('div.setup-panel div a.btn-primary').trigger('click');
+	});
+</script>
+<!------------------------------------------------- End of Step bar ------------------------------------------------->
 <!------------------------------------------------- mapScript ------------------------------------------------->
 <script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div

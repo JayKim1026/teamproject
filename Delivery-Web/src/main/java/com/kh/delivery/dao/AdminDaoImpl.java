@@ -277,7 +277,12 @@ public class AdminDaoImpl implements AdminDao {
 		return list;
 	}
 	
-	/*배달현황 수정*/
+	/*
+	 * 배달원 수정
+	 * order_no : 주문번호
+	 * order_state : 주문상태
+	 * DB 
+	 * */
 	@Override
 	public void updateOrderState(int order_no, String order_state) {
 		Map<String, Object> map = new HashMap<>();
