@@ -5,8 +5,8 @@
 <mapper namespace="com.kh.delivery.like">
 	
 	<insert id="insertLike">
-		insert into tbl_like(time_no, account_no)
-		values(#{time_no}, #{account_no})
+		insert into tbl_like(like_no, time_no, account_no)
+		values(seq_like_no.nextval, #{time_no}, #{account_no})
 	</insert>
 	
 	<delete id="deleteLike">
