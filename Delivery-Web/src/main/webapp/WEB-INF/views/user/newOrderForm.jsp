@@ -27,7 +27,6 @@
 <!-------------------------------------------------  Header  ------------------------------------------------->
 <%@include file="../include/newOrderFormHeader.jsp" %>
 <!-------------------------------------------------end of Header  ------------------------------------------------->
-${sessionScope.userVo}
 <!-------------------------------------------------  Progress Bar  ------------------------------------------------->
 <div class="container-fluid" style="margin-top:160px;">
 	<div class="row">
@@ -244,12 +243,12 @@ ${sessionScope.userVo}
 														<div class="col-md-12">
 															<div class="row">
 																<div class="col-md-12">
-																<form action="/order/insertOrder" method="post" id="insertOrder">
-																	<input type="hidden" id="order_ca"> 
-																	<input type="hidden" id="order_lat"> 
-																	<input type="hidden" id="order_lng">
-																	<input type="hidden" id="order_req">
-																	<input type="hidden" id="user_no">
+																<form action="/order/insertOrder" method="post" id="insertOrderFrm">
+																	<input type="hidden" id="order_ca" name="order_ca"> 
+																	<input type="hidden" id="order_lat" name="order_lat"> 
+																	<input type="hidden" id="order_lng" name="order_lng">
+																	<input type="hidden" id="order_req" name="order_req">
+																	<input type="hidden" id="user_no" name="user_no">
 																</form>
 																<button class="btn btn-primary nextBtn btn-lg float-right" type="button" id="btnInsertOrder">Next</button>
 																</div>
@@ -343,7 +342,7 @@ $("#btnAdressSave").click(function(){
 });
 
 $("#btnInsertOrder").click(function(){
-	console.log("마지막클릭");
+	console.log("클릭");
 	var order_req_ta = $("#order_req_ta").val();
 	$("#order_req").val(order_req_ta);
 	var order_ca = $("#order_ca").attr("data-ca");
@@ -359,12 +358,17 @@ $("#btnInsertOrder").click(function(){
 		alert("주소를 입력해주세요.");
 	}else if(order_req == null){
 		alert("요청 사항을 입력해주세요.")
-	}else{
-		
 	}
+	console.log("order_ca:" + order_ca);
+	console.log("order_lat:" + order_lat);
+	console.log("order_lng:" + order_lng);
+	console.log("order_req:" + order_req);
+	console.log("user_no:" + user_no);
+	
+	insertOrderFrm.submit();
+	
 	
 });
-
 });
 </script>
 <!------------------------------------------------- Step bar ------------------------------------------------->

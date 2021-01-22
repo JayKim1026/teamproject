@@ -40,7 +40,7 @@
 							</c:if>
 							<!-- 일반 회원  -->
 							<c:if test="${sessionScope.userVo != null }">
-								<a class="menu__font" href="/order/orderForm" >주문하기</a>
+<!-- 								<a class="menu__font" href="/order/orderForm" >주문하기</a> -->
 								<a class="menu__font" href="/order/newOrderForm">새로운 주문하기</a>
 							</c:if>
 							<c:if test="${sessionScope.userVo != null }">

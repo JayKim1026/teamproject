@@ -37,13 +37,18 @@ public class OrderController {
 	
 	// 주문하기
 	@RequestMapping(value="/insertOrder", method=RequestMethod.POST)
-	public String insertOrder(OrderVo orderVo, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String insertOrder(OrderVo orderVo, RedirectAttributes rttr) throws Exception {
 		System.out.println("orderVo = " + orderVo);
-		UserVo userVo = (UserVo) session.getAttribute("userVo");
-		orderVo.setUser_no(userVo.getUser_no());
 		String result = orderService.insertOrder(orderVo);
 		rttr.addFlashAttribute("orderResult", result);
 		return "redirect:/user/orderList";
+	}
+	
+	@RequestMapping(value="/newInsertOrder", method=RequestMethod.POST)
+	public String newInsertOrder(OrderVo orderVo) throws Exception{
+		System.out.println("newInsertOrder, orderVo:" + orderVo);
+		
+		return null;
 	}
 	
 	// 주문취소(배달취소 아님)
