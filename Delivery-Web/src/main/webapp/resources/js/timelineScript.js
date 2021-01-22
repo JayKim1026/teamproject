@@ -140,9 +140,15 @@ $(function() {
 		
 		clone1.find(".showComment").attr("data-no", data.time_no);
 		clone1.find(".insertCommentBtn").attr("data-no", data.time_no);
-		clone1.find(".btnUpdate").attr("data-no", data.time_no);
-		clone1.find(".btnDelete").attr("data-no", data.time_no);
-		clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no).attr("data-reportCode", "6-012");
+		
+		if(account_no == data.writer_no) {
+			clone1.find(".btnUpdate").attr("data-no", data.time_no).css("display", "inline");
+			clone1.find(".btnDelete").attr("data-no", data.time_no).css("display", "inline");
+			clone1.find(".btnReport").attr("data-no", data.time_no).attr("data-writerno", data.writer_no).attr("data-reportCode", "6-012");
+		} else {
+			clone1.find(".btnUpdate").css("display", "none");
+			clone1.find(".btnDelete").css("display", "none");
+		}
 		
 		clone1.show();
 		if(!insert) {
