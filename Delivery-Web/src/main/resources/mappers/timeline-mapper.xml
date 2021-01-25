@@ -7,191 +7,155 @@
 
 	<!-- 타임라인 리스트 조회 -->
 	<select id="timelineList" resultType="TimelineVo">
-		select t.*, d.dlvr_name, a.acc_name writer_name, a.acc_img writer_img,
-		nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
-		from
-		tbl_timeline t
+		select t.*, d.dlvr_name, a.acc_name writer_name, a.acc_img writer_img, nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
+		from tbl_timeline t
 		left outer join tbl_deliver d
 		on t.dlvr_no = d.dlvr_no
 		left outer join view_all a
 		on t.writer_no = a.acc_no
 		left outer join (
-		select time_no, count(*) time_like
-		from tbl_like
-		group by time_no) l
-		on
-		t.time_no = l.time_no
+			select time_no, count(*) time_like
+			from tbl_like
+			group by time_no) l
+		on t.time_no = l.time_no
 		left outer join (
-		select *
-		from tbl_like
-		where
-		account_no = #{account_no}) l2
+			select *
+			from tbl_like
+			where account_no = #{account_no}) l2
 		on t.time_no = l2.time_no
-		where
-		time_state != '2-000'
+		where time_state != '2-000'
 		<if test="searchType != null">
 			and time_state = #{searchType}
 		</if>
 		order by t.time_no desc
 	</select>
-
 	<!-- 타임라인 입력/사진o -->
 	<insert id="insertArticle">
-		insert into tbl_timeline(time_no, writer_no,
-		writer_state, time_content, time_img, time_state, time_star,
-		time_location)
-		values(seq_board_no.nextval, #{writer_no},
-		#{writer_state}, #{time_content}, #{time_img}, #{time_state},
-		#{time_star}, #{time_location})
+		insert into tbl_timeline(
+			time_no, writer_no, writer_state, time_content, 
+			time_img, time_state, time_star, time_location)
+		values(
+			seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, 
+			#{time_img}, #{time_state}, #{time_star}, #{time_location})
 	</insert>
-
 	<!-- 타임라인 입력/사진x -->
 	<insert id="insertArticleNoPic">
-		insert into tbl_timeline(time_no, writer_no,
-		writer_state, time_content, time_state, time_star, time_location)
-		values(seq_board_no.nextval, #{writer_no}, #{writer_state},
-		#{time_content}, #{time_state}, #{time_star}, #{time_location})
+		insert into tbl_timeline(
+			time_no, writer_no, writer_state, time_content, 
+			time_state, time_star, time_location)
+		values(
+			seq_board_no.nextval, #{writer_no}, #{writer_state}, #{time_content}, 
+			#{time_state}, #{time_star}, #{time_location})
 	</insert>
-
 	<!-- 타임라인 갱신 -->
 	<update id="updateArticle">
 		update tbl_timeline set
 		time_content = #{time_content}
 		where time_no = #{time_no}
 	</update>
-
 	<!-- 타임라인 삭제 -->
 	<update id="deleteArticle">
 		update tbl_timeline set
 		time_state = '2-000'
-		where
-		time_no = #{time_no}
+		where time_no = #{time_no}
 	</update>
-
 	<!-- 타임라인 조회 -->
 	<select id="selectByNo" resultType="TimelineVo">
-		select t.*, d.dlvr_name,
-		a.acc_name writer_name, a.acc_img writer_img, nvl(l.time_like, 0)
-		time_like, nvl(l2.account_no, -1) liked_no
+		select t.*, d.dlvr_name, a.acc_name writer_name, a.acc_img writer_img, nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
 		from tbl_timeline t
-		left
-		outer join tbl_deliver d
-		on t.dlvr_no = d.dlvr_no
-		left outer join
-		view_all a
-		on t.writer_no = a.acc_no
-		left outer join (
-		select time_no,
-		count(*) time_like
-		from tbl_like
-		group by time_no) l
-		on t.time_no =
-		l.time_no
-		left outer join (
-		select *
-		from tbl_like
-		where account_no =
-		#{account_no}) l2
-		on t.time_no = l2.time_no
-		where time_state != '2-000'
-		and t.time_no = #{time_no}
-	</select>
-
-	<!-- 최근 타임라인 조회 -->
-	<select id="getLastTimeline" resultType="TimelineVo">
-		select *
-		from (
-		select *
-		from tbl_timeline t
-		inner join (
-		select user_no writer_no, user_name
-		writer_name from tbl_user
-		union
-		select dlvr_no, dlvr_name from
-		tbl_deliver
-		order by writer_no desc) a
-		on t.writer_no = a.writer_no
-		where time_state != '2-000'
-		order by t.time_no desc)
-		where rownum = 1
-	</select>
-
-	<!-- 현재 출력된 타임라인 이후에 입력된 타임라인 조회 -->
-	<select id="getCurrentTimeline" resultType="TimelineVo">
-		select t.*,
-		d.dlvr_name, a.acc_name writer_name, a.acc_img writer_img,
-		nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
-		from
-		tbl_timeline t
 		left outer join tbl_deliver d
 		on t.dlvr_no = d.dlvr_no
 		left outer join view_all a
 		on t.writer_no = a.acc_no
 		left outer join (
-		select time_no, count(*) time_like
-		from tbl_like
-		group by time_no) l
-		on
-		t.time_no = l.time_no
+			select time_no, count(*) time_like
+			from tbl_like
+			group by time_no) l
+		on t.time_no = l.time_no
 		left outer join (
-		select *
-		from tbl_like
-		where
-		account_no = #{account_no}) l2
+			select *
+			from tbl_like
+			where account_no = #{account_no}) l2
 		on t.time_no = l2.time_no
-		where
-		time_state != '2-000'
-		and t.time_no &gt;
-		#{time_no}
-		order by t.time_no
-		asc
+		where time_state != '2-000'
+		and t.time_no = #{time_no}
+	</select>
+	<!-- 최근 타임라인 조회 -->
+	<select id="getLastTimeline" resultType="TimelineVo">
+		select *
+		from (
+			select *
+			from tbl_timeline t
+			inner join (
+				select user_no writer_no, user_name writer_name from tbl_user
+				union
+				select dlvr_no, dlvr_name from tbl_deliver
+				order by writer_no desc) a
+			on t.writer_no = a.writer_no
+			where time_state != '2-000'
+			order by t.time_no desc)
+		where rownum = 1
+	</select>
+	<!-- 현재 출력된 타임라인 이후에 입력된 타임라인 조회 -->
+	<select id="getCurrentTimeline" resultType="TimelineVo">
+		select t.*, d.dlvr_name, a.acc_name writer_name, a.acc_img writer_img, nvl(l.time_like, 0) time_like, nvl(l2.account_no, -1) liked_no
+		from tbl_timeline t
+		left outer join tbl_deliver d
+		on t.dlvr_no = d.dlvr_no
+		left outer join view_all a
+		on t.writer_no = a.acc_no
+		left outer join (
+			select time_no, count(*) time_like
+			from tbl_like
+			group by time_no) l
+		on t.time_no = l.time_no
+		left outer join (
+			select *
+			from tbl_like
+			where account_no = #{account_no}) l2
+		on t.time_no = l2.time_no
+		where time_state != '2-000'
+		and t.time_no &gt; #{time_no}
+		order by t.time_no asc
 	</select>
 
 	<!-- 관리자 -->
-
 	<!-- 게시물 관련 카운트 -->
 	<select id="getNewPostCount" resultType="int">
-		select count(*) from
-		tbl_timeline
+		select count(*) 
+		from tbl_timeline
 		where time_state = '2-003'
 		and time_date &gt;= (
-		select
-		to_char(sysdate -1, 'YYYY-MM-DD')
-		from dual)
+			select to_char(sysdate -1, 'YYYY-MM-DD')
+			from dual)
 		and time_date &lt;= sysdate
 	</select>
-
 	<select id="getNewReviewCount" resultType="int">
-		select count(*) from
-		tbl_timeline
+		select count(*) 
+		from tbl_timeline
 		where time_state = '2-002'
 		and time_date &gt;= (
-		select
-		to_char(sysdate -1, 'YYYY-MM-DD')
-		from dual)
+			select to_char(sysdate -1, 'YYYY-MM-DD')
+			from dual)
 		and time_date &lt;= sysdate
 	</select>
-
 	<select id="getNewNoticeCount" resultType="int">
-		select count(*) from
-		tbl_timeline
+		select count(*) 
+		from tbl_timeline
 		where time_state = '2-001'
 		and time_date &gt;= (
-		select
-		to_char(sysdate -1, 'YYYY-MM-DD')
-		from dual)
+			select to_char(sysdate -1, 'YYYY-MM-DD')
+			from dual)
 		and time_date &lt;= sysdate
 	</select>
-
 	<select id="getTotalPostCount" resultType="int">
-		select count(*) from
-		tbl_timeline
+		select count(*) 
+		from tbl_timeline
 		where time_state = '2-003'
 	</select>
-
 	<select id="getTotalReviewCount" resultType="int">
-		select count(*) from
-		tbl_timeline
+		select count(*) 
+		from tbl_timeline
 		where time_state = '2-002'
 	</select>
 	<!-- 게시물 관련 카운트 끝 -->
@@ -199,58 +163,34 @@
 	<!-- 게시물(일반, 리뷰, 공지) 목록 + 삭제 -->
 	<!-- 일반글 목록 -->
 	<select id="getPostList" resultType="TimelineVo">
-		select t.*, d.dlvr_name,
-		a.writer_name
+		select t.*, d.dlvr_name, a.acc_name writer_name
 		from tbl_timeline t
 		left outer join tbl_deliver d
-		on
-		t.dlvr_no = d.dlvr_no
-		left outer join (
-		select user_no account_no,
-		user_name writer_name, user_img from tbl_user
-		union
-		select dlvr_no,
-		dlvr_name, dlvr_img from tbl_deliver
-		) a
-		on t.writer_no = a.account_no
+		on t.dlvr_no = d.dlvr_no
+		left outer join view_account a
+		on t.writer_no = a.acc_no
 		where time_state = '2-003'
 		order by t.time_date desc
 	</select>
 	<!-- 리뷰 목록 -->
 	<select id="getReviewList" resultType="TimelineVo">
-		select t.*, d.dlvr_name,
-		a.writer_name
+		select t.*, d.dlvr_name, a.acc_name writer_name
 		from tbl_timeline t
 		left outer join tbl_deliver d
-		on
-		t.dlvr_no = d.dlvr_no
-		left outer join (
-		select user_no account_no,
-		user_name writer_name, user_img from tbl_user
-		union
-		select dlvr_no,
-		dlvr_name, dlvr_img from tbl_deliver
-		) a
-		on t.writer_no = a.account_no
+		on t.dlvr_no = d.dlvr_no
+		left outer join view_account a
+		on t.writer_no = a.acc_no
 		where time_state = '2-002'
 		order by t.time_date desc
 	</select>
 	<!-- 공지사항 목록 -->
 	<select id="getNoticeList" resultType="TimelineVo">
-		select t.*, d.dlvr_name,
-		a.writer_name
+		select t.*, d.dlvr_name, a.acc_name writer_name
 		from tbl_timeline t
 		left outer join tbl_deliver d
-		on
-		t.dlvr_no = d.dlvr_no
-		left outer join (
-		select user_no account_no,
-		user_name writer_name, user_img from tbl_user
-		union
-		select dlvr_no,
-		dlvr_name, dlvr_img from tbl_deliver
-		) a
-		on t.writer_no = a.account_no
+		on t.dlvr_no = d.dlvr_no
+		left outer join view_all a
+		on t.writer_no = a.acc_no
 		where time_state = '2-001'
 		order by t.time_date desc
 	</select>

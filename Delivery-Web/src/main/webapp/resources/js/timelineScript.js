@@ -264,8 +264,8 @@ $(function() {
 			var sendData = {
 					"def_no" : def_no,
 					"plt_no" : account_no,
-					"reportType" : reportType,
-					"reportCode" : reportCode
+					"report_type" : reportType,
+					"report_code" : reportCode
 				};
 			console.log(sendData);
 			$.post(url, sendData, function(data){

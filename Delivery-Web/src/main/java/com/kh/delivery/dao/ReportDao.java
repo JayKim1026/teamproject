@@ -6,6 +6,7 @@ import com.kh.delivery.domain.ReportVo;
 
 public interface ReportDao {
 	
+	// 신고하기
 	public String report(ReportVo reportVo) throws Exception;
 	
 	// 관리자
