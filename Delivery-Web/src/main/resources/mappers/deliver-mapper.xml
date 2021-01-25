@@ -3,37 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.deliver">
-	<!-- 웹 -->
+	<!-- 배달원 테이블 -->
+
+	<!-- 공용 -->
+	<!-- 로그인 -->
 	<select id="login" resultType="DeliverVo">
 		select * from tbl_deliver
-		where dlvr_id = #{dlvr_id}
+		where
+		dlvr_id = #{dlvr_id}
 		and dlvr_pw = #{dlvr_pw}
 	</select>
 
+	<!-- 배달원 회원가입 -->
 	<insert id="registDeliver">
 		insert into tbl_deliver(
-			dlvr_no, dlvr_id, dlvr_pw, dlvr_name, dlvr_phone, 
-			dlvr_email, dlvr_addr, dlvr_idcard, dlvr_birth, dlvr_img
+		dlvr_no, dlvr_id, dlvr_pw,
+		dlvr_name, dlvr_phone,
+		dlvr_email, dlvr_addr, dlvr_idcard, dlvr_birth,
+		dlvr_img
 		)
 		values(
-			seq_account_no.nextval, #{dlvr_id}, #{dlvr_pw}, #{dlvr_name}, #{dlvr_phone}, 
-			#{dlvr_email}, #{dlvr_addr}, #{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img}
+		seq_account_no.nextval, #{dlvr_id}, #{dlvr_pw},
+		#{dlvr_name},
+		#{dlvr_phone},
+		#{dlvr_email}, #{dlvr_addr},
+		#{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img}
 		)
 	</insert>
-	
-	<select id="checkIdDupl" resultType="DeliverVo">
-		select * 
-		from tbl_deliver
-		where dlvr_id = #{dlvr_id}
-	</select>
-	
-	<!-- 배달원 프로필 사진 변경 -->
-	<update id="imgChange">
+
+	<!-- 배달원 포인트 갱신 -->
+	<update id="updatePoint">
 		update tbl_deliver set
-		dlvr_img = #{chg_img}
-		where dlvr_id = #{dlvr_id}
+		dlvr_point = dlvr_point +
+		#{point_score}
+		where dlvr_no = #{account_no}
 	</update>
-	
+
+	<!-- 웹 -->
 	<!-- 배달원 현재 비밀번호 확인 -->
 	<select id="pwCheck" resultType="DeliverVo">
 		select * from tbl_deliver
@@ -41,75 +47,119 @@
 		dlvr_id = #{dlvr_id} and dlvr_pw = #{orgPw}
 	</select>
 
+	<!-- 배달원 프로필 사진 변경 -->
+	<update id="imgChange">
+		update tbl_deliver set
+		dlvr_img = #{chg_img}
+		where
+		dlvr_id = #{dlvr_id}
+	</update>
+
 	<!-- 배달원 비밀번호 변경 -->
 	<update id="pwChange">
 		update tbl_deliver set
 		dlvr_pw = #{chgPw}
-		where dlvr_id = #{dlvr_id}
-	</update> 
-	
-	<!-- 배달원 이메일 변경  -->
+		where dlvr_id
+		= #{dlvr_id}
+	</update>
+
+	<!-- 배달원 이메일 변경 -->
 	<update id="emailChange">
 		update tbl_deliver set
 		dlvr_email = #{chgEmail}
-		where dlvr_id = #{dlvr_id}
+		where
+		dlvr_id = #{dlvr_id}
 	</update>
-	
+
 	<!-- 배달원 휴대전화 변경 -->
 	<update id="phoneChange">
 		update tbl_deliver set
 		dlvr_phone = #{chgPhone}
-		where dlvr_id = #{dlvr_id}
+		where
+		dlvr_id = #{dlvr_id}
 	</update>
+
 	<!-- 배달원 주소 변경 -->
 	<update id="addrChange">
 		update tbl_deliver set
 		dlvr_addr = #{chgAddr}
-		where dlvr_id = #{dlvr_id}
+		where
+		dlvr_id = #{dlvr_id}
 	</update>
 
-	<!-- 배달 내역 조회 -->
-	<select id="getDeliveryList" resultType="OrderVo">
-		select o.*,c.code_detail ,t.time_star 
-	from tbl_order o
-	left outer join tbl_timeline t
-	on o.order_no = t.order_no
-	inner join tbl_code c on c.code_no = o.order_state
-	where o.dlvr_no = #{dlvr_no}
-	</select>
-	
-	<!-- 포인트 업데이트 -->
-	<update id="updatePoint">
-		update tbl_deliver set
-		dlvr_point = dlvr_point + #{point_score}
-		where dlvr_no = #{account_no}
-	</update>
-	 
+	<!-- 안드로이드 -->
+	<!-- 배달원 배달 횟수 랭킹 조회 -->
 	<select id="getDlvrRank" resultType="DeliverVo">
 		select * from (
-		    select d.*, o.order_count, rank() over(order by o.order_count desc) dlvr_rank
-		    from tbl_deliver d
-		    inner join (
-		        select dlvr_no, count(*) order_count
-		        from tbl_order
-		        where order_state = '3-003'
-		        group by dlvr_no) o
-		    on d.dlvr_no = o.dlvr_no)
+		select d.*,
+		o.order_count, rank() over(order by o.order_count desc)
+		dlvr_rank
+		from
+		tbl_deliver d
+		inner join (
+		select dlvr_no, count(*) order_count
+		from
+		tbl_order
+		where order_state = '3-003'
+		group by dlvr_no) o
+		on d.dlvr_no =
+		o.dlvr_no)
 		where dlvr_rank &lt;= 3
 	</select>
-	
-	<!-- // 웹  -->
-	
-	<!-- 안드로이드 -->
+
+	<!-- 배달원 정보 수정 -->
 	<update id="modifyDeliver">
 		update tbl_deliver set
-			dlvr_pw = #{dlvr_pw}, 
-			dlvr_phone = #{dlvr_phone}, 
-			dlvr_email = #{dlvr_email}, 
-			dlvr_addr = #{dlvr_addr}, 
-			dlvr_img = #{dlvr_img}
+		dlvr_pw = #{dlvr_pw},
+		dlvr_phone = #{dlvr_phone},
+		dlvr_email = #{dlvr_email},
+		dlvr_addr =
+		#{dlvr_addr},
+		dlvr_img = #{dlvr_img}
 		where dlvr_no = #{dlvr_no}
 	</update>
+
+
+<!-- 관리자 -->
 	
+	<select id="getWaitingDeliveryCount" resultType="int">
+		select count(*) from tbl_deliver
+		where dlvr_state = '1-001'
+		and dlvr_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and dlvr_date &lt;= sysdate
+	</select>
 	
+	<select id="getNewDeliveryCount" resultType="int">
+		select count(*) from tbl_deliver
+		where dlvr_state = '1-002'
+		and dlvr_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and dlvr_date &lt;= sysdate
+	</select>
+	
+	<select id="getTotalDeliveryCount" resultType="int">
+		select count(*) from tbl_deliver
+	</select>
+	
+	<!-- 배달원 리스트 -->
+	<select id="getDeliverList" resultType="DeliverVo">
+		select * from tbl_deliver
+	</select>
+	
+	<!-- 	가입 대기중 배달원 리스트 -->
+	<select id="getWaitingDeliverList" resultType="DeliverVo" >
+		select * from tbl_deliver
+		where dlvr_state = '1-001'
+	</select>
+	<!-- 회원 리스트 가지고오기 끝-->
+
+	<update id="deliverStateUpdate">
+		update tbl_deliver set
+		dlvr_state = #{dlvr_state}
+		where dlvr_no = #{dlvr_no}
+	</update>
+
 </mapper>

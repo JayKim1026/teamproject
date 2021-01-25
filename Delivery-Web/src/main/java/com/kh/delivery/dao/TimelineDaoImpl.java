@@ -73,4 +73,64 @@ public class TimelineDaoImpl implements TimelineDao {
 		List<TimelineVo> timelineList = sqlSession.selectList(NAMESPACE + "getCurrentTimeline", map);
 		return timelineList;
 	}
+	
+
+	
+	/*----- 게시글 관련 카운트 -----*/
+	/*신규 일반글*/
+	@Override
+	public int getNewPostCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewPostCount");
+		return count;
+	}
+	
+	/*신규 리뷰*/
+	@Override
+	public int getNewReviewCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewReviewCount");
+		return count;
+	}
+	
+	/*신규 공지*/
+	@Override
+	public int getNewNoticeCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewNoticeCount");
+		return count;
+	}
+	
+	/*전체 일반글*/
+	@Override
+	public int getTotalPostCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getTotalPostCount");
+		return count;
+	}
+	
+	/*전체 리뷰*/
+	@Override
+	public int getTotalReviewCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getTotalReviewCount");
+		return count;
+	}
+	/*----- 게시글 관련 카운트 끝 -----*/
+	
+	/*일반글 목록*/
+	@Override
+	public List<TimelineVo> getPostList() {
+		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "getPostList");
+		return list;
+	}
+	
+	/*리뷰 목록*/
+	@Override
+	public List<TimelineVo> getReviewList() {
+		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "getReviewList");
+		return list;
+	}
+	
+	/*공지 목록*/
+	@Override
+	public List<TimelineVo> getNoticeList() {
+		List<TimelineVo> list = sqlSession.selectList(NAMESPACE + "getNoticeList");
+		return list;
+	}
 }

@@ -223,7 +223,7 @@ public class UserController implements Codes {
 	public String userOrderList(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		UserVo userVo = (UserVo) session.getAttribute("userVo");
 		int user_no = userVo.getUser_no();
-		List<OrderVo> orderList = userService.getOrderList(user_no);
+		List<OrderVo> orderList = orderService.getUserOrderList(user_no);
 		if(orderList != null) {
 			model.addAttribute("orderList", orderList);
 		} else {

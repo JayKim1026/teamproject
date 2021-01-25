@@ -94,18 +94,37 @@ public class UserServiceImpl implements UserService {
 		String result = userDao.addrChange(user_id, chgAddr);
 		return result;
 	}
-	
-	//일반회원 주문내역 조회 
-	@Override
-	public List<OrderVo> getOrderList(int user_no) throws Exception {
-		List<OrderVo> orderList = userDao.getOrderList(user_no);
-		return orderList;
-	}
 
 	@Override
 	public List<UserVo> getUserRank() throws Exception {
 		List<UserVo> userRank = userDao.getUserRank();
 		return userRank;
+	}
+
+	/* 신규회원 */
+	@Override
+	public int getNewMemberCount() {
+		int count = userDao.getNewMemberCount();
+		return count;
+	}
+	
+	/* 전체 일반회원 */
+	@Override
+	public int getTotalMemberCount() {
+		int count = userDao.getTotalMemberCount();
+		return count;
+	}
+	
+	/*----- 일반회원 리스트 -----*/
+	@Override
+	public List<UserVo> getMemberList() {
+		List<UserVo> list = userDao.getMemberList();
+		return list;
+	}
+	@Override
+	public String userStateUpdate(int user_no, String user_state) {
+		String updateResult = userDao.userStateUpdate(user_no, user_state);
+		return updateResult;
 	}
 
 }

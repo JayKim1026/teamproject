@@ -115,20 +115,7 @@ public class DeliverDaoImpl implements DeliverDao {
 		sqlSession.update(NAMESPACE + "addrChange", map);
 		return "addrChange_success";
 	}
-	
-	// 배달원 배달 내역 조회
-	@Override
-	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
-		//System.out.println("dliver dao 배달 내역 조회 : " + dlvr_no);
-		List<OrderVo> deliveryList = sqlSession.selectList(NAMESPACE + "getDeliveryList", dlvr_no);
-		return deliveryList;
-	}
 
-	
-	
-	/* // 웹*/ 
-	
-	
 	
 	/* 안드로이드*/ 
 	@Override
@@ -141,6 +128,51 @@ public class DeliverDaoImpl implements DeliverDao {
 	public List<DeliverVo> getDlvrRank() throws Exception {
 		List<DeliverVo> dlvrRank = sqlSession.selectList(NAMESPACE + "getDlvrRank");
 		return dlvrRank;
+	}
+	
+	// 관리자
+	/* 신규 가입대기 배달원 */
+	@Override
+	public int getWaitingDeliveryCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getWaitingDeliveryCount");
+		return count;
+	}
+	
+	/* 신규 배달원 */
+	@Override
+	public int getNewDeliveryCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewDeliveryCount");
+		return count;
+	}
+
+	/* 전체 배달원 */
+	@Override
+	public int getTotalDeliveryCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getTotalDeliveryCount");
+		return count;
+	}
+	
+	/* 배달원 리스트 */
+	@Override
+	public List<DeliverVo> getDeliverList() {
+		List<DeliverVo> list = sqlSession.selectList(NAMESPACE + "getDeliverList");
+		return list;
+	}
+	
+	/* 가입대기중 배달원 리스트 */
+	@Override
+	public List<DeliverVo> getWaitingDeliverList() {
+		List<DeliverVo> list = sqlSession.selectList(NAMESPACE + "getWaitingDeliverList");
+		return list;
+	}
+
+	@Override
+	public String deliverStateUpdate(int dlvr_no, String dlvr_state) {
+		Map<String, Object > map = new HashMap<>();
+		map.put("dlvr_no", dlvr_no);
+		map.put("dlvr_state", dlvr_state);
+		sqlSession.update(NAMESPACE + "deliverStateUpdate", map);
+		return "update_success";
 	}
 
 }

@@ -64,8 +64,8 @@ public class OrderController {
 	// 주문 리스트 찾기
 	@RequestMapping(value="/android/getOrderList", method=RequestMethod.POST)
 	@ResponseBody
-	public List<OrderVo> getOrderList(double order_lat, double order_lng, int range) throws Exception {
-		List<OrderVo> orderList = orderService.getOrderList(order_lat, order_lng, range);
+	public List<OrderVo> getOrderList(double order_lat, double order_lng) throws Exception {
+		List<OrderVo> orderList = orderService.getOrderList(order_lat, order_lng);
 		return orderList;
 	}
 
@@ -103,10 +103,10 @@ public class OrderController {
 	}
 	
 	// 배달 완료 목록 가져오기
-	@RequestMapping(value="/android/getCompletedOrder", method=RequestMethod.POST)
+	@RequestMapping(value="/android/getDeliveryList", method=RequestMethod.POST)
 	@ResponseBody
-	public List<OrderVo> getCompletedOrder(int dlvr_no) throws Exception {
-		List<OrderVo> orderList = orderService.getCompletedOrder(dlvr_no);
+	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
+		List<OrderVo> orderList = orderService.getDeliveryList(dlvr_no);
 		return orderList;
 	}
 }

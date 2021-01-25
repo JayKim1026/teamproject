@@ -142,18 +142,43 @@ public class UserDaoImpl implements UserDao {
 		return "addrChange_success";
 	}
 
-	// 일반회원 주문내역 조회
-	@Override
-	public List<OrderVo> getOrderList(int user_no) throws Exception {
-		List<OrderVo> orderList	= sqlSession.selectList(NAMESPACE + "getOrderList", user_no);
-		System.out.println("userDaoImpl getOrderList : " + orderList);
-		return orderList;
-	}
-
 	@Override
 	public List<UserVo> getUserRank() throws Exception {
 		List<UserVo> userRank = sqlSession.selectList(NAMESPACE + "getUserRank");
 		return userRank;
+	}
+	
+
+	/* 신규회원 */
+	@Override
+	public int getNewMemberCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewMemberCount");
+		System.out.println("count:"+ count);
+		return count;
+	}
+
+	/* 전체 일반회원 */
+	@Override
+	public int getTotalMemberCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getTotalMemberCount");
+		return count;
+	}
+	
+	/* 일반회원 리스트 */
+	@Override
+	public List<UserVo> getMemberList() {
+		List<UserVo> list = sqlSession.selectList(NAMESPACE + "getMemberList");
+		return list;
+	}
+	
+	/* 계정 상태 수정 */
+	@Override
+	public String userStateUpdate(int user_no, String user_state) {
+		Map<String, Object > map = new HashMap<>();
+		map.put("user_no", user_no);
+		map.put("user_state", user_state);
+		sqlSession.update(NAMESPACE + "userStateUpdate", map);
+		return "update_success";
 	}
 	
 }

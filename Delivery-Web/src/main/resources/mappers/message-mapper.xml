@@ -3,40 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.message">
+	<!-- 메시지 테이블 -->
 
+	<!-- 주문 번호의 메시지 리스트 조회 -->
 	<select id="getMessageList" resultType="MessageVo">
-		select m.*, a.sender_name, a.sender_img 
+		select m.*, a.acc_name
+		sender_name, a.acc_img sender_img
 		from tbl_message m
-		inner join (
-		    select user_no sender_no, user_name sender_name, user_img sender_img from tbl_user
-		    union
-		    select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
-		on m.sender_no = a.sender_no
-		where m.order_no = #{order_no}
+		inner join view_all a
+		on m.sender_no = a.acc_no
+		where
+		m.order_no = #{order_no}
 		order by m.msg_no
 	</select>
-	
+
+	<!-- 현재 출력된 메시지 이후의 메시지 조회 -->
 	<select id="getCurrentMessage" resultType="MessageVo">
-		select m.*, a.sender_name, a.sender_img 
+		select m.*, a.acc_name
+		sender_name, a.acc_img sender_img
 		from tbl_message m
-		inner join (
-		    select user_no sender_no, user_name sender_name, user_img sender_img from tbl_user
-		    union
-		    select dlvr_no, dlvr_name, dlvr_img from tbl_deliver) a
-		on m.sender_no = a.sender_no
-		where m.order_no = #{order_no}
+		inner join view_all a
+		on m.sender_no = a.acc_no
+		where
+		m.order_no = #{order_no}
 		and m.msg_no > #{msg_no}
 		order by m.msg_no
 	</select>
-	
+
+	<!-- 메시지 보내기 -->
 	<insert id="sendMsgContent">
-		insert into tbl_message(msg_no, order_no, sender_no, receiver_no, msg_content)
-		values(seq_message_no.nextval, #{order_no}, #{sender_no}, #{receiver_no}, #{msg_content})
+		insert into tbl_message(msg_no, order_no, sender_no,
+		receiver_no, msg_content)
+		values(seq_message_no.nextval, #{order_no},
+		#{sender_no}, #{receiver_no}, #{msg_content})
 	</insert>
-	
+
+	<!-- 사진 보내기 -->
 	<insert id="sendMsgImg">
-		insert into tbl_message(msg_no, order_no, sender_no, receiver_no, msg_img)
-		values(seq_message_no.nextval, #{order_no}, #{sender_no}, #{receiver_no}, #{msg_img})
+		insert into tbl_message(msg_no, order_no, sender_no,
+		receiver_no, msg_img)
+		values(seq_message_no.nextval, #{order_no},
+		#{sender_no}, #{receiver_no}, #{msg_img})
 	</insert>
-	
+
 </mapper>

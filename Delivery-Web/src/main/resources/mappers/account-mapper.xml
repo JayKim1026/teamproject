@@ -5,20 +5,14 @@
 <mapper namespace="com.kh.delivery.account">
 
 	<select id="checkIdDupl" resultType="String">
-		select acc_id from (
-		    select user_id acc_id from tbl_user
-		    union
-		    select dlvr_id from tbl_deliver)
+		select acc_id 
+		from view_account
 		where acc_id = #{acc_id}
 	</select>
 	
 	<select id="findAccountId" resultType="String">
 		select acc_id 
-		from (
-		    select user_id acc_id, user_name acc_name, user_email acc_email, user_phone acc_phone from tbl_user
-		    union
-		    select dlvr_id, dlvr_name, dlvr_email, dlvr_phone from tbl_deliver
-		)
+		from view_account
 		where acc_name = #{acc_name}
 		and acc_email = #{acc_email}
 		and acc_phone = #{acc_phone}
@@ -26,11 +20,7 @@
 	
 	<select id="findAccountPw" resultType="String">
 		select acc_pw 
-		from (
-		    select user_id acc_id, user_pw acc_pw, user_name acc_name, user_email acc_email, user_phone acc_phone from tbl_user
-		    union
-		    select dlvr_id, dlvr_pw, dlvr_name, dlvr_email, dlvr_phone from tbl_deliver
-		)
+		from view_account
 		where acc_id = #{acc_id}
 		and acc_name = #{acc_name}
 		and acc_email = #{acc_email}
@@ -58,11 +48,8 @@
 	
 	<select id="getPointRank" resultType="AccountDto">
 		select * from (
-		    select acc_no, acc_id, acc_name, p.point_score acc_point, c.code_detail acc_state, rank() over(order by p.point_score desc) point_rank 
-		    from (
-		        select user_no acc_no, user_id acc_id, user_name acc_name, user_point acc_point, account_state from tbl_user
-		        union
-		        select dlvr_no, dlvr_id, dlvr_name, dlvr_point, account_state from tbl_deliver) a
+		    select a.acc_no, a.acc_id, a.acc_name, p.point_score acc_point, c.code_detail acc_state, rank() over(order by p.point_score desc) point_rank 
+			from view_account a
 		    inner join tbl_code c
 		    on a.account_state = c.code_no
 		    inner join (
