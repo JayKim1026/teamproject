@@ -11,6 +11,8 @@
 <title>Main.jsp</title>
 </head>
 <body>
+<!------------------------------------ 최상단 메뉴 ------------------------------------>
+<!-------------------------------------- 로그인,회원가입,게시판,고객센터 등-------------------------------------->		
 	<header class="header">
 		<div class="container-fluid">
 			<div class="row">
@@ -22,7 +24,7 @@
 								 <i class="fab fa-accusoft"></i>
 							</div>
 						</div>
-						
+<!-------------------------------------- 비로그인 상태일때 볼수있는 메뉴 -------------------------------------->						
 						<div align="right" class="col-md-10">
 							<c:if
 								test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
@@ -30,17 +32,16 @@
 								<a class="menu__font" href="/account/registerForm">일반회원 가입</a>
 								<a class="menu__font" href="/account/dlvr_RegisterForm">라이더 가입</a>
 							</c:if>
+<!-------------------------------------- //비로그인 상태일때 볼수있는 메뉴 끝 (밑에 더있음)-------------------------------------->							
 							
+<!-------------------------------------- 로그인 후 볼수있는 메뉴 -------------------------------------->							
 							<c:if
 								test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
 								<a class="menu__font" href="/account/logout">Logout</a>
 								<a class="menu__font" href="/timeline/showTimeline">TimeLine</a>
-								<!-- 관리자 임시로 여기뒀음 -->
-								<a class="menu__font" href="/admin/main">관리자페이지</a>
 							</c:if>
 							<!-- 일반 회원  -->
 							<c:if test="${sessionScope.userVo != null }">
-<!-- 								<a class="menu__font" href="/order/orderForm" >주문하기</a> -->
 								<a class="menu__font" href="/order/newOrderForm">주문하기</a>
 							</c:if>
 							<c:if test="${sessionScope.userVo != null }">
@@ -49,14 +50,19 @@
 							<!-- 배달원 -->
 							<c:if test="${sessionScope.deliverVo != null }">
 								<a class="menu__font" href="/deliver/info">마이페이지</a>
+<!-------------------------------------- //로그인 후 볼수있는 메뉴 끝 -------------------------------------->										
+						
+<!-------------------------------------- 비로그인 상태일때 볼수있는 메뉴  -------------------------------------->							
 							</c:if>
 							<a class="menu__font" href="/CSCenter/FAQ">고객센터</a>
-							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+<!--------------------------------------//로그인,회원가입,게시판,고객센터 등 끝-------------------------------------->	
+		
+<!-------------------------------------- 간략 소개글(애니메이션) + (최상단 메뉴 하단 백그라운드 이미지 위) -------------------------------------->		
 		<div class="col-md-12" style="margin-top: 300px;">
 			<div class="row">
 				<div class="col-md-2">
@@ -73,11 +79,12 @@
 				</div>
 			</div>
 		</div>
+<!-------------------------------------- 간략 소개글(애니메이션) + (최상단 메뉴 하단 백그라운드 이미지 위) -------------------------------------->			
 	</header>
-	
+<!-------------------------------------- //최상단 메뉴 끝-------------------------------------->		
 <body>
 
-<!-- First Content -->
+<!-------------------------------------- 첫번째, 웹페이지 소개(fade-up효과 사용) ------------------------------------->	
 <div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
 	<div class="row">
 		<div class="col-md-12">
@@ -119,9 +126,9 @@
 		</div>
 	</div>
 </div>
-<!-- End of First Content -->
-
-<!-- Second Content -->
+<!-------------------------------------- //첫번째, 웹페이지 소개(fade-up효과 사용) 끝------------------------------------->
+	
+<!-------------------------------------- 두번째, 근무제도 소개(fade-up효과 사용) ------------------------------------->
 <div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
 	<div class="row">
 		<div class="col-md-12">
@@ -176,9 +183,9 @@
 		</div>
 	</div>
 </div>
-<!-- End of Second Content -->
+<!-------------------------------------- //두번째, 근무제도 소개(fade-up효과 사용) 끝------------------------------------->
 
-<!-- Third Content -->
+<!-------------------------------------- 세번째, 근무제도 소개 두번째(fade-up효과 사용) ------------------------------------->
 <div class="container-fluid content_box" data-aos="fade-up" data-aos-duration="2000">
 	<div class="row">
 		<div class="col-md-12">
@@ -235,9 +242,9 @@
 		</div>
 	</div>
 </div>
-<!-- End of Third Content -->
+<!-------------------------------------- 세번째, 근무제도 소개 두번째(fade-up효과 사용) ------------------------------------->
 
-<!-- Third Content -->
+<!-------------------------------------- 네번째, FAQ ------------------------------------->
 <div class="container-fluid content_box" style="background-color:black;"> <!-- data-aos="fade-up" data-aos-duration="2000"-->
 	<div class="row">
 		<div class="col-md-12">
@@ -315,9 +322,9 @@
 		</div>
 	</div>
 </div>
-<!-- End of Third Content -->
+<!-------------------------------------- // 네번째, FAQ 끝 ------------------------------------->
 
-<!--Last Content(get app on playstore and appstore)-->
+<!--------------------------------------  마지막(다섯번째), 안드로이드 앱 ------------------------------------->
 <div class="container-fluid content_box">
 	<div class="row">
 		<div class="col-md-12">
@@ -367,37 +374,12 @@
 		</div>
 	</div>
 </div>
-<!-- End of Last Content(get app on playstore and appstore) -->
-
-
-	
+<!-------------------------------------- //마지막(다섯번째), 안드로이드 앱 끝------------------------------------->
 </body>
 
-<!-- Footer -->
+<!-------------------------------------- Footer------------------------------------->
 <%@include file="../include/footer.jsp" %>
-<div class="row">
-<div class="col-md-12">
-<a style="display:none;" id="modal-172661" href="#modal-container-172661" role="button" class="btn" data-toggle="modal">지도 모달</a>
-	<div class="modal fade" id="modal-container-172661" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="myModalLabel">KaKaoMap</h5> 
-					<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body" id="map" style="width:497; height:550;">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="resizing">리사이징</button> 
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				</div>
-			</div>	
-		</div>	
-	</div>	
-</div>
-</div>
+<!-------------------------------------//- Footer 끝------------------------------------->
 <script>
 $(function(){
 	//메세지

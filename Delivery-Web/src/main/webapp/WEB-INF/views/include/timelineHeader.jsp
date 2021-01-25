@@ -14,9 +14,14 @@
 				</div>
 				<div class="col-md-2">
 					<img src="${image_url}${userVo.user_img}" class="rounded-circle" id="head_icon_img"/>
-					<i id="head_icon_name">${userVo.user_name}</i>
-					<i class="far fa-comment-dots" id="head_icon_dots"></i>
-					<i class="fas fa-bell" id="head_icon_bell"></i>
+					<a id="dropdownMenuButton" data-toggle="dropdown" 
+					style="font-family : 'Nanum Pen Script', cursive; font-size : 30px; padding-left: 10%;">${userVo.user_name}</a>
+					<span style="font-family : 'Nanum Pen Script', cursive; font-size : 20px; padding-left: 2%;">님 환영합니다.</span>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						 <a class="dropdown-item" href="/user/info">마이페이지</a> 
+						 <a class="dropdown-item" href="/user/orderList">주문목록</a> 
+						 <a class="dropdown-item" href="/order/newOrderForm">주문하러가기</a> 
+					</div>
 				</div>
 			</div>
 		</div>
