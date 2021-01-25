@@ -92,7 +92,6 @@ public class AccountController {
 	@ResponseBody
 	public List<AccountDto> getPointRank() throws Exception {
 		List<AccountDto> pointRank = accountService.getPointRank();
-		System.out.println("pointRank = " + pointRank);
 		return pointRank;
 	}
 }

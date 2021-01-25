@@ -8,9 +8,9 @@ public class AccountDto {
 	private String acc_name;
 	private String acc_email;
 	private String acc_phone;
+	private String acc_state;
 	
 	// 조인 컬럼
-	private String acc_state;
 	private int acc_point;
 	private int point_rank;
 

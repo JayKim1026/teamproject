@@ -39,10 +39,7 @@ public class CSController {
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	@ResponseBody
 	public List<FAQVo> search(String category, String keyword, Model model) throws Exception {
-		System.out.println("category : " + category);
-		System.out.println("keyword : " + keyword);
 		List<FAQVo> searchList = csService.getSearchList(category, keyword);
-		System.out.println("serchList controller : " + searchList);
 		return searchList;
 	}
 

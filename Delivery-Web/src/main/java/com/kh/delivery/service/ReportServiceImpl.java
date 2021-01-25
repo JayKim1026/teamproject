@@ -19,10 +19,6 @@ public class ReportServiceImpl implements ReportService, Codes {
 
 	@Inject
 	private ReportDao reportDao;
-	@Inject
-	private PointDao pointDao;
-	@Inject
-	private AccountDao accountDao;
 	
 	// 신고하기
 	@Override

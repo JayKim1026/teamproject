@@ -64,7 +64,6 @@ public class CommentController implements Codes {
 	 * */
 	@RequestMapping(value="/updateComment", method=RequestMethod.POST)
 	public String updateComment(CommentVo commentVo) throws Exception{
-		System.out.println("CommentController, updateComment, commentVo:" + commentVo);
 		String result = commentService.updateComment(commentVo);
 		return result;
 	}
@@ -81,7 +80,6 @@ public class CommentController implements Codes {
 	/* 댓글 작성 후 현재 출력된 댓글 이후 작성된 댓글 조회 */
 	@RequestMapping(value="/getCurrentComment", method=RequestMethod.POST)
 	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception {
-		System.out.println("CommentController, getCurrentComment, commentVo:" + commentVo);
 		List<CommentVo> commentList = commentService.getCurrentComment(commentVo);
 		return commentList;
 	}

@@ -22,7 +22,6 @@ public class OrderDaoImpl implements OrderDao {
 	// 배달원 배달 내역 조회
 	@Override
 	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
-		//System.out.println("dliver dao 배달 내역 조회 : " + dlvr_no);
 		List<OrderVo> deliveryList = sqlSession.selectList(NAMESPACE + "getDeliveryList", dlvr_no);
 		return deliveryList;
 	}
@@ -38,7 +37,6 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public String orderCancel(int order_no) throws Exception {
 		int result = sqlSession.update(NAMESPACE + "orderCancel", order_no);
-		System.out.println("orderDao : " + result);
 		return "cancel_success";
 	}
 
@@ -46,7 +44,6 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public List<OrderVo> getUserOrderList(int user_no) throws Exception {
 		List<OrderVo> orderList	= sqlSession.selectList(NAMESPACE + "getUserOrderList", user_no);
-		System.out.println("userDaoImpl getOrderList : " + orderList);
 		return orderList;
 	}
 	
