@@ -14,5 +14,10 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		return "redirect:/main/main";
 	}
+
+	@RequestMapping(value="/daumAddress", method=RequestMethod.GET)
+	public String daumAddress() throws Exception {
+		return "util/daum_address";
+	}
 	
 }
