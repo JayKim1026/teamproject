@@ -7,51 +7,41 @@
 
 	<!-- 포인트 입력 -->
 	<insert id="insertPoint">
-		insert into tbl_point(point_no, point_code,
-		account_no, point_score)
-		values(seq_point_no.nextval, #{point_code},
-		#{account_no}, #{point_score})
+		insert into tbl_point(point_no, point_code, account_no, point_score)
+		values(seq_point_no.nextval, #{point_code}, #{account_no}, #{point_score})
 	</insert>
-
 	<!-- 내 포인트 기록 조회 -->
 	<select id="getMyPoint" resultType="PointVo">
-		select p.*, c.code_detail
-		point_detail
+		select p.*, c.code_detail point_detail
 		from tbl_point p
 		inner join tbl_code c
 		on p.point_code = c.code_no
-		where
-		account_no = #{account_no}
+		where account_no = #{account_no}
 		order by point_date desc
 	</select>
-
 	<!-- 사용자 포인트 리스트 조회 -->
 	<select id="getUserPointList" resultType="PointVo">
-		select p.*, u.user_name
-		account_name
+		select p.*, u.user_name account_name
 		from tbl_user u
 		inner join (
-		select p.account_no, sum(p.point_score) total_score
-		from tbl_point p
-		inner join tbl_user u
-		on p.account_no = u.user_no
-		group by p.account_no) p
+			select p.account_no, sum(p.point_score) total_score
+			from tbl_point p
+			inner join tbl_user u
+			on p.account_no = u.user_no
+			group by p.account_no) p
 		on u.user_no = p.account_no
-		order by p.total_score
-		asc
+		order by p.total_score asc
 	</select>
-
 	<!-- 배달원 포인트 리스트 조회 -->
 	<select id="getDlvrPointList" resultType="PointVo">
-		select p.*, d.dlvr_name
-		account_name
+		select p.*, d.dlvr_name account_name
 		from tbl_deliver d
 		inner join (
-		select account_no, sum(point_score) total_score
-		from tbl_point p
-		inner join tbl_deliver d
-		on p.account_no = d.dlvr_no
-		group by account_no) p
+			select account_no, sum(point_score) total_score
+			from tbl_point p
+			inner join tbl_deliver d
+			on p.account_no = d.dlvr_no
+			group by account_no) p
 		on d.dlvr_no = p.account_no
 		order by p.total_score asc
 	</select>

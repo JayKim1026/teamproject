@@ -18,12 +18,13 @@ import com.kh.delivery.util.Codes;
 public class ReportServiceImpl implements ReportService, Codes {
 
 	@Inject
-	ReportDao reportDao;
+	private ReportDao reportDao;
 	@Inject
-	PointDao pointDao;
+	private PointDao pointDao;
 	@Inject
-	AccountDao accountDao;
+	private AccountDao accountDao;
 	
+	// 신고하기
 	@Override
 	public String report(ReportVo reportVo) throws Exception {
 		String result = reportDao.report(reportVo);
@@ -37,35 +38,30 @@ public class ReportServiceImpl implements ReportService, Codes {
 		int count = reportDao.getNewRequestedReportCount();
 		return count;
 	}
-	
 	/*신규 일반글 신고*/
 	@Override
 	public int getNewPostReportCount() {
 		int count = reportDao.getNewPostReportCount();
 		return count;
 	}
-	
 	/*신규 댓글 신고*/
 	@Override
 	public int getNewCommentReportCount() {
 		int count = reportDao.getNewCommentReportCount();
 		return count;
 	}
-	
 	/* 전체 게시물 신고  */
 	@Override
 	public int getTotalPostReportCount() {
 		int count = reportDao.getTotalPostReportCount();
 		return count;
 	}
-	
 	/* 전체 댓글 신고*/
 	@Override
 	public int getTotalCommentReportCount() {
 		int count = reportDao.getTotalCommentReportCount();
 		return count;
 	}
-	
 	/* 완료된 신고 */
 	@Override
 	public int getFinishedReportCount() {
@@ -74,30 +70,29 @@ public class ReportServiceImpl implements ReportService, Codes {
 	}
 	/*----- 신고 관련 카운트 끝 -----*/
 	
+	/*----- 신고 목록 + 처리-----*/
 	/*신고 목록*/
 	@Override
 	public List<ReportVo> getReportList() {
 		List<ReportVo> list = reportDao.getReportList();
 		return list;
 	}
-	
 	/* 신고접수 목록*/
 	@Override
 	public List<ReportVo> getAcceptReportList() {
 		List<ReportVo> list = reportDao.getAcceptReportList();
 		return list;
 	}
-	
 	/* 신고취소 목록*/
 	@Override
 	public List<ReportVo> getCancelReportList() {
 		List<ReportVo> list = reportDao.getCancelReportList();
 		return list;
 	}
-	
 	/* 신고상태 변경*/
 	@Override
 	public void updateReportState(int report_no, String report_state) {
 		reportDao.updateReportState(report_no, report_state);
 	}
+	/*----- 신고 목록 + 처리 끝-----*/	
 }

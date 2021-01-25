@@ -6,8 +6,8 @@ import com.kh.delivery.domain.ReportVo;
 
 public interface ReportService {
 	
+	// 신고하기
 	public String report(ReportVo reportVo) throws Exception;
-
 	
 	/*----- 신고 관련 카운트 -----*/
 	/*신규 신고대기*/
