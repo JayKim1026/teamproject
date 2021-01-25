@@ -22,7 +22,7 @@ import com.kh.delivery.service.CSService;
 public class CSController {
 
 	@Inject
-	CSService csService;
+	private CSService csService;
 	
 	/* FAQ 페이지 이동 */
 	@RequestMapping(value="/FAQ" , method=RequestMethod.GET)

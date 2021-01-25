@@ -27,7 +27,7 @@ import com.kh.delivery.service.CommentService;
 import com.kh.delivery.service.TimelineService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
-
+/* 주석처리 완료 */
 @RestController
 @RequestMapping(value = "/comment")
 public class CommentController implements Codes {
