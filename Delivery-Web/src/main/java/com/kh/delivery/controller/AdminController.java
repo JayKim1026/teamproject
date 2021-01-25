@@ -27,7 +27,7 @@ import com.kh.delivery.service.ReportService;
 import com.kh.delivery.service.TimelineService;
 import com.kh.delivery.service.UserService;
 import com.kh.delivery.util.Codes;
-
+/* 주석처리 완료 */
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController implements Codes {
@@ -45,17 +45,22 @@ public class AdminController implements Codes {
 	@Inject
 	private ReportService reportService;
 	
-	
+	/* 관리자페이지 메인화면  */
 	@RequestMapping(value="/main")
 	public String main() throws Exception{
 		return "admin/main";
 	}
 	
+	/* 로그인 페이지  */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginForm()throws Exception {
 		return "admin/loginForm";
 	}
 	
+	/* 로그인
+	 * admin_id 관리자 아이디
+	 * admin_pw 관리자 패스워드
+	 * */
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public String loginRun(String admin_id, String admin_pw, HttpSession session)throws Exception{
 		System.out.println("AdminController, loginRun, admin_id:" + admin_id);
@@ -222,7 +227,7 @@ public class AdminController implements Codes {
 		return "admin/editMember";
 	}
 	
-	/* 일반 회원 리스트*/
+	/* 일반 회원 리스트 */
 	@RequestMapping(value="/getMemberList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<UserVo> getMemberList() throws Exception{
@@ -231,7 +236,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/* 배달원 리스트*/
+	/* 배달원 리스트 */
 	@RequestMapping(value="/getDeliverList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<DeliverVo> getDeliverList() throws Exception{
@@ -248,8 +253,10 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/* 계정상태 수정*/
-	//일반
+	/* 일반계정상태 수정 
+	 * user_no 유저번호
+	 * user_state 계정상태
+	 * */
 	@RequestMapping(value="/userStateUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public String userStateUpdate(int user_no, String user_state)throws Exception {
@@ -260,7 +267,10 @@ public class AdminController implements Codes {
 		return updateResult;
 	}
 	
-	//라이더 & 가입 대기 중 라이더
+	/* 배달원 계정상태 수정 
+	 * dlvr_no 배달원 번호
+	 * dlvr_state 배달원 계정 상태
+	 * */
 	@RequestMapping(value="/deliverStateUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public String deliverStateUpdate(int dlvr_no, String dlvr_state)throws Exception {
@@ -271,9 +281,6 @@ public class AdminController implements Codes {
 		return updateResult;
 	}
 	
-	/* 일반 회원 계정상태 수정 끝*/
-	
-	
 	/* 주문 목록 폼*/
 	@RequestMapping(value="/orderList")
 	public String orderList()throws Exception {
@@ -281,7 +288,7 @@ public class AdminController implements Codes {
 		return "admin/adminOrderList";
 	}
 	
-	/*대기중인 주문 목록*/
+	/* 대기중인 주문 목록 */
 	@RequestMapping(value="/getWaitingOrderList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<OrderVo> getWaitingOrderList()throws Exception {
@@ -290,7 +297,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/*접수된 주문 목록*/
+	/* 접수된 주문 목록 */
 	@RequestMapping(value="/getAcceptOrderList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<OrderVo> getAcceptOrderList() throws Exception{
@@ -299,7 +306,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/*완료된 주문목록*/
+	/* 완료된 주문목록 */
 	@RequestMapping(value="/getFinishOrderList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<OrderVo> getFinishOrderList() throws Exception{
@@ -308,7 +315,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/*주문자 취소 목록*/
+	/* 주문자 취소 목록 */
 	@RequestMapping(value="/getCancelOrderList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<OrderVo> getCancelOrderList() throws Exception{
@@ -317,7 +324,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/*배달원 취소 목록*/
+	/* 배달원 취소 목록 */
 	@RequestMapping(value="getCancelOrderListByDeliver", method = RequestMethod.POST)
 	@ResponseBody
 	public List<OrderVo> getCancelOrderListByDeliver() throws Exception{
@@ -326,7 +333,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/* 배달현황 수정*/
+	/* 배달현황 수정 */
 	@RequestMapping(value="updateOrderState", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateOrderState(int order_no, String order_state) throws Exception{
@@ -336,13 +343,13 @@ public class AdminController implements Codes {
 		return "success";
 	}
 	
-	/*게시판 수정 폼*/
+	/* 게시판 수정 폼 */
 	@RequestMapping(value="/editTimeline")
 	public String editTimeline() {
 		return "admin/adminEditTimeline";
 	}
 	
-	/*일반글 목록*/
+	/* 일반글 목록 */
 	@RequestMapping(value="/getPostList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TimelineVo> getPostList() throws Exception{
@@ -351,7 +358,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/*리뷰 목록*/
+	/* 리뷰 목록 */
 	@RequestMapping(value="/getReviewList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TimelineVo> getReviewList() throws Exception{
@@ -360,7 +367,7 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/*공지 목록*/
+	/* 공지 목록 */
 	@RequestMapping(value="/getNoticeList", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TimelineVo> getNoticeList() throws Exception{
@@ -369,7 +376,9 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/* 게시글 삭제*/
+	/* 게시글 삭제 
+	 * time_no 글 번호
+	 * */
 	@RequestMapping(value="/deleteArticle", method=RequestMethod.POST)
 	@ResponseBody
 	public String deleteArticle(int time_no) throws Exception{
@@ -411,7 +420,10 @@ public class AdminController implements Codes {
 		return list;
 	}
 	
-	/* 신고상태 변경*/
+	/* 신고상태 변경
+	 * report_no 신고 번호
+	 * report_state 신고 상태
+	 * */
 	@RequestMapping(value="/updateReportState", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateReportState(int report_no, String report_state) throws Exception{

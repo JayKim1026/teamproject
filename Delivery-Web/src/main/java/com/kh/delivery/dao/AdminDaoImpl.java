@@ -16,7 +16,6 @@ import com.kh.delivery.domain.ReportVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 
-
 @Repository
 public class AdminDaoImpl implements AdminDao {
 	
@@ -25,7 +24,10 @@ public class AdminDaoImpl implements AdminDao {
 	@Inject
 	SqlSession sqlSession;
 	
-	/* Login */
+	/* Login 
+	 * admin_id 관리자 아이디
+	 * admin_pw 관리자 패스워드
+	 * */
 	@Override
 	public AdminVo login(String admin_id, String admin_pw) {
 		Map<String, Object> map = new HashMap<>();
