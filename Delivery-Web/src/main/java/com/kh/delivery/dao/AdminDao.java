@@ -8,7 +8,6 @@ import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.ReportVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
-
 public interface AdminDao {
 	
 	/* 신규 가입자 신규 기준은 하루*/

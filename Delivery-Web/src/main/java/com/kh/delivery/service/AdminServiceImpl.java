@@ -22,9 +22,12 @@ public class AdminServiceImpl implements AdminService {
 	@Inject
 	private AdminDao adminDao;
 	
-	/* Login */
+	/* Login 
+	 * admin_id 관리자 아이디
+	 * admin_pw 관리자 비밀번호
+	 * */
 	@Override
-	public AdminVo login(String admin_id, String admin_pw) {
+	public AdminVo login(String admin_id, String admin_pw) throws Exception{
 		AdminVo adminVo = adminDao.login(admin_id, admin_pw);
 		return adminVo;
 	}

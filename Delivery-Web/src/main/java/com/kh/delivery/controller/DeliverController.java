@@ -31,27 +31,41 @@ import com.kh.delivery.util.FileUploadUtil;
 public class DeliverController implements Codes {
 
 	@Inject
-	DeliverService deliverService;
+	private DeliverService deliverService;
 	
 	@Inject
-	OrderService orderServiece;
+	private OrderService orderServiece;
 
-	// 웹
-	// 배달원 회원가입 run
+	/* 웹 
+	 * 배달원 회원가입 run
+	 * */
 	@RequestMapping(value = "/dlvr_RegisterRun", method = RequestMethod.POST)
 	public String dlvr_RegisterRun(DeliverVo deliverVo, MultipartFile f_dlvr_img, MultipartFile f_dlvr_idcard,
 		   String str_dlvr_birth, RedirectAttributes rttr) throws Exception {
 		
+		/* 생일 표기 */
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date dlvr_birth = new Date(df.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
-
+		
+		/* 업로드 파일 이름
+		 * org_dlvr_img 배달원 프로필 사진 파일이름
+		 * org_dlvr_idcard 배달원 신분증 사진 파일이름
+		 * */
 		String org_dlvr_img = f_dlvr_img.getOriginalFilename();
 		String org_dlvr_idcard = f_dlvr_idcard.getOriginalFilename();
-
+		
+		/* 업로드된 파일 이미지 파일인지 확인
+		 * isImage_img 프로필 사진 이미지 파일인지 확인
+		 * isImage_idcard 신분증 파일 이미지 파일인지 확인
+		 * */
 		boolean isImage_img = FileUploadUtil.isImage(org_dlvr_img);
 		boolean isImage_idcard = FileUploadUtil.isImage(org_dlvr_idcard);
 
+		/* 업로드된 파일 이미지 파일인지 확인
+		 * isImage_img 프로필 사진 이미지 파일인지 확인
+		 * isImage_idcard 신분증 파일 이미지 파일인지 확인
+		 * */
 		if (!isImage_img || !isImage_idcard) {
 			rttr.addFlashAttribute("isImage_msg", "notImage");
 			return "redirect:/account/dlvr_RegisterForm";

@@ -35,38 +35,50 @@ public class CommentController implements Codes {
 	@Inject
 	private CommentService commentService;
 	
+	/* 댓글 입력 
+	 * commentVo
+	 * c_content 댓글 내용
+	 * writer_no 작성자 회원번호
+	 * */
 	@RequestMapping(value="/insertComment", method = RequestMethod.POST)
 	public String insertComment(CommentVo commentVo)throws Exception{
-		System.out.println("CommentController, insertComment, commentVo:" + commentVo);
 		String result = commentService.insertComment(commentVo);
 		return result;
 	}
 	
+	/* 댓글 목록
+	 * time_no 글번호
+	 * 해당 글번호에 대한 댓글 목록만 불러옴.
+	 * */
 	@RequestMapping(value="/getCommentList/{time_no}", method = RequestMethod.POST)
 	public List<CommentVo> getCommentList(@PathVariable("time_no")int time_no, Model model)throws Exception{
 		String image_url = BUCKET_URL;
-		System.out.println("CommentController, getCommentList, time_no:" + time_no);
 		List<CommentVo> list = commentService.getCommentList(time_no);
-		System.out.println("CommentController, getCommentList, list:" + list);
 		model.addAttribute("image_url", image_url);
 		return list;
 	}
 	
+	/* 댓글 수정 
+	 * c_content 수정될 내용
+	 * c_no 수정할 댓글 번호
+	 * */
 	@RequestMapping(value="/updateComment", method=RequestMethod.POST)
 	public String updateComment(CommentVo commentVo) throws Exception{
-		System.out.println("updateComment..");
 		System.out.println("CommentController, updateComment, commentVo:" + commentVo);
 		String result = commentService.updateComment(commentVo);
 		return result;
 	}
 	
+	/* 댓글 삭제
+	 * c_no 삭제할 댓글 번호
+	 * */
 	@RequestMapping(value="/deleteComment/{c_no}", method=RequestMethod.POST)
 	public String deleteComment(@PathVariable("c_no") int c_no)throws Exception{
-		System.out.println("CommentController, deleteComment, c_no:" + c_no);
 		String result = commentService.deleteComment(c_no);
 		return result;
 	}
 	
+	/* 댓글 작성 후 현재 출력된 댓글 이후 작성된 댓글 조회 */
 	@RequestMapping(value="/getCurrentComment", method=RequestMethod.POST)
 	public List<CommentVo> getCurrentComment(CommentVo commentVo) throws Exception {
 		System.out.println("CommentController, getCurrentComment, commentVo:" + commentVo);
