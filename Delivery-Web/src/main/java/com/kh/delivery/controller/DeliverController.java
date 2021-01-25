@@ -22,6 +22,7 @@ import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.TimelineVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.DeliverService;
+import com.kh.delivery.service.OrderService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
 
@@ -31,6 +32,9 @@ public class DeliverController implements Codes {
 
 	@Inject
 	DeliverService deliverService;
+	
+	@Inject
+	OrderService orderServiece;
 
 	// 웹
 	// 배달원 회원가입 run
@@ -237,7 +241,7 @@ public class DeliverController implements Codes {
 		DeliverVo deliverVo = (DeliverVo)session.getAttribute("deliverVo");
 		int dlvr_no = deliverVo.getDlvr_no();
 		System.out.println("dlvr_no : " + dlvr_no);
-		List<OrderVo> deliveryList = deliverService.getDeliveryList(dlvr_no);
+		List<OrderVo> deliveryList = orderServiece.getDeliveryList(dlvr_no);
 		System.out.println("controller deliveryList : " + deliveryList);
 		model.addAttribute("deliveryList", deliveryList);
 		return "deliver/deliveryList";

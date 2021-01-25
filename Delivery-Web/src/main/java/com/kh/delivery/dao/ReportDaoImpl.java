@@ -25,24 +25,83 @@ public class ReportDaoImpl implements ReportDao {
 		return "report_success";
 	}
 
-	@Override
-	public List<ReportVo> getReportList(String report_type) throws Exception {
-		Map<String, String> map = new HashMap<>();
-		map.put("report_type", report_type);
-		List<ReportVo> reportList = sqlSession.selectList(NAMESPACE + "getReportList", map);
-		return reportList;
-	}
 
+	
+	/*----- 신고 관련 카운트 끝 -----*/
+	/*신규 신고대기*/
 	@Override
-	public String approveReport(ReportVo reportVo) throws Exception {
-		sqlSession.update(NAMESPACE + "approveReport", reportVo);
-		return "approveReport_success";
+	public int getNewRequestedReportCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewRequestedReportCount");
+		return count;
 	}
-
+	
+	/*신규 일반글 신고*/
 	@Override
-	public String revokeReport(ReportVo reportVo) throws Exception {
-		sqlSession.update(NAMESPACE + "revokeReport", reportVo);
-		return "revokeReport_success";
+	public int getNewPostReportCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewPostReportCount");
+		return count;
 	}
-
+	
+	/*신규 댓글 신고*/
+	@Override
+	public int getNewCommentReportCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getNewCommentReportCount");
+		return count;
+	}
+	
+	/* 전체 게시물 신고  */
+	@Override
+	public int getTotalPostReportCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getTotalPostReportCount");
+		return count;
+	}
+	
+	/* 전체 댓글 신고*/
+	@Override
+	public int getTotalCommentReportCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getTotalCommentReportCount");
+		return count;
+	}
+	
+	/* 완료된 신고 */
+	@Override
+	public int getFinishedReportCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getFinishedReportCount");
+		return count;
+	}
+	/*----- 신고 관련 카운트 끝 -----*/
+	
+	/* 계정 상태 수정  끝*/
+	
+	
+	
+	/*신고대기 목록*/
+	@Override
+	public List<ReportVo> getReportList() {
+		List<ReportVo> list = sqlSession.selectList(NAMESPACE + "getReportList");
+		return list;
+	}
+	/* 신고접수 목록*/
+	@Override
+	public List<ReportVo> getAcceptReportList() {
+		List<ReportVo> list = sqlSession.selectList(NAMESPACE + "getAcceptReportList");
+		return list;
+	}
+	
+	/* 신고취소 목록*/
+	@Override
+	public List<ReportVo> getCancelReportList() {
+		List<ReportVo> list = sqlSession.selectList(NAMESPACE + "getCancelReportList");
+		return list;
+	}
+	
+	/* 신고상태 변경*/
+	@Override
+	public void updateReportState(int report_no, String report_state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("report_no", report_no);
+		map.put("report_state", report_state);
+		sqlSession.selectList(NAMESPACE + "updateReportState", map);
+		
+	}
 }

@@ -74,5 +74,65 @@ public class TimelineServiceImpl implements TimelineService, Codes {
 		List<TimelineVo> timelineList = timelineDao.getCurrentTimeline(account_no, time_no);
 		return timelineList;
 	}
+	
+
+	
+	/*----- 게시글 관련 카운트 -----*/
+	/*신규 일반글*/
+	@Override
+	public int getNewPostCount() {
+		int count = timelineDao.getNewPostCount();
+		return count;
+	}
+	
+	/*신규 리뷰*/
+	@Override
+	public int getNewReviewCount() {
+		int count = timelineDao.getNewReviewCount();
+		return count;
+	}
+	
+	/*신규 공지*/
+	@Override
+	public int getNewNoticeCount() {
+		int count = timelineDao.getNewNoticeCount();
+		return count;
+	}
+	
+	/*전체 일반글*/
+	@Override
+	public int getTotalPostCount() {
+		int count = timelineDao.getTotalPostCount();
+		return count;
+	}
+	
+	/*전체 리뷰*/
+	@Override
+	public int getTotalReviewCount() {
+		int count = timelineDao.getTotalReviewCount();
+		return count;
+	}
+	/*----- 게시글 관련 카운트 끝 -----*/
+	
+	/*일반글 목록*/
+	@Override
+	public List<TimelineVo> getPostList() {
+		List<TimelineVo> list = timelineDao.getPostList();
+		return list;
+	}
+	
+	/*리뷰 목록*/
+	@Override
+	public List<TimelineVo> getReviewList() {
+		List<TimelineVo> list = timelineDao.getReviewList();
+		return list;
+	}
+	
+	/*공지 목록*/
+	@Override
+	public List<TimelineVo> getNoticeList() {
+		List<TimelineVo> list = timelineDao.getNoticeList();
+		return list;
+	}
 
 }

@@ -33,30 +33,5 @@ public class ReportController {
 		String result = reportService.report(reportVo);
 		return result;
 	}
-
-	
-	// 관리자
-	// 신고 타입으로 검색 가능
-	@RequestMapping(value="/getReportList", method=RequestMethod.POST)
-	public List<ReportVo> getReportList(String report_type) throws Exception {
-		List<ReportVo> reportList = reportService.getReportList(report_type);
-		return reportList;
-	}
-	
-	// reportno, adminno 로 신고 승인
-	@RequestMapping(value="/approveReport", method=RequestMethod.POST)
-	public String approveReport(ReportVo reportVo) throws Exception {
-		System.out.println("reportController, approveReport / " + reportVo);
-		String result = reportService.approveReport(reportVo);
-		System.out.println(result);
-		return result;
-	}
-	
-	// reportno, adminno 로 신고 취하
-	@RequestMapping(value="/revokeReport", method=RequestMethod.POST)
-	public String revokeReport(ReportVo reportVo) throws Exception {
-		String result = reportService.revokeReport(reportVo);
-		return result;
-	}
 	
 }

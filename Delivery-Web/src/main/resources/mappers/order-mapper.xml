@@ -3,76 +3,267 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.order">
-	
+	<!-- 배달 테이블 -->
+
+	<!-- 주문대기 중인 배달 리스트 조회 -->
 	<select id="getOrderList" resultType="OrderVo">
-		select * 
+		select *
 		from (
-		    select o.*, u.user_name 
-		    from tbl_order o inner join tbl_user u 
-		    on o.user_no = u.user_no)
-		where (order_lat between #{order_lat} - #{range} * 0.013 and #{order_lat} + #{range} * 0.013)
-		    and (order_lng between #{order_lng} - #{range} * 0.013 and #{order_lng} + #{range} * 0.013)
-		    and order_state = '3-001'
+		select o.*,
+		u.user_name
+		from tbl_order o inner join tbl_user u
+		on o.user_no =
+		u.user_no)
+		where (order_lat between #{order_lat} - 0.013
+		and
+		#{order_lat} + 0.013)
+		and (order_lng between #{order_lng} - 0.013 and
+		#{order_lng} + 0.013)
+		and order_state = '3-001'
 		order by order_no desc
 	</select>
-	
+
+	<!-- 주문 입력 -->
 	<insert id="insertOrder">
-		insert into tbl_order(order_no, order_ca, order_req, order_lat, order_lng, user_no)
-		values(seq_order_no.nextval, #{order_ca}, #{order_req}, #{order_lat}, #{order_lng}, #{user_no})
+		insert into tbl_order(order_no, order_ca, order_req,
+		order_lat, order_lng, user_no)
+		values(seq_order_no.nextval,
+		#{order_ca}, #{order_req}, #{order_lat}, #{order_lng}, #{user_no})
 	</insert>
 
-	<update id="pickOrder">
+	<!-- 주문 취소 -->
+	<update id="orderCancel">
 		update tbl_order set
-			dlvr_no = #{dlvr_no}, 
-			order_state = '3-002'
-		where order_no = #{order_no}
+		order_state='3-004'
+		where order_no
+		= #{order_no}
 	</update>
 
+	<!-- 일반회원 주문내역 조회 -->
+	<select id="getUserOrderList" resultType="OrderVo">
+		select o.*, c.code_detail,
+		c.code_no, d.dlvr_name
+		from tbl_order o
+		inner join tbl_code c
+		on
+		o.order_state = c.code_no
+		left outer join tbl_deliver d
+		on o.dlvr_no =
+		d.dlvr_no
+		where o.user_no =
+		#{user_no}
+		order by o.order_date desc
+	</select>
+
+	<!-- 현재 배달 중인 주문 조회 -->
 	<select id="getPickedOrder" resultType="OrderVo">
 		select o.*, u.user_name
 		from tbl_order o
 		inner join tbl_user u
 		on o.user_no = u.user_no
-		where dlvr_no = #{dlvr_no}
-			and order_state = '3-002'
+		where
+		dlvr_no = #{dlvr_no}
+		and order_state = '3-002'
 	</select>
 
+	<!-- 주문 접수 -->
+	<update id="pickOrder">
+		update tbl_order set
+		dlvr_no = #{dlvr_no},
+		order_state
+		= '3-002'
+		where order_no = #{order_no}
+	</update>
+
+	<!-- 배달 취소 -->
 	<update id="cancelDelivery">
 		update tbl_order set
-			dlvr_no = null, 
-			order_state = '3-001'
-		where order_no = #{order_no}
-			and dlvr_no = #{dlvr_no}
-	</update>
-	
-	<update id="deliveryCompleted">
-		update tbl_order set
-			order_state = '3-003'
-		where order_no = #{order_no}
-			and dlvr_no = #{dlvr_no}
+		order_state = '3-005'
+		where
+		order_no = #{order_no}
+		and dlvr_no = #{dlvr_no}
 	</update>
 
-	<select id="getCompletedOrder" resultType="OrderVo">
-	 	select o.*,c.code_detail ,t.time_star 
+	<!-- 배달 완료 -->
+	<update id="deliveryCompleted">
+		update tbl_order set
+		order_state = '3-003'
+		where
+		order_no = #{order_no}
+		and dlvr_no = #{dlvr_no}
+	</update>
+
+	<!-- 배달원 배달내역 조회 -->
+	<select id="getDeliveryList" resultType="OrderVo">
+		select o.*,c.code_detail
+		,t.time_star
 		from tbl_order o
-			left outer join tbl_timeline t
-				on o.order_no = t.order_no
-			inner join tbl_code c 
-				on c.code_no = o.order_state
+		left outer join tbl_timeline t
+		on
+		o.order_no = t.order_no
+		inner join tbl_code c
+		on c.code_no =
+		o.order_state
 		where o.dlvr_no = #{dlvr_no}
-		order by o.order_no desc
+		order by
+		o.order_no desc
 	</select>
-	
+
 	<select id="getMyOrder" resultType="OrderVo">
 		select * from tbl_order
-		where user_no = #{user_no}
-			and order_state = '3-002'
+		where
+		user_no = #{user_no}
+		and order_state = '3-002'
 	</select>
-	
-	<update id="orderCancel">
-		update tbl_order set 
-		order_state='3-004'
-		where order_no =  #{order_no}
+
+	<!-- 관리자 -->
+	<!-- 주문관련 카운트 -->
+	<select id="getRequestedOrderCount" resultType="int">
+		select count(*)
+		from tbl_order
+		where order_state = '3-001'
+		and order_date &gt;= (
+		select
+		to_char(sysdate -1, 'YYYY-MM-DD')
+		from dual)
+		and order_date &lt;=
+		sysdate
+	</select>
+
+	<select id="getOrderInProgressCount" resultType="int">
+		select count(*)
+		from tbl_order
+		where order_state = '3-002'
+		and order_date &gt;= (
+		select
+		to_char(sysdate -1, 'YYYY-MM-DD')
+		from dual)
+		and order_date &lt;=
+		sysdate
+	</select>
+
+	<select id="getFinishedOrderCount" resultType="int">
+		select count(*)
+		from tbl_order
+		where order_state = '3-003'
+		and order_date &gt;= (
+		select
+		to_char(sysdate -1, 'YYYY-MM-DD')
+		from dual)
+		and order_date &lt;=
+		sysdate
+	</select>
+
+	<select id="getTotalFinishedOrderCount" resultType="int">
+		select
+		count(*) from tbl_order
+		where order_state = '3-003'
+	</select>
+
+	<select id="getTotalCanceledOrderCount" resultType="int">
+		select
+		count(*) from tbl_order
+		where order_state = '3-004'
+	</select>
+
+	<select id="getTotalCanceledDeliverCount" resultType="int">
+		select
+		count(*) from tbl_order
+		where order_state = '3-005'
+	</select>
+	<!-- 주문관련 카운트 끝 -->
+
+	<!-- 주문(현황:대기중, 접수, 사용자취소, 배달원취소, 완료)목록 + 현황수정 -->
+	<!-- 대기중인 주문 목록 -->
+	<select id="getWaitingOrderList" resultType="OrderVo">
+		select o.*,
+		u.user_name from tbl_order o
+		inner join tbl_user u
+		on o.user_no =
+		u.user_no
+		inner join tbl_code c
+		on o.order_state = c.code_no
+		where
+		o.order_state =
+		'3-001'
+		order by o.order_date desc
+	</select>
+
+	<!-- 접수된 주문 목록 -->
+	<select id="getAcceptOrderList" resultType="OrderVo">
+		select o.*,
+		u.user_name, d.dlvr_name
+		from tbl_order o
+		inner join tbl_user u
+		on
+		o.user_no = u.user_no
+		left outer join tbl_deliver d
+		on o.dlvr_no =
+		d.dlvr_no
+		inner join tbl_code c
+		on o.order_state = c.code_no
+		where
+		o.order_state = '3-002'
+		order by o.order_date desc
+	</select>
+
+	<!-- 완료된 주문 목록 -->
+	<select id="getFinishOrderList" resultType="OrderVo">
+		select o.*,
+		u.user_name, d.dlvr_name
+		from tbl_order o
+		inner join tbl_user u
+		on
+		o.user_no = u.user_no
+		left outer join tbl_deliver d
+		on o.dlvr_no =
+		d.dlvr_no
+		inner join tbl_code c
+		on o.order_state = c.code_no
+		where
+		o.order_state = '3-003'
+		order by o.order_date desc
+	</select>
+
+	<!-- 주문자 취소 목록 -->
+	<select id="getCancelOrderList" resultType="OrderVo">
+		select o.*,
+		u.user_name from tbl_order o
+		inner join tbl_user u
+		on o.user_no =
+		u.user_no
+		inner join tbl_code c
+		on o.order_state = c.code_no
+		where
+		o.order_state =
+		'3-004'
+		order by o.order_date desc
+	</select>
+
+	<!-- 배달원 취소 목록 -->
+	<select id="getCancelOrderListByDeliver" resultType="OrderVo">
+		select o.*,
+		u.user_name, d.dlvr_name
+		from tbl_order o
+		inner join tbl_user u
+		on
+		o.user_no = u.user_no
+		left outer join tbl_deliver d
+		on o.dlvr_no =
+		d.dlvr_no
+		inner join tbl_code c
+		on o.order_state = c.code_no
+		where
+		o.order_state = '3-005'
+		order by o.order_date desc
+	</select>
+
+	<!-- 배달현황 수정 -->
+	<update id="updateOrderState">
+		update tbl_order set
+		order_state = #{order_state}
+		where order_no = #{order_no}
 	</update>
+	<!-- 주문(현황:대기중, 접수, 사용자취소, 배달원취소, 완료)목록 + 현황수정 끝 -->
 
 </mapper>

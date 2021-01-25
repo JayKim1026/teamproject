@@ -3,14 +3,63 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.report">
+	<!-- 신고 테이블 -->
 
+	<!-- 신고하기 -->
 	<insert id="report">
-		insert into tbl_report(report_no, plt_no, def_no, report_code, report_type)
-		values(seq_report_no.nextval, #{plt_no}, #{def_no}, #{report_code}, #{report_type})
+		insert into tbl_report(report_no, plt_no, def_no,
+		report_code, report_type)
+		values(seq_report_no.nextval, #{plt_no},
+		#{def_no}, #{report_code}, #{report_type})
 	</insert>
 	
+<!-- 관리자 -->
+	<!-- 신고 관련 카운트 -->
+	<select id="getNewRequestedReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_state = '6-001'
+		and report_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and report_date &lt;= sysdate
+	</select>
+	
+	<select id="getNewPostReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-012'
+		and report_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and report_date &lt;= sysdate
+	</select>
+	
+	<select id="getNewCommentReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-013'
+		and report_date &gt;= (
+		select to_char(sysdate -1, 'YYYY-MM-DD')
+	    from dual) 
+		and report_date &lt;= sysdate
+	</select>
+	
+	<select id="getTotalPostReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-012'
+	</select>
+	
+	<select id="getTotalCommentReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_type = '6-013'
+	</select>
+	
+	<select id="getFinishedReportCount" resultType="int">
+		select count(*) from tbl_report
+		where report_state = '6-002'	
+	</select>
+	<!-- 신고 관련 카운트 끝-->
+	<!-- 신고 목록 + 처리 -->
 	<select id="getReportList" resultType="ReportVo">
-		select r.*, p.plt_name, d.def_name, c.code_detail report_detail, c1.code_detail state_detail, c2.code_detail type_detail, a.admin_name 
+		select r.*, p.plt_name, d.def_name 
 		from tbl_report r
 		inner join (
 		    select user_no plt_no, user_name plt_name from tbl_user
@@ -22,32 +71,44 @@
 		    union
 		    select dlvr_no, dlvr_name from tbl_deliver) d
 		on r.def_no = d.def_no
-		inner join tbl_code c
-		on r.report_code = c.code_no
-		inner join tbl_code c1
-		on r.report_state = c1.code_no
-		inner join tbl_code c2
-		on r.report_type = c2.code_no
-		left outer join tbl_admin a
-		on r.admin_no = a.admin_no
 		where report_state = '6-001'
-		<if test='report_type != ""'>
-			and report_type = #{report_type}
-		</if>
 	</select>
 	
-	<update id="approveReport">
+	<select id="getAcceptReportList" resultType="ReportVo">
+		select r.*, p.plt_name, d.def_name 
+		from tbl_report r
+		inner join (
+		    select user_no plt_no, user_name plt_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) p
+		on r.plt_no = p.plt_no
+		inner join (
+		    select user_no def_no, user_name def_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) d
+		on r.def_no = d.def_no
+		where report_state = '6-002'
+	</select>
+	
+	<select id="getCancelReportList" resultType="ReportVo">
+		select r.*, p.plt_name, d.def_name 
+		from tbl_report r
+		inner join (
+		    select user_no plt_no, user_name plt_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) p
+		on r.plt_no = p.plt_no
+		inner join (
+		    select user_no def_no, user_name def_name from tbl_user
+		    union
+		    select dlvr_no, dlvr_name from tbl_deliver) d
+		on r.def_no = d.def_no
+		where report_state = '6-003'
+	</select>
+	
+	<update id="updateReportState">
 		update tbl_report set
-			report_state = '6-002', 
-			admin_no = #{admin_no}
+		report_state = #{report_state}
 		where report_no = #{report_no}
 	</update>
-	
-	<update id="revokeReport">
-		update tbl_report set
-			report_state = '6-003', 
-			admin_no = #{admin_no}
-		where report_no = #{report_no}
-	</update>
-	
 </mapper>

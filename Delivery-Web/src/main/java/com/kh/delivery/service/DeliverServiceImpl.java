@@ -80,19 +80,6 @@ public class DeliverServiceImpl implements DeliverService {
 		return result;
 	}
 	
-	// 배달원 배달내역 조회
-	@Override
-	public List<OrderVo> getDeliveryList(int dlvr_no) throws Exception {
-		List<OrderVo> deliveryList = deliverDao.getDeliveryList(dlvr_no);
-		return deliveryList;
-	}
-
-	
-	/*	//웹*/
-	
-	
-	
-	
 	/*	안드로이드*/
 	@Override
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
@@ -106,5 +93,50 @@ public class DeliverServiceImpl implements DeliverService {
 		return dlvrRank;
 	}
 
+
 	
+	/* 신규 가입대기 배달원 */
+	@Override
+	public int getWaitingDeliveryCount() {
+		int count = deliverDao.getWaitingDeliveryCount();
+		return count;
+	}
+
+	/* 신규 배달원 */
+	@Override
+	public int getNewDeliveryCount() {
+		int count = deliverDao.getNewDeliveryCount();
+		return count;
+	}
+
+	/* 전체 배달원 */
+	@Override
+	public int getTotalDeliveryCount() {
+		int count = deliverDao.getTotalDeliveryCount();
+		return count;
+	}
+	
+	/*----- 배달원원 리스트 -----*/
+	@Override
+	public List<DeliverVo> getDeliverList() {
+		List<DeliverVo> list = deliverDao.getDeliverList();
+		return list;
+	}
+	/*----- 배달원원 리스트 끝 -----*/
+	
+	/*----- 가입 대기 배달원원 리스트 -----*/
+	@Override
+	public List<DeliverVo> getWaitingDeliverList() {
+		List<DeliverVo> list = deliverDao.getWaitingDeliverList();
+		return list;
+	}
+	/*----- 가입 대기 배달원원 리스트 끝-----*/
+	
+	/*----- 계정상태 수정 -----*/
+	
+	@Override
+	public String deliverStateUpdate(int dlvr_no, String dlvr_state) {
+		String updateResult = deliverDao.deliverStateUpdate(dlvr_no, dlvr_state);
+		return updateResult;
+	}
 }
