@@ -10,7 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.kh.delivery.domain.DeliverVo;
 import com.kh.delivery.domain.UserVo;
 
-public class OtherInterceptor extends HandlerInterceptorAdapter {
+public class TimelineInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

@@ -39,8 +39,8 @@
 		class="com.kh.delivery.interceptor.DeliverInterceptor">
 	</beans:bean>
 	<beans:bean
-		id="otherInterceptor"
-		class="com.kh.delivery.interceptor.OtherInterceptor">
+		id="timelineInterceptor"
+		class="com.kh.delivery.interceptor.TimelineInterceptor">
 	</beans:bean>
 	
 	<!-- 인터셉터 -->
@@ -71,7 +71,7 @@
 			<mapping path="/timeline/**/*"/>
 			<exclude-mapping path="/timeline/getTimelineList"/>
 			<exclude-mapping path="/timeline/android/*"/>
-			<beans:ref bean="otherInterceptor"/>
+			<beans:ref bean="timelineInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
