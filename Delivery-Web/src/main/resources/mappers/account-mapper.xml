@@ -32,7 +32,7 @@
 			select a.acc_no, a.acc_id, a.acc_name, p.point_score acc_point, c.code_detail acc_state, rank() over(order by p.point_score desc) point_rank
 			from view_account a
 			inner join tbl_code c
-			on a.account_state = c.code_no
+			on a.acc_state = c.code_no
 			inner join (
 				select account_no, sum(point_score) point_score
 				from tbl_point

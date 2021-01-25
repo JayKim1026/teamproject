@@ -178,7 +178,6 @@ public class DeliverController implements Codes {
 		String dlvr_id = deliverVo.getDlvr_id();
 
 		String result = deliverService.pwCheck(dlvr_id, orgPw);
-		// System.out.println("controller 비밀번호 확인 result : " + result);
 		return result;
 	}
 
@@ -276,9 +275,7 @@ public class DeliverController implements Codes {
 	public String deliverOrderList(Model model, HttpSession session) throws Exception {
 		DeliverVo deliverVo = (DeliverVo)session.getAttribute("deliverVo");
 		int dlvr_no = deliverVo.getDlvr_no();
-		System.out.println("dlvr_no : " + dlvr_no);
 		List<OrderVo> deliveryList = orderServiece.getDeliveryList(dlvr_no);
-		System.out.println("controller deliveryList : " + deliveryList);
 		model.addAttribute("deliveryList", deliveryList);
 		return "deliver/deliveryList";
 	}
@@ -309,7 +306,6 @@ public class DeliverController implements Codes {
 	@ResponseBody
 	public List<DeliverVo> getDlvrRank() throws Exception {
 		List<DeliverVo> dlvrRank = deliverService.getDlvrRank();
-		System.out.println("dlvrRank = " + dlvrRank);
 		return dlvrRank;
 	}
 	
@@ -322,7 +318,6 @@ public class DeliverController implements Codes {
 	@ResponseBody
 	public DeliverVo login(String dlvr_id, String dlvr_pw) throws Exception {
 		DeliverVo deliverVo = deliverService.login(dlvr_id, dlvr_pw);
-		System.out.println("android/login = " + deliverVo);
 		return deliverVo;
 	}
 
@@ -333,7 +328,6 @@ public class DeliverController implements Codes {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dlvr_birth = new Date(sdf.parse(str_dlvr_birth).getTime());
 		deliverVo.setDlvr_birth(dlvr_birth);
-		System.out.println(deliverVo);
 		String result = deliverService.registDeliver(deliverVo);
 		return result;
 	}
@@ -342,9 +336,7 @@ public class DeliverController implements Codes {
 	@RequestMapping(value = "/android/modifyDeliver", method = RequestMethod.POST)
 	@ResponseBody
 	public String modifyDeliver(DeliverVo deliverVo) throws Exception {
-		System.out.println("mod, deliverVo = " + deliverVo.toString());
 		String result = deliverService.modifyDeliver(deliverVo);
-		System.out.println("mod, resutl = " + result);
 		return result;
 	}
 }

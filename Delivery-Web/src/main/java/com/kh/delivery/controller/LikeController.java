@@ -60,7 +60,6 @@ public class LikeController implements Codes {
 	@RequestMapping(value="/isLike", method=RequestMethod.POST)
 	public Boolean isLike(int time_no, int account_no) throws Exception {
 		Boolean result = likeService.isLike(time_no, account_no);
-		System.out.println("isLike = " + result);
 		return result;
 	}
 	

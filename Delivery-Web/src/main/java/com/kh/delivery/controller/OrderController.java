@@ -38,25 +38,16 @@ public class OrderController {
 	// 주문하기
 	@RequestMapping(value="/insertOrder", method=RequestMethod.POST)
 	public String insertOrder(OrderVo orderVo, RedirectAttributes rttr) throws Exception {
-		System.out.println("orderVo = " + orderVo);
 		String result = orderService.insertOrder(orderVo);
 		rttr.addFlashAttribute("orderResult", result);
 		return "redirect:/user/orderList";
-	}
-	
-	@RequestMapping(value="/newInsertOrder", method=RequestMethod.POST)
-	public String newInsertOrder(OrderVo orderVo) throws Exception{
-		System.out.println("newInsertOrder, orderVo:" + orderVo);
-		
-		return null;
 	}
 	
 	// 주문취소(배달취소 아님)
 	@RequestMapping(value="/cancelOrder", method=RequestMethod.POST)
 	@ResponseBody
 	public String cancelOrder(int order_no) throws Exception {
-		System.out.println("order_no : " +order_no);
-		 String result = orderService.orderCancel(order_no);
+		String result = orderService.orderCancel(order_no);
 		return result;
 	}
 	
@@ -89,7 +80,6 @@ public class OrderController {
 	@RequestMapping(value="/android/cancelDelivery", method=RequestMethod.POST)
 	@ResponseBody
 	public String cancelDelivery(int order_no, int dlvr_no) throws Exception {
-		System.out.println(order_no + ", " + dlvr_no);
 		String result = orderService.cancelDelivery(order_no, dlvr_no);
 		return result;
 	}
