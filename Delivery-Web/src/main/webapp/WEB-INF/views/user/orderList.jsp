@@ -15,6 +15,11 @@ table {
 .content_table {
 	margin: auto;
 }
+#footer{
+	position	:	relative;
+	font-family : 'Nanum Pen Script', cursive;
+	font-size 	: 25px;
+}
 </style>
 </head>
 <body>

@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <%@ include file="../include/link.jsp" %>
 <link rel="stylesheet" href="/resources/css/timeline.css">
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
-<script
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d"></script>
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>timeLine.jsp</title>
 </head>
 <script type="text/javascript">
@@ -31,10 +25,8 @@ console.log("account_no : " + account_no);
 </script>
 <script src="/resources/js/timelineScript.js" charset="UTF-8"></script>
 <body>
-<%@ include file="../include/frm.jsp"%>
 <%@ include file="../include/timelineHeader.jsp" %>
-${likeList}
-	<!-------------------------- 글 입력  --------------------------> 
+<!------------------------------------- 글 입력 ------------------------------------->
 	<div class="container-fluid" style="background-color: #f0f2f5;">
 		<div class="row">
 			<div class="col-md-12">
@@ -114,9 +106,9 @@ ${likeList}
 			</div>
 		</div>
 	</div>
-	<!-------------------------- //글 입력  -------------------------->
+<!-------------------------------------// 글 입력  끝------------------------------------->
 	
-	<!-------------------------- 글 출력  -------------------------->
+<!------------------------------------- 글 출력 ------------------------------------->
 	<div class="container-fluid" style="background-color: #f0f2f5;">
 		<div class="row">
 			<div class="col-md-12">
@@ -125,7 +117,7 @@ ${likeList}
 					<div class="col-md-1"></div>
 					<div class="col-md-6" id="house">
 						
-						<!--------------------------// 글 출력  -------------------------->
+						
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-md-2"></div>
@@ -133,9 +125,9 @@ ${likeList}
 			</div>
 		</div>
 	</div>
+<!-------------------------------------// 글 출력  끝------------------------------------->
 
-
-	<!-----------------------------------------모달----------------------------------------->
+<!------------------------------------- 수정 모달 ------------------------------------->	
 <button data-toggle="modal" data-target="#squarespaceModal"class="btn btn-primary center-block" id="btnUpdateModal" style="display:none;">Click Me</button>
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<input type="hidden" name="time_no">
@@ -166,8 +158,9 @@ ${likeList}
 		</div>
 	</div>
 </div>
-<!-- ------------------------글 출력 클론----------------------------- -->
+<!------------------------------------- 수정 모달 끝 ------------------------------------->	
 
+<!------------------------------------- 글 출력 클론------------------------------------->	
 	<div id="forclone" style="display:none;">
 		<div class="d-flex justify-content-center">
 			<div class="card_output">
@@ -246,7 +239,7 @@ ${likeList}
 
 	<!--------------------------// 글 출력 클론  -------------------------->
 	
-	<!-- -----------------------댓글 클론 -->
+<!------------------------------------- 댓글 클론 ------------------------------------->	
 	<div id="commentClone" style="display: none">
 		<div class="row commentInfo" style="padding-top:10px;">
 			<img src="https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147_960_720.jpg"  class="commenter-image" alt="commenter_image">			
@@ -278,11 +271,9 @@ ${likeList}
 			</div>
 		</div>
 	</div>
-	<!-- -----------------------// 댓글 클론 -->
+<!------------------------------------- 댓글 클론 끝 ------------------------------------->	
 	
-	<!-- -----------------------신고 모달 -->
-
-
+<!------------------------------------- 신고 모달------------------------------------->	
 	<div class="timelineModal_report">
 		<div class="timelineModal_content">
 			<form action="/report/report" method="post">
@@ -301,8 +292,7 @@ ${likeList}
 			</form>
 		</div>
 	</div>
-	
-					
-	<%@include file="../include/footer.jsp" %>
+<!------------------------------------- 신고 모달 끝------------------------------------->		
+<%@include file="../include/footer.jsp" %>
 </body>
 </html>
