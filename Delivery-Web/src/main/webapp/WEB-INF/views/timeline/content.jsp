@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@include file="../include/link.jsp"%>
-<%@include file="../css/timeline.css"%>
+<link rel="stylesheet" href="/resources/css/timeline.css">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script

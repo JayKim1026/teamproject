@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>main.jsp</title>
 <%@include file="../include/link.jsp" %>
-<%@include file="../css/adminHeader.css" %>
+<link rel="stylesheet" href="/resources/css/adminHeader.css">
 </head>
 <body>
 <!-- Header -->

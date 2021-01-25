@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../css/registerForm.css"%>
+<link rel="stylesheet" href="/resources/css/registerForm.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script

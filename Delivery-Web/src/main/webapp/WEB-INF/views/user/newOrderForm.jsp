@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../css/newOrderFormHeader.css" %>
-<%@include file="../css/newOrderForm.css" %>
+<link rel="stylesheet" href="/resources/css/newOrderFormHeader.css">
+<link rel="stylesheet" href="/resources/css/newOrderForm.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d&libraries=services,clusterer,drawing"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55ba16f01b6380a3b436ed92926b126d"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

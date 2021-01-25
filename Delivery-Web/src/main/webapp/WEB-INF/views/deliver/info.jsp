@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@include file="../include/link.jsp"%>
-<%@include file="../css/newInfoCSS.css"%>
+<link rel="stylesheet" href="/resources/css/newInfoCSS.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 <style>
 .divChgPw {

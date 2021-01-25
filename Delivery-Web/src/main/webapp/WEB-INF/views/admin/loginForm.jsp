@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login Form Page</title>
 <%@ include file="../include/link.jsp" %>
-<%@ include file="../css/loginForm.css"%>
+<link rel="stylesheet" href="/resources/css/loginForm.css">
 </head>
 <%@include file="../include/header.jsp" %>
 <body>

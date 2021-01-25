@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../css/include.css"%>
+<link rel="stylesheet" href="/resources/css/include.css">
 <header>
 <div class="container-fluid" id="head_Container">
 	<div class="row">

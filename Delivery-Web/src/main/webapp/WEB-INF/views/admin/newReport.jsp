@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@include file="../include/link.jsp"%>
-<%@include file="../css/adminHeader.css"%>
+<link rel="stylesheet" href="/resources/css/adminHeader.css">
 <style>
 .project-tab {
     padding: 10%;
