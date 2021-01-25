@@ -5,151 +5,116 @@
 <mapper namespace="com.kh.delivery.user">
 	<!-- 사용자 테이블 -->
 
-	<!-- 사용자 -->
+	<!-- 웹 -->
 	<!-- 로그인 -->
 	<select id="login" resultType="UserVo">
 		select *
-		from tbl_user
-		where user_id
-		= #{user_id}
+		from tbl_user where user_id = #{user_id}
 		and user_pw = #{user_pw}
 	</select>
-
 	<!-- 사용자 회원가입 -->
 	<insert id="insertUser">
 		insert into tbl_user(
-		user_no, user_id, user_pw,
-		user_name,
-		user_phone, user_email, user_addr, user_birth, user_img
+			user_no, user_id, user_pw,
+			user_name,
+			user_phone, user_email, user_addr, user_birth, user_img
 		)
 		values(
-		seq_account_no.nextval, #{user_id}, #{user_pw}, #{user_name},
-		#{user_phone}, #{user_email}, #{user_addr}, #{user_birth}, #{user_img}
+			seq_account_no.nextval, #{user_id}, #{user_pw}, #{user_name},
+			#{user_phone}, #{user_email}, #{user_addr}, #{user_birth}, #{user_img}
 		)
 	</insert>
-
-	<!-- 사용자 회원탈퇴 -->
-	<update id="deleteUser">
-		update tbl_user set
-		user_state = '1-003'
-		where user_no
-		= #{user_no}
-	</update>
-
-	<!-- 사용자 정보 조회 -->
-	<select id="getUserInfo" resultType="UserVo">
-		select *
-		from tbl_user
-		where
-		user_no = #{user_no}
-	</select>
-
 	<!-- 사용자 기존 비밀번호 확인 -->
 	<select id="pwCheck" resultType="userVo">
 		select *
 		from tbl_user
-		where
-		user_id = #{user_id}
+		where user_id = #{user_id}
 		and user_pw = #{orgPw}
 	</select>
-
 	<!-- 사용자 이미지 변경 -->
 	<update id="imgChange">
 		update tbl_user set
 		user_img = #{chg_img}
-		where user_id
-		= #{user_id}
+		where user_id = #{user_id}
 	</update>
-
 	<!-- 사용자 비밀번호 변경 -->
 	<update id="pwChange">
 		update tbl_user set
 		user_pw = #{chgPw}
-		where user_id =
-		#{user_id}
+		where user_id = #{user_id}
 	</update>
-
 	<!-- 사용자 이메일 변경 -->
 	<update id="emailChange">
 		update tbl_user set
 		user_email = #{chgEmail}
-		where
-		user_id = #{user_id}
+		where user_id = #{user_id}
 	</update>
-
 	<!-- 사용자 전화번호 변경 -->
 	<update id="phoneChange">
 		update tbl_user set
 		user_phone = #{chgPhone}
-		where
-		user_id = #{user_id}
+		where user_id = #{user_id}
 	</update>
-
 	<!-- 사용자 주소 변경 -->
 	<update id="addrChange">
 		update tbl_user set
 		user_addr = #{chgAddr}
-		where
-		user_id = #{user_id}
+		where user_id = #{user_id}
 	</update>
-
 	<!-- 사용자 포인트 갱신 -->
 	<update id="updatePoint">
 		update tbl_user set
-		user_point = user_point +
-		#{point_score}
+		user_point = user_point + #{point_score}
 		where user_no = #{account_no}
 	</update>
-
 	<!-- 사용자 포인트 랭킹 조회 -->
 	<select id="getUserRank" resultType="UserVo">
 		select * from (
-		select u.*,
-		o.order_count, rank() over(order by order_count desc) user_rank
-		from
-		tbl_user u
-		inner join (
-		select user_no, count(*) order_count
-		from
-		tbl_order
-		where order_state = '3-003'
-		group by user_no) o
-		on u.user_no =
-		o.user_no)
+			select u.*, o.order_count, rank() over(order by order_count desc) user_rank
+			from tbl_user u
+			inner join (
+				select user_no, count(*) order_count
+				from tbl_order
+				where order_state = '3-003'
+				group by user_no) o
+			on u.user_no = o.user_no)
 		where user_rank &lt;= 3
 	</select>
-	<!-- 사용자 끝 -->
+	
+	<!-- 안드로이드 -->
+	<!-- 사용자 정보 조회 -->
+	<select id="getUserInfo" resultType="UserVo">
+		select *
+		from tbl_user
+		where user_no = #{user_no}
+	</select>
 
 	<!-- 관리자 -->
-	<!-- 사용자 새로운 인원 조회 -->
+	<!-- 새로 가입한 사용자 인원 조회 -->
 	<select id="getNewMemberCount" resultType="int">
-		select count(*) from
-		tbl_user
+		select count(*) 
+		from tbl_user
 		where user_date &gt;= (
-		select to_char(sysdate -1,
-		'YYYY-MM-DD')
-		from dual)
+			select to_char(sysdate -1,
+			'YYYY-MM-DD')
+			from dual)
 		and user_date &lt;= sysdate
 	</select>
-
 	<!-- 사용자 전체 인원 조회 -->
 	<select id="getTotalMemberCount" resultType="int">
-		select count(*) from
-		tbl_user
+		select count(*) 
+		from tbl_user
 	</select>
-
-	<!-- 사용자 리스트 -->
+	<!-- 사용자 리스트 조회 -->
 	<select id="getMemberList" resultType="UserVo">
-		select * from tbl_user
+		select * 
+		from tbl_user
 	</select>
-
-	<!-- 사용자 계정 상태 수정 -->
+	<!-- 사용자 계정 상태 변경 -->
 	<update id="userStateUpdate">
 		update tbl_user set
 		user_state = #{user_state}
-		where
-		user_no = #{user_no}
+		where user_no = #{user_no}
 	</update>
-	<!-- 관리자 끝 -->
-
+	
 </mapper>

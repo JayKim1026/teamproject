@@ -3,62 +3,62 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.delivery.account">
-
+	<!-- 아이디 중복 확인 -->
 	<select id="checkIdDupl" resultType="String">
-		select acc_id 
+		select acc_id
 		from view_account
 		where acc_id = #{acc_id}
 	</select>
-	
+	<!-- 아이디 찾기 -->
 	<select id="findAccountId" resultType="String">
-		select acc_id 
+		select acc_id
 		from view_account
 		where acc_name = #{acc_name}
 		and acc_email = #{acc_email}
 		and acc_phone = #{acc_phone}
 	</select>
-	
+	<!-- 비밀번호 찾기 -->
 	<select id="findAccountPw" resultType="String">
-		select acc_pw 
+		select acc_pw
 		from view_account
 		where acc_id = #{acc_id}
 		and acc_name = #{acc_name}
 		and acc_email = #{acc_email}
 		and acc_phone = #{acc_phone}
 	</select>
-	
+	<!-- 포인트 랭킹 조회 -->
+	<select id="getPointRank" resultType="AccountDto">
+		select * from (
+			select a.acc_no, a.acc_id, a.acc_name, p.point_score acc_point, c.code_detail acc_state, rank() over(order by p.point_score desc) point_rank
+			from view_account a
+			inner join tbl_code c
+			on a.account_state = c.code_no
+			inner join (
+				select account_no, sum(point_score) point_score
+				from tbl_point
+				where point_date > trunc(sysdate, 'MM')
+				group by account_no) p
+			on a.acc_no = p.account_no)
+		where point_rank &lt;= 3
+	</select>
+	<!-- 포인트 업데이트 -->
 	<update id="updatePoint">
 		declare
-			usercount number :=0;
-			dlvrcount number :=0;
+		usercount number :=0;
+		dlvrcount number :=0;
 		begin
 			select count(*) into usercount from tbl_user where user_no = #{account_no};
 			select count(*) into dlvrcount from tbl_deliver where dlvr_no = #{account_no};
-			if (usercount > 0)
-			then update tbl_user 
-			set user_point = user_point + #{point_score} 
-			where user_no = #{account_no};
-			elsif (dlvrcount > 0)
-			then update tbl_deliver 
-			set dlvr_point = dlvr_point + #{point_score} 
-			where dlvr_no = #{account_no};
+			if (usercount > 0) then 
+				update tbl_user set
+				user_point = user_point + #{point_score}
+				where user_no = #{account_no};
+			elsif (dlvrcount > 0) then 
+				update tbl_deliver set 
+				dlvr_point = dlvr_point + #{point_score}
+				where dlvr_no = #{account_no};
 			end if;
 		end;
 	</update>
-	
-	<select id="getPointRank" resultType="AccountDto">
-		select * from (
-		    select a.acc_no, a.acc_id, a.acc_name, p.point_score acc_point, c.code_detail acc_state, rank() over(order by p.point_score desc) point_rank 
-			from view_account a
-		    inner join tbl_code c
-		    on a.account_state = c.code_no
-		    inner join (
-		        select account_no, sum(point_score) point_score 
-		        from tbl_point
-		        where point_date > trunc(sysdate, 'MM')
-		        group by account_no) p
-		    on a.acc_no = p.account_no)
-		where point_rank &lt;= 3
-	</select>
-	
+
 </mapper>

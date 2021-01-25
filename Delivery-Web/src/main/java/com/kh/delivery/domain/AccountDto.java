@@ -1,13 +1,15 @@
 package com.kh.delivery.domain;
 
 public class AccountDto {
-	// 조인 컬럼
+	// 뷰 컬럼
 	private int acc_no;
 	private String acc_id;
 	private String acc_pw;
 	private String acc_name;
 	private String acc_email;
 	private String acc_phone;
+	
+	// 조인 컬럼
 	private String acc_state;
 	private int acc_point;
 	private int point_rank;

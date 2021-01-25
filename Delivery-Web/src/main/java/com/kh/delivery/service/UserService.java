@@ -14,8 +14,6 @@ public interface UserService {
 	public String registUser(UserVo userVo) throws Exception;
 	// 아이디 중복 체크
 	public boolean checkIdDupl(String user_id) throws Exception;
-	// 사용자 아이디 비밀번호 찾기
-	public UserVo findAccount(String user_name, String user_phone, String user_email) throws Exception;
 	// 사용자 프로필 사진 변경
 	public String imgChange(String user_id, String chg_img) throws Exception;
 	// 사용자 기존 비밀번호 확인
@@ -36,11 +34,12 @@ public interface UserService {
 	public UserVo getUserInfo(int user_no) throws Exception;
 
 	// 관리자
-	/*신규 일반회원 카운트*/
-	public int getNewMemberCount();
-	/* 일반회원 카운트 */
-	public int getTotalMemberCount();
-	/*일반회원 리스트  */
-	public List<UserVo> getMemberList();
-	public String userStateUpdate(int user_no, String user_state);
+	// 새로 가입한 사용자 인원 조회
+	public int getNewMemberCount() throws Exception;
+	// 사용자 전체 인원 조회
+	public int getTotalMemberCount() throws Exception;
+	// 사용자 리스트 조회
+	public List<UserVo> getMemberList() throws Exception;
+	// 사용자 상태 변경
+	public String userStateUpdate(int user_no, String user_state) throws Exception;
 }

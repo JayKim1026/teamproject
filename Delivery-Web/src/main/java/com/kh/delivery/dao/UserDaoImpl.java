@@ -22,25 +22,22 @@ public class UserDaoImpl implements UserDao {
 	@Inject
 	private SqlSession sqlSession;
 	
-	//일반회원 로그인
+	// 사용자 로그인
 	@Override
 	public UserVo login(String user_id, String user_pw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_pw", user_pw);
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "login", map);
-		System.out.println("userDaoImpl : " + userVo);
 		return userVo;
 	}
-
-	//일반회원 회원가입
+	// 사용자 회원가입
 	@Override
 	public String registUser(UserVo userVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "insertUser", userVo);
 		return "registSuccess";
 	}
-
-	//일반회원 아이디 중복확인
+	// 사용자 아이디 중복확인
 	@Override
 	public boolean checkIdDupl(String user_id) throws Exception {
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "checkIdDupl", user_id);
@@ -50,130 +47,101 @@ public class UserDaoImpl implements UserDao {
 			return false;
 		}
 	}
-
-	@Override
-	public UserVo findAccount(String user_name, String user_phone, String user_email) throws Exception {
-		Map<String, String> map = new HashMap<>();
-		map.put("user_name", user_name);
-		map.put("user_phone", user_phone);
-		map.put("user_email", user_email);
-		UserVo userVo = sqlSession.selectOne(NAMESPACE + "findAccount", map);
-		return userVo;
-	}
-
-	@Override
-	public UserVo getUserInfo(int user_no) throws Exception {
-		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getUserInfo", user_no);
-		return userVo;
-	}
-
-	//일반회원 프로필 사진 변경
+	// 사용자 프로필 사진 변경
 	@Override
 	public String imgChange(String user_id, String chg_img) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("chg_img", chg_img);
-		//System.out.println("유저다오 imgChange : " + map);
-		//System.out.println("유저다오 user_id : " + user_id);
-		//System.out.println("유저다오 user_img : " + user_img);
-		
 		sqlSession.update(NAMESPACE + "imgChange", map);
-				
 		return "imgChange_success";
 	}
-
-	//일반회원 기존 비밀번호 확인
+	// 사용자 기존 비밀번호 확인
 	@Override
 	public String pwCheck(String user_id, String orgPw) throws Exception {
 		Map<String,String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("orgPw", orgPw);
 		UserVo userVo = sqlSession.selectOne(NAMESPACE + "pwCheck" , map);
-		//System.out.println("userDao pwCheck userVo : " + userVo);
 		if(userVo != null) {
 			return "true";
 		} else {
 			return "false";
 		}
 	}
-
-	//일반회원 비밀번호 변경
+	// 사용자 비밀번호 변경
 	@Override
 	public String pwChange(String user_id, String chgPw) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("chgPw", chgPw);
-		int result = sqlSession.update(NAMESPACE + "pwChange", map);
-		System.out.println("pwChange Dao result" + result);	
+		sqlSession.update(NAMESPACE + "pwChange", map);
 		return "pwChange_success";
-			
 	}
-	
-	// 일반회원 이메일 변경
+	// 사용자 이메일 변경
 	@Override
 	public String emailChange(String user_id, String chgEmail) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("chgEmail", chgEmail);
-		int result = sqlSession.update(NAMESPACE + "emailChange" , map);
-		System.out.println("emailChange Dao result : " + result);
+		sqlSession.update(NAMESPACE + "emailChange" , map);
 		return "emailChange_success";
 	}
-	
-	// 일반회원 휴대전화 변경
+	// 사용자 휴대전화 변경
 	@Override
 	public String phoneChange(String user_id, String chgPhone) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("chgPhone", chgPhone);
-		int result = sqlSession.update(NAMESPACE + "phoneChange", map);
-		System.out.println("phoneChange Dao result : " + result);
+		sqlSession.update(NAMESPACE + "phoneChange", map);
 		return "phoneChange_success";
 	}
-
-	// 일반 회원 주소 변경
+	// 사용자 주소 변경
 	@Override
 	public String addrChange(String user_id , String chgAddr ) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("chgAddr", chgAddr);
-		int result = sqlSession.update(NAMESPACE + "addrChange", map);
-		System.out.println("addrChange Dao result : " + result);
+		sqlSession.update(NAMESPACE + "addrChange", map);
 		return "addrChange_success";
 	}
-
+	// 사용자 포인트 랭킹 조회
 	@Override
 	public List<UserVo> getUserRank() throws Exception {
 		List<UserVo> userRank = sqlSession.selectList(NAMESPACE + "getUserRank");
 		return userRank;
 	}
 	
-
-	/* 신규회원 */
+	// 안드로이드
+	// 사용자 정보 조회
 	@Override
-	public int getNewMemberCount() {
+	public UserVo getUserInfo(int user_no) throws Exception {
+		UserVo userVo = sqlSession.selectOne(NAMESPACE + "getUserInfo", user_no);
+		return userVo;
+	}
+	
+	// 관리자
+	// 새로 가입한 사용자 인원 조회
+	@Override
+	public int getNewMemberCount() throws Exception {
 		int count = sqlSession.selectOne(NAMESPACE + "getNewMemberCount");
-		System.out.println("count:"+ count);
 		return count;
 	}
-
-	/* 전체 일반회원 */
+	// 사용자 전체 인원 조회
 	@Override
-	public int getTotalMemberCount() {
+	public int getTotalMemberCount() throws Exception {
 		int count = sqlSession.selectOne(NAMESPACE + "getTotalMemberCount");
 		return count;
 	}
-	
-	/* 일반회원 리스트 */
+	// 사용자 리스트 조회
 	@Override
-	public List<UserVo> getMemberList() {
+	public List<UserVo> getMemberList() throws Exception {
 		List<UserVo> list = sqlSession.selectList(NAMESPACE + "getMemberList");
 		return list;
 	}
-	
-	/* 계정 상태 수정 */
+	// 사용자 상태 변경
 	@Override
-	public String userStateUpdate(int user_no, String user_state) {
+	public String userStateUpdate(int user_no, String user_state) throws Exception {
 		Map<String, Object > map = new HashMap<>();
 		map.put("user_no", user_no);
 		map.put("user_state", user_state);

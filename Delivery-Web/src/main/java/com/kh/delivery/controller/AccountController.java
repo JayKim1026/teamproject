@@ -20,7 +20,7 @@ import com.kh.delivery.service.AccountService;
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
-
+// 완료
 	@Inject
 	JavaMailSender mailSender;
 	@Inject
@@ -52,7 +52,7 @@ public class AccountController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	// 아이디 중복확인
+	// 아이디 중복 확인
 	@RequestMapping(value = "/checkIdDupl", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean checkIdDupl(String acc_id) throws Exception {
