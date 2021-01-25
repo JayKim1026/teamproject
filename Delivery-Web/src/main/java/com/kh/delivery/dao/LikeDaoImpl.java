@@ -17,8 +17,12 @@ public class LikeDaoImpl implements LikeDao{
 	private static final String NAMESPACE = "com.kh.delivery.like.";
 	
 	@Inject
-	SqlSession sqlSession;
-
+	private SqlSession sqlSession;
+	
+	/* Insert Like
+	 * time_no 해당 글 번호
+	 * account_no 로그인되어있는 사용자 번호
+	 * */
 	@Override
 	public String insertLike(int time_no, int account_no) throws Exception {
 		Map<String, Object> map = new HashMap<>();
@@ -28,7 +32,11 @@ public class LikeDaoImpl implements LikeDao{
 		sqlSession.insert(NAMESPACE + "insertLike", map);
 		return "insertLike_success";
 	}
-
+	
+	/* Delete Like
+	 * time_no 해당 글 번호
+	 * account_no 로그인되어있는 사용자 번호
+	 * */
 	@Override
 	public String deleteLike(int time_no, int account_no) throws Exception {
 		Map<String, Object> map = new HashMap<>();
@@ -38,7 +46,11 @@ public class LikeDaoImpl implements LikeDao{
 		sqlSession.insert(NAMESPACE + "deleteLike", map);
 		return "deleteLike_success";
 	}
-
+	
+	/* 해당 사용자가 좋아요를 이전에 눌렸었는지 확인 
+	 * time_no 글 번호
+	 * account_no 로그인되어있는 사용자 번호
+	 * */
 	@Override
 	public boolean isLike(int time_no, int account_no) throws Exception {
 		Map<String, Object> map = new HashMap<>();
@@ -50,7 +62,8 @@ public class LikeDaoImpl implements LikeDao{
 		}
 		return false;
 	}
-
+	
+	/* getLikeCount */
 	@Override
 	public int getLikeCount(int time_no) throws Exception {
 		Map<String, Object> map = new HashMap<>();

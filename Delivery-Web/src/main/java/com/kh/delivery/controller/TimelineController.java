@@ -26,7 +26,7 @@ import com.kh.delivery.service.LikeService;
 import com.kh.delivery.service.TimelineService;
 import com.kh.delivery.util.Codes;
 import com.kh.delivery.util.FileUploadUtil;
-
+/* 주석처리 완료 */
 @Controller
 @RequestMapping(value = "/timeline")
 public class TimelineController implements Codes {
