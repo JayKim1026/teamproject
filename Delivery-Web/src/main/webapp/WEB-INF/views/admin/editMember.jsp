@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 정보 관리</title>
 <%@include file="../include/link.jsp"%>
 <link rel="stylesheet" href="/resources/css/adminHeader.css">
 <style>

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login Form Page</title>
+<title>관리자 로그인 페이지</title>
 <%@ include file="../include/link.jsp" %>
 <link rel="stylesheet" href="/resources/css/loginForm.css">
 </head>

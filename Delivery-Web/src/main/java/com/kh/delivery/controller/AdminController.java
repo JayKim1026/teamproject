@@ -350,7 +350,7 @@ public class AdminController implements Codes {
 	/* 신고 페이지 */
 	@RequestMapping(value="/report")
 	public String report() throws Exception {
-		return "admin/newReport";
+		return "admin/report";
 	}
 	
 	/* 신고대기 목록*/

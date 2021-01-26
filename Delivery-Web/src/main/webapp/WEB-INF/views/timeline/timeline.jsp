@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <%@ include file="../include/link.jsp" %>
 <link rel="stylesheet" href="/resources/css/timeline.css">
-<title>timeLine.jsp</title>
+<title>타임라인 페이지</title>
 </head>
 <script type="text/javascript">
 // 세션, 모델 변수 가져오기

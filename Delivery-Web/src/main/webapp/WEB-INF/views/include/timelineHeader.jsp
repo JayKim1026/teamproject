@@ -20,7 +20,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						 <a class="dropdown-item" href="/user/info">마이페이지</a> 
 						 <a class="dropdown-item" href="/user/orderList">주문목록</a> 
-						 <a class="dropdown-item" href="/order/newOrderForm">주문하러가기</a> 
+						 <a class="dropdown-item" href="/order/orderForm">주문하러가기</a> 
 					</div>
 				</div>
 			</div>

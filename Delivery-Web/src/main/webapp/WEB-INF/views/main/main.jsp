@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="../include/link.jsp" %>
 <meta charset="UTF-8">
-<title>Main.jsp</title>
+<title>메인 페이지</title>
 </head>
 <body>
 <!------------------------------------ 최상단 메뉴 ------------------------------------>
@@ -42,7 +42,7 @@
 							</c:if>
 							<!-- 일반 회원  -->
 							<c:if test="${sessionScope.userVo != null }">
-								<a class="menu__font" href="/order/newOrderForm">주문하기</a>
+								<a class="menu__font" href="/order/orderForm">주문하기</a>
 							</c:if>
 							<c:if test="${sessionScope.userVo != null }">
 								<a class="menu__font" href="/user/info">마이페이지</a>

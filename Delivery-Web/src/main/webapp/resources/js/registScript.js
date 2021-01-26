@@ -182,6 +182,23 @@ $(function(){
 			}
 		}
 	});
+	//<이메일>
+	$("#user_email").keyup(function(){
+		var user_email = $(this).val();
+		var char_user_email = "";
+		if(user_email == null || user_email == "") {
+			$(".email_state").text("");
+		} else {
+			if(user_email.indexOf("@") != -1 && user_email.indexOf(".") != -1 &&
+                    (user_email.indexOf("@") != 0) &&
+                    (user_email.indexOf("@")+1 < user_email.indexOf(".")) &&
+                    (user_email.indexOf(".")+1 < user_email.length)) {
+				$(".email_state").text("");
+            } else {
+            	$(".email_state").text("옳지 않은 이메일 형식입니다").css("color", "red");
+            }
+		}
+	});
 	
 	$("#sample4_postcode").click(function() {
 		sample4_execDaumPostcode();

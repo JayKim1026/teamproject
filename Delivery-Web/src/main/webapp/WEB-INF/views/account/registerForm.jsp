@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 <%@ include file="../include/link.jsp" %>
+<title>사용자 회원가입 페이지</title>
 </head>
 <body>
 <%@include file="../include/header.jsp" %>
@@ -79,6 +80,7 @@
 					<div class="form-group">
 						<label for="user_email"> 이메일 </label>
 						<input type="email" class="form-control" id="user_email" name="user_email" required/>
+						<span class="email_state"></span>
 					</div>
 					<button type="submit" class="btn btn-primary" id="btnRegister">가입완료</button>
 				</form>

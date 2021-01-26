@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/resources/css/findAccountForm.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="../include/link.jsp"%>
-<title>findAccount.jsp</title>
+<title>계정 찾기 페이지</title>
 </head>
 <%@include file="../include/header.jsp"%>
 <script>

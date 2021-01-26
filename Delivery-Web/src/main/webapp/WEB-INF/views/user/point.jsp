@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>포인트 페이지</title>
 <%@ include file = "../include/link.jsp" %>
 </head>
 <body>

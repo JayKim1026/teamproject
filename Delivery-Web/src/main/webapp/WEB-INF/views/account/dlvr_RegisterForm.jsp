@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<title>Deliver Register Page</title>
+<title>배달원 회원가입 페이지</title>
 <%@ include file="../include/link.jsp"%>
 </head>
 <body>

@@ -25,7 +25,7 @@
 
 </style>
 <meta charset="UTF-8">
-<title>newInfo.jsp</title>
+<title>사용자 정보 페이지</title>
 </head>
 <body>
 	<%@include file="../include/Infoheader.jsp"%>

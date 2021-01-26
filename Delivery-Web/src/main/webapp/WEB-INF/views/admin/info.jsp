@@ -14,7 +14,7 @@
 
 </style>
 <meta charset="UTF-8">
-<title>AdminInfo.jsp</title>
+<title>관리자 정보 페이지</title>
 </head>
 <body>
 <%@include file="../include/adminHeader.jsp" %>

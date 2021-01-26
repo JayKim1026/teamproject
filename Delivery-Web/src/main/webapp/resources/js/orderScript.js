@@ -56,7 +56,8 @@ $(function(){
 		
 	});
 	
-	$("#btnInsertOrder").click(function(){
+	$("#btnInsertOrder").click(function(e){
+		e.preventDefault();
 		console.log("클릭");
 		var order_req_ta = $("#order_req_ta").val();
 		$("#order_req").val(order_req_ta);
@@ -64,7 +65,6 @@ $(function(){
 		var order_lat = $("#order_lat").val();
 		var order_lng = $("#order_lng").val();
 		var order_req = $("#order_req").val();
-		var user_no = parseInt("${userVo.user_no}");
 		$("#user_no").val(user_no);
 		
 		if(order_ca == null){
@@ -81,8 +81,6 @@ $(function(){
 		console.log("user_no:" + user_no);
 		
 		insertOrderFrm.submit();
-		
-		
 	});
 });
 

@@ -27,15 +27,9 @@ public class OrderController implements Codes {
 	// 웹
 	// 주문페이지
 	@RequestMapping(value="/orderForm", method=RequestMethod.GET)
-	public String orderForm() throws Exception {
-		return "user/orderForm";
-	}
-	
-
-	@RequestMapping(value="/newOrderForm", method=RequestMethod.GET)
-	public String newOrderForm(Model model) throws Exception{
+	public String orderForm(Model model) throws Exception {
 		model.addAttribute("image_url", BUCKET_URL);
-		return "user/newOrderForm";
+		return "user/orderForm";
 	}
 	
 	// 주문하기

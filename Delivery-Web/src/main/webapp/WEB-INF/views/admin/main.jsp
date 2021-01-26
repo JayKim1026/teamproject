@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>main.jsp</title>
+<title>관리자 메인 페이지</title>
 <%@include file="../include/link.jsp" %>
 <link rel="stylesheet" href="/resources/css/adminHeader.css">
 </head>
@@ -12,7 +12,6 @@
 <!-- Header -->
 <%@include file="../include/adminHeader.jsp"%>
 <!-- end of Header -->
-${sessionScope.adminVo}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
