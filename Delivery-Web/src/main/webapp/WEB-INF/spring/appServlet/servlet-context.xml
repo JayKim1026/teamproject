@@ -42,6 +42,10 @@
 		id="timelineInterceptor"
 		class="com.kh.delivery.interceptor.TimelineInterceptor">
 	</beans:bean>
+	<beans:bean
+		id="adminInterceptor"
+		class="com.kh.delivery.interceptor.AdminInterceptor">
+	</beans:bean>
 	
 	<!-- 인터셉터 -->
 	<interceptors>
@@ -66,13 +70,22 @@
 			<beans:ref bean="deliverInterceptor"/>
 		</interceptor>
 	
-	<!-- 기타 인터셉터 -->
+	<!-- 타임라인 인터셉터 -->
 		<interceptor>
 			<mapping path="/timeline/**/*"/>
 			<exclude-mapping path="/timeline/getTimelineList"/>
 			<exclude-mapping path="/timeline/android/*"/>
 			<beans:ref bean="timelineInterceptor"/>
 		</interceptor>
+	
+	<!-- 관리자 인터셉터 -->
+		<interceptor>
+			<mapping path="/admin/**/*"/>
+			<exclude-mapping path="/admin/login"/>
+			<exclude-mapping path="/admin/loginRun"/>
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
 	</interceptors>
+		
 	
 </beans:beans>
