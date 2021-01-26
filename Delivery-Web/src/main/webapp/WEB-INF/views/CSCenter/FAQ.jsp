@@ -8,97 +8,7 @@
 <%@include file="../include/link.jsp"%>
 <meta charset="UTF-8">
 <title>자주하는 질문</title>
-<style>
-.logo {
-	float: left;
-	font-family: 'Nanum Pen Script', cursive;
-	text-decoration: none;
-	font-size: 35px;
-	color: black;
-}
-
-.page_title{
-	margin-bottom : 10px;
-}
-.topMenu_ul, .content_ul {
-	list-style: none;
-	display: flex;
-	float: right;
-}
-
-.topMenu_li, .content_li {
-	margin-left: 20px;
-	font-family: 'Nanum Pen Script';
-}
-
-.topMenu_a {
-	text-decoration: none;
-	font-size: 25px;
-	color: black;
-	margin-right: 10px;
-}
-
-.page_title {
-	margin-top: 30px;
-	font-size: 60px;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-.content_section {
-	background-color: #787878;
-	height: 40px;
-}
-
-.content_title {
-	margin-bottom : 20px;	
-}
-.content_a {
-	text-decoration: none;
-	font-size: 25px;
-	color: white;
-	margin-right: 10px;
-}
-
-.content_view {
-	padding: 30px;
-	background-color: white;
-	justify-content: center;
-}
-
-.sidebar_ul {
-	margin-top: 101px;
-	padding: 0px;
-	background-color: white;
-	list-style: none;
-}
-
-.sidebar_li {
-    padding-block: 30px;
-    margin: 0;
-    border: 1px solid whitesmoke;
-    width: 220px;
-	justify-content: center;
-	text-align: center;
-	cursor: pointer;
-}
-
-.sidebar_li:hover {
-	background-color: whitesmoke;
-}
-
-.sidebar_a {
-	display: block;
-	text-decoration: none;
-	color: black;
-	font-size: 20px;
-}
-
-.this_page {
-	background-color : whitesmoke;
-	color: black;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/csStyle.css">
 </head>
 <body>
 	<div class="container-fluid">
@@ -204,17 +114,17 @@
 								</tbody>
 							</table>
 
-							<table id="cloneTable" style="display: none;">
+							<table id="cloneTable" style="display: none; table-layout: fixed;">
 								<tbody id="cloneTbody">
 									<tr>
-										<td style="text-align: center"></td>
-										<td style="text-align: center"></td>
-										<td style="text-align: left;"><a class="faqTitle" style="margin-left: 30px;"></a></td>
+										<td style="text-align: center; width: 5%;"></td>
+										<td style="text-align: center; width: 10%;"></td>
+										<td style="text-align: left; width: 45%;"><a class="faqTitle" style="margin-left: 30px;"></a></td>
 									</tr>
 									<tr style="display: none;" class="trAnswer">
 										<td style="background-color: whitesmoke;"></td>
 										<td style="background-color: whitesmoke;"></td>
-										<td class="FAQcontentTd"style="height: auto; background-color: whitesmoke; align-content: left;"><span></span></td>
+										<td class="FAQcontentTd" style="background-color: whitesmoke; "><span></span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -233,66 +143,61 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		var pageData = "${pageData}";
-		if(pageData = "faqPage") {
-			$(".faq").addClass("this_page");
-		} else {
-			$(".faq").removeClass("this_page");
-		}
-		
-		$(function() {
-			var category = $(".category").val();
-			var keyword = $(".keyword").val();
-			getFAQ(category, keyword);
+<script>
+	var pageData = "${pageData}";
+	if(pageData = "faqPage") {
+		$(".faq").addClass("this_page");
+	} else {
+		$(".faq").removeClass("this_page");
+	}
+	
+	$(function() {
+		var category = $(".category").val();
+		var keyword = $(".keyword").val();
+		getFAQ(category, keyword);
 
-			function getFAQ(category, keyword) {
-				var url = "/CSCenter/search"
-				var sendData = {
-					"category" : $(".category").val(),
-					"keyword" : $(".keyword").val()
-				};
+		function getFAQ(category, keyword) {
+			var url = "/CSCenter/search"
+			var sendData = {
+				"category" : $(".category").val(),
+				"keyword" : $(".keyword").val()
+			};
 
-				$.get(url, sendData, function(data) {
-					console.log(data);
-					$(".orgTbody").empty();
-					$.each(data, function() {
-						var trTitleClone = $("#cloneTbody").children().eq(0)
-								.clone();
-						var trAnswerClone = $("#cloneTbody").children().eq(1)
-								.clone();
-						trTitleClone.find("td").eq(0).text(this.r);
-						trTitleClone.find("td").eq(1).text(this.code_detail);
-						trTitleClone.find("td").eq(2).find("a").text(
-								this.faq_title);
-						trTitleClone.find("td").eq(2).find("a").attr("data-r",
-								this.r);
-						trAnswerClone.find("td").find("span").text(
-								this.faq_content);
+			$.get(url, sendData, function(data) {
+				console.log(data);
+				$(".orgTbody").empty();
+				$.each(data, function() {
+					var trTitleClone = $("#cloneTbody").children().eq(0).clone();
+					var trAnswerClone = $("#cloneTbody").children().eq(1).clone();
+					trTitleClone.find("td").eq(0).text(this.r);
+					trTitleClone.find("td").eq(1).text(this.code_detail);
+					trTitleClone.find("td").eq(2).find("a").text(this.faq_title);
+					trTitleClone.find("td").eq(2).find("a").attr("data-r", this.r);
+					trAnswerClone.find("td").find("span").text(this.faq_content);
 
-						$(".orgTbody").append(trTitleClone);
-						$(".orgTbody").append(trAnswerClone);
-					});
+					$(".orgTbody").append(trTitleClone);
+					$(".orgTbody").append(trAnswerClone);
 				});
+			});
+		}
+
+		// 검색하기
+		$(".btnSearch").click(function() {
+			getFAQ(category, keyword);
+		});
+
+		// FAQ 내용 보여주기
+		$(document).on("click", ".faqTitle", function() {
+			console.log($(this).attr("data-r"));
+			var r = parseInt($(this).attr("data-r"));
+			if($(".trAnswer").eq(r - 1).css("display") != "none") {
+				$(".trAnswer").eq(r - 1).hide();
+			} else {
+				$(".trAnswer").hide();
+				$(".trAnswer").eq(r - 1).slideToggle("slow");
 			}
-
-			// 검색하기
-			$(".btnSearch").click(function() {
-				getFAQ(category, keyword);
-			});
-
-			// FAQ 내용 보여주기
-			$(document).on("click", ".faqTitle", function() {
-				console.log($(this).attr("data-r"));
-				var r = parseInt($(this).attr("data-r"));
-				if($(".trAnswer").eq(r - 1).css("display") != "none") {
-					$(".trAnswer").eq(r - 1).hide();
-				} else {
-					$(".trAnswer").hide();
-					$(".trAnswer").eq(r - 1).slideToggle("slow");
-				}
-			});
-		}); // 핸들러
-	</script>
+		});
+	}); // 핸들러
+</script>
 </body>
 </html>

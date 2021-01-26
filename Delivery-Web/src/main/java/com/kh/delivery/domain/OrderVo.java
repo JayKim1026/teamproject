@@ -19,6 +19,25 @@ public class OrderVo {
 
 	// 조인으로 가져오는 값
 	private String user_name;
+	private String ca_detail;
+	private String state_detail;
+
+	public String getCa_detail() {
+		return ca_detail;
+	}
+
+	public void setCa_detail(String ca_detail) {
+		this.ca_detail = ca_detail;
+	}
+
+	public String getState_detail() {
+		return state_detail;
+	}
+
+	public void setState_detail(String state_detail) {
+		this.state_detail = state_detail;
+	}
+
 	public String getCode_no() {
 		return code_no;
 	}
@@ -144,8 +163,8 @@ public class OrderVo {
 		return "OrderVo [order_no=" + order_no + ", order_ca=" + order_ca + ", order_req=" + order_req + ", order_lat="
 				+ order_lat + ", order_lng=" + order_lng + ", user_no=" + user_no + ", dlvr_no=" + dlvr_no
 				+ ", order_state=" + order_state + ", order_date=" + order_date + ", user_name=" + user_name
-				+ ", code_detail=" + code_detail + ", code_no=" + code_no + ", dlvr_name=" + dlvr_name + ", time_star="
-				+ time_star + "]";
+				+ ", ca_detail=" + ca_detail + ", state_detail=" + state_detail + ", code_detail=" + code_detail
+				+ ", code_no=" + code_no + ", dlvr_name=" + dlvr_name + ", time_star=" + time_star + "]";
 	}
 
 }

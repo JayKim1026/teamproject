@@ -8,98 +8,7 @@
 <%@include file="../include/link.jsp"%>
 <meta charset="UTF-8">
 <title>1:1 문의</title>
-<style>
-.logo {
-	float: left;
-	font-family: 'Nanum Pen Script', cursive;
-	text-decoration: none;
-	font-size: 35px;
-	color: black;
-}
-
-.page_title {
-	margin-bottom: 10px;
-}
-
-.topMenu_ul, .content_ul {
-	list-style: none;
-	display: flex;
-	float: right;
-}
-
-.topMenu_li, .content_li {
-	margin-left: 20px;
-	font-family: 'Nanum Pen Script';
-}
-
-.topMenu_a {
-	text-decoration: none;
-	font-size: 25px;
-	color: black;
-	margin-right: 10px;
-}
-
-.page_title {
-	margin-top: 30px;
-	font-size: 60px;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-.content_section {
-	background-color: #787878;
-	height: 40px;
-}
-
-.content_title {
-	margin-bottom: 20px;
-}
-
-.content_a {
-	text-decoration: none;
-	font-size: 25px;
-	color: white;
-	margin-right: 10px;
-}
-
-.content_view {
-	padding: 30px;
-	background-color: white;
-	justify-content: center;
-}
-
-.sidebar_ul {
-	margin-top: 63px;
-	padding: 0px;
-	background-color: white;
-	list-style: none;
-}
-
-.sidebar_li {
-	padding-block: 30px;
-	margin: 0;
-	border: 1px solid whitesmoke;
-	width: 220px;
-	justify-content: center;
-	text-align: center;
-	cursor: pointer;
-}
-
-.sidebar_li:hover {
-	background-color: whitesmoke;
-}
-
-.sidebar_a {
-	display: block;
-	text-decoration: none;
-	color: black;
-	font-size: 20px;
-}
-
-.this_page {
-	background-color: whitesmoke;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/csStyle.css">
 </head>
 <body>
 	<div class="container-fluid">
@@ -252,28 +161,28 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		var pageData = "${pageData}";
-		if (pageData = "qusetionPage") {
-			$(".question").addClass("this_page");
-		} else {
-			$(".question").removeClass("this_page");
-		}
-		
-		$(function(){
-			$(".btnShowOrderList").click(function(e){
-				e.preventDefault();
-				var url ="/CSCenter/ShowOrderList";
-				var user_no = "${userVo.user_no}";
-				console.log(user_no);
-				var sendData = {
-						"user_no" : user_no
-				};
-				$.post(url, sendData, function(){
-					
-				});
+<script>
+	var pageData = "${pageData}";
+	if (pageData = "qusetionPage") {
+		$(".question").addClass("this_page");
+	} else {
+		$(".question").removeClass("this_page");
+	}
+	
+	$(function(){
+		$(".btnShowOrderList").click(function(e){
+			e.preventDefault();
+			var url ="/CSCenter/ShowOrderList";
+			var user_no = "${userVo.user_no}";
+			console.log(user_no);
+			var sendData = {
+					"user_no" : user_no
+			};
+			$.post(url, sendData, function(){
+				
 			});
 		});
-	</script>
+	});
+</script>
 </body>
 </html>

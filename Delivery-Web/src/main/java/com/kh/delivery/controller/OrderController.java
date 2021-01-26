@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,10 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.delivery.domain.OrderVo;
 import com.kh.delivery.domain.UserVo;
 import com.kh.delivery.service.OrderService;
+import com.kh.delivery.util.Codes;
 
 @Controller
 @RequestMapping(value="/order")
-public class OrderController {
+public class OrderController implements Codes {
 
 	@Inject
 	OrderService orderService;
@@ -31,7 +33,8 @@ public class OrderController {
 	
 
 	@RequestMapping(value="/newOrderForm", method=RequestMethod.GET)
-	public String newOrderForm() throws Exception{
+	public String newOrderForm(Model model) throws Exception{
+		model.addAttribute("image_url", BUCKET_URL);
 		return "user/newOrderForm";
 	}
 	

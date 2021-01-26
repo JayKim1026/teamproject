@@ -69,15 +69,15 @@
 						<div class="tab-content" id="nav-tabContent">
 <!------------------------------------------------- 대기중 주문 목록  ------------------------------------------------->						
                         	<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-								<table style="display: none;" id="waitingOrdertrTable">
+								<table style="display: none; table-layout: fixed;" id="waitingOrdertrTable">
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
+										<td style="width: 8%"></td>
+										<td style="width: 16%"></td>
+										<td style="width: 10%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 5%"></td>
+										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
 												<option value="3-004">사용자취소</option>
@@ -86,7 +86,7 @@
 												<option value="3-003">배달완료</option>
 											</select>
 										</td>
-										<td><button type="button"
+										<td style="width: 5%"><button type="button"
 												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
@@ -114,15 +114,15 @@
 							
 <!------------------------------------------------- 배달중 주문 목록  ------------------------------------------------->							
 							<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-								<table style="display: none;" id="acceptOrdertrTable">
+								<table style="display: none; table-layout: fixed;" id="acceptOrdertrTable">
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
+										<td style="width: 8%"></td>
+										<td style="width: 16%"></td>
+										<td style="width: 10%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 5%"></td>
+										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
 												<option value="3-004">사용자취소</option>
@@ -131,7 +131,7 @@
 												<option value="3-003">배달완료</option>
 											</select>
 										</td>
-										<td><button type="button"
+										<td style="width: 5%"><button type="button"
 												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
@@ -158,15 +158,15 @@
 
 <!------------------------------------------------- 완료된 주문 목록  ------------------------------------------------->							
 							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-								<table style="display: none;" id="finishOrdertrTable">
+								<table style="display: none; table-layout: fixed;" id="finishOrdertrTable">
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
+										<td style="width: 8%"></td>
+										<td style="width: 16%"></td>
+										<td style="width: 10%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 5%"></td>
+										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
 												<option value="3-004">사용자취소</option>
@@ -175,7 +175,7 @@
 												<option value="3-003">배달완료</option>
 											</select>
 										</td>
-										<td><button type="button"
+										<td style="width: 5%"><button type="button"
 												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
@@ -202,15 +202,15 @@
 							
 <!------------------------------------------------- 사용자 취소 주문 목록  ------------------------------------------------->							
 							<div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="nav-contact-tab2">
-								<table style="display: none;" id="cancelOrdertrTable">
+								<table style="display: none; table-layout: fixed;" id="cancelOrdertrTable">
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
+										<td style="width: 8%"></td>
+										<td style="width: 16%"></td>
+										<td style="width: 10%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 5%"></td>
+										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
 												<option value="3-004">사용자취소</option>
@@ -219,7 +219,7 @@
 												<option value="3-003">배달완료</option>
 											</select>
 										</td>
-										<td><button type="button"
+										<td style="width: 5%"><button type="button"
 												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
@@ -246,15 +246,15 @@
 
 <!------------------------------------------------- 배달원 취소 주문 목록 ------------------------------------------------->							
 							<div class="tab-pane fade" id="nav-contact3" role="tabpanel" aria-labelledby="nav-contact-tab3">
-								<table style="display: none;" id="cancelOrdertrTableByDeliver">
+								<table style="display: none; table-layout: fixed" id="cancelOrdertrTableByDeliver">
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
+										<td style="width: 8%"></td>
+										<td style="width: 16%"></td>
+										<td style="width: 10%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 8%"></td>
+										<td style="width: 5%"></td>
+										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
 												<option value="3-004">사용자취소</option>
@@ -263,7 +263,7 @@
 												<option value="3-003">배달완료</option>
 											</select>
 										</td>
-										<td><button type="button"
+										<td style="width: 5%"><button type="button"
 												class="btn btn-xs btn-warning btnModify">변경</button></td>
 									</tr>
 								</table>
@@ -295,203 +295,5 @@
 		</div>
 	</div>
 </body>
-<script>
-function getWaitingOrderList() {
-	var url = "/admin/getWaitingOrderList"
-	$.post(url, function(data) {
-		console.log("주문대기:"+data);
-		$("#waitingOrderTable > #waitingOrderTableTbody").empty();
-		$.each(data, function() {
-				
-			var tr = $("#waitingOrdertrTable").find("tr").clone();
-			tr.find("td").eq(0).text(this.order_no);
-			tr.find("td").eq(1).text(this.order_req);
-			tr.find("td").eq(2).text(this.order_date);
-			tr.find("td").eq(3).text("배정안됨");
-			tr.find("td").eq(4).text(this.user_name);
-			var order_ca = "";
-			if(this.order_ca == "3-011"){
-				order_ca = "사무용품";
-			}else if(this.order_ca == "3-012"){
-				order_ca = "음식";
-			}else if(this.order_ca == "3-013"){
-				order_ca = "기타";
-			}
-			tr.find("td").eq(5).text(order_ca);
-			
-			tr.find("td").eq(6).find("option:eq(0)").attr("selected", "selected");
-			
-			tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-			tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
-				
-			$("#waitingOrderTable > #waitingOrderTableTbody").prepend(tr);
-		});
-	});
-}
-function getAcceptOrderList(){
-	var url = "/admin/getAcceptOrderList"
-	$.post(url, function(data){
-		$("#acceptOrderTable > #acceptOrderTableTbody").empty();
-		console.log("접수주문:" + data);
-		$.each(data, function() {
-				
-			var tr = $("#acceptOrdertrTable").find("tr").clone();
-			tr.find("td").eq(0).text(this.order_no);
-			tr.find("td").eq(1).text(this.order_req);
-			tr.find("td").eq(2).text(this.order_date);
-			tr.find("td").eq(3).text(this.dlvr_name);
-			tr.find("td").eq(4).text(this.user_name);
-			var order_ca = "";
-			if(this.order_ca == "3-011"){
-				order_ca = "사무용품";
-			}else if(this.order_ca == "3-012"){
-				order_ca = "음식";
-			}else if(this.order_ca == "3-013"){
-				order_ca = "기타";
-			}
-			tr.find("td").eq(5).text(order_ca);
-			
-			tr.find("td").eq(6).find("option:eq(3)").attr("selected", "selected");
-			tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-			tr.find("td").eq(8).find("button").attr("order_no", this.order_no);
-				
-			$("#acceptOrderTable > #acceptOrderTableTbody").prepend(tr);
-		});
-	});
-}
-
-function getFinishOrderList(){
-	var url = "/admin/getFinishOrderList"
-	$.post(url, function(data){
-		console.log("주문완료:"+data);
-		$("#finishOrderTable > #finishOrderTableTbody").empty();
-		$.each(data, function() {
-			var tr = $("#finishOrdertrTable").find("tr").clone();
-			tr.find("td").eq(0).text(this.order_no);
-			tr.find("td").eq(1).text(this.order_req);
-			tr.find("td").eq(2).text(this.order_date);
-			tr.find("td").eq(3).text(this.dlvr_name);
-			tr.find("td").eq(4).text(this.user_name);
-			var order_ca = "";
-			if(this.order_ca == "3-011"){
-				order_ca = "사무용품";
-			}else if(this.order_ca == "3-012"){
-				order_ca = "음식";
-			}else if(this.order_ca == "3-013"){
-				order_ca = "기타";
-			}
-			
-			tr.find("td").eq(5).text(order_ca);
-			tr.find("td").eq(6).find("option:eq(4)").attr("selected", "selected");
-			tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-				
-			$("#finishOrderTable > #finishOrderTableTbody").prepend(tr);
-		});	
-	});
-}
-
-function getCancelOrderList(){
-	var url = "/admin/getCancelOrderList"
-		$.post(url, function(data){
-			console.log("사용자 주문 취소:"+data);
-			$("#cancelOrderTable > #cancelOrderTableTbody").empty();
-			$.each(data, function() {
-				var tr = $("#cancelOrdertrTable").find("tr").clone();
-				tr.find("td").eq(0).text(this.order_no);
-				tr.find("td").eq(1).text(this.order_req);
-				tr.find("td").eq(2).text(this.order_date);
-				tr.find("td").eq(3).text(this.dlvr_name);
-				tr.find("td").eq(4).text(this.user_name);
-				var order_ca = "";
-				if(this.order_ca == "3-011"){
-					order_ca = "사무용품";
-				}else if(this.order_ca == "3-012"){
-					order_ca = "음식";
-				}else if(this.order_ca == "3-013"){
-					order_ca = "기타";
-				}
-				tr.find("td").eq(5).text(order_ca);
-				
-				tr.find("td").eq(6).find("option:eq(1)").attr("selected", "selected");
-				tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-					
-				$("#cancelOrderTable > #cancelOrderTableTbody").prepend(tr);
-			});	
-		});
-}
-
-function  getCancelOrderListByDeliver(){
-	var url = "/admin/getCancelOrderListByDeliver"
-		$.post(url, function(data){
-			console.log("배달원 주문 취소:"+data);
-			$("#cancelOrderTableByDeliver > #cancelOrderTableTbodyByDeliver").empty();
-			$.each(data, function() {
-				var tr = $("#cancelOrdertrTableByDeliver").find("tr").clone();
-				tr.find("td").eq(0).text(this.order_no);
-				tr.find("td").eq(1).text(this.order_req);
-				tr.find("td").eq(2).text(this.order_date);
-				tr.find("td").eq(3).text(this.dlvr_name);
-				tr.find("td").eq(4).text(this.user_name);
-				var order_ca = "";
-				if(this.order_ca == "3-011"){
-					order_ca = "사무용품";
-				}else if(this.order_ca == "3-012"){
-					order_ca = "음식";
-				}else if(this.order_ca == "3-013"){
-					order_ca = "기타";
-				}
-				tr.find("td").eq(5).text(order_ca);
-				
-				tr.find("td").eq(6).find("option:eq(2)").attr("selected", "selected");
-				tr.find("td").eq(7).find("button").attr("order_no", this.order_no);
-					
-				$("#cancelOrderTableByDeliver > #cancelOrderTableTbodyByDeliver").prepend(tr);
-			});	
-		});
-}
-
-$(function() {
-	getWaitingOrderList()
-	getAcceptOrderList()
-	getFinishOrderList()
-	getCancelOrderList()
-	getCancelOrderListByDeliver()
-	
-	
-	
-	
-	$("#finishOrderTableTbody, #waitingOrderTableTbody, #acceptOrderTableTbody, #cancelOrderTableTbody, #cancelOrderTableTbodyByDeliver").on("click", ".btnModify", function(){
-		
-		var order_no = parseInt($(this).attr("order_no"));
-		var order_state = $(this).parent().prev().find(":selected").val();
-		console.log(order_no);
-		console.log("order_state:" + order_state);
-		var sendData = {
-			"order_no"	:	order_no,
-			"order_state":	order_state
-		};
-		var url = "/admin/updateOrderState"
-		$.post(url, sendData, function(data){
-			if(data =="success"){
-				location.reload();
-// 				if(order_state == "3-001"){
-// 					$("#nav-home-tab").trigger("click");
-// 				}else if(order_state == "3-002"){
-// 					$("#nav-profile-tab").trigger("click");
-// 				}else if(order_state == "3-003"){
-// 					$("#nav-contact-tab").trigger("click");
-// 				}else if(order_state == "3-004"){
-// 					$("#nav-contact-tab2").trigger("click");
-// 				}else if(order_state = "3-005"){
-// 					$("#nav-contact-tab3").trigger("click");
-// 				}
-			}
-		});
-		
-		
-		
-	});
-});
-
-</script>
+<script src="/resources/js/adminOrderScript.js"></script>
 </html>

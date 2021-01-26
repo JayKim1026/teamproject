@@ -176,85 +176,78 @@
 	<!-- 주문(현황:대기중, 접수, 사용자취소, 배달원취소, 완료)목록 + 현황수정 -->
 	<!-- 대기중인 주문 목록 -->
 	<select id="getWaitingOrderList" resultType="OrderVo">
-		select o.*,
-		u.user_name from tbl_order o
+		select o.*, u.user_name, c.code_detail state_detail, c1.code_detail ca_detail
+		from tbl_order o
 		inner join tbl_user u
 		on o.user_no =
 		u.user_no
 		inner join tbl_code c
 		on o.order_state = c.code_no
-		where
-		o.order_state =
-		'3-001'
+		inner join tbl_code c1
+		on o.order_ca = c1.code_no
+		where o.order_state = '3-001'
 		order by o.order_date desc
 	</select>
 
 	<!-- 접수된 주문 목록 -->
 	<select id="getAcceptOrderList" resultType="OrderVo">
-		select o.*,
-		u.user_name, d.dlvr_name
+		select o.*, u.user_name, d.dlvr_name, c.code_detail state_detail, c1.code_detail ca_detail
 		from tbl_order o
 		inner join tbl_user u
-		on
-		o.user_no = u.user_no
+		on o.user_no = u.user_no
 		left outer join tbl_deliver d
-		on o.dlvr_no =
-		d.dlvr_no
+		on o.dlvr_no = d.dlvr_no
 		inner join tbl_code c
 		on o.order_state = c.code_no
-		where
-		o.order_state = '3-002'
+		inner join tbl_code c1
+		on o.order_ca = c1.code_no
+		where o.order_state = '3-002'
 		order by o.order_date desc
 	</select>
 
 	<!-- 완료된 주문 목록 -->
 	<select id="getFinishOrderList" resultType="OrderVo">
-		select o.*,
-		u.user_name, d.dlvr_name
+		select o.*, u.user_name, d.dlvr_name, c.code_detail state_detail, c1.code_detail ca_detail
 		from tbl_order o
 		inner join tbl_user u
-		on
-		o.user_no = u.user_no
+		on o.user_no = u.user_no
 		left outer join tbl_deliver d
-		on o.dlvr_no =
-		d.dlvr_no
+		on o.dlvr_no = d.dlvr_no
 		inner join tbl_code c
 		on o.order_state = c.code_no
-		where
-		o.order_state = '3-003'
+		inner join tbl_code c1
+		on o.order_ca = c1.code_no
+		where o.order_state = '3-003'
 		order by o.order_date desc
 	</select>
 
 	<!-- 주문자 취소 목록 -->
 	<select id="getCancelOrderList" resultType="OrderVo">
-		select o.*,
-		u.user_name from tbl_order o
+		select o.*, u.user_name, c.code_detail state_detail, c1.code_detail ca_detail
+		from tbl_order o
 		inner join tbl_user u
-		on o.user_no =
-		u.user_no
+		on o.user_no = u.user_no
 		inner join tbl_code c
 		on o.order_state = c.code_no
-		where
-		o.order_state =
-		'3-004'
+		inner join tbl_code c1
+		on o.order_ca = c1.code_no
+		where o.order_state = '3-004'
 		order by o.order_date desc
 	</select>
 
 	<!-- 배달원 취소 목록 -->
 	<select id="getCancelOrderListByDeliver" resultType="OrderVo">
-		select o.*,
-		u.user_name, d.dlvr_name
+		select o.*, u.user_name, d.dlvr_name, c.code_detail state_detail, c1.code_detail ca_detail
 		from tbl_order o
 		inner join tbl_user u
-		on
-		o.user_no = u.user_no
+		on o.user_no = u.user_no
 		left outer join tbl_deliver d
-		on o.dlvr_no =
-		d.dlvr_no
+		on o.dlvr_no = d.dlvr_no
 		inner join tbl_code c
 		on o.order_state = c.code_no
-		where
-		o.order_state = '3-005'
+		inner join tbl_code c1
+		on o.order_ca = c1.code_no
+		where o.order_state = '3-005'
 		order by o.order_date desc
 	</select>
 
