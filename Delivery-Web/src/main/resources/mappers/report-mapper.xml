@@ -69,6 +69,7 @@
 		inner join tbl_code c2
 		on r.report_type = c2.code_no
 		where report_state = '6-001'
+		order by report_no asc
 	</select>
 	
 	<select id="getAcceptReportList" resultType="ReportVo">
@@ -85,6 +86,7 @@
 		inner join tbl_code c2
 		on r.report_type = c2.code_no
 		where report_state = '6-002'
+		order by report_no asc
 	</select>
 	
 	<select id="getCancelReportList" resultType="ReportVo">
@@ -101,6 +103,7 @@
 		inner join tbl_code c2
 		on r.report_type = c2.code_no
 		where report_state = '6-003'
+		order by report_no asc
 	</select>
 	
 	<update id="updateReportState">

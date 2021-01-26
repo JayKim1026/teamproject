@@ -17,25 +17,17 @@
 	<!-- 배달원 회원가입 -->
 	<insert id="registDeliver">
 		insert into tbl_deliver(
-		dlvr_no, dlvr_id, dlvr_pw,
-		dlvr_name, dlvr_phone,
-		dlvr_email, dlvr_addr, dlvr_idcard, dlvr_birth,
-		dlvr_img
-		)
+			dlvr_no, dlvr_id, dlvr_pw, dlvr_name, dlvr_phone, 
+			dlvr_email, dlvr_addr, dlvr_idcard, dlvr_birth, dlvr_img)
 		values(
-		seq_account_no.nextval, #{dlvr_id}, #{dlvr_pw},
-		#{dlvr_name},
-		#{dlvr_phone},
-		#{dlvr_email}, #{dlvr_addr},
-		#{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img}
-		)
+			seq_account_no.nextval, #{dlvr_id}, #{dlvr_pw}, #{dlvr_name}, #{dlvr_phone},
+			#{dlvr_email}, #{dlvr_addr}, #{dlvr_idcard}, #{dlvr_birth}, #{dlvr_img})
 	</insert>
 
 	<!-- 배달원 포인트 갱신 -->
 	<update id="updatePoint">
 		update tbl_deliver set
-		dlvr_point = dlvr_point +
-		#{point_score}
+		dlvr_point = dlvr_point + #{point_score}
 		where dlvr_no = #{account_no}
 	</update>
 
@@ -43,67 +35,57 @@
 	<!-- 배달원 현재 비밀번호 확인 -->
 	<select id="pwCheck" resultType="DeliverVo">
 		select * from tbl_deliver
-		where
-		dlvr_id = #{dlvr_id} and dlvr_pw = #{orgPw}
+		where dlvr_id = #{dlvr_id} 
+		and dlvr_pw = #{orgPw}
 	</select>
 
 	<!-- 배달원 프로필 사진 변경 -->
 	<update id="imgChange">
 		update tbl_deliver set
 		dlvr_img = #{chg_img}
-		where
-		dlvr_id = #{dlvr_id}
+		where dlvr_id = #{dlvr_id}
 	</update>
 
 	<!-- 배달원 비밀번호 변경 -->
 	<update id="pwChange">
 		update tbl_deliver set
 		dlvr_pw = #{chgPw}
-		where dlvr_id
-		= #{dlvr_id}
+		where dlvr_id = #{dlvr_id}
 	</update>
 
 	<!-- 배달원 이메일 변경 -->
 	<update id="emailChange">
 		update tbl_deliver set
 		dlvr_email = #{chgEmail}
-		where
-		dlvr_id = #{dlvr_id}
+		where dlvr_id = #{dlvr_id}
 	</update>
 
 	<!-- 배달원 휴대전화 변경 -->
 	<update id="phoneChange">
 		update tbl_deliver set
 		dlvr_phone = #{chgPhone}
-		where
-		dlvr_id = #{dlvr_id}
+		where dlvr_id = #{dlvr_id}
 	</update>
 
 	<!-- 배달원 주소 변경 -->
 	<update id="addrChange">
 		update tbl_deliver set
 		dlvr_addr = #{chgAddr}
-		where
-		dlvr_id = #{dlvr_id}
+		where dlvr_id = #{dlvr_id}
 	</update>
 
 	<!-- 안드로이드 -->
 	<!-- 배달원 배달 횟수 랭킹 조회 -->
 	<select id="getDlvrRank" resultType="DeliverVo">
 		select * from (
-		select d.*,
-		o.order_count, rank() over(order by o.order_count desc)
-		dlvr_rank
-		from
-		tbl_deliver d
-		inner join (
-		select dlvr_no, count(*) order_count
-		from
-		tbl_order
-		where order_state = '3-003'
-		group by dlvr_no) o
-		on d.dlvr_no =
-		o.dlvr_no)
+			select d.*, o.order_count, rank() over(order by o.order_count desc) dlvr_rank
+			from tbl_deliver d
+			inner join (
+				select dlvr_no, count(*) order_count
+				from tbl_order
+				where order_state = '3-003'
+				group by dlvr_no) o
+			on d.dlvr_no = o.dlvr_no)
 		where dlvr_rank &lt;= 3
 	</select>
 
@@ -113,8 +95,7 @@
 		dlvr_pw = #{dlvr_pw},
 		dlvr_phone = #{dlvr_phone},
 		dlvr_email = #{dlvr_email},
-		dlvr_addr =
-		#{dlvr_addr},
+		dlvr_addr = #{dlvr_addr},
 		dlvr_img = #{dlvr_img}
 		where dlvr_no = #{dlvr_no}
 	</update>
@@ -126,8 +107,8 @@
 		select count(*) from tbl_deliver
 		where dlvr_state = '1-001'
 		and dlvr_date &gt;= (
-		select to_char(sysdate -1, 'YYYY-MM-DD')
-	    from dual) 
+			select to_char(sysdate -1, 'YYYY-MM-DD')
+		    from dual) 
 		and dlvr_date &lt;= sysdate
 	</select>
 	
@@ -135,8 +116,8 @@
 		select count(*) from tbl_deliver
 		where dlvr_state = '1-002'
 		and dlvr_date &gt;= (
-		select to_char(sysdate -1, 'YYYY-MM-DD')
-	    from dual) 
+			select to_char(sysdate -1, 'YYYY-MM-DD')
+		    from dual) 
 		and dlvr_date &lt;= sysdate
 	</select>
 	
@@ -146,13 +127,17 @@
 	
 	<!-- 배달원 리스트 -->
 	<select id="getDeliverList" resultType="DeliverVo">
-		select * from tbl_deliver
+		select * 
+		from tbl_deliver
+		order by dlvr_no asc
 	</select>
 	
 	<!-- 	가입 대기중 배달원 리스트 -->
 	<select id="getWaitingDeliverList" resultType="DeliverVo" >
-		select * from tbl_deliver
+		select * 
+		from tbl_deliver
 		where dlvr_state = '1-001'
+		order by dlvr_no asc
 	</select>
 	<!-- 회원 리스트 가지고오기 끝-->
 

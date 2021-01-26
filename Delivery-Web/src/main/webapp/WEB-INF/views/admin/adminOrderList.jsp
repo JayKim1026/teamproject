@@ -59,11 +59,11 @@
 					<div class="col-md-8">
 						<nav>
 		                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-			                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">주문대기</a>
+			                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">주문대기</a>
 			                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">주문접수</a>
 			                    <a class="nav-item nav-link" id="nav-contact-tab2" data-toggle="tab" href="#nav-contact2" role="tab" aria-controls="nav-contact2" aria-selected="false">주문취소</a>
 			                    <a class="nav-item nav-link" id="nav-contact-tab3" data-toggle="tab" href="#nav-contact3" role="tab" aria-controls="nav-contact3" aria-selected="false">배달취소</a>
-			                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">주문완료</a>
+			                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">배달완료</a>
 		                    </div>
 	                    </nav>
 						<div class="tab-content" id="nav-tabContent">
@@ -80,8 +80,8 @@
 										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
-												<option value="3-004">사용자취소</option>
-												<option value="3-005">배달원취소</option>
+												<option value="3-004">주문취소</option>
+												<option value="3-005">배달취소</option>
 												<option value="3-002">배달중</option>
 												<option value="3-003">배달완료</option>
 											</select>
@@ -125,8 +125,8 @@
 										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
-												<option value="3-004">사용자취소</option>
-												<option value="3-005">배달원취소</option>
+												<option value="3-004">주문취소</option>
+												<option value="3-005">배달취소</option>
 												<option value="3-002">배달중</option>
 												<option value="3-003">배달완료</option>
 											</select>
@@ -169,8 +169,8 @@
 										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
-												<option value="3-004">사용자취소</option>
-												<option value="3-005">배달원취소</option>
+												<option value="3-004">주문취소</option>
+												<option value="3-005">배달취소</option>
 												<option value="3-002">배달중</option>
 												<option value="3-003">배달완료</option>
 											</select>
@@ -213,8 +213,8 @@
 										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
-												<option value="3-004">사용자취소</option>
-												<option value="3-005">배달원취소</option>
+												<option value="3-004">주문취소</option>
+												<option value="3-005">배달취소</option>
 												<option value="3-002">배달중</option>
 												<option value="3-003">배달완료</option>
 											</select>
@@ -257,8 +257,8 @@
 										<td style="width: 8%">
 											<select>
 												<option value="3-001">주문대기</option>
-												<option value="3-004">사용자취소</option>
-												<option value="3-005">배달원취소</option>
+												<option value="3-004">주문취소</option>
+												<option value="3-005">배달취소</option>
 												<option value="3-002">배달중</option>
 												<option value="3-003">배달완료</option>
 											</select>

@@ -29,16 +29,16 @@
 							<c:if
 								test="${sessionScope.userVo == null && sessionScope.deliverVo == null }">
 								<a class="menu__font" href="/account/loginForm" style="padding-right:20px; font-size:35px;">로그인</a>
-								<a class="menu__font" href="/account/registerForm">일반회원 가입</a>
-								<a class="menu__font" href="/account/dlvr_RegisterForm">라이더 가입</a>
+								<a class="menu__font" href="/account/registerForm">사용자 가입</a>
+								<a class="menu__font" href="/account/dlvr_RegisterForm">뚜벅이 지원</a>
 							</c:if>
 <!-------------------------------------- //비로그인 상태일때 볼수있는 메뉴 끝 (밑에 더있음)-------------------------------------->							
 							
 <!-------------------------------------- 로그인 후 볼수있는 메뉴 -------------------------------------->							
 							<c:if
 								test="${sessionScope.userVo != null || sessionScope.deliverVo != null}">
-								<a class="menu__font" href="/account/logout">Logout</a>
-								<a class="menu__font" href="/timeline/showTimeline">TimeLine</a>
+								<a class="menu__font" href="/account/logout">로그아웃</a>
+								<a class="menu__font" href="/timeline/showTimeline">타임라인</a>
 							</c:if>
 							<!-- 일반 회원  -->
 							<c:if test="${sessionScope.userVo != null }">

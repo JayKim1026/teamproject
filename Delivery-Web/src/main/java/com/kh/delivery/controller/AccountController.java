@@ -71,21 +71,25 @@ public class AccountController {
 	@ResponseBody
 	public String sendAccountPw(AccountDto accountDto) throws Exception {
 		String acc_pw = accountService.findAccountPw(accountDto);
-		String acc_email = accountDto.getAcc_email();
-		MimeMessagePreparator preparator = new MimeMessagePreparator() {
-			@Override
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-				String text = "비밀번호는 " + acc_pw + " 입니다.";
-
-				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
-				helper.setFrom("eogml0807@gmail.com");
-				helper.setTo(acc_email);
-				helper.setSubject("계정 비밀번호");
-				helper.setText(text);
-			}
-		};
-		mailSender.send(preparator);
-		return "sendAccountPw_success";
+		if(acc_pw != null) {
+			String acc_email = accountDto.getAcc_email();
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					String text = "비밀번호는 " + acc_pw + " 입니다.";
+					
+					MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+					helper.setFrom("eogml0807@gmail.com");
+					helper.setTo(acc_email);
+					helper.setSubject("계정 비밀번호");
+					helper.setText(text);
+				}
+			};
+			mailSender.send(preparator);
+			return "sendAccountPw_success";
+		} else {
+			return "fail";
+		}
 	}
 	// 포인트 랭킹 조회
 	@RequestMapping(value="/getPointRank", method=RequestMethod.POST)

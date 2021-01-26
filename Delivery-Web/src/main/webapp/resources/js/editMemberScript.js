@@ -89,6 +89,7 @@ $(function() {
 				if(updateResult == "update_success") {
 					console.log(updateResult);
 					alert("변경 완료");
+					location.replace("/admin/editMember");
 				}
 			});
 		}
@@ -111,6 +112,7 @@ $(function() {
 				if(updateResult == "update_success") {
 					console.log(updateResult);
 					alert("변경 완료");
+					location.replace("/admin/editMember");
 				}
 			});
 		}
@@ -133,6 +135,7 @@ $(function() {
 				if(updateResult == "update_success") {
 					console.log(updateResult);
 					alert("변경 완료");
+					location.replace("/admin/editMember");
 				}
 			});
 		}

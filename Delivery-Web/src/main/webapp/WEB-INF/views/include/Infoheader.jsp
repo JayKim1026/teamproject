@@ -63,7 +63,8 @@
 						<c:choose>
 							<c:when test ="${sessionScope.userVo == null && sessionScope.deliverVo == null}">
 								<a class="main-menu" id="main_login" href="/account/loginForm">로그인</a>
-								<a class="main-menu" id="main_Joinus" href="/account/registerForm">회원가입</a>
+								<a class="main-menu" id="main_Joinus" href="/account/registerForm">사용자 가입</a>
+								<a class="main-menu" id="main_Joinus" href="/account/dlvr_RegisterForm">뚜벅이 지원</a>
 							</c:when>
 							<c:otherwise>
 								<a class="main-menu" id="main_logout" href="/account/logout">로그아웃</a>

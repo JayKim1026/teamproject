@@ -11,9 +11,8 @@
 				<div class="col-md-8">
 					<a class="main-logo" href="/">뚜벅뚜벅COMPANY</a>
 					<a class="main-menu" id="main_login" href="/account/loginForm">로그인</a>
-					<a class="main-menu" id="main_Joinus" href="/account/registerForm">일반회원가입</a>
 					<a class="main-menu" id="main_DlvrJoinus" href="/account/dlvr_RegisterForm">뚜벅이 지원</a>
-					
+					<a class="main-menu" id="main_Joinus" href="/account/registerForm">사용자 가입</a>
 				</div>
 				<div class="col-md-2">
 				</div>

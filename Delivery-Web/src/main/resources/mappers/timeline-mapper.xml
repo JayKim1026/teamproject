@@ -170,7 +170,7 @@
 		left outer join view_account a
 		on t.writer_no = a.acc_no
 		where time_state = '2-003'
-		order by t.time_date desc
+		order by t.time_no asc
 	</select>
 	<!-- 리뷰 목록 -->
 	<select id="getReviewList" resultType="TimelineVo">
@@ -181,7 +181,7 @@
 		left outer join view_account a
 		on t.writer_no = a.acc_no
 		where time_state = '2-002'
-		order by t.time_date desc
+		order by t.time_no asc
 	</select>
 	<!-- 공지사항 목록 -->
 	<select id="getNoticeList" resultType="TimelineVo">
@@ -192,7 +192,7 @@
 		left outer join view_all a
 		on t.writer_no = a.acc_no
 		where time_state = '2-001'
-		order by t.time_date desc
+		order by t.time_no asc
 	</select>
 	<!-- 게시물(일반, 리뷰, 공지) 목록 + 삭제 끝 -->
 

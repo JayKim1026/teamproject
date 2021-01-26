@@ -12,9 +12,7 @@ $(function(){
 		
 		$(this).addClass("food_color");
 		var ca = $(this).attr("data-ca");
-		$("#order_ca").attr("data-ca", ca);
-
-		var ca = $("#order_ca").attr("data-ca");
+		$("#order_ca").val(ca);
 		console.log("인풋데이타:" + ca);
 	});
 	
@@ -24,9 +22,7 @@ $(function(){
 		
 		$(this).addClass("grocery_color");
 		var ca = $(this).attr("data-ca");
-		$("#order_ca").attr("data-ca", ca);
-			
-		var ca = $("#order_ca").attr("data-ca");
+		$("#order_ca").val(ca);
 		console.log("인풋데이타:" + ca);
 	});
 	
@@ -36,9 +32,7 @@ $(function(){
 		
 		$(this).addClass("genral_color");
 		var ca = $(this).attr("data-ca");
-		$("#order_ca").attr("data-ca", ca);
-			
-		var ca = $("#order_ca").attr("data-ca");
+		$("#order_ca").val(ca);
 		console.log("인풋데이타:" + ca);
 	});
 	
@@ -56,12 +50,11 @@ $(function(){
 		
 	});
 	
-	$("#btnInsertOrder").click(function(e){
-		e.preventDefault();
+	$("#btnInsertOrder").click(function(){
 		console.log("클릭");
 		var order_req_ta = $("#order_req_ta").val();
 		$("#order_req").val(order_req_ta);
-		var order_ca = $("#order_ca").attr("data-ca");
+		var order_ca = $("#order_ca").val();
 		var order_lat = $("#order_lat").val();
 		var order_lng = $("#order_lng").val();
 		var order_req = $("#order_req").val();
@@ -74,13 +67,8 @@ $(function(){
 		}else if(order_req == null){
 			alert("요청 사항을 입력해주세요.")
 		}
-		console.log("order_ca:" + order_ca);
-		console.log("order_lat:" + order_lat);
-		console.log("order_lng:" + order_lng);
-		console.log("order_req:" + order_req);
-		console.log("user_no:" + user_no);
 		
-		insertOrderFrm.submit();
+		$("#insertOrderFrm").submit();
 	});
 });
 

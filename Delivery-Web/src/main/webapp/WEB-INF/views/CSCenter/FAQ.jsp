@@ -24,7 +24,7 @@
 								<li class="topMenu_li"><a class="topMenu_a"
 									href="/account/loginForm">로그인</a></li>
 								<li class="topMenu_li"><a class="topMenu_a"
-									href="/account/registerForm">회원가입</a></li>
+									href="/account/registerForm">사용자 가입</a></li>
 								<li class="topMenu_li"><a class="topMenu_a"
 									href="/account/dlvr_RegisterForm">뚜벅이 지원</a></li>
 							</c:when>

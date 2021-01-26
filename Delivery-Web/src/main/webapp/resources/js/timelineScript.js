@@ -246,9 +246,10 @@ $(function() {
 		var writer_no = $(this).attr("data-writerno");
 		$(".btnTimelineReportRun").attr("data-defno", writer_no);
 		$(".btnTimelineReportRun").attr("data-reportType", '6-012');
+		$(".btnTimelineReportRun").attr("data-reportCode", "6-111");
 	});
 	
-	// 타임라인 report type 
+	// 타임라인 report code 
 	$("input[name=timelineReportCode]").change(function(){
 		console.log($(this).val());
 		$(".btnTimelineReportRun").attr("data-reportCode", $(this).val());
@@ -342,6 +343,7 @@ $(function() {
 		} else {
 			commentClone.find(".btnUpdateComment").css("display", "none");
 			commentClone.find(".btnDeleteComment").css("display", "none");
+			commentClone.find(".btnReportComment").attr("data-writerno", comment.writer_no);
 		}
 		commentClone.show();
 		commentList.append(commentClone);
@@ -431,7 +433,8 @@ $(function() {
 		$(".timelineModal_report").fadeIn();
 		var writer_no = $(this).attr("data-writerno");
 		$(".btnTimelineReportRun").attr("data-defno", writer_no);
-		$(".btnTimelineReportRun").attr("data-reportCode", '6-013');
+		$(".btnTimelineReportRun").attr("data-reportType", "6-013");
+		$(".btnTimelineReportRun").attr("data-reportCode", "6-111");
 	});
 	
 	// 좋아요

@@ -59,7 +59,7 @@
 					<div class="col-md-8">
 						<nav>
 		                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-			                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">일반글</a>
+			                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">일반글</a>
 			                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">리뷰</a>
 			                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">공지</a>
 		                    </div>
@@ -138,24 +138,24 @@
 
 <!------------------------------------------------- 공지 ------------------------------------------------->							
 							<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-								<table style="display: none;" id="noticetrTable">
+								<table style="display: none; table-layout: fixed;" id="noticetrTable">
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td style="width: 10%"></td>
+										<td style="width: 35%"></td>
+										<td style="width: 15%"></td>
+										<td style="width: 15%"></td>
 										<td><button type="button"
 												class="btn btn-xs btn-warning btnDelete">삭제</button></td>
 									</tr>
 								</table>
 		
-								<table class="table" id="noticeTable">
+								<table class="table" id="noticeTable" style="table-layout: fixed;">
 									<thead>
 										<tr>
-											<th>글번호</th>
-											<th>내용</th>
-											<th>게시일</th>
-											<th>작성자</th>
+											<th style="width: 10%">번호</th>
+											<th style="width: 35%">내용</th>
+											<th style="width: 15%">게시일</th>
+											<th style="width: 15%">작성자</th>
 											<th>/</th>
 										</tr>
 									</thead>

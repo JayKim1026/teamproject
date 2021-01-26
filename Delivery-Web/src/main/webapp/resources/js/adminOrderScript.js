@@ -1,7 +1,7 @@
 function getWaitingOrderList() {
 	var url = "/admin/getWaitingOrderList"
 	$.post(url, function(data) {
-		console.log("주문대기:"+data);
+		console.log(data);
 		$("#waitingOrderTable > #waitingOrderTableTbody").empty();
 		$.each(data, function() {
 			var tr = $("#waitingOrdertrTable").find("tr").clone();

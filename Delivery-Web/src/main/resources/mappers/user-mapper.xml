@@ -104,11 +104,13 @@
 	<select id="getTotalMemberCount" resultType="int">
 		select count(*) 
 		from tbl_user
+		order by user_no asc
 	</select>
 	<!-- 사용자 리스트 조회 -->
 	<select id="getMemberList" resultType="UserVo">
 		select * 
 		from tbl_user
+		order by user_no asc
 	</select>
 	<!-- 사용자 계정 상태 변경 -->
 	<update id="userStateUpdate">
